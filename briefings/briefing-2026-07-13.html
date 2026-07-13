@@ -58,6 +58,22 @@ h2 {
   align-items: center;
   gap: 0.5rem;
 }
+h3 {
+  font-size: 1.05rem;
+  margin-top: 1.25rem;
+  margin-bottom: 0.5rem;
+  color: var(--muted);
+}
+strong { font-weight: 600; }
+em { font-style: italic; }
+code {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  padding: 1px 4px;
+  font-size: 0.85em;
+  font-family: 'SF Mono', 'Fira Code', monospace;
+}
 .feedback { margin-left: auto; font-size: 0.85rem; opacity: 0.5; transition: opacity 0.2s; }
 h2:hover .feedback { opacity: 1; }
 .thumb-up, .thumb-down {
@@ -135,19 +151,19 @@ footer {
 <h2 id="calendar">📅 Calendar</h2>
 <p>No events scheduled for today. Clear Monday ahead!</p>
 <h2 id="weather-wildwood-mo">🌤️ Weather — Wildwood, MO</h2>
-<p>☀️ **High: 88°F** | 🌙 **Low: 66°F** | 💧 Precip: 0%</p>
+<p>☀️ <strong>High: 88°F</strong> | 🌙 <strong>Low: 66°F</strong> | 💧 Precip: 0%</p>
 <p>Sunny with a high near 88. North wind around 6 mph. Clear overnight.</p>
 <h2 id="feed-highlights">📰 Feed Highlights</h2>
-<p>### 🧠 AI/Tech</p>
+<h3>🧠 AI/Tech</h3>
 <ul>
 <li><span class="item-feedback" data-id="GPT-5.6 family announced" data-section="feed-highlights"><a href="https://daily-briefing-worker.mfmccown.workers.dev/click/2026-07-13/feed-highlights?url=https%3A%2F%2Fsimonwillison.net%2F2026%2FJul%2F12%2Fgpt-56%2F" target="_blank" rel="noopener">GPT-5.6 family announced</a> — OpenAI's Luna, Terra, Sol variants <button class="thumb-up" onclick="voteItem('feed-highlights','GPT-5.6 family announced','up')">👍</button><button class="thumb-down" onclick="voteItem('feed-highlights','GPT-5.6 family announced','down')">👎</button></span></li>
 <li><span class="item-feedback" data-id="Muse Spark 1.1 released" data-section="feed-highlights"><a href="https://daily-briefing-worker.mfmccown.workers.dev/click/2026-07-13/feed-highlights?url=https%3A%2F%2Farxiv.org%2Fabs%2F2607.12345" target="_blank" rel="noopener">Muse Spark 1.1 released</a> — Meta's latest open-weight model <button class="thumb-up" onclick="voteItem('feed-highlights','Muse Spark 1.1 released','up')">👍</button><button class="thumb-down" onclick="voteItem('feed-highlights','Muse Spark 1.1 released','down')">👎</button></span></li>
 </ul>
-<p>### 🌾 Agriculture</p>
+<h3>🌾 Agriculture</h3>
 <ul>
 <li><span class="item-feedback" data-id="FTC requires Deere to expand repair access" data-section="feed-highlights"><a href="https://daily-briefing-worker.mfmccown.workers.dev/click/2026-07-13/feed-highlights?url=https%3A%2F%2Fwww.agdaily.com%2F2026%2F07%2Fdeere-right-to-repair-ftc%2F" target="_blank" rel="noopener">FTC requires Deere to expand repair access</a> — major Right-to-Repair win <button class="thumb-up" onclick="voteItem('feed-highlights','FTC requires Deere to expand repair access','up')">👍</button><button class="thumb-down" onclick="voteItem('feed-highlights','FTC requires Deere to expand repair access','down')">👎</button></span></li>
 </ul>
-<p>### 🍳 Cooking</p>
+<h3>🍳 Cooking</h3>
 <ul>
 <li><span class="item-feedback" data-id="Smashed Zucchini with Tahini-Ginger Dressing" data-section="feed-highlights"><a href="https://daily-briefing-worker.mfmccown.workers.dev/click/2026-07-13/feed-highlights?url=https%3A%2F%2Fwww.epicurious.com%2Frecipes%2Fsmashed-zucchini" target="_blank" rel="noopener">Smashed Zucchini with Tahini-Ginger Dressing</a> — perfect for peak summer squash <button class="thumb-up" onclick="voteItem('feed-highlights','Smashed Zucchini with Tahini-Ginger Dressing','up')">👍</button><button class="thumb-down" onclick="voteItem('feed-highlights','Smashed Zucchini with Tahini-Ginger Dressing','down')">👎</button></span></li>
 </ul>
@@ -156,10 +172,6 @@ footer {
 <th>Story</th>
 <th>Points</th>
 </tr></thead><tbody>
-<tr>
-<td>-------</td>
-<td>--------</td>
-</tr>
 <tr>
 <td><a href="https://daily-briefing-worker.mfmccown.workers.dev/click/2026-07-13/hacker-news-top-stories?url=https%3A%2F%2Fnews.ycombinator.com%2Fitem%3Fid%3D12345" target="_blank" rel="noopener">Old and new apps via modern coding agents</a></td>
 <td>378</td>
@@ -179,11 +191,6 @@ footer {
 <th>Value</th>
 <th>Trend</th>
 </tr></thead><tbody>
-<tr>
-<td>--------</td>
-<td>-------</td>
-<td>-------</td>
-</tr>
 <tr>
 <td>👣 Steps</td>
 <td>5,648</td>
