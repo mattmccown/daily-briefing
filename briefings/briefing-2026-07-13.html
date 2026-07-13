@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Daily Briefing — Monday, July 13, 2026</title>
+<style>
+:root {
+  --bg: #fafafa;
+  --card: #ffffff;
+  --text: #1a1a2e;
+  --muted: #666;
+  --accent: #2563eb;
+  --border: #e5e7eb;
+  --success: #059669;
+  --warning: #d97706;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0f172a;
+    --card: #1e293b;
+    --text: #e2e8f0;
+    --muted: #94a3b8;
+    --accent: #60a5fa;
+    --border: #334155;
+    --success: #34d399;
+    --warning: #fbbf24;
+  }
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', Roboto, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  padding: 0;
+}
+.container {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+header {
+  text-align: center;
+  padding: 2rem 0 1rem;
+  border-bottom: 2px solid var(--accent);
+  margin-bottom: 2rem;
+}
+header h1 { font-size: 1.5rem; color: var(--accent); }
+header .date { color: var(--muted); font-size: 0.9rem; }
+h2 {
+  font-size: 1.2rem;
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
+  padding-bottom: 0.3rem;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.feedback { margin-left: auto; font-size: 0.85rem; opacity: 0.5; transition: opacity 0.2s; }
+h2:hover .feedback { opacity: 1; }
+.thumb-up, .thumb-down {
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 2px 6px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  transition: all 0.15s;
+}
+.thumb-up:hover { background: var(--success); color: white; }
+.thumb-down:hover { background: #dc2626; color: white; }
+.thumb-up.voted, .thumb-down.voted { opacity: 0.5; pointer-events: none; }
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0.75rem 0;
+  font-size: 0.9rem;
+}
+th, td {
+  text-align: left;
+  padding: 6px 10px;
+  border-bottom: 1px solid var(--border);
+}
+th { font-weight: 600; color: var(--accent); }
+ul { margin: 0.5rem 0 0.5rem 1.5rem; }
+li { margin: 0.25rem 0; }
+p { margin: 0.5rem 0; }
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+.weather-summary {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1rem;
+  margin: 1rem 0;
+}
+.weather-main { font-size: 2rem; font-weight: 700; }
+.weather-detail { color: var(--muted); font-size: 0.9rem; }
+footer {
+  margin-top: 3rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border);
+  text-align: center;
+  color: var(--muted);
+  font-size: 0.8rem;
+}
+.toast {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  background: var(--accent);
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  opacity: 0;
+  transition: opacity 0.3s;
+  pointer-events: none;
+}
+.toast.show { opacity: 1; }
+</style>
+</head>
+<body>
+<div class="container">
+<header>
+  <h1>📋 Daily Briefing</h1>
+  <div class="date">Monday, July 13, 2026</div>
+</header>
+<main>
+<h2 id="calendar">📅 Calendar <span class="feedback" data-section="calendar"><button class="thumb-up" onclick="vote('calendar','up')">👍</button><button class="thumb-down" onclick="vote('calendar','down')">👎</button></span></h2>
+<p>No events scheduled for today. Clear Monday ahead!</p>
+<h2 id="weather-wildwood-mo">🌤️ Weather — Wildwood, MO <span class="feedback" data-section="weather-wildwood-mo"><button class="thumb-up" onclick="vote('weather-wildwood-mo','up')">👍</button><button class="thumb-down" onclick="vote('weather-wildwood-mo','down')">👎</button></span></h2>
+<p>☀️ **High: 88°F** | 🌙 **Low: 66°F** | 💧 Precip: 0%</p>
+<p>Sunny with a high near 88. North wind around 6 mph. Clear overnight.</p>
+<h2 id="feed-highlights">📰 Feed Highlights <span class="feedback" data-section="feed-highlights"><button class="thumb-up" onclick="vote('feed-highlights','up')">👍</button><button class="thumb-down" onclick="vote('feed-highlights','down')">👎</button></span></h2>
+<p>### 🧠 AI/Tech</p>
+<ul>
+<li>&lt;a href=&quot;http://localhost:8899/click/2026-07-13/feed-highlights?url=https%3A%2F%2Fsimonwillison.net%2F2026%2FJul%2F12%2Fgpt-56%2F&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;GPT-5.6 family announced&lt;/a&gt; — OpenAI's Luna, Terra, Sol variants</li>
+<li>&lt;a href=&quot;http://localhost:8899/click/2026-07-13/feed-highlights?url=https%3A%2F%2Farxiv.org%2Fabs%2F2607.12345&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Muse Spark 1.1 released&lt;/a&gt; — Meta's latest open-weight model</li>
+</ul>
+<p>### 🌾 Agriculture</p>
+<ul>
+<li>&lt;a href=&quot;http://localhost:8899/click/2026-07-13/feed-highlights?url=https%3A%2F%2Fwww.agdaily.com%2F2026%2F07%2Fdeere-right-to-repair-ftc%2F&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;FTC requires Deere to expand repair access&lt;/a&gt; — major Right-to-Repair win</li>
+</ul>
+<p>### 🍳 Cooking</p>
+<ul>
+<li>&lt;a href=&quot;http://localhost:8899/click/2026-07-13/feed-highlights?url=https%3A%2F%2Fwww.epicurious.com%2Frecipes%2Fsmashed-zucchini&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Smashed Zucchini with Tahini-Ginger Dressing&lt;/a&gt; — perfect for peak summer squash</li>
+</ul>
+<h2 id="hacker-news-top-stories">🔥 Hacker News Top Stories <span class="feedback" data-section="hacker-news-top-stories"><button class="thumb-up" onclick="vote('hacker-news-top-stories','up')">👍</button><button class="thumb-down" onclick="vote('hacker-news-top-stories','down')">👎</button></span></h2>
+<table><thead><tr>
+<th>Story</th>
+<th>Points</th>
+</tr></thead><tbody>
+<tr>
+<td>-------</td>
+<td>--------</td>
+</tr>
+<tr>
+<td>&lt;a href=&quot;http://localhost:8899/click/2026-07-13/hacker-news-top-stories?url=https%3A%2F%2Fnews.ycombinator.com%2Fitem%3Fid%3D12345&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Old and new apps via modern coding agents&lt;/a&gt;</td>
+<td>378</td>
+</tr>
+<tr>
+<td>&lt;a href=&quot;http://localhost:8899/click/2026-07-13/hacker-news-top-stories?url=https%3A%2F%2Fnews.ycombinator.com%2Fitem%3Fid%3D12346&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Claude Code vs OpenCode&lt;/a&gt;</td>
+<td>279</td>
+</tr>
+<tr>
+<td>&lt;a href=&quot;http://localhost:8899/click/2026-07-13/hacker-news-top-stories?url=https%3A%2F%2Fnews.ycombinator.com%2Fitem%3Fid%3D12347&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;&amp;quot;I love LLMs, I hate hype&amp;quot;&lt;/a&gt;</td>
+<td>198</td>
+</tr>
+</tbody></table>
+<h2 id="apple-health-yesterday">🩺 Apple Health — Yesterday <span class="feedback" data-section="apple-health-yesterday"><button class="thumb-up" onclick="vote('apple-health-yesterday','up')">👍</button><button class="thumb-down" onclick="vote('apple-health-yesterday','down')">👎</button></span></h2>
+<table><thead><tr>
+<th>Metric</th>
+<th>Value</th>
+<th>Trend</th>
+</tr></thead><tbody>
+<tr>
+<td>--------</td>
+<td>-------</td>
+<td>-------</td>
+</tr>
+<tr>
+<td>👣 Steps</td>
+<td>5,648</td>
+<td>▲ +49%</td>
+</tr>
+<tr>
+<td>❤️ Avg HR</td>
+<td>76 bpm</td>
+<td>Normal</td>
+</tr>
+<tr>
+<td>📊 HRV</td>
+<td>29.3 ms</td>
+<td>▼ -12%</td>
+</tr>
+</tbody></table>
+</main>
+<footer>
+  <p>🤖 Generated by Hermes Agent &middot; <a href="http://localhost:8899/stats/2026-07-13">View Stats</a></p>
+  <p>Click 👍/👎 on any section to help me learn what you like!</p>
+</footer>
+</div>
+<div id="toast" class="toast"></div>
+<script>
+async function vote(section, vote) {
+  const buttons = document.querySelectorAll(`.feedback[data-section="${section}"] button`);
+  buttons.forEach(b => b.classList.add('voted'));
+  try {
+    const res = await fetch(`http://localhost:8899/feedback/2026-07-13/${section}?vote=${vote}`);
+    const data = await res.json();
+    showToast(vote === 'up' ? '👍 Noted!' : '👎 Got it — I'll adjust!');
+  } catch(e) {
+    showToast('Could not record vote');
+    buttons.forEach(b => b.classList.remove('voted'));
+  }
+}
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2000);
+}
+</script>
+</body>
+</html>

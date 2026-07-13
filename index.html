@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Daily Briefings</title>
+<style>
+  body { font-family: -apple-system, BlinkMacSystemFont, sans-serif; max-width: 600px; margin: 0 auto; padding: 2rem; background: #fafafa; }
+  h1 { color: #1a1a2e; }
+  ul { list-style: none; padding: 0; }
+  li { padding: 0.5rem 0; border-bottom: 1px solid #eee; }
+  a { color: #2563eb; text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  .empty { color: #666; font-style: italic; }
+</style>
+</head>
+<body>
+<h1>📋 Daily Briefings</h1>
+<p>Loading...</p>
+<script>
+// Fetch the list of briefings from the /briefings/ directory
+fetch('/briefings/')
+  .then(r => r.text())
+  .then(html => {
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(html, 'text/html');
+    const links = doc.querySelectorAll('a');
+    const list = document.createElement('ul');
+    const briefings = [];
+    links.forEach(a => {
+      const href = a.getAttribute('href');
+      if (href && href.endsWith('.html') && href.startsWith('briefing-')) {
+        const date = href.replace('briefing-', '').replace('.html', '');
+        try {
+          const d = new Date(date);
+          const label = d.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+          briefings.push({ href, label, date: d });
+        } catch(e) {
+          briefings.push({ href, label: date, date: null });
+        }
+      }
+    });
+    briefings.sort((a, b) => b.date - a.date);
+    briefings.forEach(b => {
+      const li = document.createElement('li');
+      li.innerHTML = `<a href="/briefings/${b.href}">${b.label}</a>`;
+      list.appendChild(li);
+    });
+    document.querySelector('p').replaceWith(list);
+  })
+  .catch(() => {
+    document.querySelector('p').textContent = 'No briefings yet.';
+  });
+</script>
+</body>
+</html>
