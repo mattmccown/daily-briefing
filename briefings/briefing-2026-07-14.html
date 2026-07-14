@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Daily Briefing — Tuesday, July 14, 2026</title>
+<style>
+:root {
+  --bg: #fafafa;
+  --card: #ffffff;
+  --text: #1a1a2e;
+  --muted: #666;
+  --accent: #2563eb;
+  --border: #e5e7eb;
+  --success: #059669;
+  --warning: #d97706;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0f172a;
+    --card: #1e293b;
+    --text: #e2e8f0;
+    --muted: #94a3b8;
+    --accent: #60a5fa;
+    --border: #334155;
+    --success: #34d399;
+    --warning: #fbbf24;
+  }
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', Roboto, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  padding: 0;
+}
+.container {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+header {
+  text-align: center;
+  padding: 2rem 0 1rem;
+  border-bottom: 2px solid var(--accent);
+  margin-bottom: 2rem;
+}
+header h1 { font-size: 1.5rem; color: var(--accent); }
+header .date { color: var(--muted); font-size: 0.9rem; }
+h2 {
+  font-size: 1.2rem;
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
+  padding-bottom: 0.3rem;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+h3 {
+  font-size: 1.05rem;
+  margin-top: 1.25rem;
+  margin-bottom: 0.5rem;
+  color: var(--muted);
+}
+strong { font-weight: 600; }
+em { font-style: italic; }
+code {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  padding: 1px 4px;
+  font-size: 0.85em;
+  font-family: 'SF Mono', 'Fira Code', monospace;
+}
+.feedback { margin-left: auto; font-size: 0.85rem; opacity: 0.5; transition: opacity 0.2s; }
+h2:hover .feedback { opacity: 1; }
+.thumb-up, .thumb-down {
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 2px 6px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  transition: all 0.15s;
+}
+.thumb-up:hover { background: var(--success); color: white; }
+.thumb-down:hover { background: #dc2626; color: white; }
+.thumb-up.voted, .thumb-down.voted { opacity: 0.5; pointer-events: none; }
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0.75rem 0;
+  font-size: 0.9rem;
+}
+th, td {
+  text-align: left;
+  padding: 6px 10px;
+  border-bottom: 1px solid var(--border);
+}
+th { font-weight: 600; color: var(--accent); }
+ul { margin: 0.5rem 0 0.5rem 1.5rem; }
+li { margin: 0.25rem 0; }
+p { margin: 0.5rem 0; }
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+.weather-summary {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1rem;
+  margin: 1rem 0;
+}
+.weather-main { font-size: 2rem; font-weight: 700; }
+.weather-detail { color: var(--muted); font-size: 0.9rem; }
+footer {
+  margin-top: 3rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border);
+  text-align: center;
+  color: var(--muted);
+  font-size: 0.8rem;
+}
+.toast {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  background: var(--accent);
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  opacity: 0;
+  transition: opacity 0.3s;
+  pointer-events: none;
+}
+.toast.show { opacity: 1; }
+</style>
+</head>
+<body>
+<div class="container">
+<header>
+  <h1>📋 Daily Briefing</h1>
+  <div class="date">Tuesday, July 14, 2026</div>
+</header>
+<main>
+<p>🌐 <strong>Full briefing:</strong> https://daily-briefing-worker.mfmccown.workers.dev/briefings/briefing-2026-07-14.html?key=a8x3kM9pQw2z</p>
+<p>📅 <strong>Today:</strong> Emily Feet 8:40a, Connie hair apt 12:20p, Henry uniform fitting 5:15p, Lancer Regiment Percussion Camp 12-4p, Band Rehearsal 6-9p</p>
+<p>🌤️ <strong>Wildwood, MO:</strong> Sunny, 89°F high, 0% rain — a beautiful day</p>
+<p>🔥 <strong>HN:</strong> Japan recovers 90% lithium from EV batteries; Building iOS apps without Xcode; JetBrains open-sources YouTrackDB graph DB</p>
+<p>🌾 <strong>AgTalk:</strong> Roundup on sweet corn discussion thread active</p>
+<p>===BRIEFING-MARKDOWN===</p>
+<p># 📋 Daily Briefing — Tuesday, July 14, 2026</p>
+<h2 id="1-calendar-today">1. 📅 Calendar — Today</h2>
+<table><thead><tr>
+<th>Time (CT)</th>
+<th>Event</th>
+<th>Calendar</th>
+</tr></thead><tbody>
+<tr>
+<td>8:40–9:40 AM</td>
+<td><strong>Emily Feet</strong></td>
+<td>McCown Family</td>
+</tr>
+<tr>
+<td>12:00–4:00 PM</td>
+<td><strong>Lancer Regiment Percussion Camp</strong></td>
+<td>Lafayette HS</td>
+</tr>
+<tr>
+<td>12:20–1:20 PM</td>
+<td><strong>Connie Appointment with Hair Salon</strong></td>
+<td>McCown Family</td>
+</tr>
+<tr>
+<td>5:15–5:30 PM</td>
+<td><strong>Henry uniform fitting</strong></td>
+<td>McCown Family</td>
+</tr>
+<tr>
+<td>6:00–9:00 PM</td>
+<td><strong>Lancer Regiment Rehearsal</strong></td>
+<td>Lafayette HS</td>
+</tr>
+</tbody></table>
+<p>Yesterday: Heather's birthday (all-day) and Band Parent Meeting at LHS theater.</p>
+<h2 id="2-weather-wildwood-mo">2. 🌤️ Weather — Wildwood, MO</h2>
+<table><thead><tr>
+<th>Metric</th>
+<th>Today</th>
+<th>Tonight</th>
+</tr></thead><tbody>
+<tr>
+<td>Condition</td>
+<td>☀️ Sunny</td>
+<td>🌙 Mostly Clear</td>
+</tr>
+<tr>
+<td>High/Low</td>
+<td>89°F</td>
+<td>70°F</td>
+</tr>
+<tr>
+<td>Wind</td>
+<td>NE 2–6 mph</td>
+<td>NE 0–5 mph</td>
+</tr>
+<tr>
+<td>Precip</td>
+<td>0%</td>
+<td>0%</td>
+</tr>
+</tbody></table>
+<p><strong>7-Day Outlook:</strong></p>
+<table><thead><tr>
+<th>Day</th>
+<th>High</th>
+<th>Condition</th>
+<th>Precip</th>
+</tr></thead><tbody>
+<tr>
+<td>Wed</td>
+<td>90°F</td>
+<td>☀️ Sunny</td>
+<td>9%</td>
+</tr>
+<tr>
+<td>Thu</td>
+<td>89°F</td>
+<td>⛅ Chance T-storms</td>
+<td>50%</td>
+</tr>
+<tr>
+<td>Fri</td>
+<td>90°F</td>
+<td>⛅ Chance T-storms</td>
+<td>35%</td>
+</tr>
+<tr>
+<td>Sat</td>
+<td>91°F</td>
+<td>☀️ Slight chance storms</td>
+<td>18%</td>
+</tr>
+<tr>
+<td>Sun</td>
+<td>91°F</td>
+<td>☀️ Sunny</td>
+<td>12%</td>
+</tr>
+<tr>
+<td>Mon</td>
+<td>90°F</td>
+<td>⛅ Mostly Sunny</td>
+<td>13%</td>
+</tr>
+</tbody></table>
+<p>A beautiful stretch ahead — Thursday brings the highest rain chance (50%).</p>
+<h2 id="3-feed-highlights">3. 📰 Feed Highlights</h2>
+<h3>Brownfield Ag News (2 new)</h3>
+<ul>
+<li><span class="item-feedback" data-id="&lt;strong&gt;Hot weather throughout the Heart" data-section="3-feed-highlights"><strong>Hot weather throughout the Heartland</strong> — heat wave conditions centered on the upper Midwest, Great Plains. [[source]](https://www.brownfieldagnews.com/weathers/hot-weather-throughout-the-heartland-heat-wave-conditions-centered-on-the-upper-midwest-great-plains/) <button class="thumb-up" onclick="voteItem('3-feed-highlights','&lt;strong&gt;Hot weather throughout the Heart','up')">👍</button><button class="thumb-down" onclick="voteItem('3-feed-highlights','&lt;strong&gt;Hot weather throughout the Heart','down')">👎</button></span></li>
+<li><span class="item-feedback" data-id="&lt;strong&gt;Brownfield Ag Weather Today&lt;/str" data-section="3-feed-highlights"><strong>Brownfield Ag Weather Today</strong> [[source]](https://www.brownfieldagnews.com/weathers/brownfield-ag-weather-today-1317/) <button class="thumb-up" onclick="voteItem('3-feed-highlights','&lt;strong&gt;Brownfield Ag Weather Today&lt;/str','up')">👍</button><button class="thumb-down" onclick="voteItem('3-feed-highlights','&lt;strong&gt;Brownfield Ag Weather Today&lt;/str','down')">👎</button></span></li>
+</ul>
+<h3>Ars Technica</h3>
+<ul>
+<li><span class="item-feedback" data-id="&lt;strong&gt;SpaceX gearing up for Starship's" data-section="3-feed-highlights"><strong>SpaceX gearing up for Starship's 13th test flight</strong> this week. [[source]](https://arstechnica.com/space/2026/07/spacex-is-gearing-up-for-starships-13th-test-flight-later-this-week/) <button class="thumb-up" onclick="voteItem('3-feed-highlights','&lt;strong&gt;SpaceX gearing up for Starship's','up')">👍</button><button class="thumb-down" onclick="voteItem('3-feed-highlights','&lt;strong&gt;SpaceX gearing up for Starship's','down')">👎</button></span></li>
+<li><span class="item-feedback" data-id="&lt;strong&gt;US continues to shun Ebola-infec" data-section="3-feed-highlights"><strong>US continues to shun Ebola-infected citizens</strong> — second American sent to Germany. [[source]](https://arstechnica.com/health/2026/07/us-continues-to-shun-ebola-infected-citizens-second-american-sent-to-germany/) <button class="thumb-up" onclick="voteItem('3-feed-highlights','&lt;strong&gt;US continues to shun Ebola-infec','up')">👍</button><button class="thumb-down" onclick="voteItem('3-feed-highlights','&lt;strong&gt;US continues to shun Ebola-infec','down')">👎</button></span></li>
+<li><span class="item-feedback" data-id="&lt;strong&gt;US warns Russia state hackers ar" data-section="3-feed-highlights"><strong>US warns Russia state hackers are coming after your router.</strong> [[source]](https://arstechnica.com/security/2026/07/the-us-government-warns-that-russia-state-hackers-are-coming-after-your-router/) <button class="thumb-up" onclick="voteItem('3-feed-highlights','&lt;strong&gt;US warns Russia state hackers ar','up')">👍</button><button class="thumb-down" onclick="voteItem('3-feed-highlights','&lt;strong&gt;US warns Russia state hackers ar','down')">👎</button></span></li>
+<li><span class="item-feedback" data-id="&lt;strong&gt;Apple sues OpenAI&lt;/strong&gt; after" data-section="3-feed-highlights"><strong>Apple sues OpenAI</strong> after ex-engineer allegedly used bug to steal trade secrets. [[source]](https://arstechnica.com/tech-policy/2026/07/apple-sues-openai-after-ex-engineer-allegedly-used-bug-to-steal-trade-secrets/) <button class="thumb-up" onclick="voteItem('3-feed-highlights','&lt;strong&gt;Apple sues OpenAI&lt;/strong&gt; after','up')">👍</button><button class="thumb-down" onclick="voteItem('3-feed-highlights','&lt;strong&gt;Apple sues OpenAI&lt;/strong&gt; after','down')">👎</button></span></li>
+<li><span class="item-feedback" data-id="&lt;strong&gt;Ukrainian drone strikes forced R" data-section="3-feed-highlights"><strong>Ukrainian drone strikes forced Russia to stop shipping in vital sea corridor.</strong> [[source]](https://arstechnica.com/gadgets/2026/07/ukrainian-drone-strikes-forced-russia-to-stop-shipping-in-vital-sea-corridor/) <button class="thumb-up" onclick="voteItem('3-feed-highlights','&lt;strong&gt;Ukrainian drone strikes forced R','up')">👍</button><button class="thumb-down" onclick="voteItem('3-feed-highlights','&lt;strong&gt;Ukrainian drone strikes forced R','down')">👎</button></span></li>
+<li><span class="item-feedback" data-id="&lt;strong&gt;California creates $3" data-section="3-feed-highlights"><strong>California creates $3,500 rebate for new EV buyers.</strong> [[source]](https://arstechnica.com/cars/2026/07/first-time-ev-buyers-in-california-can-now-claim-a-new-rebate/) <button class="thumb-up" onclick="voteItem('3-feed-highlights','&lt;strong&gt;California creates $3','up')">👍</button><button class="thumb-down" onclick="voteItem('3-feed-highlights','&lt;strong&gt;California creates $3','down')">👎</button></span></li>
+<li><span class="item-feedback" data-id="&lt;strong&gt;Solution to Feynman's reverse sp" data-section="3-feed-highlights"><strong>Solution to Feynman's reverse sprinkler puzzle</strong> also applies to &quot;silly sprinklers.&quot; [[source]](https://arstechnica.com/science/2026/07/solution-to-feynmans-reverse-sprinkler-puzzle-also-applies-to-silly-sprinklers/) <button class="thumb-up" onclick="voteItem('3-feed-highlights','&lt;strong&gt;Solution to Feynman's reverse sp','up')">👍</button><button class="thumb-down" onclick="voteItem('3-feed-highlights','&lt;strong&gt;Solution to Feynman's reverse sp','down')">👎</button></span></li>
+<li><span class="item-feedback" data-id="&lt;strong&gt;States sue to block Paramount/WB" data-section="3-feed-highlights"><strong>States sue to block Paramount/WBD merger</strong> approved by Trump admin. [[source]](https://arstechnica.com/tech-policy/2026/07/states-sue-to-block-paramount-wbd-merger-that-was-approved-by-trump-admin/) <button class="thumb-up" onclick="voteItem('3-feed-highlights','&lt;strong&gt;States sue to block Paramount/WB','up')">👍</button><button class="thumb-down" onclick="voteItem('3-feed-highlights','&lt;strong&gt;States sue to block Paramount/WB','down')">👎</button></span></li>
+<li><span class="item-feedback" data-id="&lt;strong&gt;Now" data-section="3-feed-highlights"><strong>Now, defenders are embracing the prompt injection, too</strong> — context bombing and guardrails. [[source]](https://arstechnica.com/security/2026/07/now-defenders-are-embracing-the-prompt-injection-too/) <button class="thumb-up" onclick="voteItem('3-feed-highlights','&lt;strong&gt;Now','up')">👍</button><button class="thumb-down" onclick="voteItem('3-feed-highlights','&lt;strong&gt;Now','down')">👎</button></span></li>
+<li><span class="item-feedback" data-id="&lt;strong&gt;Simulating everything" data-section="3-feed-highlights"><strong>Simulating everything, sort of</strong> — The promise and limits of world models. [[source]](https://arstechnica.com/ai/2026/07/simulating-everything-sort-of-the-promise-and-limits-of-world-models/) <button class="thumb-up" onclick="voteItem('3-feed-highlights','&lt;strong&gt;Simulating everything','up')">👍</button><button class="thumb-down" onclick="voteItem('3-feed-highlights','&lt;strong&gt;Simulating everything','down')">👎</button></span></li>
+</ul>
+<h3>AGDaily</h3>
+<ul>
+<li><span class="item-feedback" data-id="&lt;strong&gt;National FFA Organization names " data-section="3-feed-highlights"><strong>National FFA Organization names 2026 American Star Finalists.</strong> [[source]](https://www.agdaily.com/ffa/national-ffa-organization-names-2026-american-star-finalists/) <button class="thumb-up" onclick="voteItem('3-feed-highlights','&lt;strong&gt;National FFA Organization names ','up')">👍</button><button class="thumb-down" onclick="voteItem('3-feed-highlights','&lt;strong&gt;National FFA Organization names ','down')">👎</button></span></li>
+<li><span class="item-feedback" data-id="&lt;strong&gt;Houston Livestock Show awards $1" data-section="3-feed-highlights"><strong>Houston Livestock Show awards $10.8M in scholarships.</strong> [[source]](https://www.agdaily.com/ffa/houston-livestock-show-rodeo-awards-record-10-8m-scholarships/) <button class="thumb-up" onclick="voteItem('3-feed-highlights','&lt;strong&gt;Houston Livestock Show awards $1','up')">👍</button><button class="thumb-down" onclick="voteItem('3-feed-highlights','&lt;strong&gt;Houston Livestock Show awards $1','down')">👎</button></span></li>
+<li><span class="item-feedback" data-id="&lt;strong&gt;More meat companies adopt USDA's" data-section="3-feed-highlights"><strong>More meat companies adopt USDA's Product of USA label.</strong> [[source]](https://www.agdaily.com/livestock/meat-companies-adopt-usdas-product-usa-label/) <button class="thumb-up" onclick="voteItem('3-feed-highlights','&lt;strong&gt;More meat companies adopt USDA's','up')">👍</button><button class="thumb-down" onclick="voteItem('3-feed-highlights','&lt;strong&gt;More meat companies adopt USDA's','down')">👎</button></span></li>
+<li><span class="item-feedback" data-id="&lt;strong&gt;20 steers stolen from Wisconsin " data-section="3-feed-highlights"><strong>20 steers stolen from Wisconsin farm.</strong> [[source]](https://www.agdaily.com/livestock/20-steers-stolen-from-wisconsin-farm/) <button class="thumb-up" onclick="voteItem('3-feed-highlights','&lt;strong&gt;20 steers stolen from Wisconsin ','up')">👍</button><button class="thumb-down" onclick="voteItem('3-feed-highlights','&lt;strong&gt;20 steers stolen from Wisconsin ','down')">👎</button></span></li>
+<li><span class="item-feedback" data-id="&lt;strong&gt;FTC settlement requires Deere to" data-section="3-feed-highlights"><strong>FTC settlement requires Deere to expand diagnostic and repair access.</strong> [[source]](https://www.agdaily.com/news/ftc-settlement-requires-deere-to-expand-diagnostic-and-repair-access/) <button class="thumb-up" onclick="voteItem('3-feed-highlights','&lt;strong&gt;FTC settlement requires Deere to','up')">👍</button><button class="thumb-down" onclick="voteItem('3-feed-highlights','&lt;strong&gt;FTC settlement requires Deere to','down')">👎</button></span></li>
+<li><span class="item-feedback" data-id="&lt;strong&gt;Syngenta shows how AI accelerate" data-section="3-feed-highlights"><strong>Syngenta shows how AI accelerates crop protection product development.</strong> [[source]](https://www.agdaily.com/crops/syngenta-shows-how-ai-accelerates-development-of-crop-protection-products/) <button class="thumb-up" onclick="voteItem('3-feed-highlights','&lt;strong&gt;Syngenta shows how AI accelerate','up')">👍</button><button class="thumb-down" onclick="voteItem('3-feed-highlights','&lt;strong&gt;Syngenta shows how AI accelerate','down')">👎</button></span></li>
+<li><span class="item-feedback" data-id="&lt;strong&gt;USDA: more than 80% of Minnesota" data-section="3-feed-highlights"><strong>USDA: more than 80% of Minnesota corn and soybeans rated good to excellent.</strong> [[source]](https://www.brownfieldagnews.com/news/313893/) <button class="thumb-up" onclick="voteItem('3-feed-highlights','&lt;strong&gt;USDA: more than 80% of Minnesota','up')">👍</button><button class="thumb-down" onclick="voteItem('3-feed-highlights','&lt;strong&gt;USDA: more than 80% of Minnesota','down')">👎</button></span></li>
+<li><span class="item-feedback" data-id="&lt;strong&gt;68% of U.S. corn" data-section="3-feed-highlights"><strong>68% of U.S. corn, 65% of soybeans rated good to excellent</strong> nationally. [[source]](https://www.brownfieldagnews.com/news/68-of-u-s-corn-65-of-soybeans-rated-good-to-excellent-2/) <button class="thumb-up" onclick="voteItem('3-feed-highlights','&lt;strong&gt;68% of U.S. corn','up')">👍</button><button class="thumb-down" onclick="voteItem('3-feed-highlights','&lt;strong&gt;68% of U.S. corn','down')">👎</button></span></li>
+<li><span class="item-feedback" data-id="&lt;strong&gt;Devastating weather significantl" data-section="3-feed-highlights"><strong>Devastating weather significantly reduces U.S. cherry crops.</strong> [[source]](https://www.brownfieldagnews.com/news/devastating-weather-significantly-reduces-u-s-cherry-crops-disaster-requests-expected/) <button class="thumb-up" onclick="voteItem('3-feed-highlights','&lt;strong&gt;Devastating weather significantl','up')">👍</button><button class="thumb-down" onclick="voteItem('3-feed-highlights','&lt;strong&gt;Devastating weather significantl','down')">👎</button></span></li>
+<li><span class="item-feedback" data-id="&lt;strong&gt;Center for Biological Diversity " data-section="3-feed-highlights"><strong>Center for Biological Diversity pushing EPA to require cancer labels on pesticides.</strong> [[source]](https://www.brownfieldagnews.com/news/center-for-biological-diversity-pushing-epa-to-require-cancer-labels-on-pesticides/) <button class="thumb-up" onclick="voteItem('3-feed-highlights','&lt;strong&gt;Center for Biological Diversity ','up')">👍</button><button class="thumb-down" onclick="voteItem('3-feed-highlights','&lt;strong&gt;Center for Biological Diversity ','down')">👎</button></span></li>
+</ul>
+<h3>Simon Willison</h3>
+<ul>
+<li><span class="item-feedback" data-id="&lt;strong&gt;Using uvx in GitHub Actions in a" data-section="3-feed-highlights"><strong>Using uvx in GitHub Actions in a cache-friendly way.</strong> [[source]](https://simonwillison.net/2026/Jul/14/uvx-github-actions-cache/#atom-everything) <button class="thumb-up" onclick="voteItem('3-feed-highlights','&lt;strong&gt;Using uvx in GitHub Actions in a','up')">👍</button><button class="thumb-down" onclick="voteItem('3-feed-highlights','&lt;strong&gt;Using uvx in GitHub Actions in a','down')">👎</button></span></li>
+<li><span class="item-feedback" data-id="&lt;strong&gt;DOOMQL&lt;/strong&gt;" data-section="3-feed-highlights"><strong>DOOMQL</strong> — SQLite meets DOOM. [[source]](https://simonwillison.net/2026/Jul/13/doomql/#atom-everything) <button class="thumb-up" onclick="voteItem('3-feed-highlights','&lt;strong&gt;DOOMQL&lt;/strong&gt;','up')">👍</button><button class="thumb-down" onclick="voteItem('3-feed-highlights','&lt;strong&gt;DOOMQL&lt;/strong&gt;','down')">👎</button></span></li>
+<li><span class="item-feedback" data-id="&lt;strong&gt;Datasette code-frequency chart o" data-section="3-feed-highlights"><strong>Datasette code-frequency chart on GitHub.</strong> [[source]](https://simonwillison.net/2026/Jul/13/datasette-code-frequency/#atom-everything) <button class="thumb-up" onclick="voteItem('3-feed-highlights','&lt;strong&gt;Datasette code-frequency chart o','up')">👍</button><button class="thumb-down" onclick="voteItem('3-feed-highlights','&lt;strong&gt;Datasette code-frequency chart o','down')">👎</button></span></li>
+<li><span class="item-feedback" data-id="&lt;strong&gt;The new GPT-5.6 family: Luna" data-section="3-feed-highlights"><strong>The new GPT-5.6 family: Luna, Terra, Sol</strong> — OpenAI's latest release. [[source]](https://simonwillison.net/2026/Jul/9/gpt-5-6/#atom-everything) <button class="thumb-up" onclick="voteItem('3-feed-highlights','&lt;strong&gt;The new GPT-5.6 family: Luna','up')">👍</button><button class="thumb-down" onclick="voteItem('3-feed-highlights','&lt;strong&gt;The new GPT-5.6 family: Luna','down')">👎</button></span></li>
+<li><span class="item-feedback" data-id="&lt;strong&gt;Introducing Muse Spark 1.1&lt;/stro" data-section="3-feed-highlights"><strong>Introducing Muse Spark 1.1</strong> — Meta's latest model. [[source]](https://simonwillison.net/2026/Jul/9/muse-spark-1-1/#atom-everything) <button class="thumb-up" onclick="voteItem('3-feed-highlights','&lt;strong&gt;Introducing Muse Spark 1.1&lt;/stro','up')">👍</button><button class="thumb-down" onclick="voteItem('3-feed-highlights','&lt;strong&gt;Introducing Muse Spark 1.1&lt;/stro','down')">👎</button></span></li>
+<li><span class="item-feedback" data-id="&lt;strong&gt;Rewriting Bun in Rust&lt;/strong&gt;" data-section="3-feed-highlights"><strong>Rewriting Bun in Rust</strong> — deep dive on the JS runtime rewrite. [[source]](https://simonwillison.net/2026/Jul/8/rewriting-bun-in-rust/#atom-everything) <button class="thumb-up" onclick="voteItem('3-feed-highlights','&lt;strong&gt;Rewriting Bun in Rust&lt;/strong&gt;','up')">👍</button><button class="thumb-down" onclick="voteItem('3-feed-highlights','&lt;strong&gt;Rewriting Bun in Rust&lt;/strong&gt;','down')">👎</button></span></li>
+<li><span class="item-feedback" data-id="&lt;strong&gt;Introducing GPT-Live&lt;/strong&gt;" data-section="3-feed-highlights"><strong>Introducing GPT-Live</strong> — new OpenAI real-time voice mode. [[source]](https://simonwillison.net/2026/Jul/8/introducing-gptlive/#atom-everything) <button class="thumb-up" onclick="voteItem('3-feed-highlights','&lt;strong&gt;Introducing GPT-Live&lt;/strong&gt;','up')">👍</button><button class="thumb-down" onclick="voteItem('3-feed-highlights','&lt;strong&gt;Introducing GPT-Live&lt;/strong&gt;','down')">👎</button></span></li>
+<li><span class="item-feedback" data-id="&lt;strong&gt;sqlite-utils 4.0&lt;/strong&gt;" data-section="3-feed-highlights"><strong>sqlite-utils 4.0</strong> — now with database schema migrations. [[source]](https://simonwillison.net/2026/Jul/7/sqlite-utils-4/#atom-everything) <button class="thumb-up" onclick="voteItem('3-feed-highlights','&lt;strong&gt;sqlite-utils 4.0&lt;/strong&gt;','up')">👍</button><button class="thumb-down" onclick="voteItem('3-feed-highlights','&lt;strong&gt;sqlite-utils 4.0&lt;/strong&gt;','down')">👎</button></span></li>
+</ul>
+<h2 id="4-hacker-news-top-stories">4. 🔥 Hacker News — Top Stories</h2>
+<table><thead><tr>
+<th>#</th>
+<th>Story</th>
+<th>Points</th>
+<th>Comments</th>
+</tr></thead><tbody>
+<tr>
+<td>1</td>
+<td><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fnews.ycombinator.com%2Fitem%3Fid%3D48901569&section=4-hacker-news-top-stories&date=2026-07-14" target="_self" rel="noopener">Japan develops method to recover up to 90% of lithium from used EV batteries</a></td>
+<td>562</td>
+<td>151</td>
+</tr>
+<tr>
+<td>2</td>
+<td><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fnews.ycombinator.com%2Fitem%3Fid%3D48896665&section=4-hacker-news-top-stories&date=2026-07-14" target="_self" rel="noopener">Building and shipping Mac/iOS apps without opening Xcode</a></td>
+<td>498</td>
+<td>211</td>
+</tr>
+<tr>
+<td>3</td>
+<td><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fnews.ycombinator.com%2Fitem%3Fid%3D48901010&section=4-hacker-news-top-stories&date=2026-07-14" target="_self" rel="noopener">The git history command</a></td>
+<td>337</td>
+<td>203</td>
+</tr>
+<tr>
+<td>4</td>
+<td><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fnews.ycombinator.com%2Fitem%3Fid%3D48897104&section=4-hacker-news-top-stories&date=2026-07-14" target="_self" rel="noopener">Infinite scroll may become endangered if Calif. law passes</a></td>
+<td>185</td>
+<td>311</td>
+</tr>
+<tr>
+<td>5</td>
+<td><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fnews.ycombinator.com%2Fitem%3Fid%3D48900191&section=4-hacker-news-top-stories&date=2026-07-14" target="_self" rel="noopener">An Englishwoman who sketched India before photography</a></td>
+<td>173</td>
+<td>52</td>
+</tr>
+<tr>
+<td>6</td>
+<td><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fnews.ycombinator.com%2Fitem%3Fid%3D48901454&section=4-hacker-news-top-stories&date=2026-07-14" target="_self" rel="noopener">Fundamentals of Wireless Communication (2005) — free textbook</a></td>
+<td>145</td>
+<td>6</td>
+</tr>
+<tr>
+<td>7</td>
+<td><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fnews.ycombinator.com%2Fitem%3Fid%3D48902026&section=4-hacker-news-top-stories&date=2026-07-14" target="_self" rel="noopener">YouTrackDB — JetBrains open-sources object-oriented graph DB</a></td>
+<td>139</td>
+<td>44</td>
+</tr>
+<tr>
+<td>8</td>
+<td><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fnews.ycombinator.com%2Fitem%3Fid%3D48902320&section=4-hacker-news-top-stories&date=2026-07-14" target="_self" rel="noopener">Australian energy retailers must provide 3 hours free daytime electricity</a></td>
+<td>137</td>
+<td>218</td>
+</tr>
+<tr>
+<td>9</td>
+<td>[The Economics of Recursive Self-Improvement [pdf]](https://news.ycombinator.com/item?id=48901224)</td>
+<td>109</td>
+<td>49</td>
+</tr>
+<tr>
+<td>10</td>
+<td><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fnews.ycombinator.com%2Fitem%3Fid%3D48901356&section=4-hacker-news-top-stories&date=2026-07-14" target="_self" rel="noopener">Satellite Tracker — Live Map of Starlink &amp;amp; 30k satellites</a></td>
+<td>101</td>
+<td>55</td>
+</tr>
+<tr>
+<td>11</td>
+<td><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fnews.ycombinator.com%2Fitem%3Fid%3D48872833&section=4-hacker-news-top-stories&date=2026-07-14" target="_self" rel="noopener">How to build a circular LCD clock</a></td>
+<td>92</td>
+<td>36</td>
+</tr>
+<tr>
+<td>12</td>
+<td><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fnews.ycombinator.com%2Fitem%3Fid%3D48901235&section=4-hacker-news-top-stories&date=2026-07-14" target="_self" rel="noopener">Is x86 ready to ACE it? — Chips and Cheese</a></td>
+<td>87</td>
+<td>15</td>
+</tr>
+<tr>
+<td>13</td>
+<td><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fnews.ycombinator.com%2Fitem%3Fid%3D48903082&section=4-hacker-news-top-stories&date=2026-07-14" target="_self" rel="noopener">Indian scientists produce most detailed 3D atlas of human brainstem</a></td>
+<td>85</td>
+<td>8</td>
+</tr>
+<tr>
+<td>14</td>
+<td><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fnews.ycombinator.com%2Fitem%3Fid%3D48901126&section=4-hacker-news-top-stories&date=2026-07-14" target="_self" rel="noopener">MorphoHDL — a minimalistic language for growing circuits</a></td>
+<td>82</td>
+<td>8</td>
+</tr>
+<tr>
+<td>15</td>
+<td><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fnews.ycombinator.com%2Fitem%3Fid%3D48905028&section=4-hacker-news-top-stories&date=2026-07-14" target="_self" rel="noopener">Codex starts encrypting prompts, uses ciphertext for inference</a></td>
+<td>76</td>
+<td>33</td>
+</tr>
+</tbody></table>
+<h2 id="5-ai-agent-news">5. 🤖 AI &amp; Agent News</h2>
+<ul>
+<li><span class="item-feedback" data-id="&lt;strong&gt;Apple sues OpenAI&lt;/strong&gt; after" data-section="5-ai-agent-news"><strong>Apple sues OpenAI</strong> after ex-engineer allegedly used a bug to steal trade secrets. [[Ars Technica]](https://arstechnica.com/tech-policy/2026/07/apple-sues-openai-after-ex-engineer-allegedly-used-bug-to-steal-trade-secrets/) <button class="thumb-up" onclick="voteItem('5-ai-agent-news','&lt;strong&gt;Apple sues OpenAI&lt;/strong&gt; after','up')">👍</button><button class="thumb-down" onclick="voteItem('5-ai-agent-news','&lt;strong&gt;Apple sues OpenAI&lt;/strong&gt; after','down')">👎</button></span></li>
+<li><span class="item-feedback" data-id="&lt;strong&gt;Defenders embracing prompt injec" data-section="5-ai-agent-news"><strong>Defenders embracing prompt injection</strong> — &quot;context bombing&quot; and guardrails become the new defense. [[Ars Technica]](https://arstechnica.com/security/2026/07/now-defenders-are-embracing-the-prompt-injection-too/) <button class="thumb-up" onclick="voteItem('5-ai-agent-news','&lt;strong&gt;Defenders embracing prompt injec','up')">👍</button><button class="thumb-down" onclick="voteItem('5-ai-agent-news','&lt;strong&gt;Defenders embracing prompt injec','down')">👎</button></span></li>
+<li><span class="item-feedback" data-id="&lt;strong&gt;World models explained&lt;/strong&gt;" data-section="5-ai-agent-news"><strong>World models explained</strong> — the promise and limits of simulating everything. [[Ars Technica]](https://arstechnica.com/ai/2026/07/simulating-everything-sort-of-the-promise-and-limits-of-world-models/) <button class="thumb-up" onclick="voteItem('5-ai-agent-news','&lt;strong&gt;World models explained&lt;/strong&gt;','up')">👍</button><button class="thumb-down" onclick="voteItem('5-ai-agent-news','&lt;strong&gt;World models explained&lt;/strong&gt;','down')">👎</button></span></li>
+<li><span class="item-feedback" data-id="&lt;strong&gt;OpenAI GPT-5.6 family&lt;/strong&gt;" data-section="5-ai-agent-news"><strong>OpenAI GPT-5.6 family</strong> — Luna, Terra, Sol models released. [[Simon Willison]](https://simonwillison.net/2026/Jul/9/gpt-5-6/#atom-everything) <button class="thumb-up" onclick="voteItem('5-ai-agent-news','&lt;strong&gt;OpenAI GPT-5.6 family&lt;/strong&gt;','up')">👍</button><button class="thumb-down" onclick="voteItem('5-ai-agent-news','&lt;strong&gt;OpenAI GPT-5.6 family&lt;/strong&gt;','down')">👎</button></span></li>
+<li><span class="item-feedback" data-id="&lt;strong&gt;Meta Muse Spark 1.1&lt;/strong&gt;" data-section="5-ai-agent-news"><strong>Meta Muse Spark 1.1</strong> — latest model release. [[Simon Willison]](https://simonwillison.net/2026/Jul/9/muse-spark-1-1/#atom-everything) <button class="thumb-up" onclick="voteItem('5-ai-agent-news','&lt;strong&gt;Meta Muse Spark 1.1&lt;/strong&gt;','up')">👍</button><button class="thumb-down" onclick="voteItem('5-ai-agent-news','&lt;strong&gt;Meta Muse Spark 1.1&lt;/strong&gt;','down')">👎</button></span></li>
+<li><span class="item-feedback" data-id="&lt;strong&gt;GPT-Live&lt;/strong&gt;" data-section="5-ai-agent-news"><strong>GPT-Live</strong> — OpenAI's new real-time voice mode. [[Simon Willison]](https://simonwillison.net/2026/Jul/8/introducing-gptlive/#atom-everything) <button class="thumb-up" onclick="voteItem('5-ai-agent-news','&lt;strong&gt;GPT-Live&lt;/strong&gt;','up')">👍</button><button class="thumb-down" onclick="voteItem('5-ai-agent-news','&lt;strong&gt;GPT-Live&lt;/strong&gt;','down')">👎</button></span></li>
+<li><span class="item-feedback" data-id="&lt;strong&gt;Codex encrypts prompts" data-section="5-ai-agent-news"><strong>Codex encrypts prompts, uses ciphertext for inference</strong> — major security shift. [[HN]](https://news.ycombinator.com/item?id=48905028) <button class="thumb-up" onclick="voteItem('5-ai-agent-news','&lt;strong&gt;Codex encrypts prompts','up')">👍</button><button class="thumb-down" onclick="voteItem('5-ai-agent-news','&lt;strong&gt;Codex encrypts prompts','down')">👎</button></span></li>
+<li><span class="item-feedback" data-id="&lt;strong&gt;Simon Willison's sqlite-utils 4." data-section="5-ai-agent-news"><strong>Simon Willison's sqlite-utils 4.0</strong> — schema migrations, mostly written by Claude Fable. [[source]](https://simonwillison.net/2026/Jul/7/sqlite-utils-4/#atom-everything) <button class="thumb-up" onclick="voteItem('5-ai-agent-news','&lt;strong&gt;Simon Willison's sqlite-utils 4.','up')">👍</button><button class="thumb-down" onclick="voteItem('5-ai-agent-news','&lt;strong&gt;Simon Willison's sqlite-utils 4.','down')">👎</button></span></li>
+<li><span class="item-feedback" data-id="&lt;strong&gt;Better Models: Worse Tools&lt;/stro" data-section="5-ai-agent-news"><strong>Better Models: Worse Tools</strong> — Armin Ronacher on the state of AI coding agents. [[Simon Willison]](https://simonwillison.net/2026/Jul/4/better-models-worse-tools/#atom-everything) <button class="thumb-up" onclick="voteItem('5-ai-agent-news','&lt;strong&gt;Better Models: Worse Tools&lt;/stro','up')">👍</button><button class="thumb-down" onclick="voteItem('5-ai-agent-news','&lt;strong&gt;Better Models: Worse Tools&lt;/stro','down')">👎</button></span></li>
+</ul>
+<h2 id="6-openrouter-budget">6. 💰 OpenRouter Budget</h2>
+<table><thead><tr>
+<th>Metric</th>
+<th>Value</th>
+</tr></thead><tbody>
+<tr>
+<td>Monthly Usage</td>
+<td>$15.25</td>
+</tr>
+<tr>
+<td>Daily Spend</td>
+<td>$0.75</td>
+</tr>
+<tr>
+<td><strong>Budget</strong></td>
+<td><strong>$20.00</strong></td>
+</tr>
+<tr>
+<td><strong>Remaining</strong></td>
+<td><strong>$4.75 (76.3% used)</strong></td>
+</tr>
+<tr>
+<td>Days Remaining</td>
+<td>17</td>
+</tr>
+<tr>
+<td>Avg Daily Needed</td>
+<td>$0.28</td>
+</tr>
+<tr>
+<td>Trend</td>
+<td>🔴 Significantly over budget today</td>
+</tr>
+</tbody></table>
+<p><strong>⚠️ On track to exceed the $20 budget.</strong> Current daily spend of $0.75 would need to drop to $0.28/day for the rest of the month to stay within budget.</p>
+<h2 id="7-agtalk-crop-talk">7. 🌾 AgTalk Crop Talk</h2>
+<p><strong>Bayer/Product Mentions:</strong></p>
+<ul>
+<li><span class="item-feedback" data-id="RE: Is this sweet corn ok after spraying with roundup?" data-section="7-agtalk-crop-talk"><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Ftalk.newagtalk.com%2Fforums%2Fthread-view.asp%3Ftid%3D1242539%26mid%3D11699955%23M11699955&section=7-agtalk-crop-talk&date=2026-07-14" target="_self" rel="noopener">RE: Is this sweet corn ok after spraying with roundup?</a> by Halflink — 1 post today <button class="thumb-up" onclick="voteItem('7-agtalk-crop-talk','RE: Is this sweet corn ok after spraying with roundup?','up')">👍</button><button class="thumb-down" onclick="voteItem('7-agtalk-crop-talk','RE: Is this sweet corn ok after spraying with roundup?','down')">👎</button></span></li>
+</ul>
+<h2 id="8-books">8. 📚 Books</h2>
+<p>&gt; *Saturday-only section — no data today.*</p>
+<h2 id="9-apple-health-yesterday-july-12-2026">9. 🩺 Apple Health — Yesterday (July 12, 2026)</h2>
+<h3>Summary</h3>
+<table><thead><tr>
+<th>Metric</th>
+<th>Value</th>
+<th>vs. Previous Day</th>
+</tr></thead><tbody>
+<tr>
+<td><strong>Steps</strong></td>
+<td>~5,479 avg*</td>
+<td>-2% (flat)</td>
+</tr>
+<tr>
+<td><strong>Resting HR</strong></td>
+<td>76 bpm</td>
+<td><strong>↑ 7 bpm</strong> ⚠️</td>
+</tr>
+<tr>
+<td><strong>HRV</strong></td>
+<td>21.85 ms</td>
+<td><strong>↓ 26%</strong> ⚠️</td>
+</tr>
+<tr>
+<td><strong>Sleep</strong></td>
+<td>7h 48min</td>
+<td>—</td>
+</tr>
+<tr>
+<td><strong>Deep Sleep</strong></td>
+<td>37 min</td>
+<td>—</td>
+</tr>
+<tr>
+<td><strong>REM Sleep</strong></td>
+<td>1h 43min</td>
+<td>—</td>
+</tr>
+<tr>
+<td><strong>Exercise</strong></td>
+<td>54 min</td>
+<td>✅ Above target</td>
+</tr>
+<tr>
+<td><strong>Walking Distance</strong></td>
+<td>2.61 mi</td>
+<td>—</td>
+</tr>
+<tr>
+<td><strong>Flights Climbed</strong></td>
+<td>17</td>
+<td>—</td>
+</tr>
+<tr>
+<td><strong>Stand Hours</strong></td>
+<td>11</td>
+<td>—</td>
+</tr>
+<tr>
+<td><strong>Respiratory Rate</strong></td>
+<td>15.15/min</td>
+<td>—</td>
+</tr>
+</tbody></table>
+<p>*Steps figure is 7-day average; latest daily data not available from the device export.</p>
+<h3>Deviations &amp; Recommendations</h3>
+<ul>
+<li><span class="item-feedback" data-id="⚠️ &lt;strong&gt;HRV dropped 26%&lt;/strong&gt; from" data-section="9-apple-health-yesterday-july-12-2026">⚠️ <strong>HRV dropped 26%</strong> from previous day (33.4 → 21.85 ms) — possible accumulated fatigue <button class="thumb-up" onclick="voteItem('9-apple-health-yesterday-july-12-2026','⚠️ &lt;strong&gt;HRV dropped 26%&lt;/strong&gt; from','up')">👍</button><button class="thumb-down" onclick="voteItem('9-apple-health-yesterday-july-12-2026','⚠️ &lt;strong&gt;HRV dropped 26%&lt;/strong&gt; from','down')">👎</button></span></li>
+<li><span class="item-feedback" data-id="⚠️ &lt;strong&gt;Resting heart rate up 7 bpm&lt;/" data-section="9-apple-health-yesterday-july-12-2026">⚠️ <strong>Resting heart rate up 7 bpm</strong> (69 → 76) — possible fatigue or stress <button class="thumb-up" onclick="voteItem('9-apple-health-yesterday-july-12-2026','⚠️ &lt;strong&gt;Resting heart rate up 7 bpm&lt;/','up')">👍</button><button class="thumb-down" onclick="voteItem('9-apple-health-yesterday-july-12-2026','⚠️ &lt;strong&gt;Resting heart rate up 7 bpm&lt;/','down')">👎</button></span></li>
+<li><span class="item-feedback" data-id="🛑 &lt;strong&gt;Rest recommended&lt;/strong&gt;" data-section="9-apple-health-yesterday-july-12-2026">🛑 <strong>Rest recommended</strong> — HRV is low and resting heart rate is elevated vs previous day <button class="thumb-up" onclick="voteItem('9-apple-health-yesterday-july-12-2026','🛑 &lt;strong&gt;Rest recommended&lt;/strong&gt;','up')">👍</button><button class="thumb-down" onclick="voteItem('9-apple-health-yesterday-july-12-2026','🛑 &lt;strong&gt;Rest recommended&lt;/strong&gt;','down')">👎</button></span></li>
+<li><span class="item-feedback" data-id="✅ &lt;strong&gt;Fitness goal on track&lt;/strong&gt;" data-section="9-apple-health-yesterday-july-12-2026">✅ <strong>Fitness goal on track</strong> — 5 workout days this period (target: 3/week), avg 54 min/day <button class="thumb-up" onclick="voteItem('9-apple-health-yesterday-july-12-2026','✅ &lt;strong&gt;Fitness goal on track&lt;/strong&gt;','up')">👍</button><button class="thumb-down" onclick="voteItem('9-apple-health-yesterday-july-12-2026','✅ &lt;strong&gt;Fitness goal on track&lt;/strong&gt;','down')">👎</button></span></li>
+</ul>
+<h3>Sleep Analysis</h3>
+<ul>
+<li><span class="item-feedback" data-id="&lt;strong&gt;Total: 7h 48min&lt;/strong&gt;" data-section="9-apple-health-yesterday-july-12-2026"><strong>Total: 7h 48min</strong> — good duration <button class="thumb-up" onclick="voteItem('9-apple-health-yesterday-july-12-2026','&lt;strong&gt;Total: 7h 48min&lt;/strong&gt;','up')">👍</button><button class="thumb-down" onclick="voteItem('9-apple-health-yesterday-july-12-2026','&lt;strong&gt;Total: 7h 48min&lt;/strong&gt;','down')">👎</button></span></li>
+<li><span class="item-feedback" data-id="&lt;strong&gt;Deep: 37 min&lt;/strong&gt;" data-section="9-apple-health-yesterday-july-12-2026"><strong>Deep: 37 min</strong> — on the lower side (8% of total) <button class="thumb-up" onclick="voteItem('9-apple-health-yesterday-july-12-2026','&lt;strong&gt;Deep: 37 min&lt;/strong&gt;','up')">👍</button><button class="thumb-down" onclick="voteItem('9-apple-health-yesterday-july-12-2026','&lt;strong&gt;Deep: 37 min&lt;/strong&gt;','down')">👎</button></span></li>
+<li><span class="item-feedback" data-id="&lt;strong&gt;REM: 1h 43min&lt;/strong&gt;" data-section="9-apple-health-yesterday-july-12-2026"><strong>REM: 1h 43min</strong> — healthy (22% of total) <button class="thumb-up" onclick="voteItem('9-apple-health-yesterday-july-12-2026','&lt;strong&gt;REM: 1h 43min&lt;/strong&gt;','up')">👍</button><button class="thumb-down" onclick="voteItem('9-apple-health-yesterday-july-12-2026','&lt;strong&gt;REM: 1h 43min&lt;/strong&gt;','down')">👎</button></span></li>
+<li><span class="item-feedback" data-id="&lt;strong&gt;Awake: 0 min&lt;/strong&gt;" data-section="9-apple-health-yesterday-july-12-2026"><strong>Awake: 0 min</strong> — no disruptions recorded <button class="thumb-up" onclick="voteItem('9-apple-health-yesterday-july-12-2026','&lt;strong&gt;Awake: 0 min&lt;/strong&gt;','up')">👍</button><button class="thumb-down" onclick="voteItem('9-apple-health-yesterday-july-12-2026','&lt;strong&gt;Awake: 0 min&lt;/strong&gt;','down')">👎</button></span></li>
+</ul>
+<p>*Generated Tuesday, July 14, 2026 — 06:00 CT*</p>
+<p>===END-BRIEFING-MARKDOWN===</p>
+</main>
+<footer>
+  <p>🤖 Generated by Hermes Agent &middot; Built with ❤️</p>
+  <p>Click 👍/👎 on any story to help me learn what you like!</p>
+</footer>
+</div>
+<div id="toast" class="toast"></div>
+<script>
+async function vote(section, vote) {
+  const buttons = document.querySelectorAll(`.feedback[data-section="${section}"] button`);
+  buttons.forEach(b => b.classList.add('voted'));
+  try {
+    const res = await fetch(`https://daily-briefing-worker.mfmccown.workers.dev/feedback/2026-07-14/${section}?vote=${vote}`);
+    const data = await res.json();
+    showToast(vote === 'up' ? '👍 Noted!' : '👎 Got it — I'll adjust!');
+  } catch(e) {
+    showToast('Could not record vote');
+    buttons.forEach(b => b.classList.remove('voted'));
+  }
+}
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2000);
+}
+</script>
+</body>
+</html>
