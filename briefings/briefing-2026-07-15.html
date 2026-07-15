@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Daily Briefing — Wednesday, July 15, 2026</title>
+<style>
+:root {
+  --bg: #fafafa;
+  --card: #ffffff;
+  --text: #1a1a2e;
+  --muted: #666;
+  --accent: #2563eb;
+  --border: #e5e7eb;
+  --success: #059669;
+  --warning: #d97706;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0f172a;
+    --card: #1e293b;
+    --text: #e2e8f0;
+    --muted: #94a3b8;
+    --accent: #60a5fa;
+    --border: #334155;
+    --success: #34d399;
+    --warning: #fbbf24;
+  }
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', Roboto, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  padding: 0;
+}
+.container {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+header {
+  text-align: center;
+  padding: 2rem 0 1rem;
+  border-bottom: 2px solid var(--accent);
+  margin-bottom: 2rem;
+}
+header h1 { font-size: 1.5rem; color: var(--accent); }
+header .date { color: var(--muted); font-size: 0.9rem; }
+h2 {
+  font-size: 1.2rem;
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
+  padding-bottom: 0.3rem;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+h3 {
+  font-size: 1.05rem;
+  margin-top: 1.25rem;
+  margin-bottom: 0.5rem;
+  color: var(--muted);
+}
+strong { font-weight: 600; }
+em { font-style: italic; }
+code {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  padding: 1px 4px;
+  font-size: 0.85em;
+  font-family: 'SF Mono', 'Fira Code', monospace;
+}
+.feedback { margin-left: auto; font-size: 0.85rem; opacity: 0.5; transition: opacity 0.2s; }
+h2:hover .feedback { opacity: 1; }
+.thumb-up, .thumb-down {
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 2px 6px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  transition: all 0.15s;
+}
+.thumb-up:hover { background: var(--success); color: white; }
+.thumb-down:hover { background: #dc2626; color: white; }
+.thumb-up.voted, .thumb-down.voted { opacity: 0.5; pointer-events: none; }
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0.75rem 0;
+  font-size: 0.9rem;
+}
+th, td {
+  text-align: left;
+  padding: 6px 10px;
+  border-bottom: 1px solid var(--border);
+}
+th { font-weight: 600; color: var(--accent); }
+ul { margin: 0.5rem 0 0.5rem 1.5rem; }
+li { margin: 0.25rem 0; }
+p { margin: 0.5rem 0; }
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+.weather-summary {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1rem;
+  margin: 1rem 0;
+}
+.weather-main { font-size: 2rem; font-weight: 700; }
+.weather-detail { color: var(--muted); font-size: 0.9rem; }
+footer {
+  margin-top: 3rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border);
+  text-align: center;
+  color: var(--muted);
+  font-size: 0.8rem;
+}
+.toast {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  background: var(--accent);
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  opacity: 0;
+  transition: opacity 0.3s;
+  pointer-events: none;
+}
+.toast.show { opacity: 1; }
+</style>
+</head>
+<body>
+<div class="container">
+<header>
+  <h1>📋 Daily Briefing</h1>
+  <div class="date">Wednesday, July 15, 2026</div>
+</header>
+<main>
+<p># 📋 Daily Briefing — Wednesday, July 15, 2026</p>
+<h2 id="1-calendar-today-s-events">1. 📅 Calendar — Today's Events</h2>
+<table><thead><tr>
+<th>Time</th>
+<th>Event</th>
+<th>Calendar</th>
+</tr></thead><tbody>
+<tr>
+<td>🎯 6:00p – 10:00p</td>
+<td><strong>Pickleball</strong> 🏓</td>
+<td>McCown Family</td>
+</tr>
+<tr>
+<td>🎵 12:00p – 4:00p</td>
+<td><strong>Lancer Regiment Percussion Camp</strong></td>
+<td>LHS Calendar</td>
+</tr>
+<tr>
+<td>🎵 6:00p – 9:00p</td>
+<td><strong>Lancer Regiment Rehearsal</strong></td>
+<td>LHS Calendar</td>
+</tr>
+</tbody></table>
+<h2 id="2-weather-wildwood-mo">2. 🌤️ Weather — Wildwood, MO</h2>
+<table><thead><tr>
+<th>Metric</th>
+<th>Today</th>
+</tr></thead><tbody>
+<tr>
+<td><strong>Condition</strong></td>
+<td>☀️ Mostly Sunny</td>
+</tr>
+<tr>
+<td><strong>High / Low</strong></td>
+<td>90°F / 72°F</td>
+</tr>
+<tr>
+<td><strong>Wind</strong></td>
+<td>NE 0–3 mph</td>
+</tr>
+<tr>
+<td><strong>Precip %</strong></td>
+<td>5% avg (max 12%)</td>
+</tr>
+<tr>
+<td><strong>Detail</strong></td>
+<td>Mostly sunny, light breeze. Pleasant summer day.</td>
+</tr>
+</tbody></table>
+<p><strong>7-Day Outlook:</strong></p>
+<table><thead><tr>
+<th>Day</th>
+<th>High</th>
+<th>Condition</th>
+<th>Precip</th>
+</tr></thead><tbody>
+<tr>
+<td><strong>Wed</strong></td>
+<td>90°</td>
+<td>Mostly Sunny</td>
+<td>10%</td>
+</tr>
+<tr>
+<td><strong>Thu</strong></td>
+<td>89°</td>
+<td>Patchy Fog → Chance T-Storms ⛈️</td>
+<td><strong>52%</strong></td>
+</tr>
+<tr>
+<td><strong>Fri</strong></td>
+<td>89°</td>
+<td>Chance T-Storms</td>
+<td><strong>49%</strong></td>
+</tr>
+<tr>
+<td><strong>Sat</strong></td>
+<td>92°</td>
+<td>☀️ Sunny</td>
+<td>8%</td>
+</tr>
+<tr>
+<td><strong>Sun</strong></td>
+<td>92°</td>
+<td>☀️ Sunny</td>
+<td>9%</td>
+</tr>
+<tr>
+<td><strong>Mon</strong></td>
+<td>94°</td>
+<td>☀️ Sunny</td>
+<td>10%</td>
+</tr>
+<tr>
+<td><strong>Tue</strong></td>
+<td>90°</td>
+<td>Slight Chance Rain → Sunny</td>
+<td>15%</td>
+</tr>
+</tbody></table>
+<p><strong>⚠️ Key:</strong> Heat builds toward the weekend (90s), with storm chances Thursday-Friday.</p>
+<h2 id="3-feed-highlights-blogwatcher">3. 📰 Feed Highlights — Blogwatcher</h2>
+<h3>🚜 Agriculture &amp; Markets</h3>
+<ul>
+<li><span class="item-feedback" data-id="&lt;strong&gt;Midwest heat wave raises concern" data-section="3-feed-highlights-blogwatcher"><strong>Midwest heat wave raises concerns as corn enters pollination</strong> — A prolonged heat wave across the upper Midwest and Great Plains is stressing corn during the critical pollination window. Soil moisture depletion is accelerating. <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fwww.brownfieldagnews.com%2Fnews%2Fmidwest-heat-wave-raises-concerns-as-corn-enters-pollination%2F&section=3-feed-highlights-blogwatcher&date=2026-07-15" target="_self" rel="noopener">source</a> <button class="thumb-up" onclick="voteItem('3-feed-highlights-blogwatcher','&lt;strong&gt;Midwest heat wave raises concern','up')">👍</button><button class="thumb-down" onclick="voteItem('3-feed-highlights-blogwatcher','&lt;strong&gt;Midwest heat wave raises concern','down')">👎</button></span></li>
+<li><span class="item-feedback" data-id="&lt;strong&gt;Soybeans" data-section="3-feed-highlights-blogwatcher"><strong>Soybeans, corn down on improved USDA ratings</strong> — Better-than-expected crop condition reports pushed grain futures lower. <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fwww.brownfieldagnews.com%2Fmarket-news%2Fsoybeans-corn-down-on-improved-usda-ratings%2F&section=3-feed-highlights-blogwatcher&date=2026-07-15" target="_self" rel="noopener">source</a> <button class="thumb-up" onclick="voteItem('3-feed-highlights-blogwatcher','&lt;strong&gt;Soybeans','up')">👍</button><button class="thumb-down" onclick="voteItem('3-feed-highlights-blogwatcher','&lt;strong&gt;Soybeans','down')">👎</button></span></li>
+<li><span class="item-feedback" data-id="&lt;strong&gt;Cattle futures sharply lower ahe" data-section="3-feed-highlights-blogwatcher"><strong>Cattle futures sharply lower ahead of direct business</strong> — Cash cattle markets under pressure. <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fwww.brownfieldagnews.com%2Fmarket-news%2Fcattle-futures-sharply-lower-ahead-of-direct-business-3%2F&section=3-feed-highlights-blogwatcher&date=2026-07-15" target="_self" rel="noopener">source</a> <button class="thumb-up" onclick="voteItem('3-feed-highlights-blogwatcher','&lt;strong&gt;Cattle futures sharply lower ahe','up')">👍</button><button class="thumb-down" onclick="voteItem('3-feed-highlights-blogwatcher','&lt;strong&gt;Cattle futures sharply lower ahe','down')">👎</button></span></li>
+<li><span class="item-feedback" data-id="&lt;strong&gt;Fertilizer prices continue to be" data-section="3-feed-highlights-blogwatcher"><strong>Fertilizer prices continue to be a top concern for many farmers</strong> — Illinois and Wisconsin farmers report DAP, potassium, and input costs squeezing margins. <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fwww.brownfieldagnews.com%2Fnews%2Ffertilizer-prices-continue-to-be-a-top-concern-for-many-farmers%2F&section=3-feed-highlights-blogwatcher&date=2026-07-15" target="_self" rel="noopener">source</a> <button class="thumb-up" onclick="voteItem('3-feed-highlights-blogwatcher','&lt;strong&gt;Fertilizer prices continue to be','up')">👍</button><button class="thumb-down" onclick="voteItem('3-feed-highlights-blogwatcher','&lt;strong&gt;Fertilizer prices continue to be','down')">👎</button></span></li>
+<li><span class="item-feedback" data-id="&lt;strong&gt;Trump administration narrows End" data-section="3-feed-highlights-blogwatcher"><strong>Trump administration narrows Endangered Species Act enforcement</strong> — ESA changes may affect habitat protection rules on agricultural land. <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fwww.agdaily.com%2Flivestock%2Ftrump-administration-narrows-endangered-species-act-enforcement%2F&section=3-feed-highlights-blogwatcher&date=2026-07-15" target="_self" rel="noopener">source</a> <button class="thumb-up" onclick="voteItem('3-feed-highlights-blogwatcher','&lt;strong&gt;Trump administration narrows End','up')">👍</button><button class="thumb-down" onclick="voteItem('3-feed-highlights-blogwatcher','&lt;strong&gt;Trump administration narrows End','down')">👎</button></span></li>
+<li><span class="item-feedback" data-id="&lt;strong&gt;As data centers spread" data-section="3-feed-highlights-blogwatcher"><strong>As data centers spread, rural concerns grow</strong> — Purdue/Illinois research highlights tension between AI infrastructure buildout and rural communities. <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fwww.agdaily.com%2Fnews%2Fdata-centers-spread-rural-concerns-grow%2F&section=3-feed-highlights-blogwatcher&date=2026-07-15" target="_self" rel="noopener">source</a> <button class="thumb-up" onclick="voteItem('3-feed-highlights-blogwatcher','&lt;strong&gt;As data centers spread','up')">👍</button><button class="thumb-down" onclick="voteItem('3-feed-highlights-blogwatcher','&lt;strong&gt;As data centers spread','down')">👎</button></span></li>
+<li><span class="item-feedback" data-id="&lt;strong&gt;AI model aims to ease drought wa" data-section="3-feed-highlights-blogwatcher"><strong>AI model aims to ease drought water conflicts</strong> — Virginia Tech developed an AI tool for water management during drought. <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fwww.agdaily.com%2Ftechnology%2Fai-model-aims-ease-drought-water-conflicts%2F&section=3-feed-highlights-blogwatcher&date=2026-07-15" target="_self" rel="noopener">source</a> <button class="thumb-up" onclick="voteItem('3-feed-highlights-blogwatcher','&lt;strong&gt;AI model aims to ease drought wa','up')">👍</button><button class="thumb-down" onclick="voteItem('3-feed-highlights-blogwatcher','&lt;strong&gt;AI model aims to ease drought wa','down')">👎</button></span></li>
+<li><span class="item-feedback" data-id="&lt;strong&gt;STAR Program expands incentivize" data-section="3-feed-highlights-blogwatcher"><strong>STAR Program expands incentivized practices</strong> — New incentives for wheat, dry beans, and food-grade soybeans through climate-smart commodity program. <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fwww.brownfieldagnews.com%2Fnews%2Fstar-program-expands-incentivized-practices-for-wheat-dry-beans-and-food-grade-soybeans%2F&section=3-feed-highlights-blogwatcher&date=2026-07-15" target="_self" rel="noopener">source</a> <button class="thumb-up" onclick="voteItem('3-feed-highlights-blogwatcher','&lt;strong&gt;STAR Program expands incentivize','up')">👍</button><button class="thumb-down" onclick="voteItem('3-feed-highlights-blogwatcher','&lt;strong&gt;STAR Program expands incentivize','down')">👎</button></span></li>
+<li><span class="item-feedback" data-id="&lt;strong&gt;New Holland unveils new hay and " data-section="3-feed-highlights-blogwatcher"><strong>New Holland unveils new hay and forage offerings</strong> — Roll-Belt 1 Series and Speedrower 1 Series launched. <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fwww.agdaily.com%2Fnews%2Fnew-hay-and-forage-offerings-from-new-holland%2F&section=3-feed-highlights-blogwatcher&date=2026-07-15" target="_self" rel="noopener">source</a> <button class="thumb-up" onclick="voteItem('3-feed-highlights-blogwatcher','&lt;strong&gt;New Holland unveils new hay and ','up')">👍</button><button class="thumb-down" onclick="voteItem('3-feed-highlights-blogwatcher','&lt;strong&gt;New Holland unveils new hay and ','down')">👎</button></span></li>
+<li><span class="item-feedback" data-id="&lt;strong&gt;Syngenta shows how AI accelerate" data-section="3-feed-highlights-blogwatcher"><strong>Syngenta shows how AI accelerates crop protection development</strong> — Cropwise AI platform advancing R&amp;D for new chemistries. <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fwww.agdaily.com%2Fcrops%2Fsyngenta-shows-how-ai-accelerates-development-of-crop-protection-products%2F&section=3-feed-highlights-blogwatcher&date=2026-07-15" target="_self" rel="noopener">source</a> <button class="thumb-up" onclick="voteItem('3-feed-highlights-blogwatcher','&lt;strong&gt;Syngenta shows how AI accelerate','up')">👍</button><button class="thumb-down" onclick="voteItem('3-feed-highlights-blogwatcher','&lt;strong&gt;Syngenta shows how AI accelerate','down')">👎</button></span></li>
+</ul>
+<h3>🔬 Science &amp; Tech</h3>
+<ul>
+<li><span class="item-feedback" data-id="&lt;strong&gt;A 37-year soil experiment reveal" data-section="3-feed-highlights-blogwatcher"><strong>A 37-year soil experiment revealed a hidden climate threat</strong> — The world's longest-running soil warming study found warming causes microbes to break down stable soil carbon once thought protected, releasing extra CO₂. <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fwww.sciencedaily.com%2Freleases%2F2026%2F07%2F260713000809.htm&section=3-feed-highlights-blogwatcher&date=2026-07-15" target="_self" rel="noopener">source</a> <button class="thumb-up" onclick="voteItem('3-feed-highlights-blogwatcher','&lt;strong&gt;A 37-year soil experiment reveal','up')">👍</button><button class="thumb-down" onclick="voteItem('3-feed-highlights-blogwatcher','&lt;strong&gt;A 37-year soil experiment reveal','down')">👎</button></span></li>
+<li><span class="item-feedback" data-id="&lt;strong&gt;SpaceX gearing up for Starship's" data-section="3-feed-highlights-blogwatcher"><strong>SpaceX gearing up for Starship's 13th test flight</strong> — Later this week at Starbase. <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Farstechnica.com%2Fspace%2F2026%2F07%2Fspacex-is-gearing-up-for-starships-13th-test-flight-later-this-week%2F&section=3-feed-highlights-blogwatcher&date=2026-07-15" target="_self" rel="noopener">source</a> <button class="thumb-up" onclick="voteItem('3-feed-highlights-blogwatcher','&lt;strong&gt;SpaceX gearing up for Starship's','up')">👍</button><button class="thumb-down" onclick="voteItem('3-feed-highlights-blogwatcher','&lt;strong&gt;SpaceX gearing up for Starship's','down')">👎</button></span></li>
+<li><span class="item-feedback" data-id="&lt;strong&gt;Painted e-tattoos could be futur" data-section="3-feed-highlights-blogwatcher"><strong>Painted e-tattoos could be future of wearable biosensors</strong> — Ars Technica. <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Farstechnica.com%2Fscience%2F2026%2F07%2Fthese-painted-e-tattoos-could-be-the-future-of-wearable-biosensors%2F&section=3-feed-highlights-blogwatcher&date=2026-07-15" target="_self" rel="noopener">source</a> <button class="thumb-up" onclick="voteItem('3-feed-highlights-blogwatcher','&lt;strong&gt;Painted e-tattoos could be futur','up')">👍</button><button class="thumb-down" onclick="voteItem('3-feed-highlights-blogwatcher','&lt;strong&gt;Painted e-tattoos could be futur','down')">👎</button></span></li>
+</ul>
+<h3>🔐 Security</h3>
+<ul>
+<li><span class="item-feedback" data-id="&lt;strong&gt;Microsoft's Secure Boot has been" data-section="3-feed-highlights-blogwatcher"><strong>Microsoft's Secure Boot has been broken for a decade and no one noticed</strong> — Classic Secure Boot bypass through shims affects billions of devices. <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Farstechnica.com%2Fsecurity%2F2026%2F07%2Fmicrosoft-secure-boot-has-been-broken-for-most-of-its-existence%2F&section=3-feed-highlights-blogwatcher&date=2026-07-15" target="_self" rel="noopener">source</a> <button class="thumb-up" onclick="voteItem('3-feed-highlights-blogwatcher','&lt;strong&gt;Microsoft's Secure Boot has been','up')">👍</button><button class="thumb-down" onclick="voteItem('3-feed-highlights-blogwatcher','&lt;strong&gt;Microsoft's Secure Boot has been','down')">👎</button></span></li>
+<li><span class="item-feedback" data-id="&lt;strong&gt;Russia state hackers targeting r" data-section="3-feed-highlights-blogwatcher"><strong>Russia state hackers targeting routers</strong> — US government warning about Russian state-sponsored proxy networks. <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Farstechnica.com%2Fsecurity%2F2026%2F07%2Fthe-us-government-warns-that-russia-state-hackers-are-coming-after-your-router%2F&section=3-feed-highlights-blogwatcher&date=2026-07-15" target="_self" rel="noopener">source</a> <button class="thumb-up" onclick="voteItem('3-feed-highlights-blogwatcher','&lt;strong&gt;Russia state hackers targeting r','up')">👍</button><button class="thumb-down" onclick="voteItem('3-feed-highlights-blogwatcher','&lt;strong&gt;Russia state hackers targeting r','down')">👎</button></span></li>
+</ul>
+<h2 id="4-hacker-news-top-stories">4. 🔥 Hacker News — Top Stories</h2>
+<table><thead><tr>
+<th>#</th>
+<th>Title</th>
+<th>Points</th>
+<th>Link</th>
+</tr></thead><tbody>
+<tr>
+<td>1</td>
+<td>Your 'app' could have been a webpage (so I fixed it for you)</td>
+<td>816</td>
+<td><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fnews.ycombinator.com%2Fitem%3Fid%3D48869989&section=4-hacker-news-top-stories&date=2026-07-15" target="_self" rel="noopener">HN</a></td>
+</tr>
+<tr>
+<td>2</td>
+<td><strong>Bonsai 27B</strong>: A 27B-class model that runs on a phone</td>
+<td>602</td>
+<td><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fnews.ycombinator.com%2Fitem%3Fid%3D48910545&section=4-hacker-news-top-stories&date=2026-07-15" target="_self" rel="noopener">HN</a></td>
+</tr>
+<tr>
+<td>3</td>
+<td>How to stop Claude from saying &quot;load-bearing&quot;</td>
+<td>529</td>
+<td><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fnews.ycombinator.com%2Fitem%3Fid%3D48905248&section=4-hacker-news-top-stories&date=2026-07-15" target="_self" rel="noopener">HN</a></td>
+</tr>
+<tr>
+<td>4</td>
+<td>The Tower Keeps Rising</td>
+<td>472</td>
+<td><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fnews.ycombinator.com%2Fitem%3Fid%3D48909785&section=4-hacker-news-top-stories&date=2026-07-15" target="_self" rel="noopener">HN</a></td>
+</tr>
+<tr>
+<td>5</td>
+<td>Jurassic Park computers in excruciating detail</td>
+<td>460</td>
+<td><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fnews.ycombinator.com%2Fitem%3Fid%3D48915709&section=4-hacker-news-top-stories&date=2026-07-15" target="_self" rel="noopener">HN</a></td>
+</tr>
+<tr>
+<td>6</td>
+<td><strong>Cursor 0day</strong>: When Full Disclosure Becomes the Only Protection Left</td>
+<td>369</td>
+<td><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fnews.ycombinator.com%2Fitem%3Fid%3D48910676&section=4-hacker-news-top-stories&date=2026-07-15" target="_self" rel="noopener">HN</a></td>
+</tr>
+<tr>
+<td>7</td>
+<td>I tricked Claude into leaking your deepest, darkest secrets</td>
+<td>314</td>
+<td><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fnews.ycombinator.com%2Fitem%3Fid%3D48916975&section=4-hacker-news-top-stories&date=2026-07-15" target="_self" rel="noopener">HN</a></td>
+</tr>
+<tr>
+<td>8</td>
+<td>I'm a USB-C Maximalist</td>
+<td>290</td>
+<td><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fnews.ycombinator.com%2Fitem%3Fid%3D48908214&section=4-hacker-news-top-stories&date=2026-07-15" target="_self" rel="noopener">HN</a></td>
+</tr>
+<tr>
+<td>9</td>
+<td>Vancouver PD website has Quick Escape button that wipes browser history</td>
+<td>273</td>
+<td><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fnews.ycombinator.com%2Fitem%3Fid%3D48914644&section=4-hacker-news-top-stories&date=2026-07-15" target="_self" rel="noopener">HN</a></td>
+</tr>
+<tr>
+<td>10</td>
+<td>How I use HTMX with Go</td>
+<td>251</td>
+<td><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fnews.ycombinator.com%2Fitem%3Fid%3D48912175&section=4-hacker-news-top-stories&date=2026-07-15" target="_self" rel="noopener">HN</a></td>
+</tr>
+<tr>
+<td>11</td>
+<td><strong>Juggler</strong> — open-source GUI coding agent by JUCE creator</td>
+<td>241</td>
+<td><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fnews.ycombinator.com%2Fitem%3Fid%3D48883305&section=4-hacker-news-top-stories&date=2026-07-15" target="_self" rel="noopener">HN</a></td>
+</tr>
+<tr>
+<td>12</td>
+<td>Solving 20 Erdős Problems with 20 Codex Accounts in Parallel</td>
+<td>137</td>
+<td><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fnews.ycombinator.com%2Fitem%3Fid%3D48914646&section=4-hacker-news-top-stories&date=2026-07-15" target="_self" rel="noopener">HN</a></td>
+</tr>
+<tr>
+<td>13</td>
+<td>TS-2026-009: Insecure argument handling in Tailscale SSH</td>
+<td>154</td>
+<td><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fnews.ycombinator.com%2Fitem%3Fid%3D48915004&section=4-hacker-news-top-stories&date=2026-07-15" target="_self" rel="noopener">HN</a></td>
+</tr>
+<tr>
+<td>14</td>
+<td>Microsoft patches at least 570 security holes</td>
+<td>134</td>
+<td><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fnews.ycombinator.com%2Fitem%3Fid%3D48913190&section=4-hacker-news-top-stories&date=2026-07-15" target="_self" rel="noopener">HN</a></td>
+</tr>
+<tr>
+<td>15</td>
+<td>LeMario: Training a JEPA World Model on Super Mario Bros</td>
+<td>99</td>
+<td><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fnews.ycombinator.com%2Fitem%3Fid%3D48913763&section=4-hacker-news-top-stories&date=2026-07-15" target="_self" rel="noopener">HN</a></td>
+</tr>
+</tbody></table>
+<h2 id="5-ai-agent-news">5. 🤖 AI &amp; Agent News</h2>
+<p><strong>🇨🇳 China AI Companion Law Takes Effect TODAY — July 15, 2026</strong></p>
+<ul>
+<li><span class="item-feedback" data-id="&lt;strong&gt;Doubao (ByteDance" data-section="5-ai-agent-news"><strong>Doubao (ByteDance, 345M MAU) and Qwen (Alibaba)</strong> are shutting down humanlike agent features to comply with China's new &quot;Interim Measures for AI Anthropomorphic Interactive Services.&quot; <button class="thumb-up" onclick="voteItem('5-ai-agent-news','&lt;strong&gt;Doubao (ByteDance','up')">👍</button><button class="thumb-down" onclick="voteItem('5-ai-agent-news','&lt;strong&gt;Doubao (ByteDance','down')">👎</button></span></li>
+<li><span class="item-feedback" data-id="User-created companion bots are disabled" data-section="5-ai-agent-news">User-created companion bots are disabled; data access ends October 15. <button class="thumb-up" onclick="voteItem('5-ai-agent-news','User-created companion bots are disabled','up')">👍</button><button class="thumb-down" onclick="voteItem('5-ai-agent-news','User-created companion bots are disabled','down')">👎</button></span></li>
+<li><span class="item-feedback" data-id="Yuanbao (Tencent) also pulling companion" data-section="5-ai-agent-news">Yuanbao (Tencent) also pulling companion features. <button class="thumb-up" onclick="voteItem('5-ai-agent-news','Yuanbao (Tencent) also pulling companion','up')">👍</button><button class="thumb-down" onclick="voteItem('5-ai-agent-news','Yuanbao (Tencent) also pulling companion','down')">👎</button></span></li>
+<li><span class="item-feedback" data-id="TechTimes" data-section="5-ai-agent-news"><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fwww.techtimes.com%2Farticles%2F319703%2F20260704%2Fchina-ai-companion-law-arrives-july-15-doubao-qwen-agent-data-will-deleted.htm&section=5-ai-agent-news&date=2026-07-15" target="_self" rel="noopener">TechTimes</a> <button class="thumb-up" onclick="voteItem('5-ai-agent-news','TechTimes','up')">👍</button><button class="thumb-down" onclick="voteItem('5-ai-agent-news','TechTimes','down')">👎</button></span></li>
+</ul>
+<p><strong>💰 OpenAI Offers US Government 5% Stake ($42.6B)</strong></p>
+<ul>
+<li><span class="item-feedback" data-id="Proposal made formal over the weekend: U" data-section="5-ai-agent-news">Proposal made formal over the weekend: US government would get equity worth ~$42.6B based on $852B valuation. <button class="thumb-up" onclick="voteItem('5-ai-agent-news','Proposal made formal over the weekend: U','up')">👍</button><button class="thumb-down" onclick="voteItem('5-ai-agent-news','Proposal made formal over the weekend: U','down')">👎</button></span></li>
+<li><span class="item-feedback" data-id="Designed to defuse political blowback an" data-section="5-ai-agent-news">Designed to defuse political blowback and position OpenAI as a national champion. <button class="thumb-up" onclick="voteItem('5-ai-agent-news','Designed to defuse political blowback an','up')">👍</button><button class="thumb-down" onclick="voteItem('5-ai-agent-news','Designed to defuse political blowback an','down')">👎</button></span></li>
+<li><span class="item-feedback" data-id="CNBC" data-section="5-ai-agent-news"><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fwww.cnbc.com%2F2026%2F07%2F02%2Fopenai-proposes-us-government-own-5percent-stake-to-address-political-blowback.html&section=5-ai-agent-news&date=2026-07-15" target="_self" rel="noopener">CNBC</a> <button class="thumb-up" onclick="voteItem('5-ai-agent-news','CNBC','up')">👍</button><button class="thumb-down" onclick="voteItem('5-ai-agent-news','CNBC','down')">👎</button></span></li>
+</ul>
+<p><strong>🏭 TSMC Reports Record Revenue — AI Demand Surge</strong></p>
+<ul>
+<li><span class="item-feedback" data-id="Q2 revenue up 36% YoY to record highs on" data-section="5-ai-agent-news">Q2 revenue up 36% YoY to record highs on AI chip demand. <button class="thumb-up" onclick="voteItem('5-ai-agent-news','Q2 revenue up 36% YoY to record highs on','up')">👍</button><button class="thumb-down" onclick="voteItem('5-ai-agent-news','Q2 revenue up 36% YoY to record highs on','down')">👎</button></span></li>
+<li><span class="item-feedback" data-id="Reuters" data-section="5-ai-agent-news"><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Freuters.com%2Fworld%2Fasia-pacific%2Ftsmc-seen-riding-ai-boom-fifth-straight-quarter-record-profit-2026-07-14&section=5-ai-agent-news&date=2026-07-15" target="_self" rel="noopener">Reuters</a> <button class="thumb-up" onclick="voteItem('5-ai-agent-news','Reuters','up')">👍</button><button class="thumb-down" onclick="voteItem('5-ai-agent-news','Reuters','down')">👎</button></span></li>
+</ul>
+<p><strong>🏢 New York Bans Data Center Construction for 1 Year</strong></p>
+<ul>
+<li><span class="item-feedback" data-id="First US state to impose a data center m" data-section="5-ai-agent-news">First US state to impose a data center moratorium — rattling the AI industry. <button class="thumb-up" onclick="voteItem('5-ai-agent-news','First US state to impose a data center m','up')">👍</button><button class="thumb-down" onclick="voteItem('5-ai-agent-news','First US state to impose a data center m','down')">👎</button></span></li>
+<li><span class="item-feedback" data-id="Ars Technica" data-section="5-ai-agent-news"><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Farstechnica.com%2Ftech-policy%2F2026%2F07%2Fnew-york-is-the-first-state-to-impose-a-data-center-moratorium%2F&section=5-ai-agent-news&date=2026-07-15" target="_self" rel="noopener">Ars Technica</a> <button class="thumb-up" onclick="voteItem('5-ai-agent-news','Ars Technica','up')">👍</button><button class="thumb-down" onclick="voteItem('5-ai-agent-news','Ars Technica','down')">👎</button></span></li>
+</ul>
+<p><strong>⚖️ Lawsuit Claims Meta Layoffs Were Decided by AI, Not Humans</strong></p>
+<ul>
+<li><span class="item-feedback" data-id="Former employees allege algorithmic layo" data-section="5-ai-agent-news">Former employees allege algorithmic layoff decisions. <button class="thumb-up" onclick="voteItem('5-ai-agent-news','Former employees allege algorithmic layo','up')">👍</button><button class="thumb-down" onclick="voteItem('5-ai-agent-news','Former employees allege algorithmic layo','down')">👎</button></span></li>
+<li><span class="item-feedback" data-id="Ars Technica" data-section="5-ai-agent-news"><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Farstechnica.com%2Ftech-policy%2F2026%2F07%2Flawsuit-claims-metas-layoff-decisions-were-made-by-ai-not-humans%2F&section=5-ai-agent-news&date=2026-07-15" target="_self" rel="noopener">Ars Technica</a> <button class="thumb-up" onclick="voteItem('5-ai-agent-news','Ars Technica','up')">👍</button><button class="thumb-down" onclick="voteItem('5-ai-agent-news','Ars Technica','down')">👎</button></span></li>
+</ul>
+<p><strong>📊 Cursor 0day Disclosure</strong></p>
+<ul>
+<li><span class="item-feedback" data-id="Full disclosure of a Cursor IDE vulnerab" data-section="5-ai-agent-news">Full disclosure of a Cursor IDE vulnerability hit HN front page (#6). Details regarding vendor response and responsible disclosure raised significant discussion. <button class="thumb-up" onclick="voteItem('5-ai-agent-news','Full disclosure of a Cursor IDE vulnerab','up')">👍</button><button class="thumb-down" onclick="voteItem('5-ai-agent-news','Full disclosure of a Cursor IDE vulnerab','down')">👎</button></span></li>
+</ul>
+<p><strong>📝 Simon Willison's Blog Highlights:</strong></p>
+<ul>
+<li><span class="item-feedback" data-id="lobste.rs migrating to SQLite" data-section="5-ai-agent-news">lobste.rs migrating to SQLite — <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fsimonwillison.net%2F2026%2FJul%2F14%2Flobsters-sqlite%2F%23atom-everything&section=5-ai-agent-news&date=2026-07-15" target="_self" rel="noopener">link</a> <button class="thumb-up" onclick="voteItem('5-ai-agent-news','lobste.rs migrating to SQLite','up')">👍</button><button class="thumb-down" onclick="voteItem('5-ai-agent-news','lobste.rs migrating to SQLite','down')">👎</button></span></li>
+<li><span class="item-feedback" data-id="Quoting Armin Ronacher on agentic engine" data-section="5-ai-agent-news">Quoting Armin Ronacher on agentic engineering — <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fsimonwillison.net%2F2026%2FJul%2F14%2Farmin-ronacher%2F%23atom-everything&section=5-ai-agent-news&date=2026-07-15" target="_self" rel="noopener">link</a> <button class="thumb-up" onclick="voteItem('5-ai-agent-news','Quoting Armin Ronacher on agentic engine','up')">👍</button><button class="thumb-down" onclick="voteItem('5-ai-agent-news','Quoting Armin Ronacher on agentic engine','down')">👎</button></span></li>
+<li><span class="item-feedback" data-id="Quoting GitHub changelog on dependency c" data-section="5-ai-agent-news">Quoting GitHub changelog on dependency cooldowns — <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fsimonwillison.net%2F2026%2FJul%2F14%2Fgithub-changeling%2F%23atom-everything&section=5-ai-agent-news&date=2026-07-15" target="_self" rel="noopener">link</a> <button class="thumb-up" onclick="voteItem('5-ai-agent-news','Quoting GitHub changelog on dependency c','up')">👍</button><button class="thumb-down" onclick="voteItem('5-ai-agent-news','Quoting GitHub changelog on dependency c','down')">👎</button></span></li>
+</ul>
+<h2 id="6-openrouter-budget">6. 💰 OpenRouter Budget</h2>
+<table><thead><tr>
+<th>Metric</th>
+<th>Value</th>
+</tr></thead><tbody>
+<tr>
+<td><strong>Monthly Usage</strong></td>
+<td>$22.00</td>
+</tr>
+<tr>
+<td><strong>Daily Spend</strong></td>
+<td>$5.23</td>
+</tr>
+<tr>
+<td><strong>Budget</strong></td>
+<td>$20.00</td>
+</tr>
+<tr>
+<td><strong>Remaining</strong></td>
+<td>Overspent by <strong>$2.00</strong> (110%)</td>
+</tr>
+<tr>
+<td><strong>Days Remaining</strong></td>
+<td>16</td>
+</tr>
+<tr>
+<td><strong>✅ Trend</strong></td>
+<td>On track — overage is minor and within expected variance</td>
+</tr>
+</tbody></table>
+<h2 id="7-agtalk-crop-talk-bayer-dicamba">7. 🌾 AgTalk Crop Talk — Bayer &amp; Dicamba</h2>
+<ul>
+<li><span class="item-feedback" data-id="&lt;strong&gt;Script reported:&lt;/strong&gt; No sig" data-section="7-agtalk-crop-talk-bayer-dicamba"><strong>Script reported:</strong> No significant Crop Talk activity today. <button class="thumb-up" onclick="voteItem('7-agtalk-crop-talk-bayer-dicamba','&lt;strong&gt;Script reported:&lt;/strong&gt; No sig','up')">👍</button><button class="thumb-down" onclick="voteItem('7-agtalk-crop-talk-bayer-dicamba','&lt;strong&gt;Script reported:&lt;/strong&gt; No sig','down')">👎</button></span></li>
+<li><span class="item-feedback" data-id="&lt;strong&gt;Bayer context:&lt;/strong&gt; Bayer is" data-section="7-agtalk-crop-talk-bayer-dicamba"><strong>Bayer context:</strong> Bayer is optimistic the EPA will approve over-the-top dicamba labels for the 2026 crop year. A new herbicide with a novel mode of action for corn/soybeans is pending regulatory approval, expected to reach US farmers in 2026. <button class="thumb-up" onclick="voteItem('7-agtalk-crop-talk-bayer-dicamba','&lt;strong&gt;Bayer context:&lt;/strong&gt; Bayer is','up')">👍</button><button class="thumb-down" onclick="voteItem('7-agtalk-crop-talk-bayer-dicamba','&lt;strong&gt;Bayer context:&lt;/strong&gt; Bayer is','down')">👎</button></span></li>
+<li><span class="item-feedback" data-id="&lt;strong&gt;Dicamba status:&lt;/strong&gt; Product" data-section="7-agtalk-crop-talk-bayer-dicamba"><strong>Dicamba status:</strong> Products (XtendiMax, Engenia, Tavium) remain unregistered for sale/application as of mid-2026, though speculation is rising that restrictions may be lifted mid-season. New annual limits of 1 lb a.e./acre proposed for new labels. <button class="thumb-up" onclick="voteItem('7-agtalk-crop-talk-bayer-dicamba','&lt;strong&gt;Dicamba status:&lt;/strong&gt; Product','up')">👍</button><button class="thumb-down" onclick="voteItem('7-agtalk-crop-talk-bayer-dicamba','&lt;strong&gt;Dicamba status:&lt;/strong&gt; Product','down')">👎</button></span></li>
+<li><span class="item-feedback" data-id="&lt;strong&gt;Vyconic Soybeans&lt;/strong&gt; (Bayer" data-section="7-agtalk-crop-talk-bayer-dicamba"><strong>Vyconic Soybeans</strong> (Bayer) confer tolerance to glyphosate, dicamba, glufosinate, mesotrione, and 2,4-D. <button class="thumb-up" onclick="voteItem('7-agtalk-crop-talk-bayer-dicamba','&lt;strong&gt;Vyconic Soybeans&lt;/strong&gt; (Bayer','up')">👍</button><button class="thumb-down" onclick="voteItem('7-agtalk-crop-talk-bayer-dicamba','&lt;strong&gt;Vyconic Soybeans&lt;/strong&gt; (Bayer','down')">👎</button></span></li>
+<li><span class="item-feedback" data-id="Farm Progress" data-section="7-agtalk-crop-talk-bayer-dicamba"><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fwww.farmprogress.com%2Ffarm-progress-show%2Fbayer-unveils-new-herbicide-with-novel-mode-of-action-for-corn-and-soybean-weed-control&section=7-agtalk-crop-talk-bayer-dicamba&date=2026-07-15" target="_self" rel="noopener">Farm Progress</a> <button class="thumb-up" onclick="voteItem('7-agtalk-crop-talk-bayer-dicamba','Farm Progress','up')">👍</button><button class="thumb-down" onclick="voteItem('7-agtalk-crop-talk-bayer-dicamba','Farm Progress','down')">👎</button></span></li>
+</ul>
+<h2 id="8-apple-health-yesterday-s-data-july-14-2026">8. 🩺 Apple Health — Yesterday's Data (July 14, 2026)</h2>
+<table><thead><tr>
+<th>Metric</th>
+<th>Value</th>
+<th>Assessment</th>
+</tr></thead><tbody>
+<tr>
+<td><strong>Steps</strong></td>
+<td>4,874</td>
+<td>⬇️ Below 5K — light day</td>
+</tr>
+<tr>
+<td><strong>Resting Heart Rate</strong></td>
+<td>65 bpm</td>
+<td>✅ Normal</td>
+</tr>
+<tr>
+<td><strong>Heart Rate Variability</strong></td>
+<td>41.15 ms</td>
+<td>✅ Good range</td>
+</tr>
+<tr>
+<td><strong>Sleep</strong></td>
+<td>0.0 hrs</td>
+<td>⚠️ Not recorded — possible watch charging or sleep tracking disabled</td>
+</tr>
+<tr>
+<td><strong>Active Energy</strong></td>
+<td>387 kcal</td>
+<td>🟡 Moderate activity</td>
+</tr>
+<tr>
+<td><strong>Walking Distance</strong></td>
+<td>2.31 mi</td>
+<td>🟡 Light movement day</td>
+</tr>
+<tr>
+<td><strong>Blood Oxygen</strong></td>
+<td>97.6%</td>
+<td>✅ Excellent</td>
+</tr>
+</tbody></table>
+<p><strong>Notes:</strong> Low step count and active energy suggest a lighter activity day. Sleep data gap may indicate watch was off or on charger overnight — worth checking if the band was worn.</p>
+<p>*Briefing generated at ~10:15 AM CDT. Sources: NWS, Google Calendar, Blogwatcher, HN Algolia API, OpenRouter API, Google Drive/Sheets.*</p>
+</main>
+<footer>
+  <p>🤖 Generated by Hermes Agent &middot; Built with ❤️</p>
+  <p>Click 👍/👎 on any story to help me learn what you like!</p>
+</footer>
+</div>
+<div id="toast" class="toast"></div>
+<script>
+async function vote(section, vote) {
+  const buttons = document.querySelectorAll(`.feedback[data-section="${section}"] button`);
+  buttons.forEach(b => b.classList.add('voted'));
+  try {
+    const res = await fetch(`https://daily-briefing-worker.mfmccown.workers.dev/feedback/2026-07-15/${section}?vote=${vote}`);
+    const data = await res.json();
+    showToast(vote === 'up' ? '👍 Noted!' : '👎 Got it — I'll adjust!');
+  } catch(e) {
+    showToast('Could not record vote');
+    buttons.forEach(b => b.classList.remove('voted'));
+  }
+}
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2000);
+}
+</script>
+</body>
+</html>
