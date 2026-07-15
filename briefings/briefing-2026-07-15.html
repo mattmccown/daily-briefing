@@ -499,25 +499,5 @@ footer {
 </footer>
 </div>
 <div id="toast" class="toast"></div>
-<script>
-async function vote(section, vote) {
-  const buttons = document.querySelectorAll(`.feedback[data-section="${section}"] button`);
-  buttons.forEach(b => b.classList.add('voted'));
-  try {
-    const res = await fetch(`https://daily-briefing-worker.mfmccown.workers.dev/feedback/2026-07-15/${section}?vote=${vote}`);
-    const data = await res.json();
-    showToast(vote === 'up' ? '👍 Noted!' : '👎 Got it — I'll adjust!');
-  } catch(e) {
-    showToast('Could not record vote');
-    buttons.forEach(b => b.classList.remove('voted'));
-  }
-}
-function showToast(msg) {
-  const t = document.getElementById('toast');
-  t.textContent = msg;
-  t.classList.add('show');
-  setTimeout(() => t.classList.remove('show'), 2000);
-}
-</script>
 </body>
 </html>
