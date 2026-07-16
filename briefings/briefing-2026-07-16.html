@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Daily Briefing — Thursday, July 16, 2026</title>
+<style>
+:root {
+  --bg: #fafafa;
+  --card: #ffffff;
+  --text: #1a1a2e;
+  --muted: #666;
+  --accent: #2563eb;
+  --border: #e5e7eb;
+  --success: #059669;
+  --warning: #d97706;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0f172a;
+    --card: #1e293b;
+    --text: #e2e8f0;
+    --muted: #94a3b8;
+    --accent: #60a5fa;
+    --border: #334155;
+    --success: #34d399;
+    --warning: #fbbf24;
+  }
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', Roboto, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  padding: 0;
+}
+.container {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+header {
+  text-align: center;
+  padding: 2rem 0 1rem;
+  border-bottom: 2px solid var(--accent);
+  margin-bottom: 2rem;
+}
+header h1 { font-size: 1.5rem; color: var(--accent); }
+header .date { color: var(--muted); font-size: 0.9rem; }
+h2 {
+  font-size: 1.2rem;
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
+  padding-bottom: 0.3rem;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+h3 {
+  font-size: 1.05rem;
+  margin-top: 1.25rem;
+  margin-bottom: 0.5rem;
+  color: var(--muted);
+}
+strong { font-weight: 600; }
+em { font-style: italic; }
+code {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  padding: 1px 4px;
+  font-size: 0.85em;
+  font-family: 'SF Mono', 'Fira Code', monospace;
+}
+.feedback { margin-left: auto; font-size: 0.85rem; opacity: 0.5; transition: opacity 0.2s; }
+h2:hover .feedback { opacity: 1; }
+.thumb-up, .thumb-down {
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 2px 6px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  transition: all 0.15s;
+}
+.thumb-up:hover { background: var(--success); color: white; }
+.thumb-down:hover { background: #dc2626; color: white; }
+.thumb-up.voted, .thumb-down.voted { opacity: 0.5; pointer-events: none; }
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0.75rem 0;
+  font-size: 0.9rem;
+}
+th, td {
+  text-align: left;
+  padding: 6px 10px;
+  border-bottom: 1px solid var(--border);
+}
+th { font-weight: 600; color: var(--accent); }
+ul { margin: 0.5rem 0 0.5rem 1.5rem; }
+li { margin: 0.25rem 0; }
+p { margin: 0.5rem 0; }
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+.weather-summary {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1rem;
+  margin: 1rem 0;
+}
+.weather-main { font-size: 2rem; font-weight: 700; }
+.weather-detail { color: var(--muted); font-size: 0.9rem; }
+footer {
+  margin-top: 3rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border);
+  text-align: center;
+  color: var(--muted);
+  font-size: 0.8rem;
+}
+.toast {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  background: var(--accent);
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  opacity: 0;
+  transition: opacity 0.3s;
+  pointer-events: none;
+}
+.toast.show { opacity: 1; }
+</style>
+</head>
+<body>
+<div class="container">
+<header>
+  <h1>📋 Daily Briefing</h1>
+  <div class="date">Thursday, July 16, 2026</div>
+</header>
+<main>
+<p># 📅 Daily Briefing — Thursday, July 16, 2026</p>
+<h2 id="calendar">📅 Calendar</h2>
+<table><thead><tr>
+<th>Time (CDT)</th>
+<th>Event</th>
+<th>Calendar</th>
+</tr></thead><tbody>
+<tr>
+<td>7:40–8:40 AM</td>
+<td><strong>Matt doc</strong></td>
+<td>McCown Family</td>
+</tr>
+<tr>
+<td>9:40–10:40 AM</td>
+<td><strong>Emily Feet</strong></td>
+<td>McCown Family</td>
+</tr>
+<tr>
+<td>12:00–4:00 PM</td>
+<td><strong>Lancer Regiment Percussion Camp</strong></td>
+<td>Lafayette High School</td>
+</tr>
+<tr>
+<td>6:00–9:00 PM</td>
+<td><strong>Lancer Regiment Rehearsal</strong></td>
+<td>Lafayette High School</td>
+</tr>
+</tbody></table>
+<p>No conflicts. Back-to-back morning appointments, then band activities fill the afternoon/evening.</p>
+<h2 id="weather-wildwood-mo">🌤️ Weather — Wildwood, MO</h2>
+<table><thead><tr>
+<th>Metric</th>
+<th>Value</th>
+</tr></thead><tbody>
+<tr>
+<td><strong>High / Low</strong></td>
+<td><strong>90°F / 72°F</strong></td>
+</tr>
+<tr>
+<td><strong>Condition</strong></td>
+<td>Partly Sunny → Chance Showers &amp; Thunderstorms (PM)</td>
+</tr>
+<tr>
+<td><strong>Precip Chance</strong></td>
+<td><strong>50%</strong> (peak 56% evening)</td>
+</tr>
+<tr>
+<td><strong>Heat Index</strong></td>
+<td>Up to <strong>100°F</strong></td>
+</tr>
+<tr>
+<td><strong>Wind</strong></td>
+<td>NW 1 mph, light</td>
+</tr>
+</tbody></table>
+<p>Showers/storms likely after noon, tapering by 8 PM. Morning is mostly sunny — get outdoor stuff done early.</p>
+<h2 id="openrouter-budget">💰 OpenRouter Budget</h2>
+<table><thead><tr>
+<th>Metric</th>
+<th>Value</th>
+</tr></thead><tbody>
+<tr>
+<td><strong>Monthly Spend</strong></td>
+<td><strong>$23.39</strong> (117% of $20 cap)</td>
+</tr>
+<tr>
+<td><strong>Daily Spend</strong></td>
+<td>$0.05</td>
+</tr>
+<tr>
+<td><strong>Days Remaining</strong></td>
+<td>15</td>
+</tr>
+<tr>
+<td><strong>Trend</strong></td>
+<td>⚠️ Over budget by <strong>$3.39</strong></td>
+</tr>
+</tbody></table>
+<p>The $20 cap was exceeded. May need a top-up or usage reduction for the rest of July.</p>
+<h2 id="feed-highlights">📰 Feed Highlights</h2>
+<h3>🤖 AI / Tech (14 new)</h3>
+<p><strong>Simon Willison (3 new):</strong></p>
+<ul>
+<li><span class="item-feedback" data-id="Mermaid to Unicode box art (grok-mermaid)" data-section="feed-highlights"><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fsimonwillison.net%2F2026%2FJul%2F16%2Fgrok-mermaid%2F&section=feed-highlights&date=2026-07-16" target="_self" rel="noopener">Mermaid to Unicode box art (grok-mermaid)</a> — Rust/WASM tool <button class="thumb-up" onclick="voteItem('feed-highlights','Mermaid to Unicode box art (grok-mermaid)','up')">👍</button><button class="thumb-down" onclick="voteItem('feed-highlights','Mermaid to Unicode box art (grok-mermaid)','down')">👎</button></span></li>
+<li><span class="item-feedback" data-id="xai-org/grok-build, now open source" data-section="feed-highlights"><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fsimonwillison.net%2F2026%2FJul%2F15%2Fgrok-build%2F&section=feed-highlights&date=2026-07-16" target="_self" rel="noopener">xai-org/grok-build, now open source</a> — xAI's build system <button class="thumb-up" onclick="voteItem('feed-highlights','xai-org/grok-build, now open source','up')">👍</button><button class="thumb-down" onclick="voteItem('feed-highlights','xai-org/grok-build, now open source','down')">👎</button></span></li>
+<li><span class="item-feedback" data-id="How I tricked Claude into leaking your deepest, darkest secrets" data-section="feed-highlights"><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fsimonwillison.net%2F2026%2FJul%2F15%2Fclaude-web-fetch-exfiltration%2F&section=feed-highlights&date=2026-07-16" target="_self" rel="noopener">How I tricked Claude into leaking your deepest, darkest secrets</a> — Prompt injection via web fetch <button class="thumb-up" onclick="voteItem('feed-highlights','How I tricked Claude into leaking your deepest, darkest secrets','up')">👍</button><button class="thumb-down" onclick="voteItem('feed-highlights','How I tricked Claude into leaking your deepest, darkest secrets','down')">👎</button></span></li>
+</ul>
+<p><strong>Ars Technica (11 new):</strong></p>
+<ul>
+<li><span class="item-feedback" data-id="OpenAI's first branded hardware is a light-up keyboard" data-section="feed-highlights"><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Farstechnica.com%2Fai%2F2026%2F07%2Fopenais-first-branded-hardware-is-a-light-up-keyboard%2F&section=feed-highlights&date=2026-07-16" target="_self" rel="noopener">OpenAI's first branded hardware is a light-up keyboard</a> <button class="thumb-up" onclick="voteItem('feed-highlights','OpenAI's first branded hardware is a light-up keyboard','up')">👍</button><button class="thumb-down" onclick="voteItem('feed-highlights','OpenAI's first branded hardware is a light-up keyboard','down')">👎</button></span></li>
+<li><span class="item-feedback" data-id="Windows 0-day drops same day Microsoft releases record number of patches" data-section="feed-highlights"><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Farstechnica.com%2Fsecurity%2F2026%2F07%2Fwindows-0-day-drops-the-same-day-microsoft-releases-record-number-of-patches%2F&section=feed-highlights&date=2026-07-16" target="_self" rel="noopener">Windows 0-day drops same day Microsoft releases record number of patches</a> <button class="thumb-up" onclick="voteItem('feed-highlights','Windows 0-day drops same day Microsoft releases record number of patches','up')">👍</button><button class="thumb-down" onclick="voteItem('feed-highlights','Windows 0-day drops same day Microsoft releases record number of patches','down')">👎</button></span></li>
+<li><span class="item-feedback" data-id="Sheetz is quitting VMware, migrating 11,000 virtual machines" data-section="feed-highlights"><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Farstechnica.com%2Finformation-technology%2F2026%2F07%2Fsheetz-moves-838-stores-off-vmware-broadcom-created-too-much-uncertainty%2F&section=feed-highlights&date=2026-07-16" target="_self" rel="noopener">Sheetz is quitting VMware, migrating 11,000 virtual machines</a> <button class="thumb-up" onclick="voteItem('feed-highlights','Sheetz is quitting VMware, migrating 11,000 virtual machines','up')">👍</button><button class="thumb-down" onclick="voteItem('feed-highlights','Sheetz is quitting VMware, migrating 11,000 virtual machines','down')">👎</button></span></li>
+<li><span class="item-feedback" data-id="Third-party app stores coming to Google Play as Epic settlement withdrawn" data-section="feed-highlights"><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Farstechnica.com%2Fgadgets%2F2026%2F07%2Fthird-party-app-stores-coming-to-google-play-next-week-as-epic-settlement-withdrawn%2F&section=feed-highlights&date=2026-07-16" target="_self" rel="noopener">Third-party app stores coming to Google Play as Epic settlement withdrawn</a> <button class="thumb-up" onclick="voteItem('feed-highlights','Third-party app stores coming to Google Play as Epic settlement withdrawn','up')">👍</button><button class="thumb-down" onclick="voteItem('feed-highlights','Third-party app stores coming to Google Play as Epic settlement withdrawn','down')">👎</button></span></li>
+<li><span class="item-feedback" data-id="Hundreds rally at Bethesda HQ to protest Xbox layoffs" data-section="feed-highlights"><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Farstechnica.com%2Fgaming%2F2026%2F07%2Fhundreds-rally-at-bethesda-hq-to-protest-xbox-layoffs-and-ars-was-there%2F&section=feed-highlights&date=2026-07-16" target="_self" rel="noopener">Hundreds rally at Bethesda HQ to protest Xbox layoffs</a> <button class="thumb-up" onclick="voteItem('feed-highlights','Hundreds rally at Bethesda HQ to protest Xbox layoffs','up')">👍</button><button class="thumb-down" onclick="voteItem('feed-highlights','Hundreds rally at Bethesda HQ to protest Xbox layoffs','down')">👎</button></span></li>
+<li><span class="item-feedback" data-id="FCC to repeal 39% TV ownership cap" data-section="feed-highlights"><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Farstechnica.com%2Ftech-policy%2F2026%2F07%2Ffcc-to-repeal-39-tv-ownership-cap-in-boost-for-trump-friendly-news-orgs%2F&section=feed-highlights&date=2026-07-16" target="_self" rel="noopener">FCC to repeal 39% TV ownership cap</a> <button class="thumb-up" onclick="voteItem('feed-highlights','FCC to repeal 39% TV ownership cap','up')">👍</button><button class="thumb-down" onclick="voteItem('feed-highlights','FCC to repeal 39% TV ownership cap','down')">👎</button></span></li>
+<li><span class="item-feedback" data-id="Judge: Trump can't deport researchers for content moderation work" data-section="feed-highlights"><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Farstechnica.com%2Ftech-policy%2F2026%2F07%2Fjudge-trump-cant-deport-researchers-just-for-working-in-content-moderation%2F&section=feed-highlights&date=2026-07-16" target="_self" rel="noopener">Judge: Trump can't deport researchers for content moderation work</a> <button class="thumb-up" onclick="voteItem('feed-highlights','Judge: Trump can't deport researchers for content moderation work','up')">👍</button><button class="thumb-down" onclick="voteItem('feed-highlights','Judge: Trump can't deport researchers for content moderation work','down')">👎</button></span></li>
+<li><span class="item-feedback" data-id="How hard is it to build orbital data centers?" data-section="feed-highlights"><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Farstechnica.com%2Fspace%2F2026%2F07%2Fhow-hard-is-it-to-build-orbital-data-centers-actually%2F&section=feed-highlights&date=2026-07-16" target="_self" rel="noopener">How hard is it to build orbital data centers?</a> <button class="thumb-up" onclick="voteItem('feed-highlights','How hard is it to build orbital data centers?','up')">👍</button><button class="thumb-down" onclick="voteItem('feed-highlights','How hard is it to build orbital data centers?','down')">👎</button></span></li>
+<li><span class="item-feedback" data-id="Move over, GPS: Navigation satellites in LEO making a comeback" data-section="feed-highlights"><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Farstechnica.com%2Fspace%2F2026%2F07%2Fmove-over-gps-navigation-satellites-in-low-earth-orbit-are-making-a-comeback%2F&section=feed-highlights&date=2026-07-16" target="_self" rel="noopener">Move over, GPS: Navigation satellites in LEO making a comeback</a> <button class="thumb-up" onclick="voteItem('feed-highlights','Move over, GPS: Navigation satellites in LEO making a comeback','up')">👍</button><button class="thumb-down" onclick="voteItem('feed-highlights','Move over, GPS: Navigation satellites in LEO making a comeback','down')">👎</button></span></li>
+<li><span class="item-feedback" data-id="Buzz Aldrin sells famous felt-tip pen that helped launch Apollo from the Moon" data-section="feed-highlights"><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Farstechnica.com%2Fspace%2F2026%2F07%2Fapollo-11s-broken-switch-and-mission-saving-pen-sell-for-860k%2F&section=feed-highlights&date=2026-07-16" target="_self" rel="noopener">Buzz Aldrin sells famous felt-tip pen that helped launch Apollo from the Moon</a> ($860K) <button class="thumb-up" onclick="voteItem('feed-highlights','Buzz Aldrin sells famous felt-tip pen that helped launch Apollo from the Moon','up')">👍</button><button class="thumb-down" onclick="voteItem('feed-highlights','Buzz Aldrin sells famous felt-tip pen that helped launch Apollo from the Moon','down')">👎</button></span></li>
+<li><span class="item-feedback" data-id="In memoriam: 7 of our favorite Sam Neill films" data-section="feed-highlights"><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Farstechnica.com%2Fculture%2F2026%2F07%2Fin-memoriam-seven-of-our-favorite-sam-neill-films%2F&section=feed-highlights&date=2026-07-16" target="_self" rel="noopener">In memoriam: 7 of our favorite Sam Neill films</a> <button class="thumb-up" onclick="voteItem('feed-highlights','In memoriam: 7 of our favorite Sam Neill films','up')">👍</button><button class="thumb-down" onclick="voteItem('feed-highlights','In memoriam: 7 of our favorite Sam Neill films','down')">👎</button></span></li>
+</ul>
+<h3>🌾 Agriculture (27 new)</h3>
+<p><strong>AGDaily (6 new):</strong></p>
+<ul>
+<li><span class="item-feedback" data-id="Bayer makes big move into hybrid wheat market" data-section="feed-highlights"><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fwww.agdaily.com%2Fcrops%2Fbayer-makes-big-move-into-largely-untapped-hybrid-wheat-market%2F&section=feed-highlights&date=2026-07-16" target="_self" rel="noopener">Bayer makes big move into hybrid wheat market</a> — acquires RAGT <button class="thumb-up" onclick="voteItem('feed-highlights','Bayer makes big move into hybrid wheat market','up')">👍</button><button class="thumb-down" onclick="voteItem('feed-highlights','Bayer makes big move into hybrid wheat market','down')">👎</button></span></li>
+<li><span class="item-feedback" data-id="This fungicide can deliver an edge against corn and soybean diseases" data-section="feed-highlights"><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fwww.agdaily.com%2Fcrops%2Fthis-fungicide-can-deliver-an-edge-against-corn-and-soybean-diseases%2F&section=feed-highlights&date=2026-07-16" target="_self" rel="noopener">This fungicide can deliver an edge against corn and soybean diseases</a> — Syngenta Miravis Neo <button class="thumb-up" onclick="voteItem('feed-highlights','This fungicide can deliver an edge against corn and soybean diseases','up')">👍</button><button class="thumb-down" onclick="voteItem('feed-highlights','This fungicide can deliver an edge against corn and soybean diseases','down')">👎</button></span></li>
+<li><span class="item-feedback" data-id="Study reveals where farmers really get their management ideas" data-section="feed-highlights"><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fwww.agdaily.com%2Fnews%2Ffarmers-trust-ag-media-peers-exploring-new-practices%2F&section=feed-highlights&date=2026-07-16" target="_self" rel="noopener">Study reveals where farmers really get their management ideas</a> — Purdue survey <button class="thumb-up" onclick="voteItem('feed-highlights','Study reveals where farmers really get their management ideas','up')">👍</button><button class="thumb-down" onclick="voteItem('feed-highlights','Study reveals where farmers really get their management ideas','down')">👎</button></span></li>
+<li><span class="item-feedback" data-id="Study finds full-fat dairy doesn't harm heart health" data-section="feed-highlights"><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fwww.agdaily.com%2Flivestock%2Fstudy-finds-full-fat-dairy-doesnt-harm-heart-health%2F&section=feed-highlights&date=2026-07-16" target="_self" rel="noopener">Study finds full-fat dairy doesn't harm heart health</a> <button class="thumb-up" onclick="voteItem('feed-highlights','Study finds full-fat dairy doesn't harm heart health','up')">👍</button><button class="thumb-down" onclick="voteItem('feed-highlights','Study finds full-fat dairy doesn't harm heart health','down')">👎</button></span></li>
+<li><span class="item-feedback" data-id="Beef export report corrected after USDA cuts sales figures by 90%" data-section="feed-highlights"><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fwww.agdaily.com%2Flivestock%2Fbeef-export-report-corrected-usda-cuts-sales-figures-90-percent%2F&section=feed-highlights&date=2026-07-16" target="_self" rel="noopener">Beef export report corrected after USDA cuts sales figures by 90%</a> <button class="thumb-up" onclick="voteItem('feed-highlights','Beef export report corrected after USDA cuts sales figures by 90%','up')">👍</button><button class="thumb-down" onclick="voteItem('feed-highlights','Beef export report corrected after USDA cuts sales figures by 90%','down')">👎</button></span></li>
+<li><span class="item-feedback" data-id="California leaning away from handling neglected farmland" data-section="feed-highlights"><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fwww.agdaily.com%2Finsights%2Fcalifornia-liening-away-from-how-it-handles-neglected-farmland%2F&section=feed-highlights&date=2026-07-16" target="_self" rel="noopener">California leaning away from handling neglected farmland</a> <button class="thumb-up" onclick="voteItem('feed-highlights','California leaning away from handling neglected farmland','up')">👍</button><button class="thumb-down" onclick="voteItem('feed-highlights','California leaning away from handling neglected farmland','down')">👎</button></span></li>
+</ul>
+<p><strong>Brownfield Ag News (20 new):</strong></p>
+<ul>
+<li><span class="item-feedback" data-id="SCOTUS glyphosate ruling shifts focus to EPA, future pesticide litigation" data-section="feed-highlights"><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fwww.brownfieldagnews.com%2Fnews%2Fscotus-glyphosate-ruling-shifts-legal-focus-to-epa-future-pesticide-litigation%2F&section=feed-highlights&date=2026-07-16" target="_self" rel="noopener">SCOTUS glyphosate ruling shifts focus to EPA, future pesticide litigation</a> — Bayer, Monsanto <button class="thumb-up" onclick="voteItem('feed-highlights','SCOTUS glyphosate ruling shifts focus to EPA, future pesticide litigation','up')">👍</button><button class="thumb-down" onclick="voteItem('feed-highlights','SCOTUS glyphosate ruling shifts focus to EPA, future pesticide litigation','down')">👎</button></span></li>
+<li><span class="item-feedback" data-id="Farmers finding value in fungicides and drones" data-section="feed-highlights"><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fwww.brownfieldagnews.com%2Fnews%2Ffarmers-finding-value-in-fungicides-and-drones%2F&section=feed-highlights&date=2026-07-16" target="_self" rel="noopener">Farmers finding value in fungicides and drones</a> <button class="thumb-up" onclick="voteItem('feed-highlights','Farmers finding value in fungicides and drones','up')">👍</button><button class="thumb-down" onclick="voteItem('feed-highlights','Farmers finding value in fungicides and drones','down')">👎</button></span></li>
+<li><span class="item-feedback" data-id="Tar spot detected in Michigan corn" data-section="feed-highlights"><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fwww.brownfieldagnews.com%2Fnews%2Ftar-spot-detected-in-michigan-corn-msu-encouraging-scouting-and-fungicide-planning%2F&section=feed-highlights&date=2026-07-16" target="_self" rel="noopener">Tar spot detected in Michigan corn</a> <button class="thumb-up" onclick="voteItem('feed-highlights','Tar spot detected in Michigan corn','up')">👍</button><button class="thumb-down" onclick="voteItem('feed-highlights','Tar spot detected in Michigan corn','down')">👎</button></span></li>
+<li><span class="item-feedback" data-id="High soil pH could trigger iron deficiency chlorosis in soybeans" data-section="feed-highlights"><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fwww.brownfieldagnews.com%2Fnews%2Fhigh-soil-ph-could-trigger-iron-deficiency-chlorosis-in-soybeans%2F&section=feed-highlights&date=2026-07-16" target="_self" rel="noopener">High soil pH could trigger iron deficiency chlorosis in soybeans</a> <button class="thumb-up" onclick="voteItem('feed-highlights','High soil pH could trigger iron deficiency chlorosis in soybeans','up')">👍</button><button class="thumb-down" onclick="voteItem('feed-highlights','High soil pH could trigger iron deficiency chlorosis in soybeans','down')">👎</button></span></li>
+<li><span class="item-feedback" data-id="Vilsack calls attention to rising worldwide hunger crisis" data-section="feed-highlights"><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fwww.brownfieldagnews.com%2Fnews%2Fvilsack-calls-attention-to-rising-worldwide-hunger-crisis%2F&section=feed-highlights&date=2026-07-16" target="_self" rel="noopener">Vilsack calls attention to rising worldwide hunger crisis</a> <button class="thumb-up" onclick="voteItem('feed-highlights','Vilsack calls attention to rising worldwide hunger crisis','up')">👍</button><button class="thumb-down" onclick="voteItem('feed-highlights','Vilsack calls attention to rising worldwide hunger crisis','down')">👎</button></span></li>
+<li><span class="item-feedback" data-id="Missouri Corn CEO urges farm bill action, backs mandatory base acre update" data-section="feed-highlights"><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fwww.brownfieldagnews.com%2Fnews%2Fmissouri-corn-ceo-urges-farm-bill-action-backs-mandatory-base-acre-update%2F&section=feed-highlights&date=2026-07-16" target="_self" rel="noopener">Missouri Corn CEO urges farm bill action, backs mandatory base acre update</a> <button class="thumb-up" onclick="voteItem('feed-highlights','Missouri Corn CEO urges farm bill action, backs mandatory base acre update','up')">👍</button><button class="thumb-down" onclick="voteItem('feed-highlights','Missouri Corn CEO urges farm bill action, backs mandatory base acre update','down')">👎</button></span></li>
+<li><span class="item-feedback" data-id="Cattle producers push for solutions as Asian longhorned tick impacts herd health" data-section="feed-highlights"><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fwww.brownfieldagnews.com%2Fnews%2Fcattle-producers-push-for-solutions-as-asian-longhorned-tick-impacts-herd-health%2F&section=feed-highlights&date=2026-07-16" target="_self" rel="noopener">Cattle producers push for solutions as Asian longhorned tick impacts herd health</a> <button class="thumb-up" onclick="voteItem('feed-highlights','Cattle producers push for solutions as Asian longhorned tick impacts herd health','up')">👍</button><button class="thumb-down" onclick="voteItem('feed-highlights','Cattle producers push for solutions as Asian longhorned tick impacts herd health','down')">👎</button></span></li>
+<li><span class="item-feedback" data-id="Wisconsin tightens animal import rules over new world screwworm" data-section="feed-highlights"><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fwww.brownfieldagnews.com%2Fnews%2Fwisconsin-tightens-animal-import-rules-as-part-of-new-world-screwworm-mitigation-efforts%2F&section=feed-highlights&date=2026-07-16" target="_self" rel="noopener">Wisconsin tightens animal import rules over new world screwworm</a> <button class="thumb-up" onclick="voteItem('feed-highlights','Wisconsin tightens animal import rules over new world screwworm','up')">👍</button><button class="thumb-down" onclick="voteItem('feed-highlights','Wisconsin tightens animal import rules over new world screwworm','down')">👎</button></span></li>
+<li><span class="item-feedback" data-id="Slow week for ethanol demand pushes stocks higher" data-section="feed-highlights"><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fwww.brownfieldagnews.com%2Fnews%2Fslow-week-for-ethanol-demand-pushes-stocks-higher%2F&section=feed-highlights&date=2026-07-16" target="_self" rel="noopener">Slow week for ethanol demand pushes stocks higher</a> <button class="thumb-up" onclick="voteItem('feed-highlights','Slow week for ethanol demand pushes stocks higher','up')">👍</button><button class="thumb-down" onclick="voteItem('feed-highlights','Slow week for ethanol demand pushes stocks higher','down')">👎</button></span></li>
+</ul>
+<p><strong>ScienceDaily Agriculture (1 new):</strong></p>
+<ul>
+<li><span class="item-feedback" data-id="Are humans really the ultimate super-predator?" data-section="feed-highlights"><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fwww.sciencedaily.com%2Freleases%2F2026%2F07%2F260714225540.htm&section=feed-highlights&date=2026-07-16" target="_self" rel="noopener">Are humans really the ultimate super-predator?</a> <button class="thumb-up" onclick="voteItem('feed-highlights','Are humans really the ultimate super-predator?','up')">👍</button><button class="thumb-down" onclick="voteItem('feed-highlights','Are humans really the ultimate super-predator?','down')">👎</button></span></li>
+</ul>
+<h3>🍳 Cooking (0 new)</h3>
+<p>No new articles from 101 Cookbooks or Epicurious.</p>
+<h2 id="hacker-news-top-stories">🔥 Hacker News — Top Stories</h2>
+<p>1. <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fnews.ycombinator.com%2Fitem%3Fid%3D48932539&section=hacker-news-top-stories&date=2026-07-16" target="_self" rel="noopener">OnePlus halts operations in USA and Europe</a> — <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fcommunity.oneplus.com%2Fthread%2F2170715118587871237&section=hacker-news-top-stories&date=2026-07-16" target="_self" rel="noopener">source</a></p>
+<p>2. <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fnews.ycombinator.com%2Fitem%3Fid%3D48930454&section=hacker-news-top-stories&date=2026-07-16" target="_self" rel="noopener">The lost joy of music piracy</a> — <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fwww.pigeonsandplanes.com%2Fread%2Fmusic-piracy-what-cd-oink-nine-inch-nails-streaming&section=hacker-news-top-stories&date=2026-07-16" target="_self" rel="noopener">source</a></p>
+<p>3. <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fnews.ycombinator.com%2Fitem%3Fid%3D48933310&section=hacker-news-top-stories&date=2026-07-16" target="_self" rel="noopener">The LLM Critics Are Right. I Use LLMs Anyway</a> — <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fwww.theocharis.dev%2Fblog%2Fllm-critics-are-right-i-use-llms-anyway%2F&section=hacker-news-top-stories&date=2026-07-16" target="_self" rel="noopener">source</a></p>
+<p>4. <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fnews.ycombinator.com%2Fitem%3Fid%3D48933344&section=hacker-news-top-stories&date=2026-07-16" target="_self" rel="noopener">SpaceX stock erases all gains, slides below IPO price</a> — <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fwww.latimes.com%2Fbusiness%2Fstory%2F2026-07-16%2Fspacex-stock-erases-gains-slides-below-ipo-price-in-intraday-trading&section=hacker-news-top-stories&date=2026-07-16" target="_self" rel="noopener">source</a></p>
+<p>5. <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fnews.ycombinator.com%2Fitem%3Fid%3D48933303&section=hacker-news-top-stories&date=2026-07-16" target="_self" rel="noopener">Let's Build PlanetScale from Scratch: Infrastructure</a> — <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fonatm.dev%2F2026%2F07%2F16%2Fhomescale-part-1%2F&section=hacker-news-top-stories&date=2026-07-16" target="_self" rel="noopener">source</a></p>
+<h2 id="agtalk-crop-talk">🌾 AgTalk Crop Talk</h2>
+<p><strong>Bayer / Liberty Ultra Thread:</strong></p>
+<p>5 replies in the <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Ftalk.newagtalk.com%2Fforums%2Fthread-view.asp%3Ftid%3D1242831&section=agtalk-crop-talk&date=2026-07-16" target="_self" rel="noopener">Liberty Ultra</a> discussion — contributions from Top Notch, humblefarmer, Streetfarmer, and SteveMn.</p>
+<p><strong>Most Active:</strong></p>
+<p><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Ftalk.newagtalk.com%2Fforums%2Fthread-view.asp%3Ftid%3D1242847%26mid%3D11701714%23M11701714&section=agtalk-crop-talk&date=2026-07-16" target="_self" rel="noopener">Wan't eady for the smoke</a> — 4 replies by jd43</p>
+<h2 id="apple-health-july-15">🩺 Apple Health — July 15</h2>
+<table><thead><tr>
+<th>Metric</th>
+<th>Value</th>
+<th>vs Prior Day</th>
+</tr></thead><tbody>
+<tr>
+<td><strong>Steps</strong></td>
+<td><strong>5,620</strong></td>
+<td>📈 +15% (4,874)</td>
+</tr>
+<tr>
+<td><strong>Active Energy</strong></td>
+<td>395 kcal</td>
+<td>+2%</td>
+</tr>
+<tr>
+<td><strong>Exercise Minutes</strong></td>
+<td>34 min</td>
+<td>+55%</td>
+</tr>
+<tr>
+<td><strong>Resting Heart Rate</strong></td>
+<td><strong>64 bpm</strong></td>
+<td>↓ 1 bpm</td>
+</tr>
+<tr>
+<td><strong>Avg Heart Rate</strong></td>
+<td>70.1 bpm</td>
+<td>—</td>
+</tr>
+<tr>
+<td><strong>Heart Rate Variability</strong></td>
+<td><strong>36.74 ms</strong></td>
+<td>↓ 11% (41.15)</td>
+</tr>
+<tr>
+<td><strong>Sleep</strong></td>
+<td>6.3 hrs</td>
+<td>—</td>
+</tr>
+<tr>
+<td><strong>Blood Oxygen</strong></td>
+<td>97.2%</td>
+<td>—</td>
+</tr>
+<tr>
+<td><strong>Stand Hours</strong></td>
+<td>12</td>
+<td>—</td>
+</tr>
+<tr>
+<td><strong>Flights Climbed</strong></td>
+<td>18</td>
+<td>—</td>
+</tr>
+</tbody></table>
+<p><strong>Trend:</strong> Steps up 15% from prior day. HRV down slightly but within normal range. RHR steady at 64. Sleep just over 6 hours. No recovery warning — normal activity day.</p>
+<p>*Briefing compiled at 2026-07-16 13:03 UTC · Hermes Agent*</p>
+</main>
+<footer>
+  <p>🤖 Generated by Hermes Agent &middot; Built with ❤️</p>
+  <p>Click 👍/👎 on any story to help me learn what you like!</p>
+</footer>
+</div>
+<div id="toast" class="toast"></div>
+</body>
+</html>
