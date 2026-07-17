@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Daily Briefing — Friday, July 17, 2026</title>
+<style>
+:root {
+  --bg: #fafafa;
+  --card: #ffffff;
+  --text: #1a1a2e;
+  --muted: #666;
+  --accent: #2563eb;
+  --border: #e5e7eb;
+  --success: #059669;
+  --warning: #d97706;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0f172a;
+    --card: #1e293b;
+    --text: #e2e8f0;
+    --muted: #94a3b8;
+    --accent: #60a5fa;
+    --border: #334155;
+    --success: #34d399;
+    --warning: #fbbf24;
+  }
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', Roboto, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  padding: 0;
+}
+.container {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+header {
+  text-align: center;
+  padding: 2rem 0 1rem;
+  border-bottom: 2px solid var(--accent);
+  margin-bottom: 2rem;
+}
+header h1 { font-size: 1.5rem; color: var(--accent); }
+header .date { color: var(--muted); font-size: 0.9rem; }
+h2 {
+  font-size: 1.2rem;
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
+  padding-bottom: 0.3rem;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+h3 {
+  font-size: 1.05rem;
+  margin-top: 1.25rem;
+  margin-bottom: 0.5rem;
+  color: var(--muted);
+}
+strong { font-weight: 600; }
+em { font-style: italic; }
+code {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  padding: 1px 4px;
+  font-size: 0.85em;
+  font-family: 'SF Mono', 'Fira Code', monospace;
+}
+.feedback { margin-left: auto; font-size: 0.85rem; opacity: 0.5; transition: opacity 0.2s; }
+h2:hover .feedback { opacity: 1; }
+.thumb-up, .thumb-down {
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 2px 6px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  transition: all 0.15s;
+}
+.thumb-up:hover { background: var(--success); color: white; }
+.thumb-down:hover { background: #dc2626; color: white; }
+.thumb-up.voted, .thumb-down.voted { opacity: 0.5; pointer-events: none; }
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0.75rem 0;
+  font-size: 0.9rem;
+}
+th, td {
+  text-align: left;
+  padding: 6px 10px;
+  border-bottom: 1px solid var(--border);
+}
+th { font-weight: 600; color: var(--accent); }
+ul { margin: 0.5rem 0 0.5rem 1.5rem; }
+li { margin: 0.25rem 0; }
+p { margin: 0.5rem 0; }
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+.weather-summary {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1rem;
+  margin: 1rem 0;
+}
+.weather-main { font-size: 2rem; font-weight: 700; }
+.weather-detail { color: var(--muted); font-size: 0.9rem; }
+footer {
+  margin-top: 3rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border);
+  text-align: center;
+  color: var(--muted);
+  font-size: 0.8rem;
+}
+.toast {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  background: var(--accent);
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  opacity: 0;
+  transition: opacity 0.3s;
+  pointer-events: none;
+}
+.toast.show { opacity: 1; }
+</style>
+</head>
+<body>
+<div class="container">
+<header>
+  <h1>📋 Daily Briefing</h1>
+  <div class="date">Friday, July 17, 2026</div>
+</header>
+<main>
+<p># 📅 Daily Briefing — Friday, July 17, 2026</p>
+<h2 id="calendar">📅 Calendar</h2>
+<table><thead><tr>
+<th>Time (CDT)</th>
+<th>Event</th>
+<th>Calendar</th>
+</tr></thead><tbody>
+<tr>
+<td>🕐 7:00 AM – 12:00 PM</td>
+<td><strong>Tesla Mobile Service Appointment</strong></td>
+<td>McCown Family</td>
+</tr>
+<tr>
+<td>🕐 12:00 PM – 5:00 PM</td>
+<td><strong>Golf?</strong></td>
+<td>McCown Family</td>
+</tr>
+<tr>
+<td>🕐 6:30 PM – 7:30 PM</td>
+<td><strong>Game Night</strong> @ 585 Rolling Glen Lane</td>
+<td>McCown Family</td>
+</tr>
+</tbody></table>
+<p><strong>Notes:</strong> Full day — Tesla service in the morning, golf afternoon, game night at 6:30 PM. No conflicts.</p>
+<h2 id="weather-wildwood-mo">🌤️ Weather — Wildwood, MO</h2>
+<table><thead><tr>
+<th>Condition</th>
+<th>Temp</th>
+<th>Precip</th>
+<th>Wind</th>
+</tr></thead><tbody>
+<tr>
+<td><strong>Today:</strong> Slight Chance Showers &amp; T-Storms</td>
+<td><strong>High 90°F</strong> / Low 74°F</td>
+<td>20%</td>
+<td>W 5 mph</td>
+</tr>
+<tr>
+<td><strong>Tonight:</strong> Slight Chance T-Storms then Mostly Clear</td>
+<td>Low 74°F</td>
+<td>20%</td>
+<td>SW 5 mph</td>
+</tr>
+</tbody></table>
+<p><strong>Weekend outlook:</strong> Saturday 92°F (HI 102°F), slight chance T-storms. Sunday 91°F, slight chance showers. Monday 93°F, mostly sunny.</p>
+<h2 id="openrouter-budget">💰 OpenRouter Budget</h2>
+<table><thead><tr>
+<th>Metric</th>
+<th>Value</th>
+</tr></thead><tbody>
+<tr>
+<td><strong>Monthly Spend</strong></td>
+<td><strong>$24.97</strong></td>
+</tr>
+<tr>
+<td><strong>Daily Spend</strong></td>
+<td>$0.90</td>
+</tr>
+<tr>
+<td><strong>Budget Cap</strong></td>
+<td>$20.00</td>
+</tr>
+<tr>
+<td><strong>Over Budget</strong></td>
+<td><strong>$4.97 over cap (124.8%)</strong></td>
+</tr>
+<tr>
+<td>Days Remaining</td>
+<td>14</td>
+</tr>
+</tbody></table>
+<p>⚠️ <strong>Over budget.</strong> Averaging $0.90/day, currently $24.97 against $20 cap. No remaining budget for the rest of the month unless the cap is raised or usage drops.</p>
+<h2 id="feed-highlights">📰 Feed Highlights</h2>
+<h3>🤖 AI / Tech</h3>
+<ul>
+<li><span class="item-feedback" data-id="EU will force Google to share search data and open up AI on Android" data-section="feed-highlights"><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Farstechnica.com%2Fgadgets%2F2026%2F07%2Fits-official-eu-will-force-google-to-share-search-data-and-open-up-ai-on-android%2F&section=feed-highlights&date=2026-07-17" target="_self" rel="noopener">EU will force Google to share search data and open up AI on Android</a> — Ars Technica. Digital Markets Act enforcement. <button class="thumb-up" onclick="voteItem('feed-highlights','EU will force Google to share search data and open up AI on Android','up')">👍</button><button class="thumb-down" onclick="voteItem('feed-highlights','EU will force Google to share search data and open up AI on Android','down')">👎</button></span></li>
+<li><span class="item-feedback" data-id="xAI can't deny Grok makes CSAM anymore, so it's suing users" data-section="feed-highlights"><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Farstechnica.com%2Ftech-policy%2F2026%2F07%2Fxai-cant-deny-grok-makes-csam-anymore-so-its-suing-users%2F&section=feed-highlights&date=2026-07-17" target="_self" rel="noopener">xAI can't deny Grok makes CSAM anymore, so it's suing users</a> — Ars Technica. <button class="thumb-up" onclick="voteItem('feed-highlights','xAI can't deny Grok makes CSAM anymore, so it's suing users','up')">👍</button><button class="thumb-down" onclick="voteItem('feed-highlights','xAI can't deny Grok makes CSAM anymore, so it's suing users','down')">👎</button></span></li>
+<li><span class="item-feedback" data-id="Fear of humanoid robots spurs strike at Hyundai auto factory" data-section="feed-highlights"><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Farstechnica.com%2Fai%2F2026%2F07%2Ffear-of-humanoid-robots-spurs-human-workers-to-strike-at-hyundai-auto-factory%2F&section=feed-highlights&date=2026-07-17" target="_self" rel="noopener">Fear of humanoid robots spurs strike at Hyundai auto factory</a> — Ars Technica. <button class="thumb-up" onclick="voteItem('feed-highlights','Fear of humanoid robots spurs strike at Hyundai auto factory','up')">👍</button><button class="thumb-down" onclick="voteItem('feed-highlights','Fear of humanoid robots spurs strike at Hyundai auto factory','down')">👎</button></span></li>
+<li><span class="item-feedback" data-id="Linus Torvalds to critics of AI coding in Linux: &quot;Fork it. Or just walk away.&quot;" data-section="feed-highlights"><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Farstechnica.com%2Fai%2F2026%2F07%2Flinus-torvalds-to-critics-of-ai-coding-in-linux-fork-it-or-just-walk-away%2F&section=feed-highlights&date=2026-07-17" target="_self" rel="noopener">Linus Torvalds to critics of AI coding in Linux: &amp;quot;Fork it. Or just walk away.&amp;quot;</a> — Ars Technica. <button class="thumb-up" onclick="voteItem('feed-highlights','Linus Torvalds to critics of AI coding in Linux: &quot;Fork it. Or just walk away.&quot;','up')">👍</button><button class="thumb-down" onclick="voteItem('feed-highlights','Linus Torvalds to critics of AI coding in Linux: &quot;Fork it. Or just walk away.&quot;','down')">👎</button></span></li>
+<li><span class="item-feedback" data-id="Energy IPOs surge as investors hunt for ways to play AI boom" data-section="feed-highlights"><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Farstechnica.com%2Finformation-technology%2F2026%2F07%2Fenergy-ipos-surge-as-investors-hunt-for-ways-to-play-ai-boom%2F&section=feed-highlights&date=2026-07-17" target="_self" rel="noopener">Energy IPOs surge as investors hunt for ways to play AI boom</a> — Ars Technica. <button class="thumb-up" onclick="voteItem('feed-highlights','Energy IPOs surge as investors hunt for ways to play AI boom','up')">👍</button><button class="thumb-down" onclick="voteItem('feed-highlights','Energy IPOs surge as investors hunt for ways to play AI boom','down')">👎</button></span></li>
+<li><span class="item-feedback" data-id="Microsoft Comic Chat is now open source" data-section="feed-highlights"><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fopensource.microsoft.com%2Fblog%2F2026%2F07%2F16%2Fmicrosoft-comic-chat-is-now-open-source%2F&section=feed-highlights&date=2026-07-17" target="_self" rel="noopener">Microsoft Comic Chat is now open source</a> — HN score 684. <button class="thumb-up" onclick="voteItem('feed-highlights','Microsoft Comic Chat is now open source','up')">👍</button><button class="thumb-down" onclick="voteItem('feed-highlights','Microsoft Comic Chat is now open source','down')">👎</button></span></li>
+<li><span class="item-feedback" data-id="LM Studio Bionic: the AI agent for open models" data-section="feed-highlights"><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Flmstudio.ai%2Fblog%2Fintroducing-lm-studio-bionic&section=feed-highlights&date=2026-07-17" target="_self" rel="noopener">LM Studio Bionic: the AI agent for open models</a> — HN score 253. <button class="thumb-up" onclick="voteItem('feed-highlights','LM Studio Bionic: the AI agent for open models','up')">👍</button><button class="thumb-down" onclick="voteItem('feed-highlights','LM Studio Bionic: the AI agent for open models','down')">👎</button></span></li>
+<li><span class="item-feedback" data-id="Kimi K3: Open Frontier Intelligence" data-section="feed-highlights"><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fwww.kimi.com%2Fblog%2Fkimi-k3&section=feed-highlights&date=2026-07-17" target="_self" rel="noopener">Kimi K3: Open Frontier Intelligence</a> — HN score 1648. Major Chinese LLM release. <button class="thumb-up" onclick="voteItem('feed-highlights','Kimi K3: Open Frontier Intelligence','up')">👍</button><button class="thumb-down" onclick="voteItem('feed-highlights','Kimi K3: Open Frontier Intelligence','down')">👎</button></span></li>
+<li><span class="item-feedback" data-id="SpaceX scrubs Starship launch after engine issues" data-section="feed-highlights"><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Farstechnica.com%2Fspace%2F2026%2F07%2Fspacex-scrubs-starship-launch-after-some-of-its-engines-didnt-start%2F&section=feed-highlights&date=2026-07-17" target="_self" rel="noopener">SpaceX scrubs Starship launch after engine issues</a> — Ars Technica. <button class="thumb-up" onclick="voteItem('feed-highlights','SpaceX scrubs Starship launch after engine issues','up')">👍</button><button class="thumb-down" onclick="voteItem('feed-highlights','SpaceX scrubs Starship launch after engine issues','down')">👎</button></span></li>
+</ul>
+<h3>🤖 Agent Dev</h3>
+<ul>
+<li><span class="item-feedback" data-id="Simon Willison: Spot birds not golf" data-section="feed-highlights"><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fsimonwillison.net%2F2026%2FJul%2F17%2Fspot-birds-not-golf%2F%23atom-everything&section=feed-highlights&date=2026-07-17" target="_self" rel="noopener">Simon Willison: Spot birds not golf</a> — AI energy usage musings. <button class="thumb-up" onclick="voteItem('feed-highlights','Simon Willison: Spot birds not golf','up')">👍</button><button class="thumb-down" onclick="voteItem('feed-highlights','Simon Willison: Spot birds not golf','down')">👎</button></span></li>
+<li><span class="item-feedback" data-id="Simon Willison: Firefox in WebAssembly" data-section="feed-highlights"><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fsimonwillison.net%2F2026%2FJul%2F16%2Ffirefox-in-webassembly%2F%23atom-everything&section=feed-highlights&date=2026-07-17" target="_self" rel="noopener">Simon Willison: Firefox in WebAssembly</a> — Firefox compiled to WASM. <button class="thumb-up" onclick="voteItem('feed-highlights','Simon Willison: Firefox in WebAssembly','up')">👍</button><button class="thumb-down" onclick="voteItem('feed-highlights','Simon Willison: Firefox in WebAssembly','down')">👎</button></span></li>
+<li><span class="item-feedback" data-id="Simon Willison on Kimi K3" data-section="feed-highlights"><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fsimonwillison.net%2F2026%2FJul%2F16%2Fkimi-k3%2F%23atom-everything&section=feed-highlights&date=2026-07-17" target="_self" rel="noopener">Simon Willison on Kimi K3</a> — Pelican benchmark analysis. <button class="thumb-up" onclick="voteItem('feed-highlights','Simon Willison on Kimi K3','up')">👍</button><button class="thumb-down" onclick="voteItem('feed-highlights','Simon Willison on Kimi K3','down')">👎</button></span></li>
+<li><span class="item-feedback" data-id="Quoting Thibault Sottiaux: Bad Codex bug" data-section="feed-highlights"><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fsimonwillison.net%2F2026%2FJul%2F16%2Fbad-codex-bug%2F%23atom-everything&section=feed-highlights&date=2026-07-17" target="_self" rel="noopener">Quoting Thibault Sottiaux: Bad Codex bug</a> — Coding agent pitfalls. <button class="thumb-up" onclick="voteItem('feed-highlights','Quoting Thibault Sottiaux: Bad Codex bug','up')">👍</button><button class="thumb-down" onclick="voteItem('feed-highlights','Quoting Thibault Sottiaux: Bad Codex bug','down')">👎</button></span></li>
+<li><span class="item-feedback" data-id="Inkling: Open-weights model" data-section="feed-highlights"><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fsimonwillison.net%2F2026%2FJul%2F16%2Finkling%2F%23atom-everything&section=feed-highlights&date=2026-07-17" target="_self" rel="noopener">Inkling: Open-weights model</a> — New open LLM release. <button class="thumb-up" onclick="voteItem('feed-highlights','Inkling: Open-weights model','up')">👍</button><button class="thumb-down" onclick="voteItem('feed-highlights','Inkling: Open-weights model','down')">👎</button></span></li>
+<li><span class="item-feedback" data-id="xai-org/grok-build, now open source" data-section="feed-highlights"><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fsimonwillison.net%2F2026%2FJul%2F15%2Fgrok-build%2F%23atom-everything&section=feed-highlights&date=2026-07-17" target="_self" rel="noopener">xai-org/grok-build, now open source</a> — xAI's build tooling open-sourced. <button class="thumb-up" onclick="voteItem('feed-highlights','xai-org/grok-build, now open source','up')">👍</button><button class="thumb-down" onclick="voteItem('feed-highlights','xai-org/grok-build, now open source','down')">👎</button></span></li>
+</ul>
+<h3>🌾 Agriculture</h3>
+<ul>
+<li><span class="item-feedback" data-id="Trade progress with China offers hope for U.S. corn, soybean markets" data-section="feed-highlights"><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fwww.brownfieldagnews.com%2Fnews%2Ftrade-progress-with-china-offers-hope-for-u-s-corn-soybean-markets%2F&section=feed-highlights&date=2026-07-17" target="_self" rel="noopener">Trade progress with China offers hope for U.S. corn, soybean markets</a> — Brownfield Ag News. <button class="thumb-up" onclick="voteItem('feed-highlights','Trade progress with China offers hope for U.S. corn, soybean markets','up')">👍</button><button class="thumb-down" onclick="voteItem('feed-highlights','Trade progress with China offers hope for U.S. corn, soybean markets','down')">👎</button></span></li>
+<li><span class="item-feedback" data-id="House budget bill includes billions in new farmer economic aid" data-section="feed-highlights"><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fwww.brownfieldagnews.com%2Fnews%2Fhouse-budget-bill-includes-billions-in-new-farmer-economic-aid%2F&section=feed-highlights&date=2026-07-17" target="_self" rel="noopener">House budget bill includes billions in new farmer economic aid</a> — Brownfield Ag News. <button class="thumb-up" onclick="voteItem('feed-highlights','House budget bill includes billions in new farmer economic aid','up')">👍</button><button class="thumb-down" onclick="voteItem('feed-highlights','House budget bill includes billions in new farmer economic aid','down')">👎</button></span></li>
+<li><span class="item-feedback" data-id="Iowa corn growers watch tar spot development" data-section="feed-highlights"><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fwww.brownfieldagnews.com%2Fnews%2Fiowa-corn-growers-watch-tar-spot-development%2F&section=feed-highlights&date=2026-07-17" target="_self" rel="noopener">Iowa corn growers watch tar spot development</a> — Brownfield Ag News. <button class="thumb-up" onclick="voteItem('feed-highlights','Iowa corn growers watch tar spot development','up')">👍</button><button class="thumb-down" onclick="voteItem('feed-highlights','Iowa corn growers watch tar spot development','down')">👎</button></span></li>
+<li><span class="item-feedback" data-id="Virtual fencing opening opportunities for cattle producers" data-section="feed-highlights"><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fwww.brownfieldagnews.com%2Fnews%2Fvirtual-fencing-opening-opportunities-for-cattle-producers%2F&section=feed-highlights&date=2026-07-17" target="_self" rel="noopener">Virtual fencing opening opportunities for cattle producers</a> — Brownfield Ag News. <button class="thumb-up" onclick="voteItem('feed-highlights','Virtual fencing opening opportunities for cattle producers','up')">👍</button><button class="thumb-down" onclick="voteItem('feed-highlights','Virtual fencing opening opportunities for cattle producers','down')">👎</button></span></li>
+<li><span class="item-feedback" data-id="Innovative disease-sensing tech from InnerPlant expands into corn crops" data-section="feed-highlights"><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fwww.agdaily.com%2Fnews%2Finnovative-disease-sensing-tech-expands-into-corn-crops%2F&section=feed-highlights&date=2026-07-17" target="_self" rel="noopener">Innovative disease-sensing tech from InnerPlant expands into corn crops</a> — AGDaily. <button class="thumb-up" onclick="voteItem('feed-highlights','Innovative disease-sensing tech from InnerPlant expands into corn crops','up')">👍</button><button class="thumb-down" onclick="voteItem('feed-highlights','Innovative disease-sensing tech from InnerPlant expands into corn crops','down')">👎</button></span></li>
+<li><span class="item-feedback" data-id="Regenerative farming practices have grown 360% in a decade" data-section="feed-highlights"><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fwww.agdaily.com%2Fcrops%2Fregenerative-farming-practices-grown-360-decade%2F&section=feed-highlights&date=2026-07-17" target="_self" rel="noopener">Regenerative farming practices have grown 360% in a decade</a> — AGDaily. <button class="thumb-up" onclick="voteItem('feed-highlights','Regenerative farming practices have grown 360% in a decade','up')">👍</button><button class="thumb-down" onclick="voteItem('feed-highlights','Regenerative farming practices have grown 360% in a decade','down')">👎</button></span></li>
+<li><span class="item-feedback" data-id="Succession planning: Farm transitions require more than legal documents" data-section="feed-highlights"><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fwww.brownfieldagnews.com%2Fnews%2Fsuccession-planning-expert-farm-transitions-require-more-than-legal-documents%2F&section=feed-highlights&date=2026-07-17" target="_self" rel="noopener">Succession planning: Farm transitions require more than legal documents</a> — Brownfield Ag News. <button class="thumb-up" onclick="voteItem('feed-highlights','Succession planning: Farm transitions require more than legal documents','up')">👍</button><button class="thumb-down" onclick="voteItem('feed-highlights','Succession planning: Farm transitions require more than legal documents','down')">👎</button></span></li>
+<li><span class="item-feedback" data-id="Grassley: Mosaic doesn't need phosphate protections" data-section="feed-highlights"><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fwww.brownfieldagnews.com%2Fnews%2Fgrassley-mosaic-doesnt-need-phosphate-protections%2F&section=feed-highlights&date=2026-07-17" target="_self" rel="noopener">Grassley: Mosaic doesn't need phosphate protections</a> — Brownfield Ag News. <button class="thumb-up" onclick="voteItem('feed-highlights','Grassley: Mosaic doesn't need phosphate protections','up')">👍</button><button class="thumb-down" onclick="voteItem('feed-highlights','Grassley: Mosaic doesn't need phosphate protections','down')">👎</button></span></li>
+<li><span class="item-feedback" data-id="USDA blueberry referendum sparks debate over proposed assessment increase" data-section="feed-highlights"><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fwww.brownfieldagnews.com%2Fnews%2Fusda-blueberry-referendum-sparks-debate-over-proposed-assessment-increase%2F&section=feed-highlights&date=2026-07-17" target="_self" rel="noopener">USDA blueberry referendum sparks debate over proposed assessment increase</a> — Brownfield Ag News. <button class="thumb-up" onclick="voteItem('feed-highlights','USDA blueberry referendum sparks debate over proposed assessment increase','up')">👍</button><button class="thumb-down" onclick="voteItem('feed-highlights','USDA blueberry referendum sparks debate over proposed assessment increase','down')">👎</button></span></li>
+</ul>
+<h2 id="hacker-news-top-stories">🔥 Hacker News — Top Stories</h2>
+<table><thead><tr>
+<th>#</th>
+<th>Title</th>
+<th>Score</th>
+</tr></thead><tbody>
+<tr>
+<td>1</td>
+<td><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fnews.ycombinator.com%2Fitem%3Fid%3D48935342&section=hacker-news-top-stories&date=2026-07-17" target="_self" rel="noopener">Kimi K3: Open Frontier Intelligence</a> — <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fwww.kimi.com%2Fblog%2Fkimi-k3&section=hacker-news-top-stories&date=2026-07-17" target="_self" rel="noopener">kimi.com</a></td>
+<td><strong>1,648</strong></td>
+</tr>
+<tr>
+<td>2</td>
+<td><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fnews.ycombinator.com%2Fitem%3Fid%3D48936426&section=hacker-news-top-stories&date=2026-07-17" target="_self" rel="noopener">Microsoft Comic Chat is now open source</a> — <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fopensource.microsoft.com%2Fblog%2F2026%2F07%2F16%2Fmicrosoft-comic-chat-is-now-open-source%2F&section=hacker-news-top-stories&date=2026-07-17" target="_self" rel="noopener">opensource.microsoft.com</a></td>
+<td><strong>684</strong></td>
+</tr>
+<tr>
+<td>3</td>
+<td><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fnews.ycombinator.com%2Fitem%3Fid%3D48936584&section=hacker-news-top-stories&date=2026-07-17" target="_self" rel="noopener">Decoy Font</a> — <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fwww.mixfont.com%2Fexperiments%2Fdecoy-font&section=hacker-news-top-stories&date=2026-07-17" target="_self" rel="noopener">mixfont.com</a></td>
+<td><strong>560</strong></td>
+</tr>
+<tr>
+<td>4</td>
+<td><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fnews.ycombinator.com%2Fitem%3Fid%3D48939662&section=hacker-news-top-stories&date=2026-07-17" target="_self" rel="noopener">LM Studio Bionic: the AI agent for open models</a> — <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Flmstudio.ai%2Fblog%2Fintroducing-lm-studio-bionic&section=hacker-news-top-stories&date=2026-07-17" target="_self" rel="noopener">lmstudio.ai</a></td>
+<td><strong>253</strong></td>
+</tr>
+<tr>
+<td>5</td>
+<td><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fnews.ycombinator.com%2Fitem%3Fid%3D48862165&section=hacker-news-top-stories&date=2026-07-17" target="_self" rel="noopener">An Engineer's Guide to USB Type-C (2024)</a> — <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fwww.ti.com%2Flit%2Feb%2Fslyy228%2Fslyy228.pdf%3Fts%3D1759892558029&section=hacker-news-top-stories&date=2026-07-17" target="_self" rel="noopener">ti.com</a></td>
+<td><strong>175</strong></td>
+</tr>
+<tr>
+<td>6</td>
+<td><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fnews.ycombinator.com%2Fitem%3Fid%3D48943142&section=hacker-news-top-stories&date=2026-07-17" target="_self" rel="noopener">How Has Roman Concrete Lasted for Millennia?</a> — Smithsonian</td>
+<td><strong>132</strong></td>
+</tr>
+<tr>
+<td>7</td>
+<td><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fnews.ycombinator.com%2Fitem%3Fid%3D48943745&section=hacker-news-top-stories&date=2026-07-17" target="_self" rel="noopener">EEG shows brain can encode two speech streams simultaneously</a> — PLOS Biology</td>
+<td><strong>97</strong></td>
+</tr>
+</tbody></table>
+<h2 id="agtalk-crop-talk">🌾 AgTalk Crop Talk</h2>
+<p><strong>Bayer mentions:</strong> Discussion on fungicide application through pivots (9 replies). Spot spray Liberty rates in pumpkins.</p>
+<p><strong>Top discussions:</strong></p>
+<ul>
+<li><span class="item-feedback" data-id="&quot;Wan't eady for the smoke&quot;" data-section="agtalk-crop-talk"><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Ftalk.newagtalk.com%2Fforums%2Fthread-view.asp%3Ftid%3D1242847%26mid%3D11701714%23M11701714&section=agtalk-crop-talk&date=2026-07-17" target="_self" rel="noopener">&amp;quot;Wan't eady for the smoke&amp;quot;</a> — 19 replies <button class="thumb-up" onclick="voteItem('agtalk-crop-talk','&quot;Wan't eady for the smoke&quot;','up')">👍</button><button class="thumb-down" onclick="voteItem('agtalk-crop-talk','&quot;Wan't eady for the smoke&quot;','down')">👎</button></span></li>
+<li><span class="item-feedback" data-id="Fungicide through pivot" data-section="agtalk-crop-talk"><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Ftalk.newagtalk.com%2Fforums%2Fthread-view.asp%3Ftid%3D1242906%26mid%3D11702347%23M11702347&section=agtalk-crop-talk&date=2026-07-17" target="_self" rel="noopener">Fungicide through pivot</a> — 9 replies ⚠️ Bayer mention <button class="thumb-up" onclick="voteItem('agtalk-crop-talk','Fungicide through pivot','up')">👍</button><button class="thumb-down" onclick="voteItem('agtalk-crop-talk','Fungicide through pivot','down')">👎</button></span></li>
+<li><span class="item-feedback" data-id="Eastern Washington sights to see?" data-section="agtalk-crop-talk"><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Ftalk.newagtalk.com%2Fforums%2Fthread-view.asp%3Ftid%3D1242896%26mid%3D11702233%23M11702233&section=agtalk-crop-talk&date=2026-07-17" target="_self" rel="noopener">Eastern Washington sights to see?</a> — 8 replies <button class="thumb-up" onclick="voteItem('agtalk-crop-talk','Eastern Washington sights to see?','up')">👍</button><button class="thumb-down" onclick="voteItem('agtalk-crop-talk','Eastern Washington sights to see?','down')">👎</button></span></li>
+<li><span class="item-feedback" data-id="Plant identification" data-section="agtalk-crop-talk"><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Ftalk.newagtalk.com%2Fforums%2Fthread-view.asp%3Ftid%3D1242899%26mid%3D11702244%23M11702244&section=agtalk-crop-talk&date=2026-07-17" target="_self" rel="noopener">Plant identification</a> — 5 replies <button class="thumb-up" onclick="voteItem('agtalk-crop-talk','Plant identification','up')">👍</button><button class="thumb-down" onclick="voteItem('agtalk-crop-talk','Plant identification','down')">👎</button></span></li>
+<li><span class="item-feedback" data-id="Manure hauling records" data-section="agtalk-crop-talk"><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Ftalk.newagtalk.com%2Fforums%2Fthread-view.asp%3Ftid%3D1242892%26mid%3D11702182%23M11702182&section=agtalk-crop-talk&date=2026-07-17" target="_self" rel="noopener">Manure hauling records</a> — 4 replies <button class="thumb-up" onclick="voteItem('agtalk-crop-talk','Manure hauling records','up')">👍</button><button class="thumb-down" onclick="voteItem('agtalk-crop-talk','Manure hauling records','down')">👎</button></span></li>
+</ul>
+<h2 id="apple-health">🩺 Apple Health</h2>
+<p>*Health data will be processed in the pipeline step below.*</p>
+<p>*Have a great Friday, Matt! ⛳*</p>
+</main>
+<footer>
+  <p>🤖 Generated by Hermes Agent &middot; Built with ❤️</p>
+  <p>Click 👍/👎 on any story to help me learn what you like!</p>
+</footer>
+</div>
+<div id="toast" class="toast"></div>
+</body>
+</html>
