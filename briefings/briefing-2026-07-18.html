@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Daily Briefing — Saturday, July 18, 2026</title>
+<style>
+:root {
+  --bg: #fafafa;
+  --card: #ffffff;
+  --text: #1a1a2e;
+  --muted: #666;
+  --accent: #2563eb;
+  --border: #e5e7eb;
+  --success: #059669;
+  --warning: #d97706;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0f172a;
+    --card: #1e293b;
+    --text: #e2e8f0;
+    --muted: #94a3b8;
+    --accent: #60a5fa;
+    --border: #334155;
+    --success: #34d399;
+    --warning: #fbbf24;
+  }
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', Roboto, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  padding: 0;
+}
+.container {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+header {
+  text-align: center;
+  padding: 2rem 0 1rem;
+  border-bottom: 2px solid var(--accent);
+  margin-bottom: 2rem;
+}
+header h1 { font-size: 1.5rem; color: var(--accent); }
+header .date { color: var(--muted); font-size: 0.9rem; }
+h2 {
+  font-size: 1.2rem;
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
+  padding-bottom: 0.3rem;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+h3 {
+  font-size: 1.05rem;
+  margin-top: 1.25rem;
+  margin-bottom: 0.5rem;
+  color: var(--muted);
+}
+strong { font-weight: 600; }
+em { font-style: italic; }
+code {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  padding: 1px 4px;
+  font-size: 0.85em;
+  font-family: 'SF Mono', 'Fira Code', monospace;
+}
+.feedback { margin-left: auto; font-size: 0.85rem; opacity: 0.5; transition: opacity 0.2s; }
+h2:hover .feedback { opacity: 1; }
+.thumb-up, .thumb-down {
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 2px 6px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  transition: all 0.15s;
+}
+.thumb-up:hover { background: var(--success); color: white; }
+.thumb-down:hover { background: #dc2626; color: white; }
+.thumb-up.voted, .thumb-down.voted { opacity: 0.5; pointer-events: none; }
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0.75rem 0;
+  font-size: 0.9rem;
+}
+th, td {
+  text-align: left;
+  padding: 6px 10px;
+  border-bottom: 1px solid var(--border);
+}
+th { font-weight: 600; color: var(--accent); }
+ul { margin: 0.5rem 0 0.5rem 1.5rem; }
+li { margin: 0.25rem 0; }
+p { margin: 0.5rem 0; }
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+.weather-summary {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1rem;
+  margin: 1rem 0;
+}
+.weather-main { font-size: 2rem; font-weight: 700; }
+.weather-detail { color: var(--muted); font-size: 0.9rem; }
+footer {
+  margin-top: 3rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border);
+  text-align: center;
+  color: var(--muted);
+  font-size: 0.8rem;
+}
+.toast {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  background: var(--accent);
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  opacity: 0;
+  transition: opacity 0.3s;
+  pointer-events: none;
+}
+.toast.show { opacity: 1; }
+</style>
+</head>
+<body>
+<div class="container">
+<header>
+  <h1>📋 Daily Briefing</h1>
+  <div class="date">Saturday, July 18, 2026</div>
+</header>
+<main>
+<p>📅 <strong>Calendar — Saturday, July 18</strong></p>
+<table><thead><tr>
+<th>Time</th>
+<th>Event</th>
+<th>Calendar</th>
+</tr></thead><tbody>
+<tr>
+<td>10:00 AM – 12:00 PM</td>
+<td>Test Event</td>
+<td>Test Calendar</td>
+</tr>
+</tbody></table>
+<p>🌤️ <strong>Weather — Wildwood, MO</strong></p>
+<table><thead><tr>
+<th>Day</th>
+<th>Condition</th>
+<th>High/Low</th>
+<th>Precip</th>
+<th>Wind</th>
+</tr></thead><tbody>
+<tr>
+<td><strong>Today</strong></td>
+<td>Slight Chance Showers/Storms</td>
+<td><strong>91°F</strong> / 74°F</td>
+<td>20%</td>
+<td>W 7 mph</td>
+</tr>
+<tr>
+<td><strong>Tonight</strong></td>
+<td>Partly Cloudy, slight chance storms</td>
+<td>— / 74°F</td>
+<td>20%</td>
+<td>W 2–6 mph</td>
+</tr>
+<tr>
+<td><strong>Sunday</strong></td>
+<td>Chance Showers/Storms → Likely PM</td>
+<td>90°F / 71°F</td>
+<td><strong>60%</strong> ⚠️</td>
+<td>N 2 mph</td>
+</tr>
+<tr>
+<td><strong>Monday</strong></td>
+<td>☀️ Sunny</td>
+<td>92°F / 76°F</td>
+<td>—</td>
+<td>S 2 mph</td>
+</tr>
+<tr>
+<td><strong>Tuesday</strong></td>
+<td>☀️ Sunny, hot</td>
+<td><strong>94°F</strong> / 68°F</td>
+<td>—</td>
+<td>W 8 mph</td>
+</tr>
+<tr>
+<td><strong>Wednesday</strong></td>
+<td>☀️ Sunny, cooler</td>
+<td>86°F / 65°F</td>
+<td>—</td>
+<td>N 7 mph</td>
+</tr>
+<tr>
+<td><strong>Thursday</strong></td>
+<td>Mostly Sunny</td>
+<td>83°F / 65°F</td>
+<td>5%</td>
+<td>E 3 mph</td>
+</tr>
+<tr>
+<td><strong>Friday</strong></td>
+<td>Chance Showers/Storms</td>
+<td>84°F / 68°F</td>
+<td>50%</td>
+<td>SE 5 mph</td>
+</tr>
+</tbody></table>
+<p>🔥 heat index up to <strong>101°F</strong> this afternoon</p>
+<p>💰 <strong>OpenRouter Budget</strong></p>
+<table><thead><tr>
+<th>Metric</th>
+<th>Value</th>
+</tr></thead><tbody>
+<tr>
+<td><strong>Monthly Spend</strong></td>
+<td><strong>$29.11</strong></td>
+</tr>
+<tr>
+<td>Budget Cap</td>
+<td>$20.00</td>
+</tr>
+<tr>
+<td>Days Remaining</td>
+<td>13</td>
+</tr>
+<tr>
+<td>Over budget by</td>
+<td>$9.11</td>
+</tr>
+</tbody></table>
+<p>📰 <strong>Feed Highlights</strong></p>
+<p><strong>🤖 AI / Tech</strong></p>
+<ul>
+<li><span class="item-feedback" data-id="Simon Willison: Using LLMs for structured data extraction" data-section="general"><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fsimonwillison.net%2F2026%2FJul%2F17%2Fllm-extraction%2F&section=general&date=2026-07-18" target="_self" rel="noopener">Simon Willison: Using LLMs for structured data extraction</a> — patterns for reliable JSON extraction from unstructured text <button class="thumb-up" onclick="voteItem('general','Simon Willison: Using LLMs for structured data extraction','up')">👍</button><button class="thumb-down" onclick="voteItem('general','Simon Willison: Using LLMs for structured data extraction','down')">👎</button></span></li>
+<li><span class="item-feedback" data-id="Ars Technica: AI coding assistants surpass 40% adoption in enterprise dev teams" data-section="general"><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Farstechnica.com%2Ftech%2F2026%2F07%2Fai-coding-adoption%2F&section=general&date=2026-07-18" target="_self" rel="noopener">Ars Technica: AI coding assistants surpass 40% adoption in enterprise dev teams</a> — SWE-bench scores continue climbing <button class="thumb-up" onclick="voteItem('general','Ars Technica: AI coding assistants surpass 40% adoption in enterprise dev teams','up')">👍</button><button class="thumb-down" onclick="voteItem('general','Ars Technica: AI coding assistants surpass 40% adoption in enterprise dev teams','down')">👎</button></span></li>
+</ul>
+<p><strong>🌾 Agriculture</strong></p>
+<ul>
+<li><span class="item-feedback" data-id="AGDaily: Dicamba drift concerns rise with hot weather patterns" data-section="general"><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fwww.agdaily.com%2Fcrops%2Fdicamba-drift-hot-weather%2F&section=general&date=2026-07-18" target="_self" rel="noopener">AGDaily: Dicamba drift concerns rise with hot weather patterns</a> — applicators warned about volatility <button class="thumb-up" onclick="voteItem('general','AGDaily: Dicamba drift concerns rise with hot weather patterns','up')">👍</button><button class="thumb-down" onclick="voteItem('general','AGDaily: Dicamba drift concerns rise with hot weather patterns','down')">👎</button></span></li>
+<li><span class="item-feedback" data-id="Brownfield Ag News: Corn condition ratings hold steady across Midwest" data-section="general"><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fwww.brownfieldagnews.com%2Fcorn-condition-ratings%2F&section=general&date=2026-07-18" target="_self" rel="noopener">Brownfield Ag News: Corn condition ratings hold steady across Midwest</a> — 67% good-to-excellent <button class="thumb-up" onclick="voteItem('general','Brownfield Ag News: Corn condition ratings hold steady across Midwest','up')">👍</button><button class="thumb-down" onclick="voteItem('general','Brownfield Ag News: Corn condition ratings hold steady across Midwest','down')">👎</button></span></li>
+</ul>
+<p><strong>🍳 Cooking</strong></p>
+<ul>
+<li><span class="item-feedback" data-id="101 Cookbooks: Cold soba noodle salad with summer vegetables" data-section="general"><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fwww.101cookbooks.com%2Farchives%2Fcold-soba-noodle-salad-recipe.html&section=general&date=2026-07-18" target="_self" rel="noopener">101 Cookbooks: Cold soba noodle salad with summer vegetables</a> — perfect for 94°F Tuesday <button class="thumb-up" onclick="voteItem('general','101 Cookbooks: Cold soba noodle salad with summer vegetables','up')">👍</button><button class="thumb-down" onclick="voteItem('general','101 Cookbooks: Cold soba noodle salad with summer vegetables','down')">👎</button></span></li>
+</ul>
+<p>🔥 <strong>Hacker News — Top Stories</strong></p>
+<table><thead><tr>
+<th>#</th>
+<th>Title</th>
+<th>Score</th>
+<th>Comments</th>
+</tr></thead><tbody>
+<tr>
+<td>1</td>
+<td><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fnews.ycombinator.com%2Fitem%3Fid%3D1&section=general&date=2026-07-18" target="_self" rel="noopener">GhostLock: New Linux kernel bug affects all major distros</a></td>
+<td>100</td>
+<td>87</td>
+</tr>
+<tr>
+<td>2</td>
+<td><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fnews.ycombinator.com%2Fitem%3Fid%3D2&section=general&date=2026-07-18" target="_self" rel="noopener">Show HN: Mycroft — open-source voice assistant with local LLM</a></td>
+<td>87</td>
+<td>64</td>
+</tr>
+<tr>
+<td>3</td>
+<td><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fnews.ycombinator.com%2Fitem%3Fid%3D3&section=general&date=2026-07-18" target="_self" rel="noopener">The case for tail-call optimization in JavaScript</a></td>
+<td>72</td>
+<td>43</td>
+</tr>
+</tbody></table>
+<p>🌾 <strong>AgTalk Crop Talk</strong></p>
+<p><strong>Bayer/Product Mentions:</strong></p>
+<ul>
+<li><span class="item-feedback" data-id="RE: Spot spray Liberty rate for hand sprayer in pumpkins" data-section="general"><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Ftalk.newagtalk.com%2Fforums%2Fthread-view.asp%3Ftid%3D1242927&section=general&date=2026-07-18" target="_self" rel="noopener">RE: Spot spray Liberty rate for hand sprayer in pumpkins</a> — discussion on Liberty (glufosinate) application rates for spot spraying in pumpkin crops <button class="thumb-up" onclick="voteItem('general','RE: Spot spray Liberty rate for hand sprayer in pumpkins','up')">👍</button><button class="thumb-down" onclick="voteItem('general','RE: Spot spray Liberty rate for hand sprayer in pumpkins','down')">👎</button></span></li>
+</ul>
+<p>📚 <strong>Books (Saturday)</strong></p>
+<p><strong>📖 Currently Reading:</strong></p>
+<ul>
+<li><span class="item-feedback" data-id="The Shadow of What Was Lost (Licanius #1" data-section="general">The Shadow of What Was Lost (Licanius #1)* — James Islington <button class="thumb-up" onclick="voteItem('general','The Shadow of What Was Lost (Licanius #1','up')">👍</button><button class="thumb-down" onclick="voteItem('general','The Shadow of What Was Lost (Licanius #1','down')">👎</button></span></li>
+<li><span class="item-feedback" data-id="The Squiggly Career" data-section="general">The Squiggly Career* — Helen Tupper &amp; Sarah Ellis <button class="thumb-up" onclick="voteItem('general','The Squiggly Career','up')">👍</button><button class="thumb-down" onclick="voteItem('general','The Squiggly Career','down')">👎</button></span></li>
+</ul>
+<p><strong>🆕 New &amp; Noteworthy:</strong></p>
+<ul>
+<li><span class="item-feedback" data-id="Exodus: The Helium Sea (Archimedes Engin" data-section="general">Exodus: The Helium Sea (Archimedes Engine #2)* — Peter F. Hamilton (Sci-Fi) — new entry in a series by an author you've read <button class="thumb-up" onclick="voteItem('general','Exodus: The Helium Sea (Archimedes Engin','up')">👍</button><button class="thumb-down" onclick="voteItem('general','Exodus: The Helium Sea (Archimedes Engin','down')">👎</button></span></li>
+</ul>
+<p>🩺 <strong>Apple Health</strong></p>
+<p>*No data — health data sync not available for this test run.*</p>
+<p>🤖 <strong>Hermes Agent Videos</strong></p>
+<ul>
+<li><span class="item-feedback" data-id="Can This Robot Be My Personal Assistant" data-section="general"><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fyoutu.be%2FouLnfWqjjN4&section=general&date=2026-07-18" target="_self" rel="noopener">Can This Robot Be My Personal Assistant</a> — Syntax · 13m · 3,467 views — AI agent discussion covering practical personal assistant use cases <button class="thumb-up" onclick="voteItem('general','Can This Robot Be My Personal Assistant','up')">👍</button><button class="thumb-down" onclick="voteItem('general','Can This Robot Be My Personal Assistant','down')">👎</button></span></li>
+</ul>
+</main>
+<footer>
+  <p>🤖 Generated by Hermes Agent &middot; Built with ❤️</p>
+  <p>Click 👍/👎 on any story to help me learn what you like!</p>
+</footer>
+</div>
+<div id="toast" class="toast"></div>
+</body>
+</html>
