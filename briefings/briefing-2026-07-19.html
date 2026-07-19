@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#2563eb">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Briefing">
+<link rel="apple-touch-icon" sizes="192x192" href="/icon-192.png">
+<link rel="manifest" href="/manifest.json?key=a8x3kM9pQw2z">
+<title>Daily Briefing — Sunday, July 19, 2026</title>
+<style>
+:root {
+  --bg: #fafafa;
+  --card: #ffffff;
+  --text: #1a1a2e;
+  --muted: #666;
+  --accent: #2563eb;
+  --border: #e5e7eb;
+  --success: #059669;
+  --warning: #d97706;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0f172a;
+    --card: #1e293b;
+    --text: #e2e8f0;
+    --muted: #94a3b8;
+    --accent: #60a5fa;
+    --border: #334155;
+    --success: #34d399;
+    --warning: #fbbf24;
+  }
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', Roboto, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  padding: 0;
+}
+.container {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+header {
+  text-align: center;
+  padding: 2rem 0 1rem;
+  border-bottom: 2px solid var(--accent);
+  margin-bottom: 2rem;
+}
+header h1 { font-size: 1.5rem; color: var(--accent); }
+header .date { color: var(--muted); font-size: 0.9rem; }
+h2 {
+  font-size: 1.2rem;
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
+  padding-bottom: 0.3rem;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+h3 {
+  font-size: 1.05rem;
+  margin-top: 1.25rem;
+  margin-bottom: 0.5rem;
+  color: var(--muted);
+}
+strong { font-weight: 600; }
+em { font-style: italic; }
+code {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  padding: 1px 4px;
+  font-size: 0.85em;
+  font-family: 'SF Mono', 'Fira Code', monospace;
+}
+.feedback { margin-left: auto; font-size: 0.85rem; opacity: 0.5; transition: opacity 0.2s; }
+h2:hover .feedback { opacity: 1; }
+.thumb-up, .thumb-down {
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 2px 6px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  transition: all 0.15s;
+}
+.thumb-up:hover { background: var(--success); color: white; }
+.thumb-down:hover { background: #dc2626; color: white; }
+.thumb-up.voted, .thumb-down.voted { opacity: 0.5; pointer-events: none; }
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0.75rem 0;
+  font-size: 0.9rem;
+}
+th, td {
+  text-align: left;
+  padding: 6px 10px;
+  border-bottom: 1px solid var(--border);
+}
+th { font-weight: 600; color: var(--accent); }
+ul { margin: 0.5rem 0 0.5rem 1.5rem; }
+li { margin: 0.25rem 0; }
+p { margin: 0.5rem 0; }
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+.weather-summary {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1rem;
+  margin: 1rem 0;
+}
+.weather-main { font-size: 2rem; font-weight: 700; }
+.weather-detail { color: var(--muted); font-size: 0.9rem; }
+footer {
+  margin-top: 3rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border);
+  text-align: center;
+  color: var(--muted);
+  font-size: 0.8rem;
+}
+.toast {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  background: var(--accent);
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  opacity: 0;
+  transition: opacity 0.3s;
+  pointer-events: none;
+}
+.toast.show { opacity: 1; }
+</style>
+</head>
+<body>
+<div class="container">
+<header>
+  <h1>📋 Daily Briefing</h1>
+  <div class="date">Sunday, July 19, 2026</div>
+  <p style="margin-top:0.5rem;font-size:0.85rem"><a href="/?key=a8x3kM9pQw2z" target="_self">📋 Previous briefings</a></p>
+</header>
+<main>
+<p># Daily Briefing — Sunday, July 19, 2026</p>
+<h2 id="calendar">📅 Calendar</h2>
+<p><em>Calendar unavailable</em></p>
+<h2 id="weather">🌤️ Weather</h2>
+<p><strong>Chance Showers And Thunderstorms</strong> | High: <strong>90°F</strong> / Low: <strong>71°F</strong></p>
+<p>🌧️ Precipitation: <strong>52%</strong> max</p>
+<p>💨 Wind: 2 mph N</p>
+<p>⏰ Next: 5 AM: 76°F 8% | 6 AM: 75°F 9% | 7 AM: 76°F 4% | 8 AM: 80°F 5%</p>
+<h2 id="openrouter-budget">💰 OpenRouter Budget</h2>
+<p><strong>$34.37</strong> / $20.00 (171.8%) used</p>
+<p><code>██████████████████████████████████</code></p>
+<p>📊 Daily: $2.88 · Remaining: <strong>$0.00</strong></p>
+<p>📈 ✅ On track</p>
+<h2 id="feed-highlights">📰 Feed Highlights</h2>
+<p><strong>Simon Willison</strong></p>
+<p><strong>Ars Technica</strong></p>
+<p><strong>ScienceDaily - Agriculture</strong></p>
+<p><strong>AGDaily</strong></p>
+<p><strong>Epicurious</strong></p>
+<p><strong>101 Cookbooks</strong></p>
+<p><strong>Brownfield Ag News</strong></p>
+<p><em>No articles from feeds</em></p>
+<h2 id="hacker-news">🔥 Hacker News</h2>
+<p>1. <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Ftwitter.com%2FAlibaba_Qwen%2Fstatus%2F2078759124914098291&section=hacker-news&date=2026-07-19" target="_self" rel="noopener">Qwen3.8 is launching and going open-weight soon</a> — <strong>148</strong> pts by nh43215rgb (<a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fnews.ycombinator.com%2Fitem%3Fid%3D48966120&section=hacker-news&date=2026-07-19" target="_self" rel="noopener">67 comments</a>)</p>
+<p>2. <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fworkshop.cjpais.com%2Fprojects%2Ftranscribe-cpp&section=hacker-news&date=2026-07-19" target="_self" rel="noopener">Transcribe.cpp</a> — <strong>539</strong> pts by sebjones (<a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fnews.ycombinator.com%2Fitem%3Fid%3D48963879&section=hacker-news&date=2026-07-19" target="_self" rel="noopener">109 comments</a>)</p>
+<p>3. <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Ftraining.perforce.com%2Flearn%2Fcourses%2F535%2Fp4-helix-core-user-basic&section=hacker-news&date=2026-07-19" target="_self" rel="noopener">Perforce charges $500 for training training videos.. and it&amp;#39;s AI narrated</a> — <strong>22</strong> pts by TZubiri (<a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fnews.ycombinator.com%2Fitem%3Fid%3D48965886&section=hacker-news&date=2026-07-19" target="_self" rel="noopener">37 comments</a>)</p>
+<p>4. <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fgithub.com%2Fmoonshine-ai%2Fmoonshine%2Ftree%2Fmain%2Fmicro&section=hacker-news&date=2026-07-19" target="_self" rel="noopener">Speech Recognition and TTS in less than 500kb</a> — <strong>458</strong> pts by petewarden (<a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fnews.ycombinator.com%2Fitem%3Fid%3D48911793&section=hacker-news&date=2026-07-19" target="_self" rel="noopener">60 comments</a>)</p>
+<p>5. <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fgithub.com%2Fstupside%2Fcastor&section=hacker-news&date=2026-07-19" target="_self" rel="noopener">Better and Cheaper Than IPTV</a> — <strong>202</strong> pts by xonery (<a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fnews.ycombinator.com%2Fitem%3Fid%3D48964015&section=hacker-news&date=2026-07-19" target="_self" rel="noopener">51 comments</a>)</p>
+<h2 id="agtalk-crop-talk">🌾 AgTalk Crop Talk</h2>
+<p><strong>Bayer/Product Mentions:</strong></p>
+<ul>
+<li><span class="item-feedback" data-id="RE: Spot spray Liberty rate for hand sprayer in pumpkins" data-section="agtalk-crop-talk"><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Ftalk.newagtalk.com%2Fforums%2Fthread-view.asp%3Ftid%3D1242927%26mid%3D11703498%23M11703498&section=agtalk-crop-talk&date=2026-07-19" target="_self" rel="noopener">RE: Spot spray Liberty rate for hand sprayer in pumpkins</a> by wbstofer (7/18/2026  04:38) <button class="thumb-up" onclick="voteItem('agtalk-crop-talk','RE: Spot spray Liberty rate for hand sprayer in pumpkins','up')">👍</button><button class="thumb-down" onclick="voteItem('agtalk-crop-talk','RE: Spot spray Liberty rate for hand sprayer in pumpkins','down')">👎</button></span></li>
+<li><span class="item-feedback" data-id="RE: Spot spray Liberty rate for hand sprayer in pumpkins" data-section="agtalk-crop-talk"><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Ftalk.newagtalk.com%2Fforums%2Fthread-view.asp%3Ftid%3D1242927%26mid%3D11703519%23M11703519&section=agtalk-crop-talk&date=2026-07-19" target="_self" rel="noopener">RE: Spot spray Liberty rate for hand sprayer in pumpkins</a> by dvswia (7/18/2026  05:48) <button class="thumb-up" onclick="voteItem('agtalk-crop-talk','RE: Spot spray Liberty rate for hand sprayer in pumpkins','up')">👍</button><button class="thumb-down" onclick="voteItem('agtalk-crop-talk','RE: Spot spray Liberty rate for hand sprayer in pumpkins','down')">👎</button></span></li>
+</ul>
+<p><strong>Most Active Discussions:</strong></p>
+<ul>
+<li><span class="item-feedback" data-id="Southern Corn Rust?" data-section="agtalk-crop-talk"><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Ftalk.newagtalk.com%2Fforums%2Fthread-view.asp%3Ftid%3D1243033%26mid%3D11703881%23M11703881&section=agtalk-crop-talk&date=2026-07-19" target="_self" rel="noopener">Southern Corn Rust?</a> (9 replies, John Smith) <button class="thumb-up" onclick="voteItem('agtalk-crop-talk','Southern Corn Rust?','up')">👍</button><button class="thumb-down" onclick="voteItem('agtalk-crop-talk','Southern Corn Rust?','down')">👎</button></span></li>
+<li><span class="item-feedback" data-id="What kind of line to bury under ground to move fertilizer under a creek." data-section="agtalk-crop-talk"><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Ftalk.newagtalk.com%2Fforums%2Fthread-view.asp%3Ftid%3D1243010%26mid%3D11703716%23M11703716&section=agtalk-crop-talk&date=2026-07-19" target="_self" rel="noopener">What kind of line to bury under ground to move fertilizer under a creek.</a> (7 replies, MX 170) <button class="thumb-up" onclick="voteItem('agtalk-crop-talk','What kind of line to bury under ground to move fertilizer under a creek.','up')">👍</button><button class="thumb-down" onclick="voteItem('agtalk-crop-talk','What kind of line to bury under ground to move fertilizer under a creek.','down')">👎</button></span></li>
+<li><span class="item-feedback" data-id="Fungicide decision and disease analysis" data-section="agtalk-crop-talk"><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Ftalk.newagtalk.com%2Fforums%2Fthread-view.asp%3Ftid%3D1243055%26mid%3D11704068%23M11704068&section=agtalk-crop-talk&date=2026-07-19" target="_self" rel="noopener">Fungicide decision and disease analysis</a> (5 replies, Rmaag4) <button class="thumb-up" onclick="voteItem('agtalk-crop-talk','Fungicide decision and disease analysis','up')">👍</button><button class="thumb-down" onclick="voteItem('agtalk-crop-talk','Fungicide decision and disease analysis','down')">👎</button></span></li>
+<li><span class="item-feedback" data-id="Spraying fungicide and herbicide together" data-section="agtalk-crop-talk"><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Ftalk.newagtalk.com%2Fforums%2Fthread-view.asp%3Ftid%3D1242996%26mid%3D11703490%23M11703490&section=agtalk-crop-talk&date=2026-07-19" target="_self" rel="noopener">Spraying fungicide and herbicide together</a> (5 replies, Rekus) <button class="thumb-up" onclick="voteItem('agtalk-crop-talk','Spraying fungicide and herbicide together','up')">👍</button><button class="thumb-down" onclick="voteItem('agtalk-crop-talk','Spraying fungicide and herbicide together','down')">👎</button></span></li>
+<li><span class="item-feedback" data-id="Corn Fungicide In Season Prices" data-section="agtalk-crop-talk"><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Ftalk.newagtalk.com%2Fforums%2Fthread-view.asp%3Ftid%3D1243021%26mid%3D11703761%23M11703761&section=agtalk-crop-talk&date=2026-07-19" target="_self" rel="noopener">Corn Fungicide In Season Prices</a> (4 replies, deere9300) <button class="thumb-up" onclick="voteItem('agtalk-crop-talk','Corn Fungicide In Season Prices','up')">👍</button><button class="thumb-down" onclick="voteItem('agtalk-crop-talk','Corn Fungicide In Season Prices','down')">👎</button></span></li>
+</ul>
+<p>===BRIEFING-MARKDOWN===</p>
+<p>📺 <strong>Hermes Agent Videos</strong> — No noteworthy new videos found in the last 14 days.</p>
+<p>===BRIEFING-MARKDOWN===</p>
+<p>&lt;!-- youtube_hermes_monitor.py stderr: Found 9 unique videos, fetching details... --&gt;</p>
+<p>===BRIEFING-MARKDOWN===</p>
+<p>🎙️ <strong>Hermes Agent Podcasts</strong> — No noteworthy new episodes in the last 3 days.</p>
+<p>===BRIEFING-MARKDOWN===</p>
+<p>&lt;!-- podcast_hermes_monitor.py stderr: Searching Listen Notes for 3-day window...</p>
+<p>Search error (Hermes Agent): Rate limited</p>
+<p>Search error (Nous Research Hermes): Rate limited</p>
+<p>Found 0 unique episodes, assessing... --&gt;</p>
+<h2 id="apple-health">🩺 Apple Health</h2>
+<p><em>Health data unavailable (Google Drive not accessible)</em></p>
+</main>
+<footer>
+  <p>🤖 Generated by Hermes Agent &middot; Built with ❤️</p>
+  <p>Click 👍/👎 on any story to help me learn what you like!</p>
+</footer>
+</div>
+<div id="toast" class="toast"></div>
+<script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function() {
+    navigator.serviceWorker.register('/sw.js', { scope: '/' })
+      .catch(function(error) { console.warn('SW registration failed:', error); });
+  });
+}
+</script>
+</body>
+</html>
