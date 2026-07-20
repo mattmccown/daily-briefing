@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#2563eb">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Briefing">
+<link rel="apple-touch-icon" sizes="192x192" href="/icon-192.png">
+<link rel="manifest" href="/manifest.json?key=a8x3kM9pQw2z">
+<title>Daily Briefing — Monday, July 20, 2026</title>
+<style>
+:root {
+  --bg: #fafafa;
+  --card: #ffffff;
+  --text: #1a1a2e;
+  --muted: #666;
+  --accent: #2563eb;
+  --border: #e5e7eb;
+  --success: #059669;
+  --warning: #d97706;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0f172a;
+    --card: #1e293b;
+    --text: #e2e8f0;
+    --muted: #94a3b8;
+    --accent: #60a5fa;
+    --border: #334155;
+    --success: #34d399;
+    --warning: #fbbf24;
+  }
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', Roboto, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  padding: 0;
+}
+.container {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+header {
+  text-align: center;
+  padding: 2rem 0 1rem;
+  border-bottom: 2px solid var(--accent);
+  margin-bottom: 2rem;
+}
+header h1 { font-size: 1.5rem; color: var(--accent); }
+header .date { color: var(--muted); font-size: 0.9rem; }
+h2 {
+  font-size: 1.2rem;
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
+  padding-bottom: 0.3rem;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+h3 {
+  font-size: 1.05rem;
+  margin-top: 1.25rem;
+  margin-bottom: 0.5rem;
+  color: var(--muted);
+}
+strong { font-weight: 600; }
+em { font-style: italic; }
+code {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  padding: 1px 4px;
+  font-size: 0.85em;
+  font-family: 'SF Mono', 'Fira Code', monospace;
+}
+.feedback { margin-left: auto; font-size: 0.85rem; opacity: 0.5; transition: opacity 0.2s; }
+h2:hover .feedback { opacity: 1; }
+.thumb-up, .thumb-down {
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 2px 6px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  transition: all 0.15s;
+}
+.thumb-up:hover { background: var(--success); color: white; }
+.thumb-down:hover { background: #dc2626; color: white; }
+.thumb-up.voted, .thumb-down.voted { opacity: 0.5; pointer-events: none; }
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0.75rem 0;
+  font-size: 0.9rem;
+}
+th, td {
+  text-align: left;
+  padding: 6px 10px;
+  border-bottom: 1px solid var(--border);
+}
+th { font-weight: 600; color: var(--accent); }
+ul { margin: 0.5rem 0 0.5rem 1.5rem; }
+li { margin: 0.25rem 0; }
+p { margin: 0.5rem 0; }
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+.weather-summary {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1rem;
+  margin: 1rem 0;
+}
+.weather-main { font-size: 2rem; font-weight: 700; }
+.weather-detail { color: var(--muted); font-size: 0.9rem; }
+footer {
+  margin-top: 3rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border);
+  text-align: center;
+  color: var(--muted);
+  font-size: 0.8rem;
+}
+.toast {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  background: var(--accent);
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  opacity: 0;
+  transition: opacity 0.3s;
+  pointer-events: none;
+}
+.toast.show { opacity: 1; }
+</style>
+</head>
+<body>
+<div class="container">
+<header>
+  <h1>📋 Daily Briefing</h1>
+  <div class="date">Monday, July 20, 2026</div>
+  <p style="margin-top:0.5rem;font-size:0.85rem"><a href="/?key=a8x3kM9pQw2z" target="_self">📋 Previous briefings</a></p>
+</header>
+<main>
+<p># Daily Briefing — Monday, July 20, 2026</p>
+<h2 id="calendar">📅 Calendar</h2>
+<ul>
+<li><span class="item-feedback" data-id="Lancer Regiment Camp at Truman State University" data-section="calendar"><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fwww.google.com%2Fcalendar%2Fevent%3Feid%3DXzZoZ244czM1NjVqbmFvOWg2aHA2YWNyamNvcmoydGJjZGxwbWdzaGdjOCAxNThqbjRhY3ZjanUybDgzbG91NDg0MjBwbXNoNGM1cEBp&section=calendar&date=2026-07-20" target="_self" rel="noopener">Lancer Regiment Camp at Truman State University</a> [Lafayette High School Calendar] <button class="thumb-up" onclick="voteItem('calendar','Lancer Regiment Camp at Truman State University','up')">👍</button><button class="thumb-down" onclick="voteItem('calendar','Lancer Regiment Camp at Truman State University','down')">👎</button></span></li>
+<li><span class="item-feedback" data-id="🌽 Tamales + Mexican rice + refried beans" data-section="calendar"><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fwww.google.com%2Fcalendar%2Fevent%3Feid%3DbDMxbW81MGhvazlwcXJhNWJ1MjlrYjJ1aXMgbmNiY3JyZ3ZiY242YnFuYXR1MWgxOWw1MWtAZw&section=calendar&date=2026-07-20" target="_self" rel="noopener">🌽 Tamales + Mexican rice + refried beans</a> [McCown Family] <button class="thumb-up" onclick="voteItem('calendar','🌽 Tamales + Mexican rice + refried beans','up')">👍</button><button class="thumb-down" onclick="voteItem('calendar','🌽 Tamales + Mexican rice + refried beans','down')">👎</button></span></li>
+</ul>
+<h2 id="weather-wildwood-mo">🌤️ Weather — Wildwood, MO</h2>
+<table><thead><tr>
+<th>Day</th>
+<th>Condition</th>
+<th>High/Low</th>
+<th>Precip</th>
+<th>Wind</th>
+</tr></thead><tbody>
+<tr>
+<td><strong>Today</strong></td>
+<td>Patchy Fog then Mostly Sunny</td>
+<td>92°F / 72°F</td>
+<td>10%</td>
+<td>1 mph S</td>
+</tr>
+<tr>
+<td><strong>Tonight</strong></td>
+<td>Patchy Fog</td>
+<td>— / 72°F</td>
+<td>1%</td>
+<td>1 mph E</td>
+</tr>
+<tr>
+<td>Tuesday</td>
+<td>Slight Chance Showers And Thunderstorms then Mostly Sunny</td>
+<td>95°F / 69°F</td>
+<td>20%</td>
+<td>5 to 9 mph W</td>
+</tr>
+<tr>
+<td>Wednesday</td>
+<td>Sunny</td>
+<td>84°F / 64°F</td>
+<td>0%</td>
+<td>6 mph N</td>
+</tr>
+<tr>
+<td>Thursday</td>
+<td>Mostly Sunny</td>
+<td>82°F / 65°F</td>
+<td>1%</td>
+<td>3 mph E</td>
+</tr>
+<tr>
+<td>Friday</td>
+<td>Chance Rain Showers then Slight Chance Showers And Thunderstorms</td>
+<td>79°F / 66°F</td>
+<td>32%</td>
+<td>3 mph E</td>
+</tr>
+<tr>
+<td>Saturday</td>
+<td>Chance Rain Showers</td>
+<td>87°F / 69°F</td>
+<td>27%</td>
+<td>5 mph SE</td>
+</tr>
+<tr>
+<td>Sunday</td>
+<td>Sunny</td>
+<td>92°F / —</td>
+<td>5%</td>
+<td>3 mph S</td>
+</tr>
+</tbody></table>
+<p>🔥 Heat index up to <strong>106°F</strong> during the forecast period.</p>
+<h2 id="openrouter-budget">💰 OpenRouter Budget</h2>
+<h3>OpenRouter</h3>
+<p><strong>$34.65</strong> / $20.00 (173.2%) used</p>
+<p><code>██████████████████████████████████</code></p>
+<p>📊 Daily: $0.00 · Remaining: <strong>$0.00</strong></p>
+<p>📈 ✅ On track</p>
+<h3>OpenAI Codex (separate from OpenRouter)</h3>
+<table><thead><tr>
+<th>Metric</th>
+<th>Value</th>
+</tr></thead><tbody>
+<tr>
+<td>Weekly limit used</td>
+<td><strong>55.0%</strong></td>
+</tr>
+<tr>
+<td>Weekly reset</td>
+<td>Sat 5:02 PM CT</td>
+</tr>
+<tr>
+<td>Latest session usage</td>
+<td>353,332 tokens</td>
+</tr>
+<tr>
+<td>Spend</td>
+<td>— (no monetary cost in local Codex data)</td>
+</tr>
+<tr>
+<td>Source/status</td>
+<td>Local Codex session cache · available · 2026-07-19T23:26:28.826Z</td>
+</tr>
+</tbody></table>
+<h2 id="feed-highlights">📰 Feed Highlights</h2>
+<p><strong>Simon Willison</strong></p>
+<p><strong>Ars Technica</strong></p>
+<p><strong>ScienceDaily - Agriculture</strong></p>
+<p><strong>AGDaily</strong></p>
+<p><strong>Epicurious</strong></p>
+<p><strong>101 Cookbooks</strong></p>
+<p><strong>Brownfield Ag News</strong></p>
+<p><em>No articles from feeds</em></p>
+<h2 id="hacker-news">🔥 Hacker News</h2>
+<p>1. <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fslcyber.io%2Fresearch-center%2Fexploit-brokers-pay-500000-for-a-wordpress-rce-i-found-one-with-gpt5-6%2F&section=hacker-news&date=2026-07-20" target="_self" rel="noopener">Exploit brokers pay $500k for WordPress RCEs. I found one with GPT5.6 and $25</a> — <strong>78</strong> pts by infosecau (<a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fnews.ycombinator.com%2Fitem%3Fid%3D48975665&section=hacker-news&date=2026-07-20" target="_self" rel="noopener">42 comments</a>)</p>
+<p>2. <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fnews.ycombinator.com%2Fitem%3Fid%3D48968606&section=hacker-news&date=2026-07-20" target="_self" rel="noopener">Show HN: I replaced a $120k bowling center system with $1,600 in ESP32s</a> — <strong>2338</strong> pts by section33 (<a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fnews.ycombinator.com%2Fitem%3Fid%3D48968606&section=hacker-news&date=2026-07-20" target="_self" rel="noopener">251 comments</a>)</p>
+<p>3. <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fgithub.com%2Fhgaiser%2Fmoonshine&section=hacker-news&date=2026-07-20" target="_self" rel="noopener">Moonshine: Lets you stream games from your PC to any device running Moonlight</a> — <strong>188</strong> pts by wertyk (<a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fnews.ycombinator.com%2Fitem%3Fid%3D48972970&section=hacker-news&date=2026-07-20" target="_self" rel="noopener">81 comments</a>)</p>
+<p>4. <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fgithub.com%2FSaivineeth147%2Flora-speedrun&section=hacker-news&date=2026-07-20" target="_self" rel="noopener">LoRA Speedrun – a public wall-clock leaderboard for fine-tuning techniques</a> — <strong>81</strong> pts by Vineeth147 (<a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fnews.ycombinator.com%2Fitem%3Fid%3D48974325&section=hacker-news&date=2026-07-20" target="_self" rel="noopener">11 comments</a>)</p>
+<p>5. <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fwww.labrujulaverde.com%2Fen%2F2026%2F07%2Fsealed-tomb-of-a-high-official-or-priest-filled-with-paintings-and-inscriptions-discovered-on-luxors-west-bank%2F&section=hacker-news&date=2026-07-20" target="_self" rel="noopener">Sealed tomb filled with paintings and inscriptions discovered in Egypt</a> — <strong>42</strong> pts by isaacfrond (<a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fnews.ycombinator.com%2Fitem%3Fid%3D48917906&section=hacker-news&date=2026-07-20" target="_self" rel="noopener">34 comments</a>)</p>
+<h2 id="hermes-agent-highlights">🤖 Hermes &amp; Agent Highlights</h2>
+<p><em>No verified highlights today.</em></p>
+<h2 id="agtalk-crop-talk">🌾 AgTalk Crop Talk</h2>
+<ul>
+<li><span class="item-feedback" data-id="No significant Crop Talk activity today" data-section="agtalk-crop-talk">No significant Crop Talk activity today <button class="thumb-up" onclick="voteItem('agtalk-crop-talk','No significant Crop Talk activity today','up')">👍</button><button class="thumb-down" onclick="voteItem('agtalk-crop-talk','No significant Crop Talk activity today','down')">👎</button></span></li>
+</ul>
+<p>===BRIEFING-MARKDOWN===</p>
+<p>📺 <strong>New Hermes &amp; Copilot Videos</strong> — Top picks from the last 14 days</p>
+<p>1. <strong><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fyoutu.be%2Fgb_D3nhXs-M&section=agtalk-crop-talk&date=2026-07-20" target="_self" rel="noopener">Watch This Before You Set Up Hermes (NetBird Remote Access)</a></strong> 🎙️</p>
+<p>NetBird · 26m · 1,651 views · ❤️ 53</p>
+<p>🔬 Deep Dive</p>
+<p>📝 [ASR captions available — can summarize with LLM]</p>
+<p>===BRIEFING-MARKDOWN===</p>
+<p>&lt;!-- youtube_hermes_monitor.py stderr: Found 58 unique videos, fetching details... --&gt;</p>
+<p>===BRIEFING-MARKDOWN===</p>
+<p>🎙️ <strong>Hermes &amp; Copilot Podcasts</strong> — No noteworthy new episodes in the last 3 days.</p>
+<p>===BRIEFING-MARKDOWN===</p>
+<p>&lt;!-- podcast_hermes_monitor.py stderr: Searching Listen Notes for 3-day window...</p>
+<p>Search error (Hermes Agent): Rate limited</p>
+<p>Search error (Nous Research Hermes): Rate limited</p>
+<p>Search error (GitHub Copilot agents): Rate limited</p>
+<p>Search error (Microsoft 365 Copilot security): Rate limited</p>
+<p>Found 0 unique episodes, assessing... --&gt;</p>
+<h2 id="apple-health">🩺 Apple Health</h2>
+<p>👣 Steps: <strong>5,620</strong></p>
+<p>📈 Steps: +3% vs previous day</p>
+<p>🎯 Workouts: <strong>7</strong> tracked days (target: 3 workouts/week)</p>
+</main>
+<footer>
+  <p>🤖 Generated by Hermes Agent &middot; Built with ❤️</p>
+  <p>Click 👍/👎 on any story to help me learn what you like!</p>
+</footer>
+</div>
+<div id="toast" class="toast"></div>
+<script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function() {
+    navigator.serviceWorker.register('/sw.js', { scope: '/' })
+      .catch(function(error) { console.warn('SW registration failed:', error); });
+  });
+}
+</script>
+</body>
+</html>
