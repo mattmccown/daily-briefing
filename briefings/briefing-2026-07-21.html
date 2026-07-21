@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#2563eb">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Briefing">
+<link rel="apple-touch-icon" sizes="192x192" href="/icon-192.png">
+<link rel="manifest" href="/manifest.json?key=a8x3kM9pQw2z">
+<title>Daily Briefing — Tuesday, July 21, 2026</title>
+<style>
+:root {
+  --bg: #fafafa;
+  --card: #ffffff;
+  --text: #1a1a2e;
+  --muted: #666;
+  --accent: #2563eb;
+  --border: #e5e7eb;
+  --success: #059669;
+  --warning: #d97706;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0f172a;
+    --card: #1e293b;
+    --text: #e2e8f0;
+    --muted: #94a3b8;
+    --accent: #60a5fa;
+    --border: #334155;
+    --success: #34d399;
+    --warning: #fbbf24;
+  }
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', Roboto, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  padding: 0;
+}
+.container {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+header {
+  text-align: center;
+  padding: 2rem 0 1rem;
+  border-bottom: 2px solid var(--accent);
+  margin-bottom: 2rem;
+}
+header h1 { font-size: 1.5rem; color: var(--accent); }
+header .date { color: var(--muted); font-size: 0.9rem; }
+h2 {
+  font-size: 1.2rem;
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
+  padding-bottom: 0.3rem;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+h3 {
+  font-size: 1.05rem;
+  margin-top: 1.25rem;
+  margin-bottom: 0.5rem;
+  color: var(--muted);
+}
+strong { font-weight: 600; }
+em { font-style: italic; }
+code {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  padding: 1px 4px;
+  font-size: 0.85em;
+  font-family: 'SF Mono', 'Fira Code', monospace;
+}
+.feedback { margin-left: auto; font-size: 0.85rem; opacity: 0.5; transition: opacity 0.2s; }
+h2:hover .feedback { opacity: 1; }
+.thumb-up, .thumb-down {
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 2px 6px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  transition: all 0.15s;
+}
+.thumb-up:hover { background: var(--success); color: white; }
+.thumb-down:hover { background: #dc2626; color: white; }
+.thumb-up.voted, .thumb-down.voted { opacity: 0.5; pointer-events: none; }
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0.75rem 0;
+  font-size: 0.9rem;
+}
+th, td {
+  text-align: left;
+  padding: 6px 10px;
+  border-bottom: 1px solid var(--border);
+}
+th { font-weight: 600; color: var(--accent); }
+ul { margin: 0.5rem 0 0.5rem 1.5rem; }
+li { margin: 0.25rem 0; }
+p { margin: 0.5rem 0; }
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+.weather-summary {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1rem;
+  margin: 1rem 0;
+}
+.weather-main { font-size: 2rem; font-weight: 700; }
+.weather-detail { color: var(--muted); font-size: 0.9rem; }
+footer {
+  margin-top: 3rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border);
+  text-align: center;
+  color: var(--muted);
+  font-size: 0.8rem;
+}
+.toast {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  background: var(--accent);
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  opacity: 0;
+  transition: opacity 0.3s;
+  pointer-events: none;
+}
+.toast.show { opacity: 1; }
+</style>
+</head>
+<body>
+<div class="container">
+<header>
+  <h1>📋 Daily Briefing</h1>
+  <div class="date">Tuesday, July 21, 2026</div>
+  <p style="margin-top:0.5rem;font-size:0.85rem"><a href="/?key=a8x3kM9pQw2z" target="_self">📋 Previous briefings</a></p>
+</header>
+<main>
+<p># Daily Briefing — Tuesday, July 21, 2026</p>
+<h2 id="calendar">📅 Calendar</h2>
+<ul>
+<li><span class="item-feedback" data-id="Lancer Regiment Camp at Truman State University" data-section="calendar"><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fwww.google.com%2Fcalendar%2Fevent%3Feid%3DXzZoZ244czM1NjVqbmFvOWg2aHA2YWNyamNvcmoydGJjZGxwbWdzaGdjOCAxNThqbjRhY3ZjanUybDgzbG91NDg0MjBwbXNoNGM1cEBp&section=calendar&date=2026-07-21" target="_self" rel="noopener">Lancer Regiment Camp at Truman State University</a> [Lafayette High School Calendar] <button class="thumb-up" onclick="voteItem('calendar','Lancer Regiment Camp at Truman State University','up')">👍</button><button class="thumb-down" onclick="voteItem('calendar','Lancer Regiment Camp at Truman State University','down')">👎</button></span></li>
+<li><span class="item-feedback" data-id="🍝 Pressure Cooker Ragu Bolognese (Kenji)" data-section="calendar"><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fwww.google.com%2Fcalendar%2Fevent%3Feid%3DczAwN3I0amNuNjBlbWEzOXVsZGo4bWdyM2MgbmNiY3JyZ3ZiY242YnFuYXR1MWgxOWw1MWtAZw&section=calendar&date=2026-07-21" target="_self" rel="noopener">🍝 Pressure Cooker Ragu Bolognese (Kenji)</a> [McCown Family] <button class="thumb-up" onclick="voteItem('calendar','🍝 Pressure Cooker Ragu Bolognese (Kenji)','up')">👍</button><button class="thumb-down" onclick="voteItem('calendar','🍝 Pressure Cooker Ragu Bolognese (Kenji)','down')">👎</button></span></li>
+</ul>
+<h2 id="weather-wildwood-mo">🌤️ Weather — Wildwood, MO</h2>
+<table><thead><tr>
+<th>Day</th>
+<th>Condition</th>
+<th>High/Low</th>
+<th>Precip</th>
+<th>Wind</th>
+</tr></thead><tbody>
+<tr>
+<td><strong>Today</strong></td>
+<td>Mostly Sunny</td>
+<td>— / 79°F</td>
+<td>14%</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td><strong>Tonight</strong></td>
+<td>Partly Cloudy</td>
+<td>— / 79°F</td>
+<td>4%</td>
+<td>5 mph SW</td>
+</tr>
+<tr>
+<td>Wednesday</td>
+<td>Sunny</td>
+<td>83°F / 63°F</td>
+<td>0%</td>
+<td>6 mph N</td>
+</tr>
+<tr>
+<td>Thursday</td>
+<td>Mostly Sunny</td>
+<td>81°F / 63°F</td>
+<td>0%</td>
+<td>3 mph E</td>
+</tr>
+<tr>
+<td>Friday</td>
+<td>Chance Rain Showers then Chance Showers And Thunderstorms</td>
+<td>78°F / 65°F</td>
+<td>38%</td>
+<td>3 mph E</td>
+</tr>
+<tr>
+<td>Saturday</td>
+<td>Slight Chance Rain Showers</td>
+<td>86°F / 69°F</td>
+<td>15%</td>
+<td>3 mph SE</td>
+</tr>
+<tr>
+<td>Sunday</td>
+<td>Sunny</td>
+<td>93°F / 73°F</td>
+<td>5%</td>
+<td>3 mph SW</td>
+</tr>
+<tr>
+<td>Monday</td>
+<td>Sunny</td>
+<td>94°F / —</td>
+<td>9%</td>
+<td>6 mph SW</td>
+</tr>
+</tbody></table>
+<p>🔥 Heat index up to <strong>105°F</strong> during the forecast period.</p>
+<h2 id="openrouter-budget">💰 OpenRouter Budget</h2>
+<h3>OpenRouter</h3>
+<p><strong>$34.65</strong> / $20.00 (173.2%) used</p>
+<p><code>██████████████████████████████████</code></p>
+<p>📊 Daily: $0.00 · Remaining: <strong>$0.00</strong></p>
+<p>📈 ✅ On track</p>
+<h3>OpenAI Codex (separate from OpenRouter)</h3>
+<table><thead><tr>
+<th>Metric</th>
+<th>Value</th>
+</tr></thead><tbody>
+<tr>
+<td>Weekly limit used</td>
+<td><strong>68.0%</strong></td>
+</tr>
+<tr>
+<td>Weekly reset</td>
+<td>Sat 5:02 PM CT</td>
+</tr>
+<tr>
+<td>Latest session usage</td>
+<td>188,892 tokens</td>
+</tr>
+<tr>
+<td>Spend</td>
+<td>— (no monetary cost in local Codex data)</td>
+</tr>
+<tr>
+<td>Source/status</td>
+<td>Local Codex session cache · available · 2026-07-21T01:39:56.480Z</td>
+</tr>
+</tbody></table>
+<h2 id="feed-highlights">📰 Feed Highlights</h2>
+<p><em>No articles from feeds</em></p>
+<h2 id="hacker-news">🔥 Hacker News</h2>
+<p>1. <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fstratechery.com%2F2026%2Fwhos-afraid-of-chinese-models%2F&section=hacker-news&date=2026-07-21" target="_self" rel="noopener">Who&amp;#39;s afraid of Chinese models?</a> — <strong>271</strong> pts by mfiguiere (<a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fnews.ycombinator.com%2Fitem%3Fid%3D48977128&section=hacker-news&date=2026-07-21" target="_self" rel="noopener">174 comments</a>)</p>
+<p>2. <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fwww.kimi.com%2Fproducts%2Fkimi-work&section=hacker-news&date=2026-07-21" target="_self" rel="noopener">Kimi Work</a> — <strong>402</strong> pts by ms7892 (<a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fnews.ycombinator.com%2Fitem%3Fid%3D48981703&section=hacker-news&date=2026-07-21" target="_self" rel="noopener">185 comments</a>)</p>
+<p>3. <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fxenaproject.wordpress.com%2F2026%2F07%2F20%2Fhuman-mathematicians-are-being-outcounterexampled%2F&section=hacker-news&date=2026-07-21" target="_self" rel="noopener">Human mathematicians are being outcounterexampled</a> — <strong>210</strong> pts by artninja1988 (<a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fnews.ycombinator.com%2Fitem%3Fid%3D48983382&section=hacker-news&date=2026-07-21" target="_self" rel="noopener">76 comments</a>)</p>
+<p>4. <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fjelly-ui.com%2F&section=hacker-news&date=2026-07-21" target="_self" rel="noopener">Jelly UI: Soft-body physics for native HTML form controls</a> — <strong>347</strong> pts by baldvinmar (<a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fnews.ycombinator.com%2Fitem%3Fid%3D48981620&section=hacker-news&date=2026-07-21" target="_self" rel="noopener">135 comments</a>)</p>
+<p>5. <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fnews.risky.biz%2Frisky-bulletin-hacker-wipes-romanias-entire-land-registry-database%2F&section=hacker-news&date=2026-07-21" target="_self" rel="noopener">Hacker wipes Romania&amp;#39;s land registry database</a> — <strong>573</strong> pts by speckx (<a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fnews.ycombinator.com%2Fitem%3Fid%3D48978605&section=hacker-news&date=2026-07-21" target="_self" rel="noopener">325 comments</a>)</p>
+<h2 id="hermes-agent-highlights">🤖 Hermes &amp; Agent Highlights</h2>
+<p><em>No verified highlights today.</em></p>
+<h2 id="agtalk-crop-talk">🌾 AgTalk Crop Talk</h2>
+<p><strong>Bayer/Product Mentions:</strong></p>
+<ul>
+<li><span class="item-feedback" data-id="Dekalb dealer phaseout" data-section="agtalk-crop-talk"><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Ftalk.newagtalk.com%2Fforums%2Fthread-view.asp%3Ftid%3D1243203%26mid%3D11705776%23M11705776&section=agtalk-crop-talk&date=2026-07-21" target="_self" rel="noopener">Dekalb dealer phaseout</a> by agscientist (7/20/2026  20:05) <button class="thumb-up" onclick="voteItem('agtalk-crop-talk','Dekalb dealer phaseout','up')">👍</button><button class="thumb-down" onclick="voteItem('agtalk-crop-talk','Dekalb dealer phaseout','down')">👎</button></span></li>
+<li><span class="item-feedback" data-id="RE: Dekalb dealer phaseout" data-section="agtalk-crop-talk"><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Ftalk.newagtalk.com%2Fforums%2Fthread-view.asp%3Ftid%3D1243203%26mid%3D11705807%23M11705807&section=agtalk-crop-talk&date=2026-07-21" target="_self" rel="noopener">RE: Dekalb dealer phaseout</a> by Jlbfarm (7/20/2026  20:42) <button class="thumb-up" onclick="voteItem('agtalk-crop-talk','RE: Dekalb dealer phaseout','up')">👍</button><button class="thumb-down" onclick="voteItem('agtalk-crop-talk','RE: Dekalb dealer phaseout','down')">👎</button></span></li>
+<li><span class="item-feedback" data-id="RE: Spot spray Liberty rate for hand sprayer in pumpkins" data-section="agtalk-crop-talk"><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Ftalk.newagtalk.com%2Fforums%2Fthread-view.asp%3Ftid%3D1242927%26mid%3D11702682%23M11702682&section=agtalk-crop-talk&date=2026-07-21" target="_self" rel="noopener">RE: Spot spray Liberty rate for hand sprayer in pumpkins</a> by dollarshorter (7/17/2026  07:51) <button class="thumb-up" onclick="voteItem('agtalk-crop-talk','RE: Spot spray Liberty rate for hand sprayer in pumpkins','up')">👍</button><button class="thumb-down" onclick="voteItem('agtalk-crop-talk','RE: Spot spray Liberty rate for hand sprayer in pumpkins','down')">👎</button></span></li>
+<li><span class="item-feedback" data-id="RE: Spot spray Liberty rate for hand sprayer in pumpkins" data-section="agtalk-crop-talk"><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Ftalk.newagtalk.com%2Fforums%2Fthread-view.asp%3Ftid%3D1242927%26mid%3D11702718%23M11702718&section=agtalk-crop-talk&date=2026-07-21" target="_self" rel="noopener">RE: Spot spray Liberty rate for hand sprayer in pumpkins</a> by brad c (7/17/2026  08:38) <button class="thumb-up" onclick="voteItem('agtalk-crop-talk','RE: Spot spray Liberty rate for hand sprayer in pumpkins','up')">👍</button><button class="thumb-down" onclick="voteItem('agtalk-crop-talk','RE: Spot spray Liberty rate for hand sprayer in pumpkins','down')">👎</button></span></li>
+<li><span class="item-feedback" data-id="RE: Spot spray Liberty rate for hand sprayer in pumpkins" data-section="agtalk-crop-talk"><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Ftalk.newagtalk.com%2Fforums%2Fthread-view.asp%3Ftid%3D1242927%26mid%3D11702854%23M11702854&section=agtalk-crop-talk&date=2026-07-21" target="_self" rel="noopener">RE: Spot spray Liberty rate for hand sprayer in pumpkins</a> by mac4440 (7/17/2026  10:53) <button class="thumb-up" onclick="voteItem('agtalk-crop-talk','RE: Spot spray Liberty rate for hand sprayer in pumpkins','up')">👍</button><button class="thumb-down" onclick="voteItem('agtalk-crop-talk','RE: Spot spray Liberty rate for hand sprayer in pumpkins','down')">👎</button></span></li>
+</ul>
+<p><strong>Most Active Discussions:</strong></p>
+<ul>
+<li><span class="item-feedback" data-id="1.5 vs 1.7 Stine." data-section="agtalk-crop-talk"><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Ftalk.newagtalk.com%2Fforums%2Fthread-view.asp%3Ftid%3D1242952%26mid%3D11702905%23M11702905&section=agtalk-crop-talk&date=2026-07-21" target="_self" rel="noopener">1.5 vs 1.7 Stine.</a> (20 replies, Morningdew) <button class="thumb-up" onclick="voteItem('agtalk-crop-talk','1.5 vs 1.7 Stine.','up')">👍</button><button class="thumb-down" onclick="voteItem('agtalk-crop-talk','1.5 vs 1.7 Stine.','down')">👎</button></span></li>
+<li><span class="item-feedback" data-id="Fungicide spray decision when’s the best time to spray" data-section="agtalk-crop-talk"><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Ftalk.newagtalk.com%2Fforums%2Fthread-view.asp%3Ftid%3D1242947%26mid%3D11702821%23M11702821&section=agtalk-crop-talk&date=2026-07-21" target="_self" rel="noopener">Fungicide spray decision when’s the best time to spray</a> (15 replies, Rmaag4) <button class="thumb-up" onclick="voteItem('agtalk-crop-talk','Fungicide spray decision when’s the best time to spray','up')">👍</button><button class="thumb-down" onclick="voteItem('agtalk-crop-talk','Fungicide spray decision when’s the best time to spray','down')">👎</button></span></li>
+<li><span class="item-feedback" data-id="fertilizer prices" data-section="agtalk-crop-talk"><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Ftalk.newagtalk.com%2Fforums%2Fthread-view.asp%3Ftid%3D1242929%26mid%3D11702644%23M11702644&section=agtalk-crop-talk&date=2026-07-21" target="_self" rel="noopener">fertilizer prices</a> (14 replies, rpron) <button class="thumb-up" onclick="voteItem('agtalk-crop-talk','fertilizer prices','up')">👍</button><button class="thumb-down" onclick="voteItem('agtalk-crop-talk','fertilizer prices','down')">👎</button></span></li>
+<li><span class="item-feedback" data-id="How late can I post spray 20oz of Dual on beans?" data-section="agtalk-crop-talk"><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Ftalk.newagtalk.com%2Fforums%2Fthread-view.asp%3Ftid%3D1243140%26mid%3D11705042%23M11705042&section=agtalk-crop-talk&date=2026-07-21" target="_self" rel="noopener">How late can I post spray 20oz of Dual on beans?</a> (13 replies, NTM Farms) <button class="thumb-up" onclick="voteItem('agtalk-crop-talk','How late can I post spray 20oz of Dual on beans?','up')">👍</button><button class="thumb-down" onclick="voteItem('agtalk-crop-talk','How late can I post spray 20oz of Dual on beans?','down')">👎</button></span></li>
+<li><span class="item-feedback" data-id="Spray weeds in flowerbed." data-section="agtalk-crop-talk"><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Ftalk.newagtalk.com%2Fforums%2Fthread-view.asp%3Ftid%3D1242964%26mid%3D11703063%23M11703063&section=agtalk-crop-talk&date=2026-07-21" target="_self" rel="noopener">Spray weeds in flowerbed.</a> (13 replies, Kylidge McNally) <button class="thumb-up" onclick="voteItem('agtalk-crop-talk','Spray weeds in flowerbed.','up')">👍</button><button class="thumb-down" onclick="voteItem('agtalk-crop-talk','Spray weeds in flowerbed.','down')">👎</button></span></li>
+</ul>
+<p>📺 <strong>Hermes &amp; Copilot Videos</strong> — No noteworthy new videos found in the last 14 days.</p>
+<p>&lt;!-- youtube_hermes_monitor.py stderr: Search API error (&quot;Hermes Agent&quot; tutorial/long): Failed after all retry attempts</p>
+<p>Search API error (&quot;Hermes Agent&quot; use case/medium): Failed after all retry attempts</p>
+<p>Search API error (&quot;Hermes Agent&quot; workflow/medium): Failed after all retry attempts</p>
+<p>Search API error (&quot;Nous Research&quot; Hermes Agent/medium): Failed after all retry attempts</p>
+<p>Search API error (&quot;Hermes Agent&quot; agentic AI workflow/medium): Failed after all retry attempts</p>
+<p>Search API error (Hermes Agent 2026/medium): Failed after all retry attempts</p>
+<p>Search API error (Hermes Agent 2026/long): Failed after all retry attempts</p>
+<p>Search API error (GitHub Copilot agents/medium): Failed after all retry attempts</p>
+<p>Search API error (GitHub Copilot agents/long): Failed after all retry attempts</p>
+<p>Search API error (Microsoft 365 Copilot security/long): Failed after all retry attempts</p>
+<p>Found 18 unique videos, fetching details... --&gt;</p>
+<p>🎙️ <strong>Hermes &amp; Copilot Podcasts</strong> — No noteworthy new episodes in the last 3 days.</p>
+<h2 id="apple-health">🩺 Apple Health</h2>
+<p><em>Health analysis unavailable</em></p>
+</main>
+<footer>
+  <p>🤖 Generated by Hermes Agent &middot; Built with ❤️</p>
+  <p>Click 👍/👎 on any story to help me learn what you like!</p>
+</footer>
+</div>
+<div id="toast" class="toast"></div>
+<script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function() {
+    navigator.serviceWorker.register('/sw.js', { scope: '/' })
+      .catch(function(error) { console.warn('SW registration failed:', error); });
+  });
+}
+</script>
+</body>
+</html>
