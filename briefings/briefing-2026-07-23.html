@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#2563eb">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Briefing">
+<link rel="apple-touch-icon" sizes="192x192" href="/icon-192.png">
+<link rel="manifest" href="/manifest.json?key=a8x3kM9pQw2z">
+<title>Daily Briefing — Thursday, July 23, 2026</title>
+<style>
+:root {
+  --bg: #fafafa;
+  --card: #ffffff;
+  --text: #1a1a2e;
+  --muted: #666;
+  --accent: #2563eb;
+  --border: #e5e7eb;
+  --success: #059669;
+  --warning: #d97706;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0f172a;
+    --card: #1e293b;
+    --text: #e2e8f0;
+    --muted: #94a3b8;
+    --accent: #60a5fa;
+    --border: #334155;
+    --success: #34d399;
+    --warning: #fbbf24;
+  }
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', Roboto, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  padding: 0;
+}
+.container {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+header {
+  text-align: center;
+  padding: 2rem 0 1rem;
+  border-bottom: 2px solid var(--accent);
+  margin-bottom: 2rem;
+}
+header h1 { font-size: 1.5rem; color: var(--accent); }
+header .date { color: var(--muted); font-size: 0.9rem; }
+h2 {
+  font-size: 1.2rem;
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
+  padding-bottom: 0.3rem;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+h3 {
+  font-size: 1.05rem;
+  margin-top: 1.25rem;
+  margin-bottom: 0.5rem;
+  color: var(--muted);
+}
+strong { font-weight: 600; }
+em { font-style: italic; }
+code {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  padding: 1px 4px;
+  font-size: 0.85em;
+  font-family: 'SF Mono', 'Fira Code', monospace;
+}
+.feedback { margin-left: auto; font-size: 0.85rem; opacity: 0.5; transition: opacity 0.2s; }
+h2:hover .feedback { opacity: 1; }
+.thumb-up, .thumb-down {
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 2px 6px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  transition: all 0.15s;
+}
+.thumb-up:hover { background: var(--success); color: white; }
+.thumb-down:hover { background: #dc2626; color: white; }
+.thumb-up.voted, .thumb-down.voted { opacity: 0.5; pointer-events: none; }
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0.75rem 0;
+  font-size: 0.9rem;
+}
+th, td {
+  text-align: left;
+  padding: 6px 10px;
+  border-bottom: 1px solid var(--border);
+}
+th { font-weight: 600; color: var(--accent); }
+ul { margin: 0.5rem 0 0.5rem 1.5rem; }
+li { margin: 0.25rem 0; }
+p { margin: 0.5rem 0; }
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+.weather-summary {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1rem;
+  margin: 1rem 0;
+}
+.weather-main { font-size: 2rem; font-weight: 700; }
+.weather-detail { color: var(--muted); font-size: 0.9rem; }
+footer {
+  margin-top: 3rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border);
+  text-align: center;
+  color: var(--muted);
+  font-size: 0.8rem;
+}
+.toast {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  background: var(--accent);
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  opacity: 0;
+  transition: opacity 0.3s;
+  pointer-events: none;
+}
+.toast.show { opacity: 1; }
+</style>
+</head>
+<body>
+<div class="container">
+<header>
+  <h1>📋 Daily Briefing</h1>
+  <div class="date">Thursday, July 23, 2026</div>
+  <p style="margin-top:0.5rem;font-size:0.85rem"><a href="/?key=a8x3kM9pQw2z" target="_self">📋 Previous briefings</a></p>
+</header>
+<main>
+<p># Daily Briefing — Thursday, July 23, 2026</p>
+<h2 id="calendar">📅 Calendar</h2>
+<ul>
+<li><span class="item-feedback" data-id="Lancer Regiment Camp at Truman State University" data-section="calendar"><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fwww.google.com%2Fcalendar%2Fevent%3Feid%3DXzZoZ244czM1NjVqbmFvOWg2aHA2YWNyamNvcmoydGJjZGxwbWdzaGdjOCAxNThqbjRhY3ZjanUybDgzbG91NDg0MjBwbXNoNGM1cEBp&section=calendar&date=2026-07-23" target="_self" rel="noopener">Lancer Regiment Camp at Truman State University</a> [Lafayette High School Calendar] <button class="thumb-up" onclick="voteItem('calendar','Lancer Regiment Camp at Truman State University','up')">👍</button><button class="thumb-down" onclick="voteItem('calendar','Lancer Regiment Camp at Truman State University','down')">👎</button></span></li>
+<li><span class="item-feedback" data-id="Handyman" data-section="calendar"><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fwww.google.com%2Fcalendar%2Fevent%3Feid%3DXzg4c2phZzloNzRxamliYTU2Z3FqaWI5azZncWppYjlwNzBwazJiOW82aDJqZWc5bTYwczM2aDlpODggbmNiY3JyZ3ZiY242YnFuYXR1MWgxOWw1MWtAZw&section=calendar&date=2026-07-23" target="_self" rel="noopener">Handyman </a> [McCown Family] <button class="thumb-up" onclick="voteItem('calendar','Handyman','up')">👍</button><button class="thumb-down" onclick="voteItem('calendar','Handyman','down')">👎</button></span></li>
+<li><span class="item-feedback" data-id="St. Louis cardinals game" data-section="calendar"><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fwww.google.com%2Fcalendar%2Fevent%3Feid%3DXzc0cjM2ZHBsNmQwajZiYTY2dDI0OGI5azhoMzM4YjlwNjRxazZiYTE2NTM0MmU5bDZwMzM2aGkyNmMgbmNiY3JyZ3ZiY242YnFuYXR1MWgxOWw1MWtAZw&section=calendar&date=2026-07-23" target="_self" rel="noopener">St. Louis cardinals game </a> [McCown Family] <button class="thumb-up" onclick="voteItem('calendar','St. Louis cardinals game','up')">👍</button><button class="thumb-down" onclick="voteItem('calendar','St. Louis cardinals game','down')">👎</button></span></li>
+<li><span class="item-feedback" data-id="🥪 Sandwiches (boys)" data-section="calendar"><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fwww.google.com%2Fcalendar%2Fevent%3Feid%3DZjM1NTFnazYwaTB2NHBocW9yZ2pzOTNkb28gbmNiY3JyZ3ZiY242YnFuYXR1MWgxOWw1MWtAZw&section=calendar&date=2026-07-23" target="_self" rel="noopener">🥪 Sandwiches (boys)</a> [McCown Family] <button class="thumb-up" onclick="voteItem('calendar','🥪 Sandwiches (boys)','up')">👍</button><button class="thumb-down" onclick="voteItem('calendar','🥪 Sandwiches (boys)','down')">👎</button></span></li>
+</ul>
+<h2 id="weather-wildwood-mo">🌤️ Weather — Wildwood, MO</h2>
+<table><thead><tr>
+<th>Day</th>
+<th>Condition</th>
+<th>High/Low</th>
+<th>Precip</th>
+<th>Wind</th>
+</tr></thead><tbody>
+<tr>
+<td><strong>Today</strong></td>
+<td>Mostly Sunny</td>
+<td>82°F / 63°F</td>
+<td>10%</td>
+<td>3 mph E</td>
+</tr>
+<tr>
+<td><strong>Tonight</strong></td>
+<td>Partly Cloudy</td>
+<td>— / 63°F</td>
+<td>2%</td>
+<td>2 mph E</td>
+</tr>
+<tr>
+<td>Friday</td>
+<td>Chance Rain Showers</td>
+<td>79°F / 66°F</td>
+<td>44%</td>
+<td>3 mph SE</td>
+</tr>
+<tr>
+<td>Saturday</td>
+<td>Showers And Thunderstorms Likely</td>
+<td>88°F / 72°F</td>
+<td>74%</td>
+<td>3 mph SW</td>
+</tr>
+<tr>
+<td>Sunday</td>
+<td>Sunny</td>
+<td>93°F / 75°F</td>
+<td>0%</td>
+<td>1 mph SW</td>
+</tr>
+<tr>
+<td>Monday</td>
+<td>Sunny</td>
+<td>97°F / 75°F</td>
+<td>2%</td>
+<td>7 mph SW</td>
+</tr>
+<tr>
+<td>Tuesday</td>
+<td>Sunny</td>
+<td>94°F / 73°F</td>
+<td>4%</td>
+<td>6 mph NW</td>
+</tr>
+<tr>
+<td>Wednesday</td>
+<td>Mostly Sunny</td>
+<td>91°F / —</td>
+<td>11%</td>
+<td>5 mph E</td>
+</tr>
+</tbody></table>
+<h2 id="openrouter-budget">💰 OpenRouter Budget</h2>
+<h3>OpenRouter</h3>
+<p><strong>$35.34</strong> / $20.00 (176.7%) used</p>
+<p><code>███████████████████████████████████</code></p>
+<p>📊 Daily: $0.08 · Remaining: <strong>$0.00</strong></p>
+<p>📈 ✅ On track</p>
+<h3>OpenAI Codex (separate from OpenRouter)</h3>
+<table><thead><tr>
+<th>Metric</th>
+<th>Value</th>
+</tr></thead><tbody>
+<tr>
+<td>Weekly limit used</td>
+<td><strong>3.0%</strong></td>
+</tr>
+<tr>
+<td>Weekly reset</td>
+<td>Tue 4:40 PM CT</td>
+</tr>
+<tr>
+<td>Latest session usage</td>
+<td>844,961 tokens</td>
+</tr>
+<tr>
+<td>Spend</td>
+<td>— (no monetary cost in local Codex data)</td>
+</tr>
+<tr>
+<td>Source/status</td>
+<td>Local Codex session cache · available · 2026-07-21T21:44:32.940Z</td>
+</tr>
+</tbody></table>
+<h2 id="feed-highlights">📰 Feed Highlights</h2>
+<p><strong>Brownfield Ag News</strong></p>
+<ul>
+<li><span class="item-feedback" data-id="Marketing grain during rallies" data-section="feed-highlights"><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fwww.brownfieldagnews.com%2Fmanaging-for_profit%2Fmarketing-grain-during-rallies%2F&section=feed-highlights&date=2026-07-23" target="_self" rel="noopener">Marketing grain during rallies</a> <button class="thumb-up" onclick="voteItem('feed-highlights','Marketing grain during rallies','up')">👍</button><button class="thumb-down" onclick="voteItem('feed-highlights','Marketing grain during rallies','down')">👎</button></span></li>
+</ul>
+<p><strong>Ars Technica</strong></p>
+<ul>
+<li><span class="item-feedback" data-id="Orcas team up to ram sunfish until they explode" data-section="feed-highlights"><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Farstechnica.com%2Fscience%2F2026%2F07%2Forcas-team-up-to-ram-sunfish-until-they-explode%2F&section=feed-highlights&date=2026-07-23" target="_self" rel="noopener">Orcas team up to ram sunfish until they explode</a> <button class="thumb-up" onclick="voteItem('feed-highlights','Orcas team up to ram sunfish until they explode','up')">👍</button><button class="thumb-down" onclick="voteItem('feed-highlights','Orcas team up to ram sunfish until they explode','down')">👎</button></span></li>
+</ul>
+<p><strong>Simon Willison</strong></p>
+<ul>
+<li><span class="item-feedback" data-id="Quoting Seth Larson" data-section="feed-highlights"><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fsimonwillison.net%2F2026%2FJul%2F23%2Fseth-larson%2F%23atom-everything&section=feed-highlights&date=2026-07-23" target="_self" rel="noopener">Quoting Seth Larson</a> <button class="thumb-up" onclick="voteItem('feed-highlights','Quoting Seth Larson','up')">👍</button><button class="thumb-down" onclick="voteItem('feed-highlights','Quoting Seth Larson','down')">👎</button></span></li>
+</ul>
+<h2 id="hacker-news">🔥 Hacker News</h2>
+<p>1. <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fjointhefreeworld.org%2Fblog%2Farticles%2Femacs%2Femacs-eglot-scala-kotlin%2Findex.html&section=hacker-news&date=2026-07-23" target="_self" rel="noopener">Escape IntelliJ: Scala and Kotlin LSPs on Emacs Eglot</a> — <strong>67</strong> pts by jjba23 (<a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fnews.ycombinator.com%2Fitem%3Fid%3D48990219&section=hacker-news&date=2026-07-23" target="_self" rel="noopener">27 comments</a>)</p>
+<p>2. <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fchatgpt.com%2Fshare%2F6a5fdc7a-d6f8-83e8-bbea-8deb42cfed56&section=hacker-news&date=2026-07-23" target="_self" rel="noopener">Terence Tao&amp;#39;s ChatGPT conversation about the Jacobian Conjecture counterexample</a> — <strong>890</strong> pts by gmays (<a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fnews.ycombinator.com%2Fitem%3Fid%3D49010345&section=hacker-news&date=2026-07-23" target="_self" rel="noopener">511 comments</a>)</p>
+<p>3. <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fziggit.dev%2Ft%2Fcruller-buns-zig-runtime-continued-on-zig-0-16%2F16734&section=hacker-news&date=2026-07-23" target="_self" rel="noopener">Cruller: Bun&amp;#39;s Zig Runtime, Continued on Zig 0.16</a> — <strong>57</strong> pts by Erenay09 (<a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fnews.ycombinator.com%2Fitem%3Fid%3D49017344&section=hacker-news&date=2026-07-23" target="_self" rel="noopener">23 comments</a>)</p>
+<p>4. <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fresobscura.substack.com%2Fp%2Fquality-non-fiction-books-are-the&section=hacker-news&date=2026-07-23" target="_self" rel="noopener">Quality non-fiction books are the antithesis of AI slop</a> — <strong>367</strong> pts by benbreen (<a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fnews.ycombinator.com%2Fitem%3Fid%3D49007247&section=hacker-news&date=2026-07-23" target="_self" rel="noopener">124 comments</a>)</p>
+<p>5. <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fnesbitt.io%2F2026%2F07%2F21%2Fend-of-options.html&section=hacker-news&date=2026-07-23" target="_self" rel="noopener">git&amp;#39;s –end-of-options Flag</a> — <strong>149</strong> pts by Erenay09 (<a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fnews.ycombinator.com%2Fitem%3Fid%3D48991882&section=hacker-news&date=2026-07-23" target="_self" rel="noopener">72 comments</a>)</p>
+<h2 id="hermes-agent-highlights">🤖 Hermes &amp; Agent Highlights</h2>
+<p><em>No verified highlights today.</em></p>
+<h2 id="agtalk-crop-talk">🌾 AgTalk Crop Talk</h2>
+<p><strong>Bayer/Product Mentions:</strong></p>
+<ul>
+<li><span class="item-feedback" data-id="What index to watch for Liberty timing?" data-section="agtalk-crop-talk"><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Ftalk.newagtalk.com%2Fforums%2Fthread-view.asp%3Ftid%3D1243359%26mid%3D11707652%23M11707652&section=agtalk-crop-talk&date=2026-07-23" target="_self" rel="noopener">What index to watch for Liberty timing?</a> by John Smith (7/23/2026  03:43) <button class="thumb-up" onclick="voteItem('agtalk-crop-talk','What index to watch for Liberty timing?','up')">👍</button><button class="thumb-down" onclick="voteItem('agtalk-crop-talk','What index to watch for Liberty timing?','down')">👎</button></span></li>
+</ul>
+<p>📺 <strong>New Hermes &amp; Copilot Videos</strong> — Top picks from the last 14 days</p>
+<p>1. <strong><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fyoutu.be%2FnRAdpq505JY&section=agtalk-crop-talk&date=2026-07-23" target="_self" rel="noopener">This AI can manage your home lab and networks! (Hermes explained)</a></strong> 🎙️</p>
+<p>MikroTik · 25m · 8,141 views · ❤️ 367</p>
+<p>🔬 Deep Dive</p>
+<p>📝 [ASR captions available — can summarize with LLM]</p>
+<p>2. <strong><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fyoutu.be%2Fmxwwb6UemOk&section=agtalk-crop-talk&date=2026-07-23" target="_self" rel="noopener">How To Run Hermes Agent For Free</a></strong> 🎙️</p>
+<p>Sharbel A. · 17m · 3,437 views · ❤️ 160</p>
+<p>📝 [ASR captions available — can summarize with LLM]</p>
+<p>3. <strong><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fyoutu.be%2FIEYgsD-Q_i8&section=agtalk-crop-talk&date=2026-07-23" target="_self" rel="noopener">Kimi K3: $20 Budget To Build for OpenClaw &amp;amp; Hermes Agent</a></strong> 🎙️</p>
+<p>Clearmud · 19m · 2,164 views · ❤️ 58</p>
+<p>📝 [ASR captions available — can summarize with LLM]</p>
+<p>&lt;!-- youtube_hermes_monitor.py stderr: Found 73 unique videos, fetching details... --&gt;</p>
+<p>🎙️ <strong>New Hermes &amp; Copilot Podcast Episodes</strong> — Top picks from the last 3 days</p>
+<p>1. <strong><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Ffeeds.transistor.fm%2Fpractical-ai-machine-learning-data-science-llm&section=agtalk-crop-talk&date=2026-07-23" target="_self" rel="noopener">Surviving the New Economics of a Post-Agentic World</a></strong></p>
+<p>Practical AI · 35m</p>
+<p>2. <strong><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Ftwit.tv%2Fshows%2Fwindows-weekly%2Fepisodes%2F993&section=agtalk-crop-talk&date=2026-07-23" target="_self" rel="noopener">Windows Weekly 993: The Columnist Savant</a></strong></p>
+<p>All TWiT.tv Shows (Audio) · 139m</p>
+<p>3. <strong><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Ftwit.tv%2Fshows%2Fwindows-weekly%2Fepisodes%2F993&section=agtalk-crop-talk&date=2026-07-23" target="_self" rel="noopener">Windows Weekly 993: The Columnist Savant</a></strong></p>
+<p>Total Leo (Audio) · 139m</p>
+<p>4. <strong><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Frss.buzzsprout.com%2F2456315.rss&section=agtalk-crop-talk&date=2026-07-23" target="_self" rel="noopener">The Hugging Face Breach: AI Agents on the Offensive | 22nd July 2026</a></strong></p>
+<p>Colaberry AI Podcast · 10m</p>
+<h2 id="apple-health">🩺 Apple Health</h2>
+<p>❤️ RHR: <strong>69</strong> bpm</p>
+<p>📊 HRV: <strong>27</strong> ms</p>
+<p>🏃 Exercise: <strong>5</strong> min</p>
+<p>👣 Steps: <strong>4,716</strong></p>
+<p>📈 Steps: +53% vs previous day</p>
+<p>⚠️ HRV dropped 39% from previous day — possible accumulated fatigue</p>
+<p>🎯 Workouts: <strong>7</strong> tracked days (target: 3 workouts/week)</p>
+</main>
+<footer>
+  <p>🤖 Generated by Hermes Agent &middot; Built with ❤️</p>
+  <p>Click 👍/👎 on any story to help me learn what you like!</p>
+</footer>
+</div>
+<div id="toast" class="toast"></div>
+<script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function() {
+    navigator.serviceWorker.register('/sw.js', { scope: '/' })
+      .catch(function(error) { console.warn('SW registration failed:', error); });
+  });
+}
+</script>
+</body>
+</html>
