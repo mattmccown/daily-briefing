@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#2563eb">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Briefing">
+<link rel="apple-touch-icon" sizes="192x192" href="/icon-192.png">
+<link rel="manifest" href="/manifest.json?key=a8x3kM9pQw2z">
+<title>Daily Briefing — Friday, July 24, 2026</title>
+<style>
+:root {
+  --bg: #fafafa;
+  --card: #ffffff;
+  --text: #1a1a2e;
+  --muted: #666;
+  --accent: #2563eb;
+  --border: #e5e7eb;
+  --success: #059669;
+  --warning: #d97706;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0f172a;
+    --card: #1e293b;
+    --text: #e2e8f0;
+    --muted: #94a3b8;
+    --accent: #60a5fa;
+    --border: #334155;
+    --success: #34d399;
+    --warning: #fbbf24;
+  }
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', Roboto, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  padding: 0;
+}
+.container {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+header {
+  text-align: center;
+  padding: 2rem 0 1rem;
+  border-bottom: 2px solid var(--accent);
+  margin-bottom: 2rem;
+}
+header h1 { font-size: 1.5rem; color: var(--accent); }
+header .date { color: var(--muted); font-size: 0.9rem; }
+h2 {
+  font-size: 1.2rem;
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
+  padding-bottom: 0.3rem;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+h3 {
+  font-size: 1.05rem;
+  margin-top: 1.25rem;
+  margin-bottom: 0.5rem;
+  color: var(--muted);
+}
+strong { font-weight: 600; }
+em { font-style: italic; }
+code {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  padding: 1px 4px;
+  font-size: 0.85em;
+  font-family: 'SF Mono', 'Fira Code', monospace;
+}
+.feedback { margin-left: auto; font-size: 0.85rem; opacity: 0.5; transition: opacity 0.2s; }
+h2:hover .feedback { opacity: 1; }
+.thumb-up, .thumb-down {
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 2px 6px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  transition: all 0.15s;
+}
+.thumb-up:hover { background: var(--success); color: white; }
+.thumb-down:hover { background: #dc2626; color: white; }
+.thumb-up.voted, .thumb-down.voted { opacity: 0.5; pointer-events: none; }
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0.75rem 0;
+  font-size: 0.9rem;
+}
+th, td {
+  text-align: left;
+  padding: 6px 10px;
+  border-bottom: 1px solid var(--border);
+}
+th { font-weight: 600; color: var(--accent); }
+ul { margin: 0.5rem 0 0.5rem 1.5rem; }
+li { margin: 0.25rem 0; }
+p { margin: 0.5rem 0; }
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+.weather-summary {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1rem;
+  margin: 1rem 0;
+}
+.weather-main { font-size: 2rem; font-weight: 700; }
+.weather-detail { color: var(--muted); font-size: 0.9rem; }
+footer {
+  margin-top: 3rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border);
+  text-align: center;
+  color: var(--muted);
+  font-size: 0.8rem;
+}
+.toast {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  background: var(--accent);
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  opacity: 0;
+  transition: opacity 0.3s;
+  pointer-events: none;
+}
+.toast.show { opacity: 1; }
+</style>
+</head>
+<body>
+<div class="container">
+<header>
+  <h1>📋 Daily Briefing</h1>
+  <div class="date">Friday, July 24, 2026</div>
+  <p style="margin-top:0.5rem;font-size:0.85rem"><a href="/?key=a8x3kM9pQw2z" target="_self">📋 Previous briefings</a></p>
+</header>
+<main>
+<p># Daily Briefing — Friday, July 24, 2026</p>
+<h2 id="calendar">📅 Calendar</h2>
+<ul>
+<li><span class="item-feedback" data-id="Lancer Regiment Camp at Truman State University" data-section="calendar"><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fwww.google.com%2Fcalendar%2Fevent%3Feid%3DXzZoZ244czM1NjVqbmFvOWg2aHA2YWNyamNvcmoydGJjZGxwbWdzaGdjOCAxNThqbjRhY3ZjanUybDgzbG91NDg0MjBwbXNoNGM1cEBp&section=calendar&date=2026-07-24" target="_self" rel="noopener">Lancer Regiment Camp at Truman State University</a> [Lafayette High School Calendar] <button class="thumb-up" onclick="voteItem('calendar','Lancer Regiment Camp at Truman State University','up')">👍</button><button class="thumb-down" onclick="voteItem('calendar','Lancer Regiment Camp at Truman State University','down')">👎</button></span></li>
+<li><span class="item-feedback" data-id="Cat Vet appointment" data-section="calendar"><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fwww.google.com%2Fcalendar%2Fevent%3Feid%3DN2VicnJqbWszcmZtb2kzYjdnZm1saHYxcDkgbmNiY3JyZ3ZiY242YnFuYXR1MWgxOWw1MWtAZw&section=calendar&date=2026-07-24" target="_self" rel="noopener">Cat Vet appointment</a> [McCown Family] <button class="thumb-up" onclick="voteItem('calendar','Cat Vet appointment','up')">👍</button><button class="thumb-down" onclick="voteItem('calendar','Cat Vet appointment','down')">👎</button></span></li>
+<li><span class="item-feedback" data-id="Emily feet" data-section="calendar"><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fwww.google.com%2Fcalendar%2Fevent%3Feid%3DazByb21jZW9hMGw1OTluYzh2cHJtcWdpZmcgbmNiY3JyZ3ZiY242YnFuYXR1MWgxOWw1MWtAZw&section=calendar&date=2026-07-24" target="_self" rel="noopener">Emily feet</a> [McCown Family] <button class="thumb-up" onclick="voteItem('calendar','Emily feet','up')">👍</button><button class="thumb-down" onclick="voteItem('calendar','Emily feet','down')">👎</button></span></li>
+</ul>
+<h2 id="weather-wildwood-mo">🌤️ Weather — Wildwood, MO</h2>
+<table><thead><tr>
+<th>Day</th>
+<th>Condition</th>
+<th>High/Low</th>
+<th>Precip</th>
+<th>Wind</th>
+</tr></thead><tbody>
+<tr>
+<td><strong>Today</strong></td>
+<td>Rain Showers Likely</td>
+<td>77°F / 61°F</td>
+<td>59%</td>
+<td>2 mph SE</td>
+</tr>
+<tr>
+<td><strong>Tonight</strong></td>
+<td>Partly Cloudy</td>
+<td>— / 61°F</td>
+<td>9%</td>
+<td>1 mph SE</td>
+</tr>
+<tr>
+<td>Saturday</td>
+<td>Chance Showers And Thunderstorms then Slight Chance Showers And Thunderstorms</td>
+<td>88°F / 72°F</td>
+<td>41%</td>
+<td>3 mph S</td>
+</tr>
+<tr>
+<td>Sunday</td>
+<td>Mostly Sunny</td>
+<td>94°F / 75°F</td>
+<td>2%</td>
+<td>1 mph SW</td>
+</tr>
+<tr>
+<td>Monday</td>
+<td>Mostly Sunny</td>
+<td>97°F / 76°F</td>
+<td>7%</td>
+<td>6 mph SW</td>
+</tr>
+<tr>
+<td>Tuesday</td>
+<td>Sunny</td>
+<td>95°F / 74°F</td>
+<td>3%</td>
+<td>6 mph W</td>
+</tr>
+<tr>
+<td>Wednesday</td>
+<td>Sunny</td>
+<td>92°F / 71°F</td>
+<td>10%</td>
+<td>3 mph NE</td>
+</tr>
+<tr>
+<td>Thursday</td>
+<td>Slight Chance Rain Showers</td>
+<td>91°F / —</td>
+<td>15%</td>
+<td>3 mph SE</td>
+</tr>
+</tbody></table>
+<p>🔥 Heat index up to <strong>101°F</strong> during the forecast period.</p>
+<h2 id="openrouter-budget">💰 OpenRouter Budget</h2>
+<h3>OpenRouter</h3>
+<p><strong>$35.34</strong> / $20.00 (176.7%) used</p>
+<p><code>███████████████████████████████████</code></p>
+<p>📊 Daily: $0.00 · Remaining: <strong>$0.00</strong></p>
+<p>📈 ✅ On track</p>
+<h3>OpenAI Codex (separate from OpenRouter)</h3>
+<table><thead><tr>
+<th>Metric</th>
+<th>Value</th>
+</tr></thead><tbody>
+<tr>
+<td>Weekly limit used</td>
+<td><strong>3.0%</strong></td>
+</tr>
+<tr>
+<td>Weekly reset</td>
+<td>Tue 4:40 PM CT</td>
+</tr>
+<tr>
+<td>Latest session usage</td>
+<td>844,961 tokens</td>
+</tr>
+<tr>
+<td>Spend</td>
+<td>— (no monetary cost in local Codex data)</td>
+</tr>
+<tr>
+<td>Source/status</td>
+<td>Local Codex session cache · available · 2026-07-21T21:44:32.940Z</td>
+</tr>
+</tbody></table>
+<h2 id="feed-highlights">📰 Feed Highlights</h2>
+<p><em>No articles from feeds</em></p>
+<h2 id="hacker-news">🔥 Hacker News</h2>
+<p>1. <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fbfl.ai%2Fblog%2Fflux-3&section=hacker-news&date=2026-07-24" target="_self" rel="noopener">Flux 3</a> — <strong>284</strong> pts by ThouYS (<a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fnews.ycombinator.com%2Fitem%3Fid%3D49031796&section=hacker-news&date=2026-07-24" target="_self" rel="noopener">67 comments</a>)</p>
+<p>2. <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fbfl.ai%2Fblog%2Fflux-3-mimic&section=hacker-news&date=2026-07-24" target="_self" rel="noopener">Flux 3 X Mimic: The Next Generation of Video-Action Models</a> — <strong>30</strong> pts by kensai (<a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fnews.ycombinator.com%2Fitem%3Fid%3D49033127&section=hacker-news&date=2026-07-24" target="_self" rel="noopener">3 comments</a>)</p>
+<p>3. <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fptrchm.com%2Fposts%2Fnothing-works-and-everyone-is-euphoric%2F&section=hacker-news&date=2026-07-24" target="_self" rel="noopener">Nothing works and everyone is euphoric</a> — <strong>38</strong> pts by pchm (<a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fnews.ycombinator.com%2Fitem%3Fid%3D49033004&section=hacker-news&date=2026-07-24" target="_self" rel="noopener">13 comments</a>)</p>
+<p>4. <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fnealstephenson.substack.com%2Fp%2Fwriting-by-hand-is-good-for-your&section=hacker-news&date=2026-07-24" target="_self" rel="noopener">Writing by hand is good for your brain</a> — <strong>1319</strong> pts by dwwoelfel (<a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fnews.ycombinator.com%2Fitem%3Fid%3D49022152&section=hacker-news&date=2026-07-24" target="_self" rel="noopener">596 comments</a>)</p>
+<p>5. <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fglyphack.com%2Fattention%2F&section=hacker-news&date=2026-07-24" target="_self" rel="noopener">It&amp;#39;s getting harder to focus every day</a> — <strong>22</strong> pts by peykar (<a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fnews.ycombinator.com%2Fitem%3Fid%3D49032660&section=hacker-news&date=2026-07-24" target="_self" rel="noopener">10 comments</a>)</p>
+<h2 id="hermes-agent-highlights">🤖 Hermes &amp; Agent Highlights</h2>
+<p><em>No verified highlights today.</em></p>
+<h2 id="agtalk-crop-talk">🌾 AgTalk Crop Talk</h2>
+<ul>
+<li><span class="item-feedback" data-id="No significant Crop Talk activity today" data-section="agtalk-crop-talk">No significant Crop Talk activity today <button class="thumb-up" onclick="voteItem('agtalk-crop-talk','No significant Crop Talk activity today','up')">👍</button><button class="thumb-down" onclick="voteItem('agtalk-crop-talk','No significant Crop Talk activity today','down')">👎</button></span></li>
+</ul>
+<p>📺 <strong>New Hermes &amp; Copilot Videos</strong> — Top picks from the last 14 days</p>
+<p>1. <strong><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fyoutu.be%2Fznj-WpMj1dI&section=agtalk-crop-talk&date=2026-07-24" target="_self" rel="noopener">Obsidian + Agentic AI? 🧠 Full Hermes Obsidian Workflow &amp;amp; Wiki Prep</a></strong> ⭐ 🎙️</p>
+<p>Wanderloots · 22m · 6,354 views · ❤️ 340</p>
+<p>⚙️ Workflow · 🔬 Deep Dive</p>
+<p>📝 [ASR captions available — can summarize with LLM]</p>
+<p>2. <strong><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fyoutu.be%2FIEYgsD-Q_i8&section=agtalk-crop-talk&date=2026-07-24" target="_self" rel="noopener">Kimi K3: $20 Budget To Build for OpenClaw &amp;amp; Hermes Agent</a></strong> 🎙️</p>
+<p>Clearmud · 19m · 2,226 views · ❤️ 58</p>
+<p>📝 [ASR captions available — can summarize with LLM]</p>
+<p>&lt;!-- youtube_hermes_monitor.py stderr: Found 84 unique videos, fetching details... --&gt;</p>
+<p>🎙️ <strong>New Hermes &amp; Copilot Podcast Episodes</strong> — Top picks from the last 3 days</p>
+<p>1. <strong><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Ftwit.tv%2Fshows%2Fios-today%2Fepisodes%2F812&section=agtalk-crop-talk&date=2026-07-24" target="_self" rel="noopener">iOS Today 812: Calculators on Your Phone</a></strong></p>
+<p>All TWiT.tv Shows (Audio) · 53m</p>
+<p>2. <strong><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fgithub.com%2Fclawdassistant85-netizen%2Fopenclaw-podcast-media-en%2Freleases%2Fdownload%2Fep091%2Fepisode_091.mp3&section=agtalk-crop-talk&date=2026-07-24" target="_self" rel="noopener">Episode 91: 27B Open-Weight Model Now Fits in Laptop RAM, Dorsey Ships Buzz, Anthropic Settles $1.5B Case</a></strong></p>
+<p>AgentStack Daily · 34m</p>
+<h2 id="apple-health">🩺 Apple Health</h2>
+<p>❤️ RHR: <strong>66</strong> bpm</p>
+<p>📊 HRV: <strong>35</strong> ms</p>
+<p>😴 Sleep: <strong>6.7h</strong></p>
+<p>🏃 Exercise: <strong>13</strong> min</p>
+<p>👣 Steps: <strong>7,226</strong></p>
+<p>📈 Steps: +7% vs previous day</p>
+<p>⚠️ HRV up 31% from previous day — good recovery signal</p>
+<p>🎯 Workouts: <strong>7</strong> tracked days (target: 3 workouts/week)</p>
+</main>
+<footer>
+  <p>🤖 Generated by Hermes Agent &middot; Built with ❤️</p>
+  <p>Click 👍/👎 on any story to help me learn what you like!</p>
+</footer>
+</div>
+<div id="toast" class="toast"></div>
+<script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function() {
+    navigator.serviceWorker.register('/sw.js', { scope: '/' })
+      .catch(function(error) { console.warn('SW registration failed:', error); });
+  });
+}
+</script>
+</body>
+</html>
