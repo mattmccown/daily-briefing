@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#2563eb">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Briefing">
+<link rel="apple-touch-icon" sizes="192x192" href="/icon-192.png">
+<link rel="manifest" href="/manifest.json?key=a8x3kM9pQw2z">
+<title>Daily Briefing — Sunday, August 23, 2026</title>
+<style>
+:root {
+  --bg: #fafafa;
+  --card: #ffffff;
+  --text: #1a1a2e;
+  --muted: #666;
+  --accent: #2563eb;
+  --border: #e5e7eb;
+  --success: #059669;
+  --warning: #d97706;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0f172a;
+    --card: #1e293b;
+    --text: #e2e8f0;
+    --muted: #94a3b8;
+    --accent: #60a5fa;
+    --border: #334155;
+    --success: #34d399;
+    --warning: #fbbf24;
+  }
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', Roboto, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  padding: 0;
+}
+.container {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+header {
+  text-align: center;
+  padding: 2rem 0 1rem;
+  border-bottom: 2px solid var(--accent);
+  margin-bottom: 2rem;
+}
+header h1 { font-size: 1.5rem; color: var(--accent); }
+header .date { color: var(--muted); font-size: 0.9rem; }
+h2 {
+  font-size: 1.2rem;
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
+  padding-bottom: 0.3rem;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+h3 {
+  font-size: 1.05rem;
+  margin-top: 1.25rem;
+  margin-bottom: 0.5rem;
+  color: var(--muted);
+}
+strong { font-weight: 600; }
+em { font-style: italic; }
+code {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  padding: 1px 4px;
+  font-size: 0.85em;
+  font-family: 'SF Mono', 'Fira Code', monospace;
+}
+.feedback { margin-left: auto; font-size: 0.85rem; opacity: 0.5; transition: opacity 0.2s; }
+h2:hover .feedback { opacity: 1; }
+.thumb-up, .thumb-down {
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 2px 6px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  transition: all 0.15s;
+}
+.thumb-up:hover { background: var(--success); color: white; }
+.thumb-down:hover { background: #dc2626; color: white; }
+.thumb-up.voted, .thumb-down.voted { opacity: 0.5; pointer-events: none; }
+.bookmark-btn {
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 2px 6px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  margin-left: 0.25rem;
+}
+.bookmark-btn:hover, .bookmark-btn.saved { background: var(--accent); color: white; }
+.bookmark-btn:disabled { opacity: 0.6; cursor: wait; }
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0.75rem 0;
+  font-size: 0.9rem;
+}
+th, td {
+  text-align: left;
+  padding: 6px 10px;
+  border-bottom: 1px solid var(--border);
+}
+th { font-weight: 600; color: var(--accent); }
+ul { margin: 0.5rem 0 0.5rem 1.5rem; }
+li { margin: 0.25rem 0; }
+p { margin: 0.5rem 0; }
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+.weather-summary {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1rem;
+  margin: 1rem 0;
+}
+.weather-main { font-size: 2rem; font-weight: 700; }
+.weather-detail { color: var(--muted); font-size: 0.9rem; }
+footer {
+  margin-top: 3rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border);
+  text-align: center;
+  color: var(--muted);
+  font-size: 0.8rem;
+}
+.toast {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  background: var(--accent);
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  opacity: 0;
+  transition: opacity 0.3s;
+  pointer-events: none;
+}
+.toast.show { opacity: 1; }
+</style>
+</head>
+<body>
+<div class="container">
+<header>
+  <h1>📋 Daily Briefing</h1>
+  <div class="date">Sunday, August 23, 2026</div>
+  <p style="margin-top:0.5rem;font-size:0.85rem"><a href="/?key=a8x3kM9pQw2z" target="_self">📋 Previous briefings</a> · <a href="/bookmarks.html?key=a8x3kM9pQw2z" target="_self">🔖 Bookmarks</a></p>
+</header>
+<main>
+<p># Daily Briefing — Sunday, August 23, 2026</p>
+<h2 id="calendar">📅 Calendar</h2>
+<ul>
+<li><span class="item-feedback" data-id="First Day of School for Students" data-section="calendar"><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fwww.google.com%2Fcalendar%2Fevent%3Feid%3DXzY5bm1hZDlqZDhvbW1yMWhkOG8zZ29obWVoajY2cDFvZTVnbTJkYjFjcyAxNThqbjRhY3ZjanUybDgzbG91NDg0MjBwbXNoNGM1cEBp&section=calendar&date=2026-08-23" target="_self" rel="noopener">First Day of School for Students</a> [Lafayette High School Calendar] <button class="thumb-up" onclick="voteItem('calendar','First Day of School for Students','up')">👍</button><button class="thumb-down" onclick="voteItem('calendar','First Day of School for Students','down')">👎</button><button class="bookmark-btn" data-bookmark-url="https://www.google.com/calendar/event?eid=XzY5bm1hZDlqZDhvbW1yMWhkOG8zZ29obWVoajY2cDFvZTVnbTJkYjFjcyAxNThqbjRhY3ZjanUybDgzbG91NDg0MjBwbXNoNGM1cEBp" data-bookmark-title="First Day of School for Students" data-bookmark-section="calendar" type="button" aria-label="Bookmark this item">🔖 Bookmark</button></span></li>
+</ul>
+<h2 id="weather-wildwood-mo">🌤️ Weather — Wildwood, MO</h2>
+<table><thead><tr>
+<th>Day</th>
+<th>Condition</th>
+<th>High/Low</th>
+<th>Precip</th>
+<th>Wind</th>
+</tr></thead><tbody>
+<tr>
+<td><strong>Today</strong></td>
+<td>Mostly Sunny</td>
+<td>81°F / 63°F</td>
+<td>0%</td>
+<td>2 to 7 mph NW</td>
+</tr>
+<tr>
+<td><strong>Tonight</strong></td>
+<td>Clear</td>
+<td>— / 63°F</td>
+<td>0%</td>
+<td>2 mph N</td>
+</tr>
+<tr>
+<td>Monday</td>
+<td>Mostly Sunny</td>
+<td>81°F / 64°F</td>
+<td>4%</td>
+<td>5 mph SE</td>
+</tr>
+<tr>
+<td>Tuesday</td>
+<td>Mostly Sunny</td>
+<td>84°F / 67°F</td>
+<td>5%</td>
+<td>3 mph E</td>
+</tr>
+<tr>
+<td>Wednesday</td>
+<td>Mostly Sunny</td>
+<td>87°F / 67°F</td>
+<td>9%</td>
+<td>2 mph SW</td>
+</tr>
+<tr>
+<td>Thursday</td>
+<td>Sunny</td>
+<td>86°F / 66°F</td>
+<td>6%</td>
+<td>2 to 6 mph NW</td>
+</tr>
+<tr>
+<td>Friday</td>
+<td>Sunny</td>
+<td>84°F / 66°F</td>
+<td>4%</td>
+<td>2 mph N</td>
+</tr>
+<tr>
+<td>Saturday</td>
+<td>Slight Chance Rain Showers then Slight Chance Showers And Thunderstorms</td>
+<td>85°F / —</td>
+<td>18%</td>
+<td>3 mph SE</td>
+</tr>
+</tbody></table>
+<h2 id="openrouter-budget">💰 OpenRouter Budget</h2>
+<h3>OpenRouter</h3>
+<p><strong>$0.15</strong> / $20.00 (0.8%) used</p>
+<p><code>█░░░░░░░░░░░░░░░░░░░</code></p>
+<p>📊 Daily: $0.00 · Remaining: <strong>$19.85</strong></p>
+<p>📈 ✅ On track</p>
+<h3>OpenAI Codex (separate from OpenRouter)</h3>
+<table><thead><tr>
+<th>Metric</th>
+<th>Value</th>
+</tr></thead><tbody>
+<tr>
+<td>Weekly limit used</td>
+<td><strong>1.0%</strong></td>
+</tr>
+<tr>
+<td>Weekly reset</td>
+<td>Wed 11:30 PM CT</td>
+</tr>
+<tr>
+<td>Latest session usage</td>
+<td>—</td>
+</tr>
+<tr>
+<td>Spend</td>
+<td>— (no monetary cost in local Codex data)</td>
+</tr>
+<tr>
+<td>Source/status</td>
+<td>Official Codex usage endpoint · available · 2026-08-23T10:30:33.501968+00:00</td>
+</tr>
+</tbody></table>
+<h2 id="feed-highlights">📰 Feed Highlights</h2>
+<h3>AI &amp; ML</h3>
+<ul>
+<li><span class="item-feedback" data-id="More than just code review" data-section="feed-highlights"><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fsimonwillison.net%2F2026%2FAug%2F22%2Fmore-than-just-code-review%2F&section=feed-highlights&date=2026-08-23" target="_self" rel="noopener">More than just code review</a> — <em>Simon Willison</em> <button class="thumb-up" onclick="voteItem('feed-highlights','More than just code review','up')">👍</button><button class="thumb-down" onclick="voteItem('feed-highlights','More than just code review','down')">👎</button><button class="bookmark-btn" data-bookmark-url="https://simonwillison.net/2026/Aug/22/more-than-just-code-review/" data-bookmark-title="More than just code review" data-bookmark-section="feed-highlights" type="button" aria-label="Bookmark this item">🔖 Bookmark</button></span></li>
+<li><span class="item-feedback" data-id="How mobility gives language models a deeper understanding of place" data-section="feed-highlights"><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fresearch.google%2Fblog%2Fhow-mobility-gives-language-models-a-deeper-understanding-of-place%2F&section=feed-highlights&date=2026-08-23" target="_self" rel="noopener">How mobility gives language models a deeper understanding of place</a> — <em>Google Research</em> <button class="thumb-up" onclick="voteItem('feed-highlights','How mobility gives language models a deeper understanding of place','up')">👍</button><button class="thumb-down" onclick="voteItem('feed-highlights','How mobility gives language models a deeper understanding of place','down')">👎</button><button class="bookmark-btn" data-bookmark-url="https://research.google/blog/how-mobility-gives-language-models-a-deeper-understanding-of-place/" data-bookmark-title="How mobility gives language models a deeper understanding of place" data-bookmark-section="feed-highlights" type="button" aria-label="Bookmark this item">🔖 Bookmark</button></span></li>
+</ul>
+<h3>Technology</h3>
+<ul>
+<li><span class="item-feedback" data-id="SpaceX’s orbital data centers would create a new category of e-waste" data-section="feed-highlights"><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Farstechnica.com%2Fscience%2F2026%2F08%2Fspacexs-orbital-data-centers-would-create-a-new-category-of-e-waste%2F&section=feed-highlights&date=2026-08-23" target="_self" rel="noopener">SpaceX’s orbital data centers would create a new category of e-waste</a> — <em>Ars Technica</em> <button class="thumb-up" onclick="voteItem('feed-highlights','SpaceX’s orbital data centers would create a new category of e-waste','up')">👍</button><button class="thumb-down" onclick="voteItem('feed-highlights','SpaceX’s orbital data centers would create a new category of e-waste','down')">👎</button><button class="bookmark-btn" data-bookmark-url="https://arstechnica.com/science/2026/08/spacexs-orbital-data-centers-would-create-a-new-category-of-e-waste/" data-bookmark-title="SpaceX’s orbital data centers would create a new category of e-waste" data-bookmark-section="feed-highlights" type="button" aria-label="Bookmark this item">🔖 Bookmark</button></span></li>
+</ul>
+<h3>Agriculture &amp; Food Systems</h3>
+<ul>
+<li><span class="item-feedback" data-id="Rollins: Additional beef imports needed to ease consumer costs" data-section="feed-highlights"><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fwww.brownfieldagnews.com%2Fnews%2Frollins-additional-beef-imports-needed-to-ease-consumer-costs%2F&section=feed-highlights&date=2026-08-23" target="_self" rel="noopener">Rollins: Additional beef imports needed to ease consumer costs</a> — <em>Brownfield Ag News</em> <button class="thumb-up" onclick="voteItem('feed-highlights','Rollins: Additional beef imports needed to ease consumer costs','up')">👍</button><button class="thumb-down" onclick="voteItem('feed-highlights','Rollins: Additional beef imports needed to ease consumer costs','down')">👎</button><button class="bookmark-btn" data-bookmark-url="https://www.brownfieldagnews.com/news/rollins-additional-beef-imports-needed-to-ease-consumer-costs/" data-bookmark-title="Rollins: Additional beef imports needed to ease consumer costs" data-bookmark-section="feed-highlights" type="button" aria-label="Bookmark this item">🔖 Bookmark</button></span></li>
+<li><span class="item-feedback" data-id="Perspective: Wild horse slaughter investigation raises bigger question" data-section="feed-highlights"><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fwww.agdaily.com%2Flivestock%2Fwild-horse-slaughter-investigation-raises-bigger-question%2F&section=feed-highlights&date=2026-08-23" target="_self" rel="noopener">Perspective: Wild horse slaughter investigation raises bigger question</a> — <em>AGDaily</em> <button class="thumb-up" onclick="voteItem('feed-highlights','Perspective: Wild horse slaughter investigation raises bigger question','up')">👍</button><button class="thumb-down" onclick="voteItem('feed-highlights','Perspective: Wild horse slaughter investigation raises bigger question','down')">👎</button><button class="bookmark-btn" data-bookmark-url="https://www.agdaily.com/livestock/wild-horse-slaughter-investigation-raises-bigger-question/" data-bookmark-title="Perspective: Wild horse slaughter investigation raises bigger question" data-bookmark-section="feed-highlights" type="button" aria-label="Bookmark this item">🔖 Bookmark</button></span></li>
+<li><span class="item-feedback" data-id="Queen bees have a disturbing way to survive pesticides" data-section="feed-highlights"><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fwww.sciencedaily.com%2Freleases%2F2026%2F08%2F260821012224.htm&section=feed-highlights&date=2026-08-23" target="_self" rel="noopener">Queen bees have a disturbing way to survive pesticides</a> — <em>ScienceDaily - Agriculture</em> <button class="thumb-up" onclick="voteItem('feed-highlights','Queen bees have a disturbing way to survive pesticides','up')">👍</button><button class="thumb-down" onclick="voteItem('feed-highlights','Queen bees have a disturbing way to survive pesticides','down')">👎</button><button class="bookmark-btn" data-bookmark-url="https://www.sciencedaily.com/releases/2026/08/260821012224.htm" data-bookmark-title="Queen bees have a disturbing way to survive pesticides" data-bookmark-section="feed-highlights" type="button" aria-label="Bookmark this item">🔖 Bookmark</button></span></li>
+</ul>
+<h2 id="hacker-news">🔥 Hacker News</h2>
+<p>1. <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=http%3A%2F%2Fwww.os2museum.com%2Fwp%2Fthe-end-of-an-athlon%2F&section=hacker-news&date=2026-08-23" target="_self" rel="noopener">The End of an Athlon</a> — <strong>92</strong> pts by userbinator (<a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fnews.ycombinator.com%2Fitem%3Fid%3D49406333&section=hacker-news&date=2026-08-23" target="_self" rel="noopener">25 comments</a>)</p>
+<p>2. <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fnappertime.com%2Fthe-golden-rule-of-becoming-a-better-writer%2F&section=hacker-news&date=2026-08-23" target="_self" rel="noopener">To become a better writer, read as much as you can</a> — <strong>155</strong> pts by andsoitis (<a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fnews.ycombinator.com%2Fitem%3Fid%3D49405870&section=hacker-news&date=2026-08-23" target="_self" rel="noopener">102 comments</a>)</p>
+<p>3. <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fmalisper.me%2Fjit-compiling-code-in-5-us%2F&section=hacker-news&date=2026-08-23" target="_self" rel="noopener">JIT Compiling Code in 5μs</a> — <strong>66</strong> pts by zX41ZdbW (<a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fnews.ycombinator.com%2Fitem%3Fid%3D49406387&section=hacker-news&date=2026-08-23" target="_self" rel="noopener">27 comments</a>)</p>
+<p>4. <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fmartypc.net%2F&section=hacker-news&date=2026-08-23" target="_self" rel="noopener">MartyPC is a cross-platform emulator of early PCs written in Rust</a> — <strong>117</strong> pts by boilerupnc (<a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fnews.ycombinator.com%2Fitem%3Fid%3D49405816&section=hacker-news&date=2026-08-23" target="_self" rel="noopener">38 comments</a>)</p>
+<p>5. <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Flucumr.pocoo.org%2F2026%2F8%2F22%2Ffast-hard-code%2F&section=hacker-news&date=2026-08-23" target="_self" rel="noopener">Fast and Hard Code</a> — <strong>29</strong> pts by tosh (<a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fnews.ycombinator.com%2Fitem%3Fid%3D49406285&section=hacker-news&date=2026-08-23" target="_self" rel="noopener">5 comments</a>)</p>
+<h2 id="r-hermesagent">🤖 r/hermesagent</h2>
+<p>1. <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fwww.reddit.com%2Fr%2Fhermesagent%2Fcomments%2F1vvwmi1%2Fwow_hermes_is_exploding_on_openrouter%2F&section=r-hermesagent&date=2026-08-23" target="_self" rel="noopener">Wow Hermes is exploding on OpenRouter</a> — <strong>60</strong> pts · 20 comments</p>
+<p>2. <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fwww.reddit.com%2Fr%2Fhermesagent%2Fcomments%2F1vvxppq%2Fgive_your_agent_a_personality_it_makes_chatting%2F&section=r-hermesagent&date=2026-08-23" target="_self" rel="noopener">Give your agent a personality, it makes chatting with them a lot more fun.</a> — <strong>36</strong> pts · 24 comments</p>
+<h2 id="hermes-agent-highlights">🤖 Hermes &amp; Agent Highlights</h2>
+<p><em>No verified highlights today.</em></p>
+<h2 id="targeted-search-highlights">𝕏 Targeted Search Highlights</h2>
+<p><em>X search unavailable.</em></p>
+<h2 id="agtalk-crop-talk">🌾 AgTalk Crop Talk</h2>
+<ul>
+<li><span class="item-feedback" data-id="No significant Crop Talk activity today" data-section="agtalk-crop-talk">No significant Crop Talk activity today <button class="thumb-up" onclick="voteItem('agtalk-crop-talk','No significant Crop Talk activity today','up')">👍</button><button class="thumb-down" onclick="voteItem('agtalk-crop-talk','No significant Crop Talk activity today','down')">👎</button></span></li>
+</ul>
+<h2 id="videos">📺 Videos</h2>
+<p><em>No noteworthy new videos today.</em></p>
+<h2 id="podcasts">🎙️ Podcasts</h2>
+<p>🎙️ <strong>New Hermes &amp; Copilot Podcast Episodes</strong> — Top picks from the last 3 days</p>
+<ul>
+<li><span class="item-feedback" data-id="&lt;strong&gt;[How to Build Your Own AI Agent " data-section="podcasts"><strong><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fpodcasters.spotify.com%2Fpod%2Fshow%2Fjulian-goldie9%2Fepisodes%2FHow-to-Build-Your-Own-AI-Agent-Operating-System-e3np2pb&section=podcasts&date=2026-08-23" target="_self" rel="noopener">How to Build Your Own AI Agent Operating System</a></strong> <button class="thumb-up" onclick="voteItem('podcasts','&lt;strong&gt;[How to Build Your Own AI Agent ','up')">👍</button><button class="thumb-down" onclick="voteItem('podcasts','&lt;strong&gt;[How to Build Your Own AI Agent ','down')">👎</button><button class="bookmark-btn" data-bookmark-url="https://podcasters.spotify.com/pod/show/julian-goldie9/episodes/How-to-Build-Your-Own-AI-Agent-Operating-System-e3np2pb" data-bookmark-title="How to Build Your Own AI Agent Operating System" data-bookmark-section="podcasts" type="button" aria-label="Bookmark this item">🔖 Bookmark</button></span></li>
+</ul>
+<p>AI News Today | Julian Goldie Podcast · 18m</p>
+<ul>
+<li><span class="item-feedback" data-id="&lt;strong&gt;[DeepSeek Harness: FREE 1 Hour C" data-section="podcasts"><strong><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fpodcasters.spotify.com%2Fpod%2Fshow%2Fjulian-goldie9%2Fepisodes%2FDeepSeek-Harness-FREE-1-Hour-Course-e3np2jr&section=podcasts&date=2026-08-23" target="_self" rel="noopener">DeepSeek Harness: FREE 1 Hour Course!</a></strong> <button class="thumb-up" onclick="voteItem('podcasts','&lt;strong&gt;[DeepSeek Harness: FREE 1 Hour C','up')">👍</button><button class="thumb-down" onclick="voteItem('podcasts','&lt;strong&gt;[DeepSeek Harness: FREE 1 Hour C','down')">👎</button><button class="bookmark-btn" data-bookmark-url="https://podcasters.spotify.com/pod/show/julian-goldie9/episodes/DeepSeek-Harness-FREE-1-Hour-Course-e3np2jr" data-bookmark-title="DeepSeek Harness: FREE 1 Hour Course!" data-bookmark-section="podcasts" type="button" aria-label="Bookmark this item">🔖 Bookmark</button></span></li>
+</ul>
+<p>AI News Today | Julian Goldie Podcast · 58m</p>
+<h2 id="apple-health">🩺 Apple Health</h2>
+<h3>Current week progress</h3>
+<p><strong>Elapsed:</strong> 2026-08-17–2026-08-22 · <strong>Coverage:</strong> 5/6 days</p>
+<p><strong>Current-week total:</strong> 63,794 steps · 5,103 kcal · 854 min exercise</p>
+<p>**Yesterday (2026-08-22): — steps · — · — exercise · RHR — · HRV —</p>
+<p>🎯 Current-week workouts: <strong>3/3</strong></p>
+<p>Verified modalities: cardio 0 · strength 0 · unknown 3</p>
+<h3>Foundation decision</h3>
+<p><strong>Goal:</strong> 3 sessions/week (optional 4th in weeks 5–8).</p>
+<p><strong>Consistency:</strong> 3/4 evaluated weeks at target; progression: advance optional fourth.</p>
+<p><strong>Lapse/re-entry:</strong> active.</p>
+<p>💡 Goal met: maintain your routine and protect recovery.</p>
+<p>⚠️ No valid historical baseline for exercise minutes.</p>
+<p>⚠️ No valid historical baseline for heart rate variability.</p>
+<h3>🧠 Evidence-informed training/recovery synthesis</h3>
+<p>Yesterday’s data are missing, so recovery is unavailable—not evidence of inactivity—and no readiness call can be made. The prior two days show declining movement, exercise minutes, sleep, and HRV; however, this week already reached 3 sessions, and wrist temperature has insufficient data without repeated or corroborated elevation.</p>
+<p>🎯 Today&#39;s action: Take one comfortable 20-minute walk today.</p>
+<p><em>Why: This supports foundation-phase consistency after a four-day lapse without catch-up volume or advanced intensity. · Limits: August 22 is missing, the week is incomplete, HRV and exercise-minute historical baselines are unavailable, wrist-temperature data are insufficient, and Apple Health exercise minutes do not identify workout type or intensity.</em></p>
+<p><em>Public framework note (researched 2026-07-26): <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fwww.hubermanlab.com%2Ftopics%2Fsleep-hygiene&section=apple-health&date=2026-08-23" target="_self" rel="noopener">Huberman Lab</a> · <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fpeterattiamd.com%2Fexercising-for-longevity%2F&section=apple-health&date=2026-08-23" target="_self" rel="noopener">Peter Attia MD</a> · <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fwww.andygalpin.com%2F55-minute-physiology&section=apple-health&date=2026-08-23" target="_self" rel="noopener">Andy Galpin</a></em></p>
+<p><strong>Completed week:</strong> 2026-08-10–2026-08-16 · <strong>Coverage:</strong> 7/7 days</p>
+<table><thead><tr>
+<th>Date</th>
+<th>Steps</th>
+<th>Sleep</th>
+<th>Exercise</th>
+<th>RHR</th>
+<th>HRV</th>
+</tr></thead><tbody>
+<tr>
+<td>2026-08-10</td>
+<td>6,287</td>
+<td>—</td>
+<td>36 min</td>
+<td>71</td>
+<td>34</td>
+</tr>
+<tr>
+<td>2026-08-11</td>
+<td>3,460</td>
+<td>—</td>
+<td>3 min</td>
+<td>69</td>
+<td>34</td>
+</tr>
+<tr>
+<td>2026-08-12</td>
+<td>4,574</td>
+<td>—</td>
+<td>13 min</td>
+<td>72</td>
+<td>32</td>
+</tr>
+<tr>
+<td>2026-08-13</td>
+<td>9,250</td>
+<td>—</td>
+<td>11 min</td>
+<td>72</td>
+<td>34</td>
+</tr>
+<tr>
+<td>2026-08-14</td>
+<td>10,381</td>
+<td>6.4h</td>
+<td>—</td>
+<td>67</td>
+<td>—</td>
+</tr>
+<tr>
+<td>2026-08-15</td>
+<td>19,558</td>
+<td>8.0h</td>
+<td>—</td>
+<td>74</td>
+<td>—</td>
+</tr>
+<tr>
+<td>2026-08-16</td>
+<td>28,504</td>
+<td>—</td>
+<td>—</td>
+<td>74</td>
+<td>—</td>
+</tr>
+</tbody></table>
+<table><thead><tr>
+<th>Metric</th>
+<th>Week</th>
+<th>Historical median</th>
+<th>Δ</th>
+<th>n</th>
+</tr></thead><tbody>
+<tr>
+<td>Steps</td>
+<td>82,014 steps</td>
+<td>46,316 steps</td>
+<td>+77.1%</td>
+<td>106</td>
+</tr>
+<tr>
+<td>Active Energy</td>
+<td>7,122.5 kcal</td>
+<td>3,086 kcal</td>
+<td>+130.8%</td>
+<td>98</td>
+</tr>
+<tr>
+<td>Walking Distance</td>
+<td>43.8 mi</td>
+<td>27.3 mi</td>
+<td>+60.4%</td>
+<td>106</td>
+</tr>
+<tr>
+<td>Flights Climbed</td>
+<td>275 flights</td>
+<td>83.4 flights</td>
+<td>+229.8%</td>
+<td>106</td>
+</tr>
+<tr>
+<td>Exercise Minutes</td>
+<td>63 min</td>
+<td>—</td>
+<td>—</td>
+<td>0</td>
+</tr>
+<tr>
+<td>Sleep</td>
+<td>7.2 h</td>
+<td>7.7 h</td>
+<td>-6.7%</td>
+<td>76</td>
+</tr>
+<tr>
+<td>Resting HR</td>
+<td>71.4 bpm</td>
+<td>63 bpm</td>
+<td>+13.3%</td>
+<td>77</td>
+</tr>
+<tr>
+<td>HRV</td>
+<td>33.6 ms</td>
+<td>—</td>
+<td>—</td>
+<td>0</td>
+</tr>
+</tbody></table>
+</main>
+<footer>
+  <p>🤖 Generated by Hermes Agent &middot; Built with ❤️</p>
+  <p>Click 👍/👎 on any story to help me learn what you like!</p>
+</footer>
+</div>
+<div id="toast" class="toast"></div>
+<script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function() {
+    navigator.serviceWorker.register('/sw.js', { scope: '/' })
+      .catch(function(error) { console.warn('SW registration failed:', error); });
+  });
+}
+</script>
+</body>
+</html>
