@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#2563eb">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Briefing">
+<link rel="apple-touch-icon" sizes="192x192" href="/icon-192.png">
+<link rel="manifest" href="/manifest.json?key=a8x3kM9pQw2z">
+<title>Daily Briefing — Sunday, September 13, 2026</title>
+<style>
+:root {
+  --bg: #fafafa;
+  --card: #ffffff;
+  --text: #1a1a2e;
+  --muted: #666;
+  --accent: #2563eb;
+  --border: #e5e7eb;
+  --success: #059669;
+  --warning: #d97706;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0f172a;
+    --card: #1e293b;
+    --text: #e2e8f0;
+    --muted: #94a3b8;
+    --accent: #60a5fa;
+    --border: #334155;
+    --success: #34d399;
+    --warning: #fbbf24;
+  }
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', Roboto, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  padding: 0;
+}
+.container {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+header {
+  text-align: center;
+  padding: 2rem 0 1rem;
+  border-bottom: 2px solid var(--accent);
+  margin-bottom: 2rem;
+}
+header h1 { font-size: 1.5rem; color: var(--accent); }
+header .date { color: var(--muted); font-size: 0.9rem; }
+h2 {
+  font-size: 1.2rem;
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
+  padding-bottom: 0.3rem;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+h3 {
+  font-size: 1.05rem;
+  margin-top: 1.25rem;
+  margin-bottom: 0.5rem;
+  color: var(--muted);
+}
+strong { font-weight: 600; }
+em { font-style: italic; }
+code {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  padding: 1px 4px;
+  font-size: 0.85em;
+  font-family: 'SF Mono', 'Fira Code', monospace;
+}
+.feedback { margin-left: auto; font-size: 0.85rem; opacity: 0.5; transition: opacity 0.2s; }
+h2:hover .feedback { opacity: 1; }
+.thumb-up, .thumb-down {
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 2px 6px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  transition: all 0.15s;
+}
+.thumb-up:hover { background: var(--success); color: white; }
+.thumb-down:hover { background: #dc2626; color: white; }
+.thumb-up.voted, .thumb-down.voted { opacity: 0.5; pointer-events: none; }
+.bookmark-btn {
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 2px 6px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  margin-left: 0.25rem;
+}
+.bookmark-btn:hover, .bookmark-btn.saved { background: var(--accent); color: white; }
+.bookmark-btn:disabled { opacity: 0.6; cursor: wait; }
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0.75rem 0;
+  font-size: 0.9rem;
+}
+th, td {
+  text-align: left;
+  padding: 6px 10px;
+  border-bottom: 1px solid var(--border);
+}
+th { font-weight: 600; color: var(--accent); }
+ul { margin: 0.5rem 0 0.5rem 1.5rem; }
+li { margin: 0.25rem 0; }
+p { margin: 0.5rem 0; }
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+.weather-summary {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1rem;
+  margin: 1rem 0;
+}
+.weather-main { font-size: 2rem; font-weight: 700; }
+.weather-detail { color: var(--muted); font-size: 0.9rem; }
+footer {
+  margin-top: 3rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border);
+  text-align: center;
+  color: var(--muted);
+  font-size: 0.8rem;
+}
+.toast {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  background: var(--accent);
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  opacity: 0;
+  transition: opacity 0.3s;
+  pointer-events: none;
+}
+.toast.show { opacity: 1; }
+</style>
+</head>
+<body>
+<div class="container">
+<header>
+  <h1>📋 Daily Briefing</h1>
+  <div class="date">Sunday, September 13, 2026</div>
+  <p style="margin-top:0.5rem;font-size:0.85rem"><a href="/?key=a8x3kM9pQw2z" target="_self">📋 Previous briefings</a> · <a href="/bookmarks.html?key=a8x3kM9pQw2z" target="_self">🔖 Bookmarks</a></p>
+</header>
+<main>
+<p># Daily Briefing — Sunday, September 13, 2026</p>
+<h2 id="calendar">📅 Calendar</h2>
+<p><em>No events today</em></p>
+<h2 id="weather-wildwood-mo">🌤️ Weather — Wildwood, MO</h2>
+<table><thead><tr>
+<th>Day</th>
+<th>Condition</th>
+<th>High/Low</th>
+<th>Precip</th>
+<th>Wind</th>
+</tr></thead><tbody>
+<tr>
+<td><strong>Today</strong></td>
+<td>Partly Sunny</td>
+<td>85°F / 68°F</td>
+<td>13%</td>
+<td>5 mph N</td>
+</tr>
+<tr>
+<td><strong>Tonight</strong></td>
+<td>Mostly Cloudy</td>
+<td>— / 68°F</td>
+<td>2%</td>
+<td>2 mph N</td>
+</tr>
+<tr>
+<td>Monday</td>
+<td>Mostly Sunny</td>
+<td>86°F / 73°F</td>
+<td>13%</td>
+<td>7 mph SE</td>
+</tr>
+<tr>
+<td>Tuesday</td>
+<td>Sunny then Slight Chance Showers And Thunderstorms</td>
+<td>95°F / 71°F</td>
+<td>16%</td>
+<td>6 mph SW</td>
+</tr>
+<tr>
+<td>Wednesday</td>
+<td>Slight Chance Rain Showers then Slight Chance Showers And Thunderstorms</td>
+<td>93°F / 73°F</td>
+<td>19%</td>
+<td>3 mph SE</td>
+</tr>
+<tr>
+<td>Thursday</td>
+<td>Slight Chance Rain Showers then Slight Chance Showers And Thunderstorms</td>
+<td>92°F / 70°F</td>
+<td>21%</td>
+<td>5 mph SW</td>
+</tr>
+<tr>
+<td>Friday</td>
+<td>Slight Chance Rain Showers</td>
+<td>87°F / 65°F</td>
+<td>22%</td>
+<td>5 mph W</td>
+</tr>
+<tr>
+<td>Saturday</td>
+<td>Chance Rain Showers then Slight Chance Showers And Thunderstorms</td>
+<td>82°F / —</td>
+<td>27%</td>
+<td>6 mph NW</td>
+</tr>
+</tbody></table>
+<h2 id="openrouter-budget">💰 OpenRouter Budget</h2>
+<h3>OpenRouter</h3>
+<p><strong>$0.15</strong> / $20.00 (0.7%) used</p>
+<p><code>█░░░░░░░░░░░░░░░░░░░</code></p>
+<p>📊 Daily: $0.00 · Remaining: <strong>$19.85</strong></p>
+<p>📈 ✅ On track</p>
+<h3>OpenAI Codex (separate from OpenRouter)</h3>
+<table><thead><tr>
+<th>Metric</th>
+<th>Value</th>
+</tr></thead><tbody>
+<tr>
+<td>Weekly limit used</td>
+<td><strong>0.0%</strong></td>
+</tr>
+<tr>
+<td>Weekly reset</td>
+<td>Sat 5:31 AM CT</td>
+</tr>
+<tr>
+<td>Latest session usage</td>
+<td>—</td>
+</tr>
+<tr>
+<td>Spend</td>
+<td>— (no monetary cost in local Codex data)</td>
+</tr>
+<tr>
+<td>Source/status</td>
+<td>Official Codex usage endpoint · available · 2026-09-13T10:30:56.080397+00:00</td>
+</tr>
+</tbody></table>
+<h2 id="feed-highlights">📰 Feed Highlights</h2>
+<h3>AI &amp; ML</h3>
+<ul>
+<li><span class="item-feedback" data-id="datasette 1.0a39" data-section="feed-highlights"><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fsimonwillison.net%2F2026%2FSep%2F11%2Fdatasette-2%2F&section=feed-highlights&date=2026-09-13" target="_self" rel="noopener">datasette 1.0a39</a> — <em>Simon Willison</em> <button class="thumb-up" onclick="voteItem('feed-highlights','datasette 1.0a39','up')">👍</button><button class="thumb-down" onclick="voteItem('feed-highlights','datasette 1.0a39','down')">👎</button><button class="bookmark-btn" data-bookmark-url="https://simonwillison.net/2026/Sep/11/datasette-2/" data-bookmark-title="datasette 1.0a39" data-bookmark-section="feed-highlights" type="button" aria-label="Bookmark this item">🔖 Bookmark</button></span></li>
+<li><span class="item-feedback" data-id="BenchMIRT: What are LLM benchmarks actually measuring?" data-section="feed-highlights"><a href="https://huggingface.co/blog/allenai/benchmirt" target="_self" rel="noopener noreferrer">BenchMIRT: What are LLM benchmarks actually measuring?</a> — <em>Hugging Face Blog</em> <button class="thumb-up" onclick="voteItem('feed-highlights','BenchMIRT: What are LLM benchmarks actually measuring?','up')">👍</button><button class="thumb-down" onclick="voteItem('feed-highlights','BenchMIRT: What are LLM benchmarks actually measuring?','down')">👎</button><button class="bookmark-btn" data-bookmark-url="https://huggingface.co/blog/allenai/benchmirt" data-bookmark-title="BenchMIRT: What are LLM benchmarks actually measuring?" data-bookmark-section="feed-highlights" type="button" aria-label="Bookmark this item">🔖 Bookmark</button></span></li>
+</ul>
+<h3>Technology</h3>
+<ul>
+<li><span class="item-feedback" data-id="Oracle tries to appease Stargate data center opponents with renewables push" data-section="feed-highlights"><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Farstechnica.com%2Fgadgets%2F2026%2F09%2Foracle-promises-2-gw-of-renewables-to-match-stargate-data-center-emissions%2F&section=feed-highlights&date=2026-09-13" target="_self" rel="noopener">Oracle tries to appease Stargate data center opponents with renewables push</a> — <em>Ars Technica</em> <button class="thumb-up" onclick="voteItem('feed-highlights','Oracle tries to appease Stargate data center opponents with renewables push','up')">👍</button><button class="thumb-down" onclick="voteItem('feed-highlights','Oracle tries to appease Stargate data center opponents with renewables push','down')">👎</button><button class="bookmark-btn" data-bookmark-url="https://arstechnica.com/gadgets/2026/09/oracle-promises-2-gw-of-renewables-to-match-stargate-data-center-emissions/" data-bookmark-title="Oracle tries to appease Stargate data center opponents with renewables push" data-bookmark-section="feed-highlights" type="button" aria-label="Bookmark this item">🔖 Bookmark</button></span></li>
+</ul>
+<h3>Agriculture &amp; Food Systems</h3>
+<ul>
+<li><span class="item-feedback" data-id="MSU says sustainable cropping systems are gaining economic advantages in long-term study" data-section="feed-highlights"><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fwww.brownfieldagnews.com%2Fnews%2Fmsu-says-sustainable-cropping-systems-are-gaining-economic-advantages-in-long-term-study%2F&section=feed-highlights&date=2026-09-13" target="_self" rel="noopener">MSU says sustainable cropping systems are gaining economic advantages in long-term study</a> — <em>Brownfield Ag News</em> <button class="thumb-up" onclick="voteItem('feed-highlights','MSU says sustainable cropping systems are gaining economic advantages in long-term study','up')">👍</button><button class="thumb-down" onclick="voteItem('feed-highlights','MSU says sustainable cropping systems are gaining economic advantages in long-term study','down')">👎</button><button class="bookmark-btn" data-bookmark-url="https://www.brownfieldagnews.com/news/msu-says-sustainable-cropping-systems-are-gaining-economic-advantages-in-long-term-study/" data-bookmark-title="MSU says sustainable cropping systems are gaining economic advantages in long-term study" data-bookmark-section="feed-highlights" type="button" aria-label="Bookmark this item">🔖 Bookmark</button></span></li>
+<li><span class="item-feedback" data-id="Ag on Instagram: The week’s best photos on Sept. 11, 2026" data-section="feed-highlights"><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fwww.agdaily.com%2Flifestyle%2Fag-instagram-weeks-best-photos-sept-11-2026%2F&section=feed-highlights&date=2026-09-13" target="_self" rel="noopener">Ag on Instagram: The week’s best photos on Sept. 11, 2026</a> — <em>AGDaily</em> <button class="thumb-up" onclick="voteItem('feed-highlights','Ag on Instagram: The week’s best photos on Sept. 11, 2026','up')">👍</button><button class="thumb-down" onclick="voteItem('feed-highlights','Ag on Instagram: The week’s best photos on Sept. 11, 2026','down')">👎</button><button class="bookmark-btn" data-bookmark-url="https://www.agdaily.com/lifestyle/ag-instagram-weeks-best-photos-sept-11-2026/" data-bookmark-title="Ag on Instagram: The week’s best photos on Sept. 11, 2026" data-bookmark-section="feed-highlights" type="button" aria-label="Bookmark this item">🔖 Bookmark</button></span></li>
+</ul>
+<h3>Cooking</h3>
+<ul>
+<li><span class="item-feedback" data-id="A Really Big Chicken Parm" data-section="feed-highlights"><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fwww.epicurious.com%2Frecipes%2Ffood%2Fviews%2Fba-syn-a-really-big-chicken-parm&section=feed-highlights&date=2026-09-13" target="_self" rel="noopener">A Really Big Chicken Parm</a> — <em>Epicurious</em> <button class="thumb-up" onclick="voteItem('feed-highlights','A Really Big Chicken Parm','up')">👍</button><button class="thumb-down" onclick="voteItem('feed-highlights','A Really Big Chicken Parm','down')">👎</button><button class="bookmark-btn" data-bookmark-url="https://www.epicurious.com/recipes/food/views/ba-syn-a-really-big-chicken-parm" data-bookmark-title="A Really Big Chicken Parm" data-bookmark-section="feed-highlights" type="button" aria-label="Bookmark this item">🔖 Bookmark</button></span></li>
+</ul>
+<h2 id="hacker-news">🔥 Hacker News</h2>
+<p>1. <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fjetkvm.com%2Fblog%2Fintroducing-jetkvm-mini&section=hacker-news&date=2026-09-13" target="_self" rel="noopener">JetKVM Mini</a> — <strong>112</strong> pts by taubek (<a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fnews.ycombinator.com%2Fitem%3Fid%3D49681152&section=hacker-news&date=2026-09-13" target="_self" rel="noopener">60 comments</a>)</p>
+<p>2. <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fneobrowser.ai%2F&section=hacker-news&date=2026-09-13" target="_self" rel="noopener">Norton Neo Browser</a> — <strong>19</strong> pts by phantomathkg (<a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fnews.ycombinator.com%2Fitem%3Fid%3D49681724&section=hacker-news&date=2026-09-13" target="_self" rel="noopener">20 comments</a>)</p>
+<p>3. <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fyoshuabengio.org%2Fen%2Fpublication%2Fwhy-are-ai-agents-lying-cheating-and-coordinating&section=hacker-news&date=2026-09-13" target="_self" rel="noopener">Why are AI agents lying, cheating and coordinating?</a> — <strong>225</strong> pts by jonifico (<a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fnews.ycombinator.com%2Fitem%3Fid%3D49678969&section=hacker-news&date=2026-09-13" target="_self" rel="noopener">298 comments</a>)</p>
+<p>4. <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Ficm.museum%2F&section=hacker-news&date=2026-09-13" target="_self" rel="noopener">The Interim Computer Museum</a> — <strong>114</strong> pts by mulmen (<a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fnews.ycombinator.com%2Fitem%3Fid%3D49679459&section=hacker-news&date=2026-09-13" target="_self" rel="noopener">13 comments</a>)</p>
+<p>5. <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fhigh5apps.github.io%2Fjosm-plugin-website-wizard%2F&section=hacker-news&date=2026-09-13" target="_self" rel="noopener">Make your first edit to OpenStreetMap</a> — <strong>466</strong> pts by juliantigler (<a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fnews.ycombinator.com%2Fitem%3Fid%3D49674050&section=hacker-news&date=2026-09-13" target="_self" rel="noopener">119 comments</a>)</p>
+<h2 id="r-hermesagent">🤖 r/hermesagent</h2>
+<p>1. <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fwww.reddit.com%2Fr%2Fhermesagent%2Fcomments%2F1weggq6%2Fthat_icon%2F&section=r-hermesagent&date=2026-09-13" target="_self" rel="noopener">That icon.</a> — <strong>130</strong> pts · 152 comments</p>
+<p>2. <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fwww.reddit.com%2Fr%2Fhermesagent%2Fcomments%2F1weu211%2Fdeepseek_41_flash_is_weird%2F&section=r-hermesagent&date=2026-09-13" target="_self" rel="noopener">Deepseek 4.1 flash is weird</a> — <strong>28</strong> pts · 21 comments</p>
+<p>3. <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fwww.reddit.com%2Fr%2Fhermesagent%2Fcomments%2F1wf2agm%2Five_built_a_memory_system_for_my_agent_and_its%2F&section=r-hermesagent&date=2026-09-13" target="_self" rel="noopener">I&amp;#39;ve built a memory system for my agent and it&amp;#39;s actually working</a> — <strong>15</strong> pts · 13 comments</p>
+<h2 id="hermes-agent-highlights">🤖 Hermes &amp; Agent Highlights</h2>
+<p><em>No verified highlights today.</em></p>
+<h2 id="targeted-search-highlights">𝕏 Targeted Search Highlights</h2>
+<p><em>X search unavailable.</em></p>
+<h2 id="agtalk-crop-talk">🌾 AgTalk Crop Talk</h2>
+<p>None</p>
+<h2 id="videos">📺 Videos</h2>
+<p><em>No noteworthy new videos today.</em></p>
+<h2 id="podcasts">🎙️ Podcasts</h2>
+<p><em>No noteworthy new podcast episodes today.</em></p>
+<h2 id="apple-health">🩺 Apple Health</h2>
+<h3>Current week progress</h3>
+<p><strong>Elapsed:</strong> 2026-09-07–2026-09-12 · <strong>Coverage:</strong> 6/6 days</p>
+<p><strong>Current-week total:</strong> 36,369 steps · 2,053 kcal · 39 min exercise</p>
+<p>**Yesterday (2026-09-12): 9,907 steps · 346 kcal · 4 min exercise · RHR 73 · HRV 26</p>
+<p>🎯 Current-week workouts: <strong>0/3</strong></p>
+<p>Verified modalities: cardio 0 · strength 0 · unknown 0</p>
+<h3>Foundation decision</h3>
+<p><strong>Goal:</strong> 3 sessions/week (optional 4th in weeks 5–8).</p>
+<p><strong>Consistency:</strong> 3/4 evaluated weeks at target; progression: repeat reduced.</p>
+<p><strong>Lapse/re-entry:</strong> short lapse repeat reduced.</p>
+<p>💡 Short lapse: repeat an easy reduced foundation session; do not catch up or add advanced intensity.</p>
+<p>⚠️ No valid historical baseline for exercise minutes.</p>
+<p>⚠️ No valid historical baseline for heart rate variability.</p>
+<h3>🧠 Evidence-informed training/recovery synthesis</h3>
+<p>Yesterday’s short sleep (4.66 hours), above-baseline resting heart rate (73 bpm), and three-day HRV decline indicate reduced recovery capacity, while wrist-temperature data are insufficient and show no repeated, corroborated elevation. This complete week recorded 39 exercise minutes and no qualifying sessions versus a three-session goal; after a seven-day lapse, the deterministic state calls for repeating at reduced load, not catching up or increasing intensity.</p>
+<p>🎯 Today&#39;s action: Take one easy 20-minute walk at a conversational pace today.</p>
+<p><em>Why: This provides a low-fatigue return to intentional exercise while respecting the current recovery warnings and reduced-load foundation phase. · Limits: Today’s data are excluded; sleep is missing for several days, HRV and exercise minutes lack valid historical baselines, wrist-temperature data are insufficient, and Apple Health exercise minutes do not establish workout modality or intensity.</em></p>
+<p><em>Public framework note (researched 2026-07-26): <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fwww.hubermanlab.com%2Ftopics%2Fsleep-hygiene&section=apple-health&date=2026-09-13" target="_self" rel="noopener">Huberman Lab</a> · <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fpeterattiamd.com%2Fexercising-for-longevity%2F&section=apple-health&date=2026-09-13" target="_self" rel="noopener">Peter Attia MD</a> · <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fwww.andygalpin.com%2F55-minute-physiology&section=apple-health&date=2026-09-13" target="_self" rel="noopener">Andy Galpin</a></em></p>
+<p><strong>Completed week:</strong> 2026-08-31–2026-09-06 · <strong>Coverage:</strong> 7/7 days</p>
+<table><thead><tr>
+<th>Date</th>
+<th>Steps</th>
+<th>Sleep</th>
+<th>Exercise</th>
+<th>RHR</th>
+<th>HRV</th>
+</tr></thead><tbody>
+<tr>
+<td>2026-08-31</td>
+<td>5,425</td>
+<td>7.9h</td>
+<td>13 min</td>
+<td>75</td>
+<td>46</td>
+</tr>
+<tr>
+<td>2026-09-01</td>
+<td>10,188</td>
+<td>6.2h</td>
+<td>30 min</td>
+<td>73</td>
+<td>31</td>
+</tr>
+<tr>
+<td>2026-09-02</td>
+<td>8,391</td>
+<td>7.4h</td>
+<td>39 min</td>
+<td>68</td>
+<td>33</td>
+</tr>
+<tr>
+<td>2026-09-03</td>
+<td>7,530</td>
+<td>7.4h</td>
+<td>18 min</td>
+<td>68</td>
+<td>34</td>
+</tr>
+<tr>
+<td>2026-09-04</td>
+<td>7,197</td>
+<td>1.1h</td>
+<td>17 min</td>
+<td>76</td>
+<td>31</td>
+</tr>
+<tr>
+<td>2026-09-05</td>
+<td>8,489</td>
+<td>—</td>
+<td>26 min</td>
+<td>68</td>
+<td>38</td>
+</tr>
+<tr>
+<td>2026-09-06</td>
+<td>3,898</td>
+<td>5.9h</td>
+<td>4 min</td>
+<td>67</td>
+<td>39</td>
+</tr>
+</tbody></table>
+<table><thead><tr>
+<th>Metric</th>
+<th>Week</th>
+<th>Historical median</th>
+<th>Δ</th>
+<th>n</th>
+</tr></thead><tbody>
+<tr>
+<td>Steps</td>
+<td>51,118 steps</td>
+<td>46,316 steps</td>
+<td>+10.4%</td>
+<td>106</td>
+</tr>
+<tr>
+<td>Active Energy</td>
+<td>2,977.6 kcal</td>
+<td>3,086 kcal</td>
+<td>-3.5%</td>
+<td>98</td>
+</tr>
+<tr>
+<td>Walking Distance</td>
+<td>22.6 mi</td>
+<td>27.3 mi</td>
+<td>-17.3%</td>
+<td>106</td>
+</tr>
+<tr>
+<td>Flights Climbed</td>
+<td>36 flights</td>
+<td>83.4 flights</td>
+<td>-56.8%</td>
+<td>106</td>
+</tr>
+<tr>
+<td>Exercise Minutes</td>
+<td>147 min</td>
+<td>—</td>
+<td>—</td>
+<td>0</td>
+</tr>
+<tr>
+<td>Sleep</td>
+<td>6 h</td>
+<td>7.7 h</td>
+<td>-22.5%</td>
+<td>76</td>
+</tr>
+<tr>
+<td>Resting HR</td>
+<td>70.7 bpm</td>
+<td>63 bpm</td>
+<td>+12.2%</td>
+<td>77</td>
+</tr>
+<tr>
+<td>HRV</td>
+<td>35.9 ms</td>
+<td>—</td>
+<td>—</td>
+<td>0</td>
+</tr>
+</tbody></table>
+</main>
+<footer>
+  <p>🤖 Generated by Hermes Agent &middot; Built with ❤️</p>
+  <p>Click 👍/👎 on any story to help me learn what you like!</p>
+</footer>
+</div>
+<div id="toast" class="toast"></div>
+<script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function() {
+    navigator.serviceWorker.register('/sw.js', { scope: '/' })
+      .catch(function(error) { console.warn('SW registration failed:', error); });
+  });
+}
+</script>
+</body>
+</html>
