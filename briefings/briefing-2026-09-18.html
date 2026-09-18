@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#2563eb">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Briefing">
+<link rel="apple-touch-icon" sizes="192x192" href="/icon-192.png">
+<link rel="manifest" href="/manifest.json?key=a8x3kM9pQw2z">
+<title>Daily Briefing — Friday, September 18, 2026</title>
+<style>
+:root {
+  --bg: #fafafa;
+  --card: #ffffff;
+  --text: #1a1a2e;
+  --muted: #666;
+  --accent: #2563eb;
+  --border: #e5e7eb;
+  --success: #059669;
+  --warning: #d97706;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0f172a;
+    --card: #1e293b;
+    --text: #e2e8f0;
+    --muted: #94a3b8;
+    --accent: #60a5fa;
+    --border: #334155;
+    --success: #34d399;
+    --warning: #fbbf24;
+  }
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', Roboto, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  padding: 0;
+}
+.container {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+header {
+  text-align: center;
+  padding: 2rem 0 1rem;
+  border-bottom: 2px solid var(--accent);
+  margin-bottom: 2rem;
+}
+header h1 { font-size: 1.5rem; color: var(--accent); }
+header .date { color: var(--muted); font-size: 0.9rem; }
+h2 {
+  font-size: 1.2rem;
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
+  padding-bottom: 0.3rem;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+h3 {
+  font-size: 1.05rem;
+  margin-top: 1.25rem;
+  margin-bottom: 0.5rem;
+  color: var(--muted);
+}
+strong { font-weight: 600; }
+em { font-style: italic; }
+code {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  padding: 1px 4px;
+  font-size: 0.85em;
+  font-family: 'SF Mono', 'Fira Code', monospace;
+}
+.feedback { margin-left: auto; font-size: 0.85rem; opacity: 0.5; transition: opacity 0.2s; }
+h2:hover .feedback { opacity: 1; }
+.thumb-up, .thumb-down {
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 2px 6px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  transition: all 0.15s;
+}
+.thumb-up:hover { background: var(--success); color: white; }
+.thumb-down:hover { background: #dc2626; color: white; }
+.thumb-up.voted, .thumb-down.voted { opacity: 0.5; pointer-events: none; }
+.bookmark-btn {
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 2px 6px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  margin-left: 0.25rem;
+}
+.bookmark-btn:hover, .bookmark-btn.saved { background: var(--accent); color: white; }
+.bookmark-btn:disabled { opacity: 0.6; cursor: wait; }
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0.75rem 0;
+  font-size: 0.9rem;
+}
+th, td {
+  text-align: left;
+  padding: 6px 10px;
+  border-bottom: 1px solid var(--border);
+}
+th { font-weight: 600; color: var(--accent); }
+ul { margin: 0.5rem 0 0.5rem 1.5rem; }
+li { margin: 0.25rem 0; }
+p { margin: 0.5rem 0; }
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+.weather-summary {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1rem;
+  margin: 1rem 0;
+}
+.weather-main { font-size: 2rem; font-weight: 700; }
+.weather-detail { color: var(--muted); font-size: 0.9rem; }
+footer {
+  margin-top: 3rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border);
+  text-align: center;
+  color: var(--muted);
+  font-size: 0.8rem;
+}
+.toast {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  background: var(--accent);
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  opacity: 0;
+  transition: opacity 0.3s;
+  pointer-events: none;
+}
+.toast.show { opacity: 1; }
+</style>
+</head>
+<body>
+<div class="container">
+<header>
+  <h1>📋 Daily Briefing</h1>
+  <div class="date">Friday, September 18, 2026</div>
+  <p style="margin-top:0.5rem;font-size:0.85rem"><a href="/?key=a8x3kM9pQw2z" target="_self">📋 Previous briefings</a> · <a href="/bookmarks.html?key=a8x3kM9pQw2z" target="_self">🔖 Bookmarks</a></p>
+</header>
+<main>
+<p># Daily Briefing — Friday, September 18, 2026</p>
+<h2 id="calendar">📅 Calendar</h2>
+<p><em>Calendar unavailable</em></p>
+<h2 id="weather-wildwood-mo">🌤️ Weather — Wildwood, MO</h2>
+<table><thead><tr>
+<th>Day</th>
+<th>Condition</th>
+<th>High/Low</th>
+<th>Precip</th>
+<th>Wind</th>
+</tr></thead><tbody>
+<tr>
+<td><strong>Today</strong></td>
+<td>Sunny then Slight Chance Showers And Thunderstorms</td>
+<td>94°F / 72°F</td>
+<td>20%</td>
+<td>3 mph N</td>
+</tr>
+<tr>
+<td><strong>Tonight</strong></td>
+<td>Mostly Clear</td>
+<td>— / 72°F</td>
+<td>0%</td>
+<td>2 mph NW</td>
+</tr>
+<tr>
+<td>Saturday</td>
+<td>Mostly Sunny</td>
+<td>94°F / 72°F</td>
+<td>3%</td>
+<td>2 to 7 mph SW</td>
+</tr>
+<tr>
+<td>Sunday</td>
+<td>Partly Sunny then Slight Chance Showers And Thunderstorms</td>
+<td>91°F / 67°F</td>
+<td>19%</td>
+<td>5 mph W</td>
+</tr>
+<tr>
+<td>Monday</td>
+<td>Showers And Thunderstorms Likely</td>
+<td>79°F / 59°F</td>
+<td>69%</td>
+<td>5 mph N</td>
+</tr>
+<tr>
+<td>Tuesday</td>
+<td>Slight Chance Rain Showers then Partly Sunny</td>
+<td>71°F / 54°F</td>
+<td>24%</td>
+<td>7 mph N</td>
+</tr>
+<tr>
+<td>Wednesday</td>
+<td>Mostly Sunny</td>
+<td>73°F / 54°F</td>
+<td>2%</td>
+<td>5 mph N</td>
+</tr>
+<tr>
+<td>Thursday</td>
+<td>Mostly Sunny</td>
+<td>74°F / —</td>
+<td>5%</td>
+<td>5 mph N</td>
+</tr>
+</tbody></table>
+<p>🔥 Heat index up to <strong>106°F</strong> during the forecast period.</p>
+<h2 id="openrouter-budget">💰 OpenRouter Budget</h2>
+<h3>OpenRouter</h3>
+<p><strong>$3.91</strong> / $20.00 (19.6%) used</p>
+<p><code>███░░░░░░░░░░░░░░░░░</code></p>
+<p>📊 Daily: $0.90 · Remaining: <strong>$16.09</strong></p>
+<p>📈 ✅ On track</p>
+<h3>OpenAI Codex (separate from OpenRouter)</h3>
+<table><thead><tr>
+<th>Metric</th>
+<th>Value</th>
+</tr></thead><tbody>
+<tr>
+<td>Weekly limit used</td>
+<td><strong>16.0%</strong></td>
+</tr>
+<tr>
+<td>Weekly reset</td>
+<td>Thu 8:26 PM CT</td>
+</tr>
+<tr>
+<td>Latest session usage</td>
+<td>—</td>
+</tr>
+<tr>
+<td>Spend</td>
+<td>— (no monetary cost in local Codex data)</td>
+</tr>
+<tr>
+<td>Source/status</td>
+<td>Official Codex usage endpoint · available · 2026-09-18T10:30:28.591987+00:00</td>
+</tr>
+</tbody></table>
+<h2 id="feed-highlights">📰 Feed Highlights</h2>
+<h3>AI &amp; ML</h3>
+<ul>
+<li><span class="item-feedback" data-id="How To Write With An LLM" data-section="feed-highlights"><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fsimonwillison.net%2F2026%2FSep%2F17%2Fhow-to-write-with-an-llm%2F&section=feed-highlights&date=2026-09-18" target="_self" rel="noopener">How To Write With An LLM</a> — <em>Simon Willison</em> <button class="thumb-up" onclick="voteItem('feed-highlights','How To Write With An LLM','up')">👍</button><button class="thumb-down" onclick="voteItem('feed-highlights','How To Write With An LLM','down')">👎</button><button class="bookmark-btn" data-bookmark-url="https://simonwillison.net/2026/Sep/17/how-to-write-with-an-llm/" data-bookmark-title="How To Write With An LLM" data-bookmark-section="feed-highlights" type="button" aria-label="Bookmark this item">🔖 Bookmark</button></span></li>
+<li><span class="item-feedback" data-id="The future of practice: Enabling teachers to create learning interactives with generative UI" data-section="feed-highlights"><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fresearch.google%2Fblog%2Fthe-future-of-practice-enabling-teachers-to-create-learning-interactives-with-generative-ui%2F&section=feed-highlights&date=2026-09-18" target="_self" rel="noopener">The future of practice: Enabling teachers to create learning interactives with generative UI</a> — <em>Google Research</em> <button class="thumb-up" onclick="voteItem('feed-highlights','The future of practice: Enabling teachers to create learning interactives with generative UI','up')">👍</button><button class="thumb-down" onclick="voteItem('feed-highlights','The future of practice: Enabling teachers to create learning interactives with generative UI','down')">👎</button><button class="bookmark-btn" data-bookmark-url="https://research.google/blog/the-future-of-practice-enabling-teachers-to-create-learning-interactives-with-generative-ui/" data-bookmark-title="The future of practice: Enabling teachers to create learning interactives with generative UI" data-bookmark-section="feed-highlights" type="button" aria-label="Bookmark this item">🔖 Bookmark</button></span></li>
+</ul>
+<h3>Technology</h3>
+<ul>
+<li><span class="item-feedback" data-id="Iran strikes on Amazon data centers caused permanent loss of customer data" data-section="feed-highlights"><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Farstechnica.com%2Fgadgets%2F2026%2F09%2Firan-strikes-on-amazon-data-centers-caused-permanent-loss-of-customer-data%2F&section=feed-highlights&date=2026-09-18" target="_self" rel="noopener">Iran strikes on Amazon data centers caused permanent loss of customer data</a> — <em>Ars Technica</em> <button class="thumb-up" onclick="voteItem('feed-highlights','Iran strikes on Amazon data centers caused permanent loss of customer data','up')">👍</button><button class="thumb-down" onclick="voteItem('feed-highlights','Iran strikes on Amazon data centers caused permanent loss of customer data','down')">👎</button><button class="bookmark-btn" data-bookmark-url="https://arstechnica.com/gadgets/2026/09/iran-strikes-on-amazon-data-centers-caused-permanent-loss-of-customer-data/" data-bookmark-title="Iran strikes on Amazon data centers caused permanent loss of customer data" data-bookmark-section="feed-highlights" type="button" aria-label="Bookmark this item">🔖 Bookmark</button></span></li>
+</ul>
+<h3>Agriculture &amp; Food Systems</h3>
+<ul>
+<li><span class="item-feedback" data-id="Beef, pork export sales rise, while corn, soybeans fall" data-section="feed-highlights"><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fwww.brownfieldagnews.com%2Fnews%2Fbeef-pork-export-sales-rise-while-corn-soybeans-fall%2F&section=feed-highlights&date=2026-09-18" target="_self" rel="noopener">Beef, pork export sales rise, while corn, soybeans fall</a> — <em>Brownfield Ag News</em> <button class="thumb-up" onclick="voteItem('feed-highlights','Beef, pork export sales rise, while corn, soybeans fall','up')">👍</button><button class="thumb-down" onclick="voteItem('feed-highlights','Beef, pork export sales rise, while corn, soybeans fall','down')">👎</button><button class="bookmark-btn" data-bookmark-url="https://www.brownfieldagnews.com/news/beef-pork-export-sales-rise-while-corn-soybeans-fall/" data-bookmark-title="Beef, pork export sales rise, while corn, soybeans fall" data-bookmark-section="feed-highlights" type="button" aria-label="Bookmark this item">🔖 Bookmark</button></span></li>
+<li><span class="item-feedback" data-id="Soybeans end session mixed as corn, wheat see profit taking" data-section="feed-highlights"><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fwww.brownfieldagnews.com%2Fmarket-news%2Fsoybeans-end-session-mixed-as-corn-wheat-see-profit-taking%2F&section=feed-highlights&date=2026-09-18" target="_self" rel="noopener">Soybeans end session mixed as corn, wheat see profit taking</a> — <em>Brownfield Ag News</em> <button class="thumb-up" onclick="voteItem('feed-highlights','Soybeans end session mixed as corn, wheat see profit taking','up')">👍</button><button class="thumb-down" onclick="voteItem('feed-highlights','Soybeans end session mixed as corn, wheat see profit taking','down')">👎</button><button class="bookmark-btn" data-bookmark-url="https://www.brownfieldagnews.com/market-news/soybeans-end-session-mixed-as-corn-wheat-see-profit-taking/" data-bookmark-title="Soybeans end session mixed as corn, wheat see profit taking" data-bookmark-section="feed-highlights" type="button" aria-label="Bookmark this item">🔖 Bookmark</button></span></li>
+<li><span class="item-feedback" data-id="John Deere sees farm data and AI as a major way forward" data-section="feed-highlights"><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fwww.agdaily.com%2Ftechnology%2Fjohn-deere-sees-farm-data-ai-major-way-forward%2F&section=feed-highlights&date=2026-09-18" target="_self" rel="noopener">John Deere sees farm data and AI as a major way forward</a> — <em>AGDaily</em> <button class="thumb-up" onclick="voteItem('feed-highlights','John Deere sees farm data and AI as a major way forward','up')">👍</button><button class="thumb-down" onclick="voteItem('feed-highlights','John Deere sees farm data and AI as a major way forward','down')">👎</button><button class="bookmark-btn" data-bookmark-url="https://www.agdaily.com/technology/john-deere-sees-farm-data-ai-major-way-forward/" data-bookmark-title="John Deere sees farm data and AI as a major way forward" data-bookmark-section="feed-highlights" type="button" aria-label="Bookmark this item">🔖 Bookmark</button></span></li>
+</ul>
+<h2 id="hacker-news">🔥 Hacker News</h2>
+<p>1. <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fopenjev.com%2F&section=hacker-news&date=2026-09-18" target="_self" rel="noopener">OpenJev</a> — <strong>50</strong> pts by ilreb (<a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fnews.ycombinator.com%2Fitem%3Fid%3D49752041&section=hacker-news&date=2026-09-18" target="_self" rel="noopener">12 comments</a>)</p>
+<p>2. <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fgithub.com%2Fjemalloc%2Fjemalloc%2Freleases%2Ftag%2F5.4.0&section=hacker-news&date=2026-09-18" target="_self" rel="noopener">Jemalloc 5.4.0</a> — <strong>156</strong> pts by gkfasdfasdf (<a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fnews.ycombinator.com%2Fitem%3Fid%3D49750152&section=hacker-news&date=2026-09-18" target="_self" rel="noopener">44 comments</a>)</p>
+<p>3. <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Ffex-emu.com%2FScourge-of-emulation%2F&section=hacker-news&date=2026-09-18" target="_self" rel="noopener">The scourge of x86 emulation</a> — <strong>153</strong> pts by dagmx (<a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fnews.ycombinator.com%2Fitem%3Fid%3D49750094&section=hacker-news&date=2026-09-18" target="_self" rel="noopener">27 comments</a>)</p>
+<p>4. <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fopenai.com%2Findex%2Fastra-for-law%2F&section=hacker-news&date=2026-09-18" target="_self" rel="noopener">Astra for Law</a> — <strong>496</strong> pts by vertigoruntime (<a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fnews.ycombinator.com%2Fitem%3Fid%3D49745940&section=hacker-news&date=2026-09-18" target="_self" rel="noopener">571 comments</a>)</p>
+<p>5. <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fprismml.com%2Fnews%2Fbonsai-2-27b&section=hacker-news&date=2026-09-18" target="_self" rel="noopener">Bonsai 2 27B: Near-Lossless Compression in a 9x Smaller Footprint</a> — <strong>459</strong> pts by JonSchneider (<a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fnews.ycombinator.com%2Fitem%3Fid%3D49746618&section=hacker-news&date=2026-09-18" target="_self" rel="noopener">134 comments</a>)</p>
+<h2 id="r-hermesagent">🤖 r/hermesagent</h2>
+<p><em>No new r/hermesagent threads.</em></p>
+<h2 id="hermes-agent-highlights">🤖 Hermes &amp; Agent Highlights</h2>
+<p><em>No verified highlights today.</em></p>
+<h2 id="targeted-search-highlights">𝕏 Targeted Search Highlights</h2>
+<p><em>X search unavailable.</em></p>
+<h2 id="agtalk-crop-talk">🌾 AgTalk Crop Talk</h2>
+<p>None</p>
+<h2 id="videos">📺 Videos</h2>
+<p>📺 <strong>New Hermes &amp; Copilot Videos</strong> — Top picks from the last 14 days</p>
+<ul>
+<li><span class="item-feedback" data-id="&lt;strong&gt;[Testing Orca: Installation" data-section="videos"><strong><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fyoutu.be%2FTg-6_3iFYPs&section=videos&date=2026-09-18" target="_self" rel="noopener">Testing Orca: Installation, Setup, Worktrees, &amp;amp; Design Mode</a></strong> 🎙️ <button class="thumb-up" onclick="voteItem('videos','&lt;strong&gt;[Testing Orca: Installation','up')">👍</button><button class="thumb-down" onclick="voteItem('videos','&lt;strong&gt;[Testing Orca: Installation','down')">👎</button><button class="bookmark-btn" data-bookmark-url="https://youtu.be/Tg-63iFYPs" data-bookmark-title="Testing Orca: Installation, Setup, Worktrees, &amp; Design Mode" data-bookmark-section="videos" type="button" aria-label="Bookmark this item">🔖 Bookmark</button></span></li>
+</ul>
+<p>Tonbi&#39;s AI Garage · 23m · 25,471 views · ❤️ 245</p>
+<p>🔬 Deep Dive</p>
+<p>📝 [ASR captions available — can summarize with LLM]</p>
+<ul>
+<li><span class="item-feedback" data-id="&lt;strong&gt;[What if you could customize you" data-section="videos"><strong><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fyoutu.be%2FojQu4RwvvIA&section=videos&date=2026-09-18" target="_self" rel="noopener">What if you could customize your agent from a Chat Window</a></strong> 🎙️ <button class="thumb-up" onclick="voteItem('videos','&lt;strong&gt;[What if you could customize you','up')">👍</button><button class="thumb-down" onclick="voteItem('videos','&lt;strong&gt;[What if you could customize you','down')">👎</button><button class="bookmark-btn" data-bookmark-url="https://youtu.be/ojQu4RwvvIA" data-bookmark-title="What if you could customize your agent from a Chat Window" data-bookmark-section="videos" type="button" aria-label="Bookmark this item">🔖 Bookmark</button></span></li>
+</ul>
+<p>Microsoft Developer · 9m · 3,873 views · ❤️ 16</p>
+<p>🏗️ Skills</p>
+<p>📝 [ASR captions available — can summarize with LLM]</p>
+<h2 id="podcasts">🎙️ Podcasts</h2>
+<p>🎙️ <strong>New Hermes &amp; Copilot Podcast Episodes</strong> — Top picks from the last 3 days</p>
+<ul>
+<li><span class="item-feedback" data-id="&lt;strong&gt;[Genspark&#39;s Bet: AI Agents Becom" data-section="podcasts"><strong><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Ffeeds.transistor.fm%2Fchain-of-thought&section=podcasts&date=2026-09-18" target="_self" rel="noopener">Genspark&amp;#39;s Bet: AI Agents Become the Users of Software</a></strong> <button class="thumb-up" onclick="voteItem('podcasts','&lt;strong&gt;[Genspark&#39;s Bet: AI Agents Becom','up')">👍</button><button class="thumb-down" onclick="voteItem('podcasts','&lt;strong&gt;[Genspark&#39;s Bet: AI Agents Becom','down')">👎</button><button class="bookmark-btn" data-bookmark-url="https://feeds.transistor.fm/chain-of-thought" data-bookmark-title="Genspark&#39;s Bet: AI Agents Become the Users of Software" data-bookmark-section="podcasts" type="button" aria-label="Bookmark this item">🔖 Bookmark</button></span></li>
+</ul>
+<p>Chain of Thought | AI Agents, Infrastructure &amp; Engineering · 61m</p>
+<h2 id="apple-health">🩺 Apple Health</h2>
+<p><em>Health data unavailable (GAPI parse error)</em></p>
+</main>
+<footer>
+  <p>🤖 Generated by Hermes Agent &middot; Built with ❤️</p>
+  <p>Click 👍/👎 on any story to help me learn what you like!</p>
+</footer>
+</div>
+<div id="toast" class="toast"></div>
+<script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function() {
+    navigator.serviceWorker.register('/sw.js', { scope: '/' })
+      .catch(function(error) { console.warn('SW registration failed:', error); });
+  });
+}
+</script>
+</body>
+</html>
