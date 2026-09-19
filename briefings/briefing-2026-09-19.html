@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#2563eb">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Briefing">
+<link rel="apple-touch-icon" sizes="192x192" href="/icon-192.png">
+<link rel="manifest" href="/manifest.json?key=a8x3kM9pQw2z">
+<title>Daily Briefing — Saturday, September 19, 2026</title>
+<style>
+:root {
+  --bg: #fafafa;
+  --card: #ffffff;
+  --text: #1a1a2e;
+  --muted: #666;
+  --accent: #2563eb;
+  --border: #e5e7eb;
+  --success: #059669;
+  --warning: #d97706;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0f172a;
+    --card: #1e293b;
+    --text: #e2e8f0;
+    --muted: #94a3b8;
+    --accent: #60a5fa;
+    --border: #334155;
+    --success: #34d399;
+    --warning: #fbbf24;
+  }
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', Roboto, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  padding: 0;
+}
+.container {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+header {
+  text-align: center;
+  padding: 2rem 0 1rem;
+  border-bottom: 2px solid var(--accent);
+  margin-bottom: 2rem;
+}
+header h1 { font-size: 1.5rem; color: var(--accent); }
+header .date { color: var(--muted); font-size: 0.9rem; }
+h2 {
+  font-size: 1.2rem;
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
+  padding-bottom: 0.3rem;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+h3 {
+  font-size: 1.05rem;
+  margin-top: 1.25rem;
+  margin-bottom: 0.5rem;
+  color: var(--muted);
+}
+strong { font-weight: 600; }
+em { font-style: italic; }
+code {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  padding: 1px 4px;
+  font-size: 0.85em;
+  font-family: 'SF Mono', 'Fira Code', monospace;
+}
+.feedback { margin-left: auto; font-size: 0.85rem; opacity: 0.5; transition: opacity 0.2s; }
+h2:hover .feedback { opacity: 1; }
+.thumb-up, .thumb-down {
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 2px 6px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  transition: all 0.15s;
+}
+.thumb-up:hover { background: var(--success); color: white; }
+.thumb-down:hover { background: #dc2626; color: white; }
+.thumb-up.voted, .thumb-down.voted { opacity: 0.5; pointer-events: none; }
+.bookmark-btn {
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 2px 6px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  margin-left: 0.25rem;
+}
+.bookmark-btn:hover, .bookmark-btn.saved { background: var(--accent); color: white; }
+.bookmark-btn:disabled { opacity: 0.6; cursor: wait; }
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0.75rem 0;
+  font-size: 0.9rem;
+}
+th, td {
+  text-align: left;
+  padding: 6px 10px;
+  border-bottom: 1px solid var(--border);
+}
+th { font-weight: 600; color: var(--accent); }
+ul { margin: 0.5rem 0 0.5rem 1.5rem; }
+li { margin: 0.25rem 0; }
+p { margin: 0.5rem 0; }
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+.weather-summary {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1rem;
+  margin: 1rem 0;
+}
+.weather-main { font-size: 2rem; font-weight: 700; }
+.weather-detail { color: var(--muted); font-size: 0.9rem; }
+footer {
+  margin-top: 3rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border);
+  text-align: center;
+  color: var(--muted);
+  font-size: 0.8rem;
+}
+.toast {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  background: var(--accent);
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  opacity: 0;
+  transition: opacity 0.3s;
+  pointer-events: none;
+}
+.toast.show { opacity: 1; }
+</style>
+</head>
+<body>
+<div class="container">
+<header>
+  <h1>📋 Daily Briefing</h1>
+  <div class="date">Saturday, September 19, 2026</div>
+  <p style="margin-top:0.5rem;font-size:0.85rem"><a href="/?key=a8x3kM9pQw2z" target="_self">📋 Previous briefings</a> · <a href="/bookmarks.html?key=a8x3kM9pQw2z" target="_self">🔖 Bookmarks</a></p>
+</header>
+<main>
+<p># Daily Briefing — Saturday, September 19, 2026</p>
+<h2 id="calendar">📅 Calendar</h2>
+<p><em>Calendar unavailable</em></p>
+<h2 id="weather-wildwood-mo">🌤️ Weather — Wildwood, MO</h2>
+<table><thead><tr>
+<th>Day</th>
+<th>Condition</th>
+<th>High/Low</th>
+<th>Precip</th>
+<th>Wind</th>
+</tr></thead><tbody>
+<tr>
+<td><strong>Today</strong></td>
+<td>Mostly Sunny</td>
+<td>97°F / 74°F</td>
+<td>5%</td>
+<td>6 mph SW</td>
+</tr>
+<tr>
+<td><strong>Tonight</strong></td>
+<td>Mostly Clear</td>
+<td>— / 74°F</td>
+<td>2%</td>
+<td>3 mph S</td>
+</tr>
+<tr>
+<td>Sunday</td>
+<td>Chance Rain Showers then Slight Chance Showers And Thunderstorms</td>
+<td>91°F / 67°F</td>
+<td>37%</td>
+<td>3 mph W</td>
+</tr>
+<tr>
+<td>Monday</td>
+<td>Showers And Thunderstorms Likely</td>
+<td>77°F / 59°F</td>
+<td>69%</td>
+<td>6 mph NE</td>
+</tr>
+<tr>
+<td>Tuesday</td>
+<td>Slight Chance Rain Showers then Partly Sunny</td>
+<td>69°F / 54°F</td>
+<td>22%</td>
+<td>7 mph N</td>
+</tr>
+<tr>
+<td>Wednesday</td>
+<td>Mostly Sunny</td>
+<td>72°F / 55°F</td>
+<td>1%</td>
+<td>6 mph N</td>
+</tr>
+<tr>
+<td>Thursday</td>
+<td>Mostly Sunny</td>
+<td>75°F / 57°F</td>
+<td>1%</td>
+<td>5 mph N</td>
+</tr>
+<tr>
+<td>Friday</td>
+<td>Partly Sunny</td>
+<td>75°F / —</td>
+<td>9%</td>
+<td>5 mph NE</td>
+</tr>
+</tbody></table>
+<p>🔥 Heat index up to <strong>100°F</strong> during the forecast period.</p>
+<h2 id="openrouter-budget">💰 OpenRouter Budget</h2>
+<h3>OpenRouter</h3>
+<p><strong>$4.75</strong> / $20.00 (23.8%) used</p>
+<p><code>████░░░░░░░░░░░░░░░░</code></p>
+<p>📊 Daily: $0.00 · Remaining: <strong>$15.25</strong></p>
+<p>📈 ✅ On track</p>
+<h3>OpenAI Codex (separate from OpenRouter)</h3>
+<table><thead><tr>
+<th>Metric</th>
+<th>Value</th>
+</tr></thead><tbody>
+<tr>
+<td>Weekly limit used</td>
+<td><strong>54.0%</strong></td>
+</tr>
+<tr>
+<td>Weekly reset</td>
+<td>Thu 8:26 PM CT</td>
+</tr>
+<tr>
+<td>Latest session usage</td>
+<td>—</td>
+</tr>
+<tr>
+<td>Spend</td>
+<td>— (no monetary cost in local Codex data)</td>
+</tr>
+<tr>
+<td>Source/status</td>
+<td>Official Codex usage endpoint · available · 2026-09-19T10:31:34.923404+00:00</td>
+</tr>
+</tbody></table>
+<h2 id="feed-highlights">📰 Feed Highlights</h2>
+<h3>AI &amp; ML</h3>
+<ul>
+<li><span class="item-feedback" data-id="MilleMiglia: A realistic instance generator for middle-mile logistics" data-section="feed-highlights"><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fresearch.google%2Fblog%2Fmillemiglia-a-realistic-instance-generator-for-middle-mile-logistics%2F&section=feed-highlights&date=2026-09-19" target="_self" rel="noopener">MilleMiglia: A realistic instance generator for middle-mile logistics</a> — <em>Google Research</em> <button class="thumb-up" onclick="voteItem('feed-highlights','MilleMiglia: A realistic instance generator for middle-mile logistics','up')">👍</button><button class="thumb-down" onclick="voteItem('feed-highlights','MilleMiglia: A realistic instance generator for middle-mile logistics','down')">👎</button><button class="bookmark-btn" data-bookmark-url="https://research.google/blog/millemiglia-a-realistic-instance-generator-for-middle-mile-logistics/" data-bookmark-title="MilleMiglia: A realistic instance generator for middle-mile logistics" data-bookmark-section="feed-highlights" type="button" aria-label="Bookmark this item">🔖 Bookmark</button></span></li>
+<li><span class="item-feedback" data-id="Gemini Hacked Three Companies in First Known Breakout by Google’s AI" data-section="feed-highlights"><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fsimonwillison.net%2F2026%2FSep%2F18%2Fgemini-hacked-three-companies%2F&section=feed-highlights&date=2026-09-19" target="_self" rel="noopener">Gemini Hacked Three Companies in First Known Breakout by Google’s AI</a> — <em>Simon Willison</em> <button class="thumb-up" onclick="voteItem('feed-highlights','Gemini Hacked Three Companies in First Known Breakout by Google’s AI','up')">👍</button><button class="thumb-down" onclick="voteItem('feed-highlights','Gemini Hacked Three Companies in First Known Breakout by Google’s AI','down')">👎</button><button class="bookmark-btn" data-bookmark-url="https://simonwillison.net/2026/Sep/18/gemini-hacked-three-companies/" data-bookmark-title="Gemini Hacked Three Companies in First Known Breakout by Google’s AI" data-bookmark-section="feed-highlights" type="button" aria-label="Bookmark this item">🔖 Bookmark</button></span></li>
+</ul>
+<h3>Technology</h3>
+<ul>
+<li><span class="item-feedback" data-id="Researchers used Claude to hack OpenAI" data-section="feed-highlights"><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Farstechnica.com%2Fai%2F2026%2F09%2Fresearchers-used-claude-to-hack-openai%2F&section=feed-highlights&date=2026-09-19" target="_self" rel="noopener">Researchers used Claude to hack OpenAI</a> — <em>Ars Technica</em> <button class="thumb-up" onclick="voteItem('feed-highlights','Researchers used Claude to hack OpenAI','up')">👍</button><button class="thumb-down" onclick="voteItem('feed-highlights','Researchers used Claude to hack OpenAI','down')">👎</button><button class="bookmark-btn" data-bookmark-url="https://arstechnica.com/ai/2026/09/researchers-used-claude-to-hack-openai/" data-bookmark-title="Researchers used Claude to hack OpenAI" data-bookmark-section="feed-highlights" type="button" aria-label="Bookmark this item">🔖 Bookmark</button></span></li>
+</ul>
+<h3>Agriculture &amp; Food Systems</h3>
+<ul>
+<li><span class="item-feedback" data-id="NFU says farm bill needs stronger safety net for farmers" data-section="feed-highlights"><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fwww.brownfieldagnews.com%2Fnews%2Fnfu-says-farm-bill-needs-stronger-safety-net-for-farmers%2F&section=feed-highlights&date=2026-09-19" target="_self" rel="noopener">NFU says farm bill needs stronger safety net for farmers</a> — <em>Brownfield Ag News</em> <button class="thumb-up" onclick="voteItem('feed-highlights','NFU says farm bill needs stronger safety net for farmers','up')">👍</button><button class="thumb-down" onclick="voteItem('feed-highlights','NFU says farm bill needs stronger safety net for farmers','down')">👎</button><button class="bookmark-btn" data-bookmark-url="https://www.brownfieldagnews.com/news/nfu-says-farm-bill-needs-stronger-safety-net-for-farmers/" data-bookmark-title="NFU says farm bill needs stronger safety net for farmers" data-bookmark-section="feed-highlights" type="button" aria-label="Bookmark this item">🔖 Bookmark</button></span></li>
+<li><span class="item-feedback" data-id="New report shows that the equipment industry needs more technicians" data-section="feed-highlights"><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fwww.agdaily.com%2Fnews%2Fthe-equipment-industry-needs-more-technicians%2F&section=feed-highlights&date=2026-09-19" target="_self" rel="noopener">New report shows that the equipment industry needs more technicians</a> — <em>AGDaily</em> <button class="thumb-up" onclick="voteItem('feed-highlights','New report shows that the equipment industry needs more technicians','up')">👍</button><button class="thumb-down" onclick="voteItem('feed-highlights','New report shows that the equipment industry needs more technicians','down')">👎</button><button class="bookmark-btn" data-bookmark-url="https://www.agdaily.com/news/the-equipment-industry-needs-more-technicians/" data-bookmark-title="New report shows that the equipment industry needs more technicians" data-bookmark-section="feed-highlights" type="button" aria-label="Bookmark this item">🔖 Bookmark</button></span></li>
+</ul>
+<h3>Cooking</h3>
+<ul>
+<li><span class="item-feedback" data-id="Macro Bowls" data-section="feed-highlights"><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fwww.101cookbooks.com%2Fmacro-bowls%2F&section=feed-highlights&date=2026-09-19" target="_self" rel="noopener">Macro Bowls</a> — <em>101 Cookbooks</em> <button class="thumb-up" onclick="voteItem('feed-highlights','Macro Bowls','up')">👍</button><button class="thumb-down" onclick="voteItem('feed-highlights','Macro Bowls','down')">👎</button><button class="bookmark-btn" data-bookmark-url="https://www.101cookbooks.com/macro-bowls/" data-bookmark-title="Macro Bowls" data-bookmark-section="feed-highlights" type="button" aria-label="Bookmark this item">🔖 Bookmark</button></span></li>
+</ul>
+<h2 id="hacker-news">🔥 Hacker News</h2>
+<p>1. <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fjohn.hartnup.uk%2F2026%2F06%2F07%2Fai-event-posters.html&section=hacker-news&date=2026-09-19" target="_self" rel="noopener">AI-generated posters don’t have to be horrible</a> — <strong>60</strong> pts by ereiamjh (<a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fnews.ycombinator.com%2Fitem%3Fid%3D49764791&section=hacker-news&date=2026-09-19" target="_self" rel="noopener">30 comments</a>)</p>
+<p>2. <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fmed.stanford.edu%2Fnews%2Fall-news%2F2026%2F09%2Ftwo-separate-brains.html&section=hacker-news&date=2026-09-19" target="_self" rel="noopener">Human brain is two separate organs, Stanford Medicine-led research finds</a> — <strong>239</strong> pts by emigre (<a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fnews.ycombinator.com%2Fitem%3Fid%3D49763697&section=hacker-news&date=2026-09-19" target="_self" rel="noopener">103 comments</a>)</p>
+<p>3. <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fterrytao.wordpress.com%2F2026%2F09%2F18%2Fif-math-is-more-than-proof-we-need-to-better-celebrate-the-rest-of-it%2F&section=hacker-news&date=2026-09-19" target="_self" rel="noopener">If math is more than proof, we need to better celebrate the rest of it</a> — <strong>102</strong> pts by num42 (<a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fnews.ycombinator.com%2Fitem%3Fid%3D49763928&section=hacker-news&date=2026-09-19" target="_self" rel="noopener">71 comments</a>)</p>
+<p>4. <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fwww.prinzai.com%2Fp%2Fgpt-6-astra-solves-a-wwi-german-radio&section=hacker-news&date=2026-09-19" target="_self" rel="noopener">GPT-6 Astra Solves a WWI German Radio Cipher</a> — <strong>120</strong> pts by nsoonhui (<a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fnews.ycombinator.com%2Fitem%3Fid%3D49763987&section=hacker-news&date=2026-09-19" target="_self" rel="noopener">58 comments</a>)</p>
+<p>5. <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fgrapheneos.social%2F%40GrapheneOS%2F117282080803799576&section=hacker-news&date=2026-09-19" target="_self" rel="noopener">Android 17 is the first since 3.x to add new APIs without releasing to the AOSP</a> — <strong>849</strong> pts by theanonymousone (<a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fnews.ycombinator.com%2Fitem%3Fid%3D49758736&section=hacker-news&date=2026-09-19" target="_self" rel="noopener">417 comments</a>)</p>
+<h2 id="r-hermesagent">🤖 r/hermesagent</h2>
+<p>1. <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fwww.reddit.com%2Fr%2Fhermesagent%2Fcomments%2F1wjy1fs%2Fopen_source_locally_hosted_crossdomain_calculator%2F&section=r-hermesagent&date=2026-09-19" target="_self" rel="noopener">Open source locally hosted cross-domain \\</a> — <strong>81</strong> pts · 10 comments</p>
+<p>2. <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fwww.reddit.com%2Fr%2Fhermesagent%2Fcomments%2F1wjvnd6%2Fbots_vs_profiles_in_hermes_explained_without_the%2F&section=r-hermesagent&date=2026-09-19" target="_self" rel="noopener">Bots vs profiles in Hermes, explained without the architecture lecture</a> — <strong>69</strong> pts · 15 comments</p>
+<p>3. <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fwww.reddit.com%2Fr%2Fhermesagent%2Fcomments%2F1wk2q5e%2Fwhy_would_you_have_hermes_delegate_work_to_other%2F&section=r-hermesagent&date=2026-09-19" target="_self" rel="noopener">Why would you have Hermes delegate work to other harnesses?</a> — <strong>20</strong> pts · 30 comments</p>
+<h2 id="hermes-agent-highlights">🤖 Hermes &amp; Agent Highlights</h2>
+<p><em>No verified highlights today.</em></p>
+<h2 id="targeted-search-highlights">𝕏 Targeted Search Highlights</h2>
+<p><em>X search unavailable.</em></p>
+<h2 id="agtalk-crop-talk">🌾 AgTalk Crop Talk</h2>
+<p>None</p>
+<h2 id="videos">📺 Videos</h2>
+<p>📺 <strong>New Hermes &amp; Copilot Videos</strong> — Top picks from the last 14 days</p>
+<ul>
+<li><span class="item-feedback" data-id="&lt;strong&gt;[First Look at DeepSeek-V4.1-Fla" data-section="videos"><strong><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fyoutu.be%2FApKxwKEDMXU&section=videos&date=2026-09-19" target="_self" rel="noopener">First Look at DeepSeek-V4.1-Flash: Cheap, Effective, &amp;amp; Open Weights</a></strong> 🎙️ <button class="thumb-up" onclick="voteItem('videos','&lt;strong&gt;[First Look at DeepSeek-V4.1-Fla','up')">👍</button><button class="thumb-down" onclick="voteItem('videos','&lt;strong&gt;[First Look at DeepSeek-V4.1-Fla','down')">👎</button><button class="bookmark-btn" data-bookmark-url="https://youtu.be/ApKxwKEDMXU" data-bookmark-title="First Look at DeepSeek-V4.1-Flash: Cheap, Effective, &amp; Open Weights" data-bookmark-section="videos" type="button" aria-label="Bookmark this item">🔖 Bookmark</button></span></li>
+</ul>
+<p>Tonbi&#39;s AI Garage · 20m · 10,482 views · ❤️ 79</p>
+<p>🔬 Deep Dive</p>
+<p>📝 [ASR captions available — can summarize with LLM]</p>
+<ul>
+<li><span class="item-feedback" data-id="&lt;strong&gt;[Dream it" data-section="videos"><strong><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fyoutu.be%2F2dy2hFR3-q4&section=videos&date=2026-09-19" target="_self" rel="noopener">Dream it, Build it, Ship it! | GitHub Copilot Day</a></strong> 🎙️ <button class="thumb-up" onclick="voteItem('videos','&lt;strong&gt;[Dream it','up')">👍</button><button class="thumb-down" onclick="voteItem('videos','&lt;strong&gt;[Dream it','down')">👎</button><button class="bookmark-btn" data-bookmark-url="https://youtu.be/2dy2hFR3-q4" data-bookmark-title="Dream it, Build it, Ship it! | GitHub Copilot Day" data-bookmark-section="videos" type="button" aria-label="Bookmark this item">🔖 Bookmark</button></span></li>
+</ul>
+<p>GitHub · 29m · 3,867 views · ❤️ 39</p>
+<p>🔬 Deep Dive</p>
+<p>📝 [ASR captions available — can summarize with LLM]</p>
+<ul>
+<li><span class="item-feedback" data-id="&lt;strong&gt;[Hermes Desktop Masterclass: 3. " data-section="videos"><strong><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fyoutu.be%2FO3tDjW3hHIA&section=videos&date=2026-09-19" target="_self" rel="noopener">Hermes Desktop Masterclass: 3. Plugins, Kanban, Bot Mode &amp;amp; Pets</a></strong> 🎙️ <button class="thumb-up" onclick="voteItem('videos','&lt;strong&gt;[Hermes Desktop Masterclass: 3. ','up')">👍</button><button class="thumb-down" onclick="voteItem('videos','&lt;strong&gt;[Hermes Desktop Masterclass: 3. ','down')">👎</button><button class="bookmark-btn" data-bookmark-url="https://youtu.be/O3tDjW3hHIA" data-bookmark-title="Hermes Desktop Masterclass: 3. Plugins, Kanban, Bot Mode &amp; Pets" data-bookmark-section="videos" type="button" aria-label="Bookmark this item">🔖 Bookmark</button></span></li>
+</ul>
+<p>Tonbi&#39;s AI Garage · 30m · 4,491 views · ❤️ 96</p>
+<p>🔬 Deep Dive</p>
+<p>📝 [ASR captions available — can summarize with LLM]</p>
+<ul>
+<li><span class="item-feedback" data-id="&lt;strong&gt;[Agent-Run Business from Zero: 4" data-section="videos"><strong><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fyoutu.be%2Fd00Y8IAWDwo&section=videos&date=2026-09-19" target="_self" rel="noopener">Agent-Run Business from Zero: 4. Wiring Up Shopify &amp;amp; External Providers</a></strong> <button class="thumb-up" onclick="voteItem('videos','&lt;strong&gt;[Agent-Run Business from Zero: 4','up')">👍</button><button class="thumb-down" onclick="voteItem('videos','&lt;strong&gt;[Agent-Run Business from Zero: 4','down')">👎</button><button class="bookmark-btn" data-bookmark-url="https://youtu.be/d00Y8IAWDwo" data-bookmark-title="Agent-Run Business from Zero: 4. Wiring Up Shopify &amp; External Providers" data-bookmark-section="videos" type="button" aria-label="Bookmark this item">🔖 Bookmark</button></span></li>
+</ul>
+<p>Tonbi&#39;s AI Garage · 1h3m · 2,265 views · ❤️ 28</p>
+<p>🔬 Deep Dive</p>
+<h2 id="podcasts">🎙️ Podcasts</h2>
+<p><em>No noteworthy new podcast episodes today.</em></p>
+<h2 id="books">📚 Books</h2>
+<p><strong>📖 Currently Reading:</strong></p>
+<ul>
+<li><span class="item-feedback" data-id="Morning Star (Red Rising" data-section="books">Morning Star (Red Rising, #3)* — Pierce Brown <button class="thumb-up" onclick="voteItem('books','Morning Star (Red Rising','up')">👍</button><button class="thumb-down" onclick="voteItem('books','Morning Star (Red Rising','down')">👎</button></span></li>
+</ul>
+<p><strong>🆕 New &amp; Notable in Your Genres:</strong></p>
+<p>*Trending in your genres:*</p>
+<ul>
+<li><span class="item-feedback" data-id="I Punched an Alien and Now We&amp;apos;re in" data-section="books">I Punched an Alien and Now We&amp;apos;re in Couples Therapy* — Kimberly Lemming (Sci-Fi) <button class="thumb-up" onclick="voteItem('books','I Punched an Alien and Now We&amp;apos;re in','up')">👍</button><button class="thumb-down" onclick="voteItem('books','I Punched an Alien and Now We&amp;apos;re in','down')">👎</button></span></li>
+<li><span class="item-feedback" data-id="The Jewel and the Comet (Tales of Nigh-S" data-section="books">The Jewel and the Comet (Tales of Nigh-Space #2)* — Tim Pratt (Sci-Fi) <button class="thumb-up" onclick="voteItem('books','The Jewel and the Comet (Tales of Nigh-S','up')">👍</button><button class="thumb-down" onclick="voteItem('books','The Jewel and the Comet (Tales of Nigh-S','down')">👎</button></span></li>
+<li><span class="item-feedback" data-id="Space Shield: The Wrath of the Sun (Sci-" data-section="books">Space Shield: The Wrath of the Sun (Sci-Fi Galaxy Series, #3)* — Jeremy  Clift (Sci-Fi) <button class="thumb-up" onclick="voteItem('books','Space Shield: The Wrath of the Sun (Sci-','up')">👍</button><button class="thumb-down" onclick="voteItem('books','Space Shield: The Wrath of the Sun (Sci-','down')">👎</button></span></li>
+<li><span class="item-feedback" data-id="Moss&amp;apos;d in Space (Moss&amp;apos;d in Spa" data-section="books">Moss&amp;apos;d in Space (Moss&amp;apos;d in Space, #1)* — Rebecca Thorne (Sci-Fi) <button class="thumb-up" onclick="voteItem('books','Moss&amp;apos;d in Space (Moss&amp;apos;d in Spa','up')">👍</button><button class="thumb-down" onclick="voteItem('books','Moss&amp;apos;d in Space (Moss&amp;apos;d in Spa','down')">👎</button></span></li>
+</ul>
+<h2 id="apple-health">🩺 Apple Health</h2>
+<p><em>Health data unavailable (GAPI parse error)</em></p>
+</main>
+<footer>
+  <p>🤖 Generated by Hermes Agent &middot; Built with ❤️</p>
+  <p>Click 👍/👎 on any story to help me learn what you like!</p>
+</footer>
+</div>
+<div id="toast" class="toast"></div>
+<script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function() {
+    navigator.serviceWorker.register('/sw.js', { scope: '/' })
+      .catch(function(error) { console.warn('SW registration failed:', error); });
+  });
+}
+</script>
+</body>
+</html>
