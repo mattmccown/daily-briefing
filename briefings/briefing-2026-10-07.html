@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#2563eb">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Briefing">
+<link rel="apple-touch-icon" sizes="192x192" href="/icon-192.png">
+<link rel="manifest" href="/manifest.json?key=a8x3kM9pQw2z">
+<title>Daily Briefing — Wednesday, October 7, 2026</title>
+<style>
+:root {
+  --bg: #fafafa;
+  --card: #ffffff;
+  --text: #1a1a2e;
+  --muted: #666;
+  --accent: #2563eb;
+  --border: #e5e7eb;
+  --success: #059669;
+  --warning: #d97706;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0f172a;
+    --card: #1e293b;
+    --text: #e2e8f0;
+    --muted: #94a3b8;
+    --accent: #60a5fa;
+    --border: #334155;
+    --success: #34d399;
+    --warning: #fbbf24;
+  }
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', Roboto, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  padding: 0;
+}
+.container {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+header {
+  text-align: center;
+  padding: 2rem 0 1rem;
+  border-bottom: 2px solid var(--accent);
+  margin-bottom: 2rem;
+}
+header h1 { font-size: 1.5rem; color: var(--accent); }
+header .date { color: var(--muted); font-size: 0.9rem; }
+h2 {
+  font-size: 1.2rem;
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
+  padding-bottom: 0.3rem;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+h3 {
+  font-size: 1.05rem;
+  margin-top: 1.25rem;
+  margin-bottom: 0.5rem;
+  color: var(--muted);
+}
+strong { font-weight: 600; }
+em { font-style: italic; }
+code {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  padding: 1px 4px;
+  font-size: 0.85em;
+  font-family: 'SF Mono', 'Fira Code', monospace;
+}
+.feedback { margin-left: auto; font-size: 0.85rem; opacity: 0.5; transition: opacity 0.2s; }
+h2:hover .feedback { opacity: 1; }
+.thumb-up, .thumb-down {
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 2px 6px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  transition: all 0.15s;
+}
+.thumb-up:hover { background: var(--success); color: white; }
+.thumb-down:hover { background: #dc2626; color: white; }
+.thumb-up.voted, .thumb-down.voted { opacity: 0.5; pointer-events: none; }
+.bookmark-btn {
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 2px 6px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  margin-left: 0.25rem;
+}
+.bookmark-btn:hover, .bookmark-btn.saved { background: var(--accent); color: white; }
+.bookmark-btn:disabled { opacity: 0.6; cursor: wait; }
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0.75rem 0;
+  font-size: 0.9rem;
+}
+th, td {
+  text-align: left;
+  padding: 6px 10px;
+  border-bottom: 1px solid var(--border);
+}
+th { font-weight: 600; color: var(--accent); }
+ul { margin: 0.5rem 0 0.5rem 1.5rem; }
+li { margin: 0.25rem 0; }
+p { margin: 0.5rem 0; }
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+.weather-summary {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1rem;
+  margin: 1rem 0;
+}
+.weather-main { font-size: 2rem; font-weight: 700; }
+.weather-detail { color: var(--muted); font-size: 0.9rem; }
+footer {
+  margin-top: 3rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border);
+  text-align: center;
+  color: var(--muted);
+  font-size: 0.8rem;
+}
+.toast {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  background: var(--accent);
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  opacity: 0;
+  transition: opacity 0.3s;
+  pointer-events: none;
+}
+.toast.show { opacity: 1; }
+</style>
+</head>
+<body>
+<div class="container">
+<header>
+  <h1>📋 Daily Briefing</h1>
+  <div class="date">Wednesday, October 7, 2026</div>
+  <p style="margin-top:0.5rem;font-size:0.85rem"><a href="/?key=a8x3kM9pQw2z" target="_self">📋 Previous briefings</a> · <a href="/bookmarks.html?key=a8x3kM9pQw2z" target="_self">🔖 Bookmarks</a></p>
+</header>
+<main>
+<p># Daily Briefing — Wednesday, October 7, 2026</p>
+<h2 id="calendar">📅 Calendar</h2>
+<ul>
+<li><span class="item-feedback" data-id="Emily dentist" data-section="calendar"><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fwww.google.com%2Fcalendar%2Fevent%3Feid%3DNnVmMTRramFpZTFlYXEyczNnMGZ0OGZxNTAgbmNiY3JyZ3ZiY242YnFuYXR1MWgxOWw1MWtAZw&section=calendar&date=2026-10-07" target="_self" rel="noopener">Emily dentist</a> [McCown Family] <button class="thumb-up" onclick="voteItem('calendar','Emily dentist','up')">👍</button><button class="thumb-down" onclick="voteItem('calendar','Emily dentist','down')">👎</button><button class="bookmark-btn" data-bookmark-url="https://www.google.com/calendar/event?eid=NnVmMTRramFpZTFlYXEyczNnMGZ0OGZxNTAgbmNiY3JyZ3ZiY242YnFuYXR1MWgxOWw1MWtAZw" data-bookmark-title="Emily dentist" data-bookmark-section="calendar" type="button" aria-label="Bookmark this item">🔖 Bookmark</button></span></li>
+</ul>
+<h2 id="weather-wildwood-mo">🌤️ Weather — Wildwood, MO</h2>
+<table><thead><tr>
+<th>Day</th>
+<th>Condition</th>
+<th>High/Low</th>
+<th>Precip</th>
+<th>Wind</th>
+</tr></thead><tbody>
+<tr>
+<td><strong>Today</strong></td>
+<td>Sunny</td>
+<td>88°F / 50°F</td>
+<td>2%</td>
+<td>5 to 9 mph W</td>
+</tr>
+<tr>
+<td><strong>Tonight</strong></td>
+<td>Clear</td>
+<td>— / 50°F</td>
+<td>0%</td>
+<td>5 mph SW</td>
+</tr>
+<tr>
+<td>Thursday</td>
+<td>Patchy Fog then Sunny</td>
+<td>83°F / 56°F</td>
+<td>0%</td>
+<td>3 mph N</td>
+</tr>
+<tr>
+<td>Friday</td>
+<td>Sunny</td>
+<td>87°F / 61°F</td>
+<td>0%</td>
+<td>6 mph SE</td>
+</tr>
+<tr>
+<td>Saturday</td>
+<td>Sunny</td>
+<td>86°F / 59°F</td>
+<td>4%</td>
+<td>6 mph S</td>
+</tr>
+<tr>
+<td>Sunday</td>
+<td>Chance Rain Showers</td>
+<td>80°F / 59°F</td>
+<td>29%</td>
+<td>5 mph N</td>
+</tr>
+<tr>
+<td>Columbus Day</td>
+<td>Mostly Sunny</td>
+<td>84°F / 61°F</td>
+<td>9%</td>
+<td>5 mph SW</td>
+</tr>
+<tr>
+<td>Tuesday</td>
+<td>Chance Rain Showers</td>
+<td>81°F / —</td>
+<td>26%</td>
+<td>7 mph W</td>
+</tr>
+</tbody></table>
+<h2 id="openrouter-budget">💰 OpenRouter Budget</h2>
+<h3>OpenRouter</h3>
+<p><strong>$0.02</strong> / $20.00 (0.1%) used</p>
+<p><code>█░░░░░░░░░░░░░░░░░░░</code></p>
+<p>📊 Daily: $0.00 · Remaining: <strong>$19.98</strong></p>
+<p>📈 ✅ On track</p>
+<h3>OpenAI Codex (separate from OpenRouter)</h3>
+<table><thead><tr>
+<th>Metric</th>
+<th>Value</th>
+</tr></thead><tbody>
+<tr>
+<td>Weekly limit used</td>
+<td><strong>0.0%</strong></td>
+</tr>
+<tr>
+<td>Weekly reset</td>
+<td>Wed 2:00 AM CT</td>
+</tr>
+<tr>
+<td>Latest session usage</td>
+<td>—</td>
+</tr>
+<tr>
+<td>Spend</td>
+<td>— (no monetary cost in local Codex data)</td>
+</tr>
+<tr>
+<td>Source/status</td>
+<td>Official Codex usage endpoint · available · 2026-10-07T10:30:46.260531+00:00</td>
+</tr>
+</tbody></table>
+<h2 id="feed-highlights">📰 Feed Highlights</h2>
+<h3>AI &amp; ML</h3>
+<ul>
+<li><span class="item-feedback" data-id="Using Parseable with Datasette for OpenTelemetry traces" data-section="feed-highlights"><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fsimonwillison.net%2F2026%2FOct%2F6%2Fdatasette-parseable-opentelemetry%2F&section=feed-highlights&date=2026-10-07" target="_self" rel="noopener">Using Parseable with Datasette for OpenTelemetry traces</a> — <em>Simon Willison</em> <button class="thumb-up" onclick="voteItem('feed-highlights','Using Parseable with Datasette for OpenTelemetry traces','up')">👍</button><button class="thumb-down" onclick="voteItem('feed-highlights','Using Parseable with Datasette for OpenTelemetry traces','down')">👎</button><button class="bookmark-btn" data-bookmark-url="https://simonwillison.net/2026/Oct/6/datasette-parseable-opentelemetry/" data-bookmark-title="Using Parseable with Datasette for OpenTelemetry traces" data-bookmark-section="feed-highlights" type="button" aria-label="Bookmark this item">🔖 Bookmark</button></span></li>
+<li><span class="item-feedback" data-id="EmbeddingGemma 2: an open, lightweight multimodal embedding model" data-section="feed-highlights"><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fdeepmind.google%2Fblog%2Fembeddinggemma-2-an-open-lightweight-multimodal-embedding-model%2F&section=feed-highlights&date=2026-10-07" target="_self" rel="noopener">EmbeddingGemma 2: an open, lightweight multimodal embedding model</a> — <em>Google DeepMind</em> <button class="thumb-up" onclick="voteItem('feed-highlights','EmbeddingGemma 2: an open, lightweight multimodal embedding model','up')">👍</button><button class="thumb-down" onclick="voteItem('feed-highlights','EmbeddingGemma 2: an open, lightweight multimodal embedding model','down')">👎</button><button class="bookmark-btn" data-bookmark-url="https://deepmind.google/blog/embeddinggemma-2-an-open-lightweight-multimodal-embedding-model/" data-bookmark-title="EmbeddingGemma 2: an open, lightweight multimodal embedding model" data-bookmark-section="feed-highlights" type="button" aria-label="Bookmark this item">🔖 Bookmark</button></span></li>
+<li><span class="item-feedback" data-id="Unlocking Earth AI’s planetary geospatial foundation models for global public health" data-section="feed-highlights"><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fresearch.google%2Fblog%2Fearth-ais-planetary-geospatial-foundation-models-for-global-public-health%2F&section=feed-highlights&date=2026-10-07" target="_self" rel="noopener">Unlocking Earth AI’s planetary geospatial foundation models for global public health</a> — <em>Google Research</em> <button class="thumb-up" onclick="voteItem('feed-highlights','Unlocking Earth AI’s planetary geospatial foundation models for global public health','up')">👍</button><button class="thumb-down" onclick="voteItem('feed-highlights','Unlocking Earth AI’s planetary geospatial foundation models for global public health','down')">👎</button><button class="bookmark-btn" data-bookmark-url="https://research.google/blog/earth-ais-planetary-geospatial-foundation-models-for-global-public-health/" data-bookmark-title="Unlocking Earth AI’s planetary geospatial foundation models for global public health" data-bookmark-section="feed-highlights" type="button" aria-label="Bookmark this item">🔖 Bookmark</button></span></li>
+</ul>
+<h3>Technology</h3>
+<ul>
+<li><span class="item-feedback" data-id="Russian drones strike Ukraine’s data centers by exploiting air defense gaps" data-section="feed-highlights"><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Farstechnica.com%2Fgadgets%2F2026%2F10%2Frussian-drones-strike-ukraines-data-centers-by-exploiting-air-defense-gaps%2F&section=feed-highlights&date=2026-10-07" target="_self" rel="noopener">Russian drones strike Ukraine’s data centers by exploiting air defense gaps</a> — <em>Ars Technica</em> <button class="thumb-up" onclick="voteItem('feed-highlights','Russian drones strike Ukraine’s data centers by exploiting air defense gaps','up')">👍</button><button class="thumb-down" onclick="voteItem('feed-highlights','Russian drones strike Ukraine’s data centers by exploiting air defense gaps','down')">👎</button><button class="bookmark-btn" data-bookmark-url="https://arstechnica.com/gadgets/2026/10/russian-drones-strike-ukraines-data-centers-by-exploiting-air-defense-gaps/" data-bookmark-title="Russian drones strike Ukraine’s data centers by exploiting air defense gaps" data-bookmark-section="feed-highlights" type="button" aria-label="Bookmark this item">🔖 Bookmark</button></span></li>
+</ul>
+<h3>Agriculture &amp; Food Systems</h3>
+<ul>
+<li><span class="item-feedback" data-id="Extension weed specialist: Drilling cover crops can boost weed suppression" data-section="feed-highlights"><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fwww.brownfieldagnews.com%2Fnews%2Fextension-weed-specialist-drilling-cover-crops-can-boost-weed-suppression%2F&section=feed-highlights&date=2026-10-07" target="_self" rel="noopener">Extension weed specialist: Drilling cover crops can boost weed suppression</a> — <em>Brownfield Ag News</em> <button class="thumb-up" onclick="voteItem('feed-highlights','Extension weed specialist: Drilling cover crops can boost weed suppression','up')">👍</button><button class="thumb-down" onclick="voteItem('feed-highlights','Extension weed specialist: Drilling cover crops can boost weed suppression','down')">👎</button><button class="bookmark-btn" data-bookmark-url="https://www.brownfieldagnews.com/news/extension-weed-specialist-drilling-cover-crops-can-boost-weed-suppression/" data-bookmark-title="Extension weed specialist: Drilling cover crops can boost weed suppression" data-bookmark-section="feed-highlights" type="button" aria-label="Bookmark this item">🔖 Bookmark</button></span></li>
+<li><span class="item-feedback" data-id="The AI platform identifying new fungicide and insecticide modes of action" data-section="feed-highlights"><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fwww.agdaily.com%2Fnews%2Fai-platform-identifying-new-fungicide-insecticide-modes-of-action%2F&section=feed-highlights&date=2026-10-07" target="_self" rel="noopener">The AI platform identifying new fungicide and insecticide modes of action</a> — <em>AGDaily</em> <button class="thumb-up" onclick="voteItem('feed-highlights','The AI platform identifying new fungicide and insecticide modes of action','up')">👍</button><button class="thumb-down" onclick="voteItem('feed-highlights','The AI platform identifying new fungicide and insecticide modes of action','down')">👎</button><button class="bookmark-btn" data-bookmark-url="https://www.agdaily.com/news/ai-platform-identifying-new-fungicide-insecticide-modes-of-action/" data-bookmark-title="The AI platform identifying new fungicide and insecticide modes of action" data-bookmark-section="feed-highlights" type="button" aria-label="Bookmark this item">🔖 Bookmark</button></span></li>
+</ul>
+<h2 id="hacker-news">🔥 Hacker News</h2>
+<p>1. <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fgithub.com%2Fszabadkai%2Fc64-keyboard-font%2F&section=hacker-news&date=2026-10-07" target="_self" rel="noopener">A font recreated from photographs of classic Commodore 64 keycaps</a> — <strong>33</strong> pts by sohkamyung (<a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fnews.ycombinator.com%2Fitem%3Fid%3D49990224&section=hacker-news&date=2026-10-07" target="_self" rel="noopener">5 comments</a>)</p>
+<p>2. <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fopenai.com%2Findex%2Fsharing-ai-progress-in-mathematics%2F&section=hacker-news&date=2026-10-07" target="_self" rel="noopener">Sharing AI progress in mathematics</a> — <strong>940</strong> pts by OfficialTurkey (<a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fnews.ycombinator.com%2Fitem%3Fid%3D49984923&section=hacker-news&date=2026-10-07" target="_self" rel="noopener">877 comments</a>)</p>
+<p>3. <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fwww.nobelprize.org%2Fprizes%2Fchemistry%2F2026%2Fpress-release%2F&section=hacker-news&date=2026-10-07" target="_self" rel="noopener">Nobel Prize in Chemistry 2026 to Henri B. Kagan and Kenso Soai</a> — <strong>12</strong> pts by sasvari (<a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fnews.ycombinator.com%2Fitem%3Fid%3D49990470&section=hacker-news&date=2026-10-07" target="_self" rel="noopener">0 comments</a>)</p>
+<p>4. <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fstrandsagents.com%2Fblog%2Fintroducing-strands-decider%2F&section=hacker-news&date=2026-10-07" target="_self" rel="noopener">Strands Decider 2B: a small, open-source, decision model</a> — <strong>180</strong> pts by gmays (<a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fnews.ycombinator.com%2Fitem%3Fid%3D49987076&section=hacker-news&date=2026-10-07" target="_self" rel="noopener">45 comments</a>)</p>
+<p>5. <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fdevelopers.openai.com%2Fapi%2Fdocs%2Fguides%2Fdecisions&section=hacker-news&date=2026-10-07" target="_self" rel="noopener">Decisions API is in public beta</a> — <strong>302</strong> pts by chiefstorm (<a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fnews.ycombinator.com%2Fitem%3Fid%3D49984025&section=hacker-news&date=2026-10-07" target="_self" rel="noopener">145 comments</a>)</p>
+<h2 id="r-hermesagent">🤖 r/hermesagent</h2>
+<p>1. <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fwww.reddit.com%2Fr%2Fhermesagent%2Fcomments%2F1wzj132%2Fwarm_compaction_a_hermes_agent_plugin_that_makes%2F&section=r-hermesagent&date=2026-10-07" target="_self" rel="noopener">Warm Compaction: a Hermes Agent plugin that makes context compaction 3–4x faster by reusing the prompt cache</a> — <strong>66</strong> pts · 11 comments</p>
+<p>2. <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fwww.reddit.com%2Fr%2Fhermesagent%2Fcomments%2F1wziiqo%2Flinus_talking_about_his_hermes_on_wan_show%2F&section=r-hermesagent&date=2026-10-07" target="_self" rel="noopener">LInus talking about his Hermes on WAN Show</a> — <strong>65</strong> pts · 20 comments</p>
+<p>3. <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fwww.reddit.com%2Fr%2Fhermesagent%2Fcomments%2F1wzi3l0%2Fhermes_index_agentic_model_leaderboard%2F&section=r-hermesagent&date=2026-10-07" target="_self" rel="noopener">Hermes Index | Agentic Model Leaderboard</a> — <strong>52</strong> pts · 21 comments</p>
+<h2 id="hermes-agent-highlights">🤖 Hermes &amp; Agent Highlights</h2>
+<p><em>No verified highlights today.</em></p>
+<h2 id="targeted-search-highlights">𝕏 Targeted Search Highlights</h2>
+<p><em>X search unavailable.</em></p>
+<h2 id="agtalk-crop-talk">🌾 AgTalk Crop Talk</h2>
+<p>None</p>
+<h2 id="videos">📺 Videos</h2>
+<p>📺 <strong>New Hermes &amp; Copilot Videos</strong> — Top picks from the last 14 days</p>
+<ul>
+<li><span class="item-feedback" data-id="&lt;strong&gt;[Turn Meeting Transcripts into P" data-section="videos"><strong><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fyoutu.be%2FsRXhjodSZTc&section=videos&date=2026-10-07" target="_self" rel="noopener">Turn Meeting Transcripts into Project Plans with GitHub Copilot Agents | MVP Unplugged</a></strong> 🎙️ <button class="thumb-up" onclick="voteItem('videos','&lt;strong&gt;[Turn Meeting Transcripts into P','up')">👍</button><button class="thumb-down" onclick="voteItem('videos','&lt;strong&gt;[Turn Meeting Transcripts into P','down')">👎</button><button class="bookmark-btn" data-bookmark-url="https://youtu.be/sRXhjodSZTc" data-bookmark-title="Turn Meeting Transcripts into Project Plans with GitHub Copilot Agents | MVP Unplugged" data-bookmark-section="videos" type="button" aria-label="Bookmark this item">🔖 Bookmark</button></span></li>
+</ul>
+<p>Microsoft Developer · 30m · 2,091 views · ❤️ 15</p>
+<p>🔬 Deep Dive</p>
+<p>📝 [ASR captions available — can summarize with LLM]</p>
+<ul>
+<li><span class="item-feedback" data-id="&lt;strong&gt;[7 Hermes Agent Upgrades You NEE" data-section="videos"><strong><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fyoutu.be%2Fh9SsHkRSHxo&section=videos&date=2026-10-07" target="_self" rel="noopener">7 Hermes Agent Upgrades You NEED To Implement Today</a></strong> 🎙️ <button class="thumb-up" onclick="voteItem('videos','&lt;strong&gt;[7 Hermes Agent Upgrades You NEE','up')">👍</button><button class="thumb-down" onclick="voteItem('videos','&lt;strong&gt;[7 Hermes Agent Upgrades You NEE','down')">👎</button><button class="bookmark-btn" data-bookmark-url="https://youtu.be/h9SsHkRSHxo" data-bookmark-title="7 Hermes Agent Upgrades You NEED To Implement Today" data-bookmark-section="videos" type="button" aria-label="Bookmark this item">🔖 Bookmark</button></span></li>
+</ul>
+<p>Komputer Mechanic · 9m · 9,007 views · ❤️ 254</p>
+<p>📝 [ASR captions available — can summarize with LLM]</p>
+<h2 id="podcasts">🎙️ Podcasts</h2>
+<p>🎙️ <strong>New Hermes &amp; Copilot Podcast Episodes</strong> — Top picks from the last 3 days</p>
+<ul>
+<li><span class="item-feedback" data-id="&lt;strong&gt;[MacBreak Weekly 1045: The iCup " data-section="podcasts"><strong><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Ftwit.tv%2Fshows%2Fmacbreak-weekly%2Fepisodes%2F1045&section=podcasts&date=2026-10-07" target="_self" rel="noopener">MacBreak Weekly 1045: The iCup Specialist</a></strong> <button class="thumb-up" onclick="voteItem('podcasts','&lt;strong&gt;[MacBreak Weekly 1045: The iCup ','up')">👍</button><button class="thumb-down" onclick="voteItem('podcasts','&lt;strong&gt;[MacBreak Weekly 1045: The iCup ','down')">👎</button><button class="bookmark-btn" data-bookmark-url="https://twit.tv/shows/macbreak-weekly/episodes/1045" data-bookmark-title="MacBreak Weekly 1045: The iCup Specialist" data-bookmark-section="podcasts" type="button" aria-label="Bookmark this item">🔖 Bookmark</button></span></li>
+</ul>
+<p>All TWiT.tv Shows (Audio) · 145m</p>
+<ul>
+<li><span class="item-feedback" data-id="&lt;strong&gt;[MacBreak Weekly 1045: The iCup " data-section="podcasts"><strong><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Ftwit.tv%2Fshows%2Fmacbreak-weekly%2Fepisodes%2F1045&section=podcasts&date=2026-10-07" target="_self" rel="noopener">MacBreak Weekly 1045: The iCup Specialist</a></strong> <button class="thumb-up" onclick="voteItem('podcasts','&lt;strong&gt;[MacBreak Weekly 1045: The iCup ','up')">👍</button><button class="thumb-down" onclick="voteItem('podcasts','&lt;strong&gt;[MacBreak Weekly 1045: The iCup ','down')">👎</button><button class="bookmark-btn" data-bookmark-url="https://twit.tv/shows/macbreak-weekly/episodes/1045" data-bookmark-title="MacBreak Weekly 1045: The iCup Specialist" data-bookmark-section="podcasts" type="button" aria-label="Bookmark this item">🔖 Bookmark</button></span></li>
+</ul>
+<p>Total Leo (Audio) · 145m</p>
+<h2 id="apple-health">🩺 Apple Health</h2>
+<h3>Current week progress</h3>
+<p><strong>Elapsed:</strong> 2026-10-05–2026-10-06 · <strong>Coverage:</strong> 2/2 days</p>
+<p><strong>Current-week total:</strong> 6,941 steps · 380 kcal · 7 min exercise</p>
+<p>**Yesterday (2026-10-06): 2,368 steps · 18 kcal · — exercise · RHR — · HRV 51</p>
+<p>🎯 Current-week workouts: <strong>0/3</strong></p>
+<p>Verified modalities: cardio 0 · strength 0 · unknown 0</p>
+<h3>Foundation decision</h3>
+<p><strong>Goal:</strong> 3 sessions/week (optional 4th in weeks 5–8).</p>
+<p><strong>Consistency:</strong> 0/4 evaluated weeks at target; progression: repeat reduced.</p>
+<p><strong>Lapse/re-entry:</strong> short lapse repeat reduced.</p>
+<p>💡 Short lapse: repeat an easy reduced foundation session; do not catch up or add advanced intensity.</p>
+<p>⚠️ No valid historical baseline for exercise minutes.</p>
+<p>⚠️ No valid historical baseline for heart rate variability.</p>
+<h3>🧠 Evidence-informed training/recovery synthesis</h3>
+<p>Yesterday’s sleep was below baseline at 6.43 hours, while HRV was 50.77 but lacks a valid personal baseline; resting heart rate and exercise minutes were unavailable. Activity declined across the last three days, and the current week has 0 of 3 qualifying sessions after a 12-day lapse, so the foundation plan remains reduced without catch-up intensity.</p>
+<p>🎯 Today&#39;s action: Complete one easy 20-minute walk today.</p>
+<p><em>Why: This meets the intentional-session threshold with a low recovery cost while rebuilding consistency after the lapse. · Limits: Apple Health exercise minutes do not identify workout type or intensity; yesterday’s resting heart rate and exercise minutes are missing, HRV and exercise-minute historical baselines are unavailable, and wrist-temperature data are insufficient without repeated or corroborated elevation.</em></p>
+<p><em>Public framework note (researched 2026-07-26): <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fwww.hubermanlab.com%2Ftopics%2Fsleep-hygiene&section=apple-health&date=2026-10-07" target="_self" rel="noopener">Huberman Lab</a> · <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fpeterattiamd.com%2Fexercising-for-longevity%2F&section=apple-health&date=2026-10-07" target="_self" rel="noopener">Peter Attia MD</a> · <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fwww.andygalpin.com%2F55-minute-physiology&section=apple-health&date=2026-10-07" target="_self" rel="noopener">Andy Galpin</a></em></p>
+<p><strong>Completed week:</strong> 2026-09-28–2026-10-04 · <strong>Coverage:</strong> 7/7 days</p>
+<table><thead><tr>
+<th>Date</th>
+<th>Steps</th>
+<th>Sleep</th>
+<th>Exercise</th>
+<th>RHR</th>
+<th>HRV</th>
+</tr></thead><tbody>
+<tr>
+<td>2026-09-28</td>
+<td>7,754</td>
+<td>—</td>
+<td>16 min</td>
+<td>60</td>
+<td>40</td>
+</tr>
+<tr>
+<td>2026-09-29</td>
+<td>3,890</td>
+<td>7.2h</td>
+<td>15 min</td>
+<td>65</td>
+<td>48</td>
+</tr>
+<tr>
+<td>2026-09-30</td>
+<td>6,240</td>
+<td>—</td>
+<td>19 min</td>
+<td>73</td>
+<td>31</td>
+</tr>
+<tr>
+<td>2026-10-01</td>
+<td>5,143</td>
+<td>6.9h</td>
+<td>15 min</td>
+<td>71</td>
+<td>29</td>
+</tr>
+<tr>
+<td>2026-10-02</td>
+<td>2,966</td>
+<td>—</td>
+<td>16 min</td>
+<td>67</td>
+<td>41</td>
+</tr>
+<tr>
+<td>2026-10-03</td>
+<td>8,493</td>
+<td>4.7h</td>
+<td>16 min</td>
+<td>67</td>
+<td>35</td>
+</tr>
+<tr>
+<td>2026-10-04</td>
+<td>8,319</td>
+<td>—</td>
+<td>11 min</td>
+<td>70</td>
+<td>30</td>
+</tr>
+</tbody></table>
+<table><thead><tr>
+<th>Metric</th>
+<th>Week</th>
+<th>Historical median</th>
+<th>Δ</th>
+<th>n</th>
+</tr></thead><tbody>
+<tr>
+<td>Steps</td>
+<td>42,805 steps</td>
+<td>46,316 steps</td>
+<td>-7.6%</td>
+<td>106</td>
+</tr>
+<tr>
+<td>Active Energy</td>
+<td>2,616.2 kcal</td>
+<td>3,086 kcal</td>
+<td>-15.2%</td>
+<td>98</td>
+</tr>
+<tr>
+<td>Walking Distance</td>
+<td>19.4 mi</td>
+<td>27.3 mi</td>
+<td>-29.1%</td>
+<td>106</td>
+</tr>
+<tr>
+<td>Flights Climbed</td>
+<td>69 flights</td>
+<td>83.4 flights</td>
+<td>-17.3%</td>
+<td>106</td>
+</tr>
+<tr>
+<td>Exercise Minutes</td>
+<td>108 min</td>
+<td>—</td>
+<td>—</td>
+<td>0</td>
+</tr>
+<tr>
+<td>Sleep</td>
+<td>6.3 h</td>
+<td>7.7 h</td>
+<td>-19.0%</td>
+<td>76</td>
+</tr>
+<tr>
+<td>Resting HR</td>
+<td>67.6 bpm</td>
+<td>63 bpm</td>
+<td>+7.3%</td>
+<td>77</td>
+</tr>
+<tr>
+<td>HRV</td>
+<td>36.2 ms</td>
+<td>—</td>
+<td>—</td>
+<td>0</td>
+</tr>
+</tbody></table>
+</main>
+<footer>
+  <p>🤖 Generated by Hermes Agent &middot; Built with ❤️</p>
+  <p>Click 👍/👎 on any story to help me learn what you like!</p>
+</footer>
+</div>
+<div id="toast" class="toast"></div>
+<script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function() {
+    navigator.serviceWorker.register('/sw.js', { scope: '/' })
+      .catch(function(error) { console.warn('SW registration failed:', error); });
+  });
+}
+</script>
+</body>
+</html>
