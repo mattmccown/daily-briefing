@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#2563eb">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Briefing">
+<link rel="apple-touch-icon" sizes="192x192" href="/icon-192.png">
+<link rel="manifest" href="/manifest.json?key=a8x3kM9pQw2z">
+<title>Daily Briefing — Sunday, October 11, 2026</title>
+<style>
+:root {
+  --bg: #fafafa;
+  --card: #ffffff;
+  --text: #1a1a2e;
+  --muted: #666;
+  --accent: #2563eb;
+  --border: #e5e7eb;
+  --success: #059669;
+  --warning: #d97706;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0f172a;
+    --card: #1e293b;
+    --text: #e2e8f0;
+    --muted: #94a3b8;
+    --accent: #60a5fa;
+    --border: #334155;
+    --success: #34d399;
+    --warning: #fbbf24;
+  }
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', Roboto, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  padding: 0;
+}
+.container {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+header {
+  text-align: center;
+  padding: 2rem 0 1rem;
+  border-bottom: 2px solid var(--accent);
+  margin-bottom: 2rem;
+}
+header h1 { font-size: 1.5rem; color: var(--accent); }
+header .date { color: var(--muted); font-size: 0.9rem; }
+h2 {
+  font-size: 1.2rem;
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
+  padding-bottom: 0.3rem;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+h3 {
+  font-size: 1.05rem;
+  margin-top: 1.25rem;
+  margin-bottom: 0.5rem;
+  color: var(--muted);
+}
+strong { font-weight: 600; }
+em { font-style: italic; }
+code {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  padding: 1px 4px;
+  font-size: 0.85em;
+  font-family: 'SF Mono', 'Fira Code', monospace;
+}
+.feedback { margin-left: auto; font-size: 0.85rem; opacity: 0.5; transition: opacity 0.2s; }
+h2:hover .feedback { opacity: 1; }
+.thumb-up, .thumb-down {
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 2px 6px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  transition: all 0.15s;
+}
+.thumb-up:hover { background: var(--success); color: white; }
+.thumb-down:hover { background: #dc2626; color: white; }
+.thumb-up.voted, .thumb-down.voted { opacity: 0.5; pointer-events: none; }
+.bookmark-btn {
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 2px 6px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  margin-left: 0.25rem;
+}
+.bookmark-btn:hover, .bookmark-btn.saved { background: var(--accent); color: white; }
+.bookmark-btn:disabled { opacity: 0.6; cursor: wait; }
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0.75rem 0;
+  font-size: 0.9rem;
+}
+th, td {
+  text-align: left;
+  padding: 6px 10px;
+  border-bottom: 1px solid var(--border);
+}
+th { font-weight: 600; color: var(--accent); }
+ul { margin: 0.5rem 0 0.5rem 1.5rem; }
+li { margin: 0.25rem 0; }
+p { margin: 0.5rem 0; }
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+.weather-summary {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1rem;
+  margin: 1rem 0;
+}
+.weather-main { font-size: 2rem; font-weight: 700; }
+.weather-detail { color: var(--muted); font-size: 0.9rem; }
+footer {
+  margin-top: 3rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border);
+  text-align: center;
+  color: var(--muted);
+  font-size: 0.8rem;
+}
+.toast {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  background: var(--accent);
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  opacity: 0;
+  transition: opacity 0.3s;
+  pointer-events: none;
+}
+.toast.show { opacity: 1; }
+</style>
+</head>
+<body>
+<div class="container">
+<header>
+  <h1>📋 Daily Briefing</h1>
+  <div class="date">Sunday, October 11, 2026</div>
+  <p style="margin-top:0.5rem;font-size:0.85rem"><a href="/?key=a8x3kM9pQw2z" target="_self">📋 Previous briefings</a> · <a href="/bookmarks.html?key=a8x3kM9pQw2z" target="_self">🔖 Bookmarks</a></p>
+</header>
+<main>
+<p># Daily Briefing — Sunday, October 11, 2026</p>
+<h2 id="calendar">📅 Calendar</h2>
+<ul>
+<li><span class="item-feedback" data-id="Marching Band Competition (Lancer Regiment)" data-section="calendar"><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fwww.google.com%2Fcalendar%2Fevent%3Feid%3DXzZjcDM2YzlvY2xxbjhycmNkcG82aXA5aDc0cW40Y2JtZTloNzBjOWtlOCAxNThqbjRhY3ZjanUybDgzbG91NDg0MjBwbXNoNGM1cEBp&section=calendar&date=2026-10-11" target="_self" rel="noopener">Marching Band Competition (Lancer Regiment)</a> [Lafayette High School Calendar] <button class="thumb-up" onclick="voteItem('calendar','Marching Band Competition (Lancer Regiment)','up')">👍</button><button class="thumb-down" onclick="voteItem('calendar','Marching Band Competition (Lancer Regiment)','down')">👎</button><button class="bookmark-btn" data-bookmark-url="https://www.google.com/calendar/event?eid=XzZjcDM2YzlvY2xxbjhycmNkcG82aXA5aDc0cW40Y2JtZTloNzBjOWtlOCAxNThqbjRhY3ZjanUybDgzbG91NDg0MjBwbXNoNGM1cEBp" data-bookmark-title="Marching Band Competition (Lancer Regiment)" data-bookmark-section="calendar" type="button" aria-label="Bookmark this item">🔖 Bookmark</button></span></li>
+<li><span class="item-feedback" data-id="Youth Group" data-section="calendar"><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fwww.google.com%2Fcalendar%2Fevent%3Feid%3DNHFyZzJtdG5uYWdkbGxqZGxqM3RjZWp1YTdfMjAyNjEwMTFUMjIwMDAwWiBuY2JjcnJndmJjbjZicW5hdHUxaDE5bDUxa0Bn&section=calendar&date=2026-10-11" target="_self" rel="noopener">Youth Group</a> [McCown Family] <button class="thumb-up" onclick="voteItem('calendar','Youth Group','up')">👍</button><button class="thumb-down" onclick="voteItem('calendar','Youth Group','down')">👎</button><button class="bookmark-btn" data-bookmark-url="https://www.google.com/calendar/event?eid=NHFyZzJtdG5uYWdkbGxqZGxqM3RjZWp1YTdfMjAyNjEwMTFUMjIwMDAwWiBuY2JjcnJndmJjbjZicW5hdHUxaDE5bDUxa0Bn" data-bookmark-title="Youth Group" data-bookmark-section="calendar" type="button" aria-label="Bookmark this item">🔖 Bookmark</button></span></li>
+</ul>
+<h2 id="weather-wildwood-mo">🌤️ Weather — Wildwood, MO</h2>
+<table><thead><tr>
+<th>Day</th>
+<th>Condition</th>
+<th>High/Low</th>
+<th>Precip</th>
+<th>Wind</th>
+</tr></thead><tbody>
+<tr>
+<td><strong>Today</strong></td>
+<td>Sunny</td>
+<td>89°F / 51°F</td>
+<td>0%</td>
+<td>2 mph S</td>
+</tr>
+<tr>
+<td><strong>Tonight</strong></td>
+<td>Clear</td>
+<td>— / 51°F</td>
+<td>0%</td>
+<td>1 mph N</td>
+</tr>
+<tr>
+<td>Columbus Day</td>
+<td>Sunny</td>
+<td>92°F / 71°F</td>
+<td>0%</td>
+<td>6 to 9 mph SW</td>
+</tr>
+<tr>
+<td>Tuesday</td>
+<td>Sunny</td>
+<td>93°F / 69°F</td>
+<td>10%</td>
+<td>3 to 7 mph SW</td>
+</tr>
+<tr>
+<td>Wednesday</td>
+<td>Showers And Thunderstorms</td>
+<td>82°F / 63°F</td>
+<td>80%</td>
+<td>5 mph NW</td>
+</tr>
+<tr>
+<td>Thursday</td>
+<td>Showers And Thunderstorms</td>
+<td>77°F / 54°F</td>
+<td>75%</td>
+<td>7 mph SE</td>
+</tr>
+<tr>
+<td>Friday</td>
+<td>Chance Showers And Thunderstorms</td>
+<td>66°F / 42°F</td>
+<td>34%</td>
+<td>12 mph NW</td>
+</tr>
+<tr>
+<td>Saturday</td>
+<td>Mostly Sunny</td>
+<td>60°F / —</td>
+<td>5%</td>
+<td>5 to 8 mph N</td>
+</tr>
+</tbody></table>
+<h2 id="openrouter-budget">💰 OpenRouter Budget</h2>
+<h3>OpenRouter</h3>
+<p><strong>$0.02</strong> / $20.00 (0.1%) used</p>
+<p><code>█░░░░░░░░░░░░░░░░░░░</code></p>
+<p>📊 Daily: $0.00 · Remaining: <strong>$19.98</strong></p>
+<p>📈 ✅ On track</p>
+<h3>OpenAI Codex (separate from OpenRouter)</h3>
+<table><thead><tr>
+<th>Metric</th>
+<th>Value</th>
+</tr></thead><tbody>
+<tr>
+<td>Weekly limit used</td>
+<td><strong>1.0%</strong></td>
+</tr>
+<tr>
+<td>Weekly reset</td>
+<td>Sun 2:00 AM CT</td>
+</tr>
+<tr>
+<td>Latest session usage</td>
+<td>—</td>
+</tr>
+<tr>
+<td>Spend</td>
+<td>— (no monetary cost in local Codex data)</td>
+</tr>
+<tr>
+<td>Source/status</td>
+<td>Official Codex usage endpoint · available · 2026-10-11T10:30:40.764863+00:00</td>
+</tr>
+</tbody></table>
+<h2 id="feed-highlights">📰 Feed Highlights</h2>
+<h3>AI &amp; ML</h3>
+<ul>
+<li><span class="item-feedback" data-id="Dwarf Fortress uses version control now" data-section="feed-highlights"><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fsimonwillison.net%2F2026%2FOct%2F11%2Fdwarf-fortress%2F&section=feed-highlights&date=2026-10-11" target="_self" rel="noopener">Dwarf Fortress uses version control now</a> — <em>Simon Willison</em> <button class="thumb-up" onclick="voteItem('feed-highlights','Dwarf Fortress uses version control now','up')">👍</button><button class="thumb-down" onclick="voteItem('feed-highlights','Dwarf Fortress uses version control now','down')">👎</button><button class="bookmark-btn" data-bookmark-url="https://simonwillison.net/2026/Oct/11/dwarf-fortress/" data-bookmark-title="Dwarf Fortress uses version control now" data-bookmark-section="feed-highlights" type="button" aria-label="Bookmark this item">🔖 Bookmark</button></span></li>
+</ul>
+<h3>Technology</h3>
+<ul>
+<li><span class="item-feedback" data-id="AI coding agents generate more code, but not more software" data-section="feed-highlights"><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Farstechnica.com%2Fai%2F2026%2F10%2Fai-coding-agents-generate-more-code-but-not-more-software%2F&section=feed-highlights&date=2026-10-11" target="_self" rel="noopener">AI coding agents generate more code, but not more software</a> — <em>Ars Technica</em> <button class="thumb-up" onclick="voteItem('feed-highlights','AI coding agents generate more code, but not more software','up')">👍</button><button class="thumb-down" onclick="voteItem('feed-highlights','AI coding agents generate more code, but not more software','down')">👎</button><button class="bookmark-btn" data-bookmark-url="https://arstechnica.com/ai/2026/10/ai-coding-agents-generate-more-code-but-not-more-software/" data-bookmark-title="AI coding agents generate more code, but not more software" data-bookmark-section="feed-highlights" type="button" aria-label="Bookmark this item">🔖 Bookmark</button></span></li>
+</ul>
+<h3>Agriculture &amp; Food Systems</h3>
+<ul>
+<li><span class="item-feedback" data-id="Corn and soybean quality holding up in some areas" data-section="feed-highlights"><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fwww.brownfieldagnews.com%2Fnews%2Fcorn-and-soybean-quality-holding-up-in-some-areas%2F&section=feed-highlights&date=2026-10-11" target="_self" rel="noopener">Corn and soybean quality holding up in some areas</a> — <em>Brownfield Ag News</em> <button class="thumb-up" onclick="voteItem('feed-highlights','Corn and soybean quality holding up in some areas','up')">👍</button><button class="thumb-down" onclick="voteItem('feed-highlights','Corn and soybean quality holding up in some areas','down')">👎</button><button class="bookmark-btn" data-bookmark-url="https://www.brownfieldagnews.com/news/corn-and-soybean-quality-holding-up-in-some-areas/" data-bookmark-title="Corn and soybean quality holding up in some areas" data-bookmark-section="feed-highlights" type="button" aria-label="Bookmark this item">🔖 Bookmark</button></span></li>
+<li><span class="item-feedback" data-id="Soybean basis falls from recent highs as supplies reach crush plants" data-section="feed-highlights"><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fwww.brownfieldagnews.com%2Fnews%2Fsoybean-basis-falls-from-recent-highs-as-supplies-reach-crush-plants%2F&section=feed-highlights&date=2026-10-11" target="_self" rel="noopener">Soybean basis falls from recent highs as supplies reach crush plants</a> — <em>Brownfield Ag News</em> <button class="thumb-up" onclick="voteItem('feed-highlights','Soybean basis falls from recent highs as supplies reach crush plants','up')">👍</button><button class="thumb-down" onclick="voteItem('feed-highlights','Soybean basis falls from recent highs as supplies reach crush plants','down')">👎</button><button class="bookmark-btn" data-bookmark-url="https://www.brownfieldagnews.com/news/soybean-basis-falls-from-recent-highs-as-supplies-reach-crush-plants/" data-bookmark-title="Soybean basis falls from recent highs as supplies reach crush plants" data-bookmark-section="feed-highlights" type="button" aria-label="Bookmark this item">🔖 Bookmark</button></span></li>
+<li><span class="item-feedback" data-id="Harvest season is hacking season: How farms and ag businesses can protect their data" data-section="feed-highlights"><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fwww.agdaily.com%2Fsponsored%2Fharvest-season-hacking-season-farms-ag-businesses-can-protect-data%2F&section=feed-highlights&date=2026-10-11" target="_self" rel="noopener">Harvest season is hacking season: How farms and ag businesses can protect their data</a> — <em>AGDaily</em> <button class="thumb-up" onclick="voteItem('feed-highlights','Harvest season is hacking season: How farms and ag businesses can protect their data','up')">👍</button><button class="thumb-down" onclick="voteItem('feed-highlights','Harvest season is hacking season: How farms and ag businesses can protect their data','down')">👎</button><button class="bookmark-btn" data-bookmark-url="https://www.agdaily.com/sponsored/harvest-season-hacking-season-farms-ag-businesses-can-protect-data/" data-bookmark-title="Harvest season is hacking season: How farms and ag businesses can protect their data" data-bookmark-section="feed-highlights" type="button" aria-label="Bookmark this item">🔖 Bookmark</button></span></li>
+</ul>
+<h3>Cooking</h3>
+<ul>
+<li><span class="item-feedback" data-id="Pumpkin Cheesecake Muffins" data-section="feed-highlights"><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fwww.epicurious.com%2Frecipes%2Ffood%2Fviews%2Fba-syn-pumpkin-cheesecake-muffins&section=feed-highlights&date=2026-10-11" target="_self" rel="noopener">Pumpkin Cheesecake Muffins</a> — <em>Epicurious</em> <button class="thumb-up" onclick="voteItem('feed-highlights','Pumpkin Cheesecake Muffins','up')">👍</button><button class="thumb-down" onclick="voteItem('feed-highlights','Pumpkin Cheesecake Muffins','down')">👎</button><button class="bookmark-btn" data-bookmark-url="https://www.epicurious.com/recipes/food/views/ba-syn-pumpkin-cheesecake-muffins" data-bookmark-title="Pumpkin Cheesecake Muffins" data-bookmark-section="feed-highlights" type="button" aria-label="Bookmark this item">🔖 Bookmark</button></span></li>
+</ul>
+<h2 id="hacker-news">🔥 Hacker News</h2>
+<p>1. <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Flineageos.org%2FChangelog-32%2F&section=hacker-news&date=2026-10-11" target="_self" rel="noopener">LineageOS 24.0</a> — <strong>106</strong> pts by timschumi (<a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fnews.ycombinator.com%2Fitem%3Fid%3D50040276&section=hacker-news&date=2026-10-11" target="_self" rel="noopener">25 comments</a>)</p>
+<p>2. <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fircv3.net%2F&section=hacker-news&date=2026-10-11" target="_self" rel="noopener">IRCv3</a> — <strong>7</strong> pts by basilikum (<a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fnews.ycombinator.com%2Fitem%3Fid%3D50041540&section=hacker-news&date=2026-10-11" target="_self" rel="noopener">0 comments</a>)</p>
+<p>3. <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fnishtahir.com%2Fbuild-your-own-decision-model%2F&section=hacker-news&date=2026-10-11" target="_self" rel="noopener">Build your own decision model</a> — <strong>311</strong> pts by softwaredoug (<a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fnews.ycombinator.com%2Fitem%3Fid%3D50037949&section=hacker-news&date=2026-10-11" target="_self" rel="noopener">72 comments</a>)</p>
+<p>4. <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fpatkerr.co.uk%2F2d-vehicles%2F&section=hacker-news&date=2026-10-11" target="_self" rel="noopener">2D Vehicles</a> — <strong>488</strong> pts by Michelangelo11 (<a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fnews.ycombinator.com%2Fitem%3Fid%3D49991852&section=hacker-news&date=2026-10-11" target="_self" rel="noopener">101 comments</a>)</p>
+<p>5. <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fhousing.over.pizza%2F&section=hacker-news&date=2026-10-11" target="_self" rel="noopener">A city-building game in which the city would prefer you didn&amp;#39;t</a> — <strong>351</strong> pts by JumpCrisscross (<a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fnews.ycombinator.com%2Fitem%3Fid%3D50036864&section=hacker-news&date=2026-10-11" target="_self" rel="noopener">118 comments</a>)</p>
+<h2 id="r-hermesagent">🤖 r/hermesagent</h2>
+<p>1. <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fwww.reddit.com%2Fr%2Fhermesagent%2Fcomments%2F1x29v0m%2Fmade_a_few_more_variants_of_hermes_girl%2F&section=r-hermesagent&date=2026-10-11" target="_self" rel="noopener">Made a few more variants of Hermes girl</a> — <strong>128</strong> pts · 79 comments</p>
+<p>2. <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fwww.reddit.com%2Fr%2Fhermesagent%2Fcomments%2F1x24qfp%2Fmy_hermes_configuration_that_works_for_me%2F&section=r-hermesagent&date=2026-10-11" target="_self" rel="noopener">My Hermes Configuration that works for me</a> — <strong>108</strong> pts · 18 comments</p>
+<p>3. <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fwww.reddit.com%2Fr%2Fhermesagent%2Fcomments%2F1x2w0bg%2Fhas_hermes_solved_memory%2F&section=r-hermesagent&date=2026-10-11" target="_self" rel="noopener">Has hermes solved memory?</a> — <strong>32</strong> pts · 38 comments</p>
+<p>4. <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fwww.reddit.com%2Fr%2Fhermesagent%2Fcomments%2F1x2j2ms%2Fnondevelopers_but_ai_power_users_what_are_you%2F&section=r-hermesagent&date=2026-10-11" target="_self" rel="noopener">Non-developers but ai power users, what are you using Hermes Agent Desktop for?</a> — <strong>24</strong> pts · 11 comments</p>
+<h2 id="hermes-agent-highlights">🤖 Hermes &amp; Agent Highlights</h2>
+<p><em>No verified highlights today.</em></p>
+<h2 id="targeted-search-highlights">𝕏 Targeted Search Highlights</h2>
+<p><em>X source status: current verified artifact.</em></p>
+<p>1. <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fx.com%2Fcrossian90%2Fstatus%2F2109226202393100415&section=targeted-search-highlights&date=2026-10-11" target="_self" rel="noopener">Chang Min Park \\(박창민\\) @crossian90 · 39s 그록봇, 뮤즈, 닷, hermrs agent 모두 설치해서 사용해본 결과, 나에게는 hermes agent 를 텔레그램으로 연결해서 각종 에이젼트들 연결해서 사용하고, 그록봇을 외부 리서치, 이메일 검토 후 일정관리 등의 용도로 쓰는게 제일 효과적인거 같네. 뮤즈와 닷 등은 그록봇과 너무 겹치는듯. 2</a> — <em>Hermes</em> · 0 engagement</p>
+<p>2. <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fx.com%2F1t00000%2Fstatus%2F2109224179627446346&section=targeted-search-highlights&date=2026-10-11" target="_self" rel="noopener">ニッパー / Nipparᯅ @1t00000 · 8m 今さらHermes Agentにハマってる話を書きました。 Strata経由で動かしてるQwenを都度SSHで再起動するやつとかもHermesができるようにした Quote ニッパー / Nipparᯅ @1t00000 · 17h Article CodexとHermesに、同じローカルLLMを使わせる環境を作ってみた ここ数日、Macで動くCodexとHermes Agentから、Windows PC上のローカルLLMを呼び出せる環境を構築していた。 GPU: RTX 5080 16GB メモリ: 64GB DDR5-5600 CPU:Ryzen 9700X SSD：NVMe Gen4 x4 2TB... 18</a> — <em>Hermes</em> · 0 engagement</p>
+<p>3. <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fx.com%2Fjustrehen%2Fstatus%2F2109223593565401431&section=targeted-search-highlights&date=2026-10-11" target="_self" rel="noopener">rehen @justrehen · 11m Nous Research is reportedly worth 1.5 billion dollars now. It started in 2022 as a bunch of AI researchers on Discord giving their work away for free. This week it closed a 90 million dollar Series B with Nvidia and Microsoft M12 and Samsung Next in the round. The Hermes agent Show more 14</a> — <em>Hermes</em> · 0 engagement</p>
+<p>4. <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fx.com%2FToStandIsToRise%2Fstatus%2F2109018220048875814&section=targeted-search-highlights&date=2026-10-11" target="_self" rel="noopener">RisingPakistan @ToStandIsToRise · 13h Replying to @SushiReggie It&amp;#39;s not just this is exactly what most American and western corperate agriculture companies do. One was Monsanto which i believe had their licence cancelled in Pakistan in Imran Khan era. They then came back via Bayer pharmaceutical company 1 2 26 767</a> — <em>Bayer</em> · 0 engagement</p>
+<p>5. <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fx.com%2FOle_S_Hansen%2Fstatus%2F2109196787785351393&section=targeted-search-highlights&date=2026-10-11" target="_self" rel="noopener">Ole S Hansen @Ole\&amp;lt;em&amp;gt;S\_Hansen · 1h #Grains: USDA supply shock sent corn futures tumbling on Friday. US corn futures plunged by as much as the daily 30 cents trading limit on Friday, the most in three years, before settling down 20 cents, or 4.1%, at 480 cents per bushel, after the USDA&amp;#39;s October WASDE report Show more 5 4 19 3.6K</a> — _Agriculture</em> · 0 engagement</p>
+<p>6. <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fx.com%2FVesper7786%2Fstatus%2F2109044814872560069&section=targeted-search-highlights&date=2026-10-11" target="_self" rel="noopener">Vesper @Vesper7786 · 16m The USDA caught the entire grains market off guard on October 9 by unexpectedly raising US corn production estimates to about 16 billion bushels, defying consensus calls for weather-driven crop cuts. Corn futures immediately tumbled as much as 6%, posting their biggest single-day Show more 3</a> — <em>Agriculture</em> · 0 engagement</p>
+<p>7. <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fx.com%2Fabebeos%2Fstatus%2F2108956001906921759&section=targeted-search-highlights&date=2026-10-11" target="_self" rel="noopener">abebeos @abebeos · 9m Replying to @HermesWatcher &amp;#39;Hermes Agent&amp;#39; seems incorrect. Maybe &amp;#39;Hermes Director&amp;#39; or &amp;#39;Orchestrator&amp;#39; or &amp;#39;Supervis&amp;#39; etc. 1</a> — <em>Hermes</em> · 0 engagement</p>
+<p>8. <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fx.com%2Fcoindotgo%2Fstatus%2F2108954962499883108&section=targeted-search-highlights&date=2026-10-11" target="_self" rel="noopener">coindotgo @coindotgo · 13m hermes agent + TinyFis: finding a website is easy. Doing something there is the real test. Free search + fetch. Cloud browser and goal-based web agent use credits, with approval prompts by default. From search to action. 👇 0:28 Quote Keith Zhai @KeithZhai · Oct 8 Hermes just added TinyFish as a first-party plugin. Search and fetch</a> — <em>Hermes</em> · 0 engagement</p>
+<p>9. <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fx.com%2FHermesAgentTips%2Fstatus%2F2108954711835443422&section=targeted-search-highlights&date=2026-10-11" target="_self" rel="noopener">Hermes Agent Tips @HermesAgentTips · 14m Replying to @emmagine79 really powerful stack you have there! sonnet is my personal fav because is a powerful writer! 1</a> — <em>Hermes</em> · 0 engagement</p>
+<p>10. <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fx.com%2FGolde476Linda%2Fstatus%2F2108883175661318460&section=targeted-search-highlights&date=2026-10-11" target="_self" rel="noopener">Linda Golden @Golde476Linda · 4h Replying to @Nancy023922191 Remember Mister Monsanto , With Bayer Monsanto Crop Poisoning Sprays &amp;amp; More !! Remember All The Law Suits Re Monsanto Products Causing Cancer, Birth Defects, &amp;amp; More YES ! MIT The Good Morman, ? Knew, &amp;amp; Didn&amp;#39;t Care ! Add His Involvement &amp;amp; His Son In Ukraine! NWO Evil 34</a> — <em>Bayer</em> · 0 engagement</p>
+<p>11. <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fx.com%2FFarmrHuntr%2Fstatus%2F2108953542996214091&section=targeted-search-highlights&date=2026-10-11" target="_self" rel="noopener">Ryan Heiniger @FarmrHuntr · 18m If you think corn is low now just wait till USDA releases the DC corn acres in the October report 1 5 116</a> — <em>Agriculture</em> · 0 engagement</p>
+<p>12. <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fx.com%2Fbazfurby%2Fstatus%2F2108948367208259710&section=targeted-search-highlights&date=2026-10-11" target="_self" rel="noopener">Baz Furby 👻 @bazfurby · 6m Nous Research just confirmed a $90M Series B at a reported $1.5B valuation, and launched Hermes for Businesses. Hermes started as an open-source agent with tens of millions of clones. Now they&amp;#39;re selling the team layer: shared skills, central billing, per-member spend caps, and Show more 8</a> — <em>Hermes</em> · 0 engagement</p>
+<p>13. <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fx.com%2Fbagusfarisa%2Fstatus%2F2108947274453950759&section=targeted-search-highlights&date=2026-10-11" target="_self" rel="noopener">Guntur @bagusfarisa · 10m Saya coba pakai prompt ini dengan Hermes Agent + Mimo V2.6 Pro + Remotion skill dan hasilnya mayan mirip sih https:// prompt-motion.com/brainextends-e 19ac3 … 25</a> — <em>Hermes</em> · 0 engagement</p>
+<p>14. <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fx.com%2Fiiam_Akshay%2Fstatus%2F2108947385976332520&section=targeted-search-highlights&date=2026-10-11" target="_self" rel="noopener">Akshay @iiam\&amp;lt;em&amp;gt;Akshay · 10m AI and crypto are increasingly overlapping. Nous Research reportedly raised $90 million, highlighting investor interest in open AI research alongside blockchain-related infrastructure. The key question: can open AI ecosystems build sustainable products — not just attract Show more 58</a> — _Hermes</em> · 0 engagement</p>
+<p>15. <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fx.com%2FBlueHorseShoe__%2Fstatus%2F2108942742382399641&section=targeted-search-highlights&date=2026-10-11" target="_self" rel="noopener">Spencer Prosser @BlueHorseShoe\&amp;lt;em&amp;gt;\&amp;lt;/em&amp;gt; · 29m So… you are telling me the corn farmers think the USDA yield is wrong? 1 1 90</a> — <em>Agriculture</em> · 0 engagement</p>
+<p>16. <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fx.com%2FJayQinQT%2Fstatus%2F2108946543374106858&section=targeted-search-highlights&date=2026-10-11" target="_self" rel="noopener">Jay @JayQinQT · 5m s protocol&amp;#39; on a Claude relay? It speaks only /v1/messages, not /chat/completions: curl $BASE/v1/messages -H &amp;#39;x-api-key: $KEY &amp;#39; Use an Anthropic-type provider. OpenClaw / Hermes Agent / DeepSeek Harness / OpenCode: https:// claw.qt.cool 14</a> — <em>Hermes</em> · 0 engagement</p>
+<p>17. <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fx.com%2Fphilkellr%2Fstatus%2F2108946242029953041&section=targeted-search-highlights&date=2026-10-11" target="_self" rel="noopener">Philipp Keller @philkellr · 1m Replying to @tavioto What are you running with Hermes agent? And is deepseek a sub? 1</a> — <em>Hermes</em> · 0 engagement</p>
+<p>18. <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fx.com%2Ftmophoto%2Fstatus%2F2108945066152915015&section=targeted-search-highlights&date=2026-10-11" target="_self" rel="noopener">tmo @tmophoto · 5m Replying to @mr\&amp;lt;em&amp;gt;r0b0t and @NousResearch the kanban aspect of hermes agent is the most incredible thing about the whole thing 6</a> — _Hermes</em> · 0 engagement</p>
+<p>19. <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fx.com%2Fitx_l0b0%2Fstatus%2F2108944735356555724&section=targeted-search-highlights&date=2026-10-11" target="_self" rel="noopener">Lobo @itx\&amp;lt;em&amp;gt;l0b0 · 7m Replying to @migtissera is this hermes agent? 1 1 18</a> — _Hermes</em> · 0 engagement</p>
+<p>20. <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fx.com%2FHermesAgentTips%2Fstatus%2F2108944475422933366&section=targeted-search-highlights&date=2026-10-11" target="_self" rel="noopener">Hermes Agent Tips @HermesAgentTips · 6m Replying to @Youkhna and @MinimalCompany looks pretty slick 6</a> — <em>Hermes</em> · 0 engagement</p>
+<p>21. <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fx.com%2FOnFinality%2Fstatus%2F2108943686755406062&section=targeted-search-highlights&date=2026-10-11" target="_self" rel="noopener">OnFinality @OnFinality · 5m Replying to @JulianGoldieSEO 1M context sounds great until the agent has to actually navigate something. Does Hermes Agent use that window for raw page dumps, or does it still rely on a browser layer for state? 2</a> — <em>Hermes</em> · 0 engagement</p>
+<p>22. <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fx.com%2F4jr4m0s%2Fstatus%2F2108938242062160044&section=targeted-search-highlights&date=2026-10-11" target="_self" rel="noopener">Ángel - アンヘル @4jr4m0s · 6m Replying to @felipepoloruiz and @ReadwiseReader Yo sé lo mando a mi Hermes agent y me hace un resumen en audio de un minuto y cómo aplicarlo a mi contexto que vive en obsidian. Si me gusta, le digo que me haga una PR a mi obsidian. Si me interesa mucho le digo que haga un Cronjob y me vaya mandado el contenido 6</a> — <em>Hermes</em> · 0 engagement</p>
+<p>23. <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fx.com%2FMark_Edgeller%2Fstatus%2F2108938278921794030&section=targeted-search-highlights&date=2026-10-11" target="_self" rel="noopener">Mark Edgeller @Mark\&amp;lt;em&amp;gt;Edgeller · 6m Replying to @thorstenball So, a couple of harnesses have implemented this route using the Agent SDK. In the ones I&amp;#39;ve tried I&amp;#39;ve noticed my usage is garbage, without changing my behaviour in any meaningful way. In Hermes Agent, the person who wrote their plugin indicated that we should 1/2 1 14</a> — _Hermes</em> · 0 engagement</p>
+<p>24. <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fx.com%2Fsanma_dev%2Fstatus%2F2108937193406582803&section=targeted-search-highlights&date=2026-10-11" target="_self" rel="noopener">sanma @sanma\&amp;lt;em&amp;gt;dev · 10m Opus5.5で雑コーディング -\&amp;gt; grok botであらゆる角度からデバッグ -\&amp;gt; hermes agentかなんか使ってGLM5.3で自分のサイト攻撃させてセキュリティチェックのループだけで開発は完結するのでは？？ そんでaiに直せないバグ出た時だけアーキテクチャの調査するって感じの開発が多分最速 17</a> — _Hermes</em> · 0 engagement</p>
+<p>25. <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fx.com%2FScalpingX%2Fstatus%2F2108929904658264561&section=targeted-search-highlights&date=2026-10-11" target="_self" rel="noopener">ScalpingX @ScalpingX · 39m Agricultural Markets Diverge as USDA Raises U.S. Corn Supply Forecast 🌾 During October 5–9, global agricultural markets were heavily influenced by the USDA&amp;#39;s October WASDE report. Corn prices fell sharply as the U.S. supply outlook exceeded expectations, while soybeans Show more 76</a> — <em>Agriculture</em> · 0 engagement</p>
+<p>26. <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fx.com%2Ftavioto%2Fstatus%2F2108935286105231758&section=targeted-search-highlights&date=2026-10-11" target="_self" rel="noopener">Octavio Herrera @tavioto · 24s Replying to @philkellr I just decided for one model per each task: - business, architect, engineer: GPT 5.6 Sol - coding: Qwen 3.8 Flash - Hermes Agent; DeepSeek 4.1 flash</a> — <em>Hermes</em> · 0 engagement</p>
+<p>27. <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fx.com%2Falexhvnsen%2Fstatus%2F2108934581470806403&section=targeted-search-highlights&date=2026-10-11" target="_self" rel="noopener">Alex Hansen 🦈 @alexhvnsen · 3m Can I get one of these only to chat with my Hermes agent? Quote Andre @Youkhna · 20h For years, the smartphone industry has been competing for one thing: more of your attention. More scrolling. More notifications. More screen time. We think the next generation of smartphones should compete for something entirely different. Givi</a> — <em>Hermes</em> · 0 engagement</p>
+<p>28. <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fx.com%2Febukagaus%2Fstatus%2F2108934218499674461&section=targeted-search-highlights&date=2026-10-11" target="_self" rel="noopener">Ebuka l Socrates🦙🐍🦜🦀 @ebukagaus · 4m I have been doing this via @NousResearch Hermes Agent on Telegram \\(only for open source repos on my GitHub and nothing 9-5 related, because I don&amp;#39;t 100% trust AI yet\\) Quote timi the chef 👨🏾‍🍳 @timithechef · 18h I’ve stopped coding on my PC I now run T3 Code on my VPS, with multiple Codex and Claude Code subs aggregated</a> — <em>Hermes</em> · 0 engagement</p>
+<h2 id="agtalk-crop-talk">🌾 AgTalk Crop Talk</h2>
+<p><em>AgTalk source status: current verified artifact.</em></p>
+<p>1. <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Ftalk.newagtalk.com%2Fforums%2Fthread-view.asp%3Ftid%3D1249487&section=agtalk-crop-talk&date=2026-10-11" target="_self" rel="noopener">RE: Anyone see any of&amp;quot;the once in a while&amp;quot; black soybeans?</a> — 0 replies · roundup · 10/10/2026 19:42 · <strong>Bayer/Product mention</strong></p>
+<p>2. <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Ftalk.newagtalk.com%2Fforums%2Fthread-view.asp%3Ftid%3D1249445&section=agtalk-crop-talk&date=2026-10-11" target="_self" rel="noopener">Who can we SUE?.</a> — 23 replies · Gadsdenman · 10/9/2026 22:18</p>
+<p>3. <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Ftalk.newagtalk.com%2Fforums%2Fthread-view.asp%3Ftid%3D1249384&section=agtalk-crop-talk&date=2026-10-11" target="_self" rel="noopener">Seed Dealer Advice - Northwest Ohio</a> — 13 replies · YoungInAg05 · 10/9/2026 08:36</p>
+<p>4. <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Ftalk.newagtalk.com%2Fforums%2Fthread-view.asp%3Ftid%3D1249383&section=agtalk-crop-talk&date=2026-10-11" target="_self" rel="noopener">Anyone purchasing 28% for next year?</a> — 8 replies · roarintiger1 · 10/9/2026 08:26</p>
+<p>5. <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Ftalk.newagtalk.com%2Fforums%2Fthread-view.asp%3Ftid%3D1249414&section=agtalk-crop-talk&date=2026-10-11" target="_self" rel="noopener">Sound Ag product called Source</a> — 8 replies · GlugMethod · 10/9/2026 13:18</p>
+<p>6. <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Ftalk.newagtalk.com%2Fforums%2Fthread-view.asp%3Ftid%3D1249336&section=agtalk-crop-talk&date=2026-10-11" target="_self" rel="noopener">Humic Acid, how many times to apply</a> — 10 replies · John Smith · 10/8/2026 20:06</p>
+<p>7. <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Ftalk.newagtalk.com%2Fforums%2Fthread-view.asp%3Ftid%3D1249416&section=agtalk-crop-talk&date=2026-10-11" target="_self" rel="noopener">Building Carbon</a> — 1 replies · NE Soil Builder · 10/9/2026 15:15</p>
+<p>8. <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Ftalk.newagtalk.com%2Fforums%2Fthread-view.asp%3Ftid%3D217889&section=agtalk-crop-talk&date=2026-10-11" target="_self" rel="noopener">AgTalk Posting Policy</a> — 0 replies · dko_scOH · 3/1/2011 20:11</p>
+<p>9. <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Ftalk.newagtalk.com%2Fforums%2Fthread-view.asp%3Ftid%3D1249393&section=agtalk-crop-talk&date=2026-10-11" target="_self" rel="noopener">Rain</a> — 5 replies · ajb71 · 10/9/2026 10:15</p>
+<p>10. <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Ftalk.newagtalk.com%2Fforums%2Fthread-view.asp%3Ftid%3D1249412&section=agtalk-crop-talk&date=2026-10-11" target="_self" rel="noopener">Pioneer P35Z76E</a> — 3 replies · neukm · 10/9/2026 13:04</p>
+<h2 id="videos">📺 Videos</h2>
+<p><em>No noteworthy new videos today.</em></p>
+<h2 id="podcasts">🎙️ Podcasts</h2>
+<p><em>No noteworthy new podcast episodes today.</em></p>
+<h2 id="apple-health">🩺 Apple Health</h2>
+<h3>Current week progress</h3>
+<p><strong>Elapsed:</strong> 2026-10-05–2026-10-10 · <strong>Coverage:</strong> 6/6 days</p>
+<p><strong>Current-week total:</strong> 28,714 steps · 1,349 kcal · 55 min exercise</p>
+<p>**Yesterday (2026-10-10): 3,039 steps · — · — exercise · RHR — · HRV —</p>
+<p>🎯 Current-week workouts: <strong>2/3</strong></p>
+<p>Verified modalities: cardio 0 · strength 0 · unknown 2</p>
+<h3>Foundation decision</h3>
+<p><strong>Goal:</strong> 3 sessions/week (optional 4th in weeks 5–8).</p>
+<p><strong>Consistency:</strong> 0/4 evaluated weeks at target; progression: hold foundation.</p>
+<p><strong>Lapse/re-entry:</strong> active.</p>
+<p>💡 Goal behind: schedule 1 more workout this week; favor an easy 20–30 minute session and an earlier wind-down tonight.</p>
+<p>⚠️ No valid historical baseline for exercise minutes.</p>
+<p>⚠️ No valid historical baseline for heart rate variability.</p>
+<h3>🧠 Evidence-informed training/recovery synthesis</h3>
+<p>Yesterday’s 3,039 steps continued a three-day decline from 6,064 to 4,188 to 3,039, but missing sleep, resting-heart-rate, HRV, energy, and exercise data prevents a reliable recovery assessment. This week reached 2 of 3 foundation sessions, while the deterministic state calls for holding foundation after a lapse rather than adding catch-up intensity.</p>
+<p>🎯 Today&#39;s action: Take one easy 20-minute walk today at a comfortable conversational pace.</p>
+<p><em>Why: This supports consistency with a low-fatigue aerobic session without treating incomplete data as inactivity or escalating intensity. · Limits: Yesterday’s recovery metrics and exercise minutes are unavailable; Apple Health minutes do not identify workout modality or intensity, HRV and exercise-minute historical baselines are invalid, and wrist-temperature data are insufficient with no repeated or corroborated elevation.</em></p>
+<p><em>Public framework note (researched 2026-07-26): <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fwww.hubermanlab.com%2Ftopics%2Fsleep-hygiene&section=apple-health&date=2026-10-11" target="_self" rel="noopener">Huberman Lab</a> · <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fpeterattiamd.com%2Fexercising-for-longevity%2F&section=apple-health&date=2026-10-11" target="_self" rel="noopener">Peter Attia MD</a> · <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fwww.andygalpin.com%2F55-minute-physiology&section=apple-health&date=2026-10-11" target="_self" rel="noopener">Andy Galpin</a></em></p>
+<p><strong>Completed week:</strong> 2026-09-28–2026-10-04 · <strong>Coverage:</strong> 7/7 days</p>
+<table><thead><tr>
+<th>Date</th>
+<th>Steps</th>
+<th>Sleep</th>
+<th>Exercise</th>
+<th>RHR</th>
+<th>HRV</th>
+</tr></thead><tbody>
+<tr>
+<td>2026-09-28</td>
+<td>7,754</td>
+<td>—</td>
+<td>16 min</td>
+<td>60</td>
+<td>40</td>
+</tr>
+<tr>
+<td>2026-09-29</td>
+<td>3,890</td>
+<td>7.2h</td>
+<td>15 min</td>
+<td>65</td>
+<td>48</td>
+</tr>
+<tr>
+<td>2026-09-30</td>
+<td>6,240</td>
+<td>—</td>
+<td>19 min</td>
+<td>73</td>
+<td>31</td>
+</tr>
+<tr>
+<td>2026-10-01</td>
+<td>5,143</td>
+<td>6.9h</td>
+<td>15 min</td>
+<td>71</td>
+<td>29</td>
+</tr>
+<tr>
+<td>2026-10-02</td>
+<td>2,966</td>
+<td>—</td>
+<td>16 min</td>
+<td>67</td>
+<td>41</td>
+</tr>
+<tr>
+<td>2026-10-03</td>
+<td>8,493</td>
+<td>4.7h</td>
+<td>16 min</td>
+<td>67</td>
+<td>35</td>
+</tr>
+<tr>
+<td>2026-10-04</td>
+<td>8,319</td>
+<td>—</td>
+<td>11 min</td>
+<td>70</td>
+<td>30</td>
+</tr>
+</tbody></table>
+<table><thead><tr>
+<th>Metric</th>
+<th>Week</th>
+<th>Historical median</th>
+<th>Δ</th>
+<th>n</th>
+</tr></thead><tbody>
+<tr>
+<td>Steps</td>
+<td>42,805 steps</td>
+<td>46,316 steps</td>
+<td>-7.6%</td>
+<td>106</td>
+</tr>
+<tr>
+<td>Active Energy</td>
+<td>2,616.2 kcal</td>
+<td>3,086 kcal</td>
+<td>-15.2%</td>
+<td>98</td>
+</tr>
+<tr>
+<td>Walking Distance</td>
+<td>19.4 mi</td>
+<td>27.3 mi</td>
+<td>-29.1%</td>
+<td>106</td>
+</tr>
+<tr>
+<td>Flights Climbed</td>
+<td>69 flights</td>
+<td>83.4 flights</td>
+<td>-17.3%</td>
+<td>106</td>
+</tr>
+<tr>
+<td>Exercise Minutes</td>
+<td>108 min</td>
+<td>—</td>
+<td>—</td>
+<td>0</td>
+</tr>
+<tr>
+<td>Sleep</td>
+<td>6.3 h</td>
+<td>7.7 h</td>
+<td>-19.0%</td>
+<td>76</td>
+</tr>
+<tr>
+<td>Resting HR</td>
+<td>67.6 bpm</td>
+<td>63 bpm</td>
+<td>+7.3%</td>
+<td>77</td>
+</tr>
+<tr>
+<td>HRV</td>
+<td>36.2 ms</td>
+<td>—</td>
+<td>—</td>
+<td>0</td>
+</tr>
+</tbody></table>
+</main>
+<footer>
+  <p>🤖 Generated by Hermes Agent &middot; Built with ❤️</p>
+  <p>Click 👍/👎 on any story to help me learn what you like!</p>
+</footer>
+</div>
+<div id="toast" class="toast"></div>
+<script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function() {
+    navigator.serviceWorker.register('/sw.js', { scope: '/' })
+      .catch(function(error) { console.warn('SW registration failed:', error); });
+  });
+}
+</script>
+</body>
+</html>
