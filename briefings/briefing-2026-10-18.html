@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#2563eb">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Briefing">
+<link rel="apple-touch-icon" sizes="192x192" href="/icon-192.png">
+<link rel="manifest" href="/manifest.json?key=a8x3kM9pQw2z">
+<title>Daily Briefing — Sunday, October 18, 2026</title>
+<style>
+:root {
+  --bg: #fafafa;
+  --card: #ffffff;
+  --text: #1a1a2e;
+  --muted: #666;
+  --accent: #2563eb;
+  --border: #e5e7eb;
+  --success: #059669;
+  --warning: #d97706;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0f172a;
+    --card: #1e293b;
+    --text: #e2e8f0;
+    --muted: #94a3b8;
+    --accent: #60a5fa;
+    --border: #334155;
+    --success: #34d399;
+    --warning: #fbbf24;
+  }
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', Roboto, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  padding: 0;
+}
+.container {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+header {
+  text-align: center;
+  padding: 2rem 0 1rem;
+  border-bottom: 2px solid var(--accent);
+  margin-bottom: 2rem;
+}
+header h1 { font-size: 1.5rem; color: var(--accent); }
+header .date { color: var(--muted); font-size: 0.9rem; }
+h2 {
+  font-size: 1.2rem;
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
+  padding-bottom: 0.3rem;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+h3 {
+  font-size: 1.05rem;
+  margin-top: 1.25rem;
+  margin-bottom: 0.5rem;
+  color: var(--muted);
+}
+strong { font-weight: 600; }
+em { font-style: italic; }
+code {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  padding: 1px 4px;
+  font-size: 0.85em;
+  font-family: 'SF Mono', 'Fira Code', monospace;
+}
+.feedback { margin-left: auto; font-size: 0.85rem; opacity: 0.5; transition: opacity 0.2s; }
+h2:hover .feedback { opacity: 1; }
+.thumb-up, .thumb-down {
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 2px 6px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  transition: all 0.15s;
+}
+.thumb-up:hover { background: var(--success); color: white; }
+.thumb-down:hover { background: #dc2626; color: white; }
+.thumb-up.voted, .thumb-down.voted { opacity: 0.5; pointer-events: none; }
+.bookmark-btn {
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 2px 6px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  margin-left: 0.25rem;
+}
+.bookmark-btn:hover, .bookmark-btn.saved { background: var(--accent); color: white; }
+.bookmark-btn:disabled { opacity: 0.6; cursor: wait; }
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0.75rem 0;
+  font-size: 0.9rem;
+}
+th, td {
+  text-align: left;
+  padding: 6px 10px;
+  border-bottom: 1px solid var(--border);
+}
+th { font-weight: 600; color: var(--accent); }
+ul { margin: 0.5rem 0 0.5rem 1.5rem; }
+li { margin: 0.25rem 0; }
+p { margin: 0.5rem 0; }
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+.weather-summary {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1rem;
+  margin: 1rem 0;
+}
+.weather-main { font-size: 2rem; font-weight: 700; }
+.weather-detail { color: var(--muted); font-size: 0.9rem; }
+footer {
+  margin-top: 3rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border);
+  text-align: center;
+  color: var(--muted);
+  font-size: 0.8rem;
+}
+.toast {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  background: var(--accent);
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  opacity: 0;
+  transition: opacity 0.3s;
+  pointer-events: none;
+}
+.toast.show { opacity: 1; }
+</style>
+</head>
+<body>
+<div class="container">
+<header>
+  <h1>📋 Daily Briefing</h1>
+  <div class="date">Sunday, October 18, 2026</div>
+  <p style="margin-top:0.5rem;font-size:0.85rem"><a href="/?key=a8x3kM9pQw2z" target="_self">📋 Previous briefings</a> · <a href="/bookmarks.html?key=a8x3kM9pQw2z" target="_self">🔖 Bookmarks</a></p>
+</header>
+<main>
+<p># Daily Briefing — Sunday, October 18, 2026</p>
+<h2 id="calendar">📅 Calendar</h2>
+<ul>
+<li><span class="item-feedback" data-id="Youth Group" data-section="calendar"><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fwww.google.com%2Fcalendar%2Fevent%3Feid%3DNHFyZzJtdG5uYWdkbGxqZGxqM3RjZWp1YTdfMjAyNjEwMThUMjIwMDAwWiBuY2JjcnJndmJjbjZicW5hdHUxaDE5bDUxa0Bn&section=calendar&date=2026-10-18" target="_self" rel="noopener">Youth Group</a> [McCown Family] <button class="thumb-up" onclick="voteItem('calendar','Youth Group','up')">👍</button><button class="thumb-down" onclick="voteItem('calendar','Youth Group','down')">👎</button><button class="bookmark-btn" data-bookmark-url="https://www.google.com/calendar/event?eid=NHFyZzJtdG5uYWdkbGxqZGxqM3RjZWp1YTdfMjAyNjEwMThUMjIwMDAwWiBuY2JjcnJndmJjbjZicW5hdHUxaDE5bDUxa0Bn" data-bookmark-title="Youth Group" data-bookmark-section="calendar" type="button" aria-label="Bookmark this item">🔖 Bookmark</button></span></li>
+</ul>
+<h2 id="weather-wildwood-mo">🌤️ Weather — Wildwood, MO</h2>
+<table><thead><tr>
+<th>Day</th>
+<th>Condition</th>
+<th>High/Low</th>
+<th>Precip</th>
+<th>Wind</th>
+</tr></thead><tbody>
+<tr>
+<td><strong>Today</strong></td>
+<td>Widespread Frost then Sunny</td>
+<td>69°F / 32°F</td>
+<td>0%</td>
+<td>5 mph S</td>
+</tr>
+<tr>
+<td><strong>Tonight</strong></td>
+<td>Patchy Frost</td>
+<td>— / 32°F</td>
+<td>0%</td>
+<td>1 mph S</td>
+</tr>
+<tr>
+<td>Monday</td>
+<td>Sunny</td>
+<td>71°F / 41°F</td>
+<td>0%</td>
+<td>2 mph SE</td>
+</tr>
+<tr>
+<td>Tuesday</td>
+<td>Sunny</td>
+<td>73°F / 43°F</td>
+<td>0%</td>
+<td>1 mph E</td>
+</tr>
+<tr>
+<td>Wednesday</td>
+<td>Sunny</td>
+<td>76°F / 47°F</td>
+<td>0%</td>
+<td>0 mph</td>
+</tr>
+<tr>
+<td>Thursday</td>
+<td>Sunny</td>
+<td>80°F / 47°F</td>
+<td>0%</td>
+<td>1 mph E</td>
+</tr>
+<tr>
+<td>Friday</td>
+<td>Sunny</td>
+<td>79°F / 48°F</td>
+<td>0%</td>
+<td>3 mph SE</td>
+</tr>
+<tr>
+<td>Saturday</td>
+<td>Mostly Sunny</td>
+<td>79°F / —</td>
+<td>1%</td>
+<td>3 mph SE</td>
+</tr>
+</tbody></table>
+<h2 id="openrouter-budget">💰 OpenRouter Budget</h2>
+<h3>OpenRouter</h3>
+<p><strong>$0.06</strong> / $20.00 (0.3%) used</p>
+<p><code>█░░░░░░░░░░░░░░░░░░░</code></p>
+<p>📊 Daily: $0.00 · Remaining: <strong>$19.94</strong></p>
+<p>📈 ✅ On track</p>
+<h3>OpenAI Codex (separate from OpenRouter)</h3>
+<table><thead><tr>
+<th>Metric</th>
+<th>Value</th>
+</tr></thead><tbody>
+<tr>
+<td>Weekly limit used</td>
+<td><strong>1.0%</strong></td>
+</tr>
+<tr>
+<td>Weekly reset</td>
+<td>Sat 6:40 PM CT</td>
+</tr>
+<tr>
+<td>Latest session usage</td>
+<td>—</td>
+</tr>
+<tr>
+<td>Spend</td>
+<td>— (no monetary cost in local Codex data)</td>
+</tr>
+<tr>
+<td>Source/status</td>
+<td>Official Codex usage endpoint · available · 2026-10-18T10:30:26.458017+00:00</td>
+</tr>
+</tbody></table>
+<h2 id="feed-highlights">📰 Feed Highlights</h2>
+<h3>AI &amp; ML</h3>
+<ul>
+<li><span class="item-feedback" data-id="Inline rendering with document​.currentScript" data-section="feed-highlights"><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fsimonwillison.net%2F2026%2FOct%2F17%2Fdocument-currentscript%2F&section=feed-highlights&date=2026-10-18" target="_self" rel="noopener">Inline rendering with document​.currentScript</a> — <em>Simon Willison</em> <button class="thumb-up" onclick="voteItem('feed-highlights','Inline rendering with document​.currentScript','up')">👍</button><button class="thumb-down" onclick="voteItem('feed-highlights','Inline rendering with document​.currentScript','down')">👎</button><button class="bookmark-btn" data-bookmark-url="https://simonwillison.net/2026/Oct/17/document-currentscript/" data-bookmark-title="Inline rendering with document​.currentScript" data-bookmark-section="feed-highlights" type="button" aria-label="Bookmark this item">🔖 Bookmark</button></span></li>
+<li><span class="item-feedback" data-id="Granite Switch 4.1: Chat, Decisions, and Speech from One Endpoint" data-section="feed-highlights"><a href="https://huggingface.co/blog/ibm-granite/granite-switch-4-1" target="_self" rel="noopener noreferrer">Granite Switch 4.1: Chat, Decisions, and Speech from One Endpoint</a> — <em>Hugging Face Blog</em> <button class="thumb-up" onclick="voteItem('feed-highlights','Granite Switch 4.1: Chat, Decisions, and Speech from One Endpoint','up')">👍</button><button class="thumb-down" onclick="voteItem('feed-highlights','Granite Switch 4.1: Chat, Decisions, and Speech from One Endpoint','down')">👎</button><button class="bookmark-btn" data-bookmark-url="https://huggingface.co/blog/ibm-granite/granite-switch-4-1" data-bookmark-title="Granite Switch 4.1: Chat, Decisions, and Speech from One Endpoint" data-bookmark-section="feed-highlights" type="button" aria-label="Bookmark this item">🔖 Bookmark</button></span></li>
+</ul>
+<h3>Technology</h3>
+<ul>
+<li><span class="item-feedback" data-id="Rocket Report: FAA eyes more Starbase traffic; India&#39;s Skyroot snares US customer" data-section="feed-highlights"><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Farstechnica.com%2Fspace%2F2026%2F10%2Frocket-report-faa-eyes-more-starbase-traffic-indias-skyroot-snares-us-customer%2F&section=feed-highlights&date=2026-10-18" target="_self" rel="noopener">Rocket Report: FAA eyes more Starbase traffic; India&amp;#39;s Skyroot snares US customer</a> — <em>Ars Technica</em> <button class="thumb-up" onclick="voteItem('feed-highlights','Rocket Report: FAA eyes more Starbase traffic; India&#39;s Skyroot snares US customer','up')">👍</button><button class="thumb-down" onclick="voteItem('feed-highlights','Rocket Report: FAA eyes more Starbase traffic; India&#39;s Skyroot snares US customer','down')">👎</button><button class="bookmark-btn" data-bookmark-url="https://arstechnica.com/space/2026/10/rocket-report-faa-eyes-more-starbase-traffic-indias-skyroot-snares-us-customer/" data-bookmark-title="Rocket Report: FAA eyes more Starbase traffic; India&#39;s Skyroot snares US customer" data-bookmark-section="feed-highlights" type="button" aria-label="Bookmark this item">🔖 Bookmark</button></span></li>
+</ul>
+<h3>Agriculture &amp; Food Systems</h3>
+<ul>
+<li><span class="item-feedback" data-id="A 24-year study uncovers a surprising climate benefit beneath forests" data-section="feed-highlights"><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fwww.sciencedaily.com%2Freleases%2F2026%2F10%2F261014015525.htm&section=feed-highlights&date=2026-10-18" target="_self" rel="noopener">A 24-year study uncovers a surprising climate benefit beneath forests</a> — <em>ScienceDaily - Agriculture</em> <button class="thumb-up" onclick="voteItem('feed-highlights','A 24-year study uncovers a surprising climate benefit beneath forests','up')">👍</button><button class="thumb-down" onclick="voteItem('feed-highlights','A 24-year study uncovers a surprising climate benefit beneath forests','down')">👎</button><button class="bookmark-btn" data-bookmark-url="https://www.sciencedaily.com/releases/2026/10/261014015525.htm" data-bookmark-title="A 24-year study uncovers a surprising climate benefit beneath forests" data-bookmark-section="feed-highlights" type="button" aria-label="Bookmark this item">🔖 Bookmark</button></span></li>
+<li><span class="item-feedback" data-id="Thompson visits Missouri; farm bill negotiations continue ahead of lame-duck session" data-section="feed-highlights"><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fwww.brownfieldagnews.com%2Fnews%2Fthompson-visits-missouri-farm-bill-negotiations-continue-ahead-of-lame-duck-session%2F&section=feed-highlights&date=2026-10-18" target="_self" rel="noopener">Thompson visits Missouri; farm bill negotiations continue ahead of lame-duck session</a> — <em>Brownfield Ag News</em> <button class="thumb-up" onclick="voteItem('feed-highlights','Thompson visits Missouri; farm bill negotiations continue ahead of lame-duck session','up')">👍</button><button class="thumb-down" onclick="voteItem('feed-highlights','Thompson visits Missouri; farm bill negotiations continue ahead of lame-duck session','down')">👎</button><button class="bookmark-btn" data-bookmark-url="https://www.brownfieldagnews.com/news/thompson-visits-missouri-farm-bill-negotiations-continue-ahead-of-lame-duck-session/" data-bookmark-title="Thompson visits Missouri; farm bill negotiations continue ahead of lame-duck session" data-bookmark-section="feed-highlights" type="button" aria-label="Bookmark this item">🔖 Bookmark</button></span></li>
+<li><span class="item-feedback" data-id="Sample Cost and Returns for a Migratory Commercial Beekeeping Operation 2025-2026" data-section="feed-highlights"><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Ffarmdocdaily.illinois.edu%2F2026%2F10%2Fsample-cost-and-returns-for-a-migratory-commercial-beekeeping-operation-2025-2026.html&section=feed-highlights&date=2026-10-18" target="_self" rel="noopener">Sample Cost and Returns for a Migratory Commercial Beekeeping Operation 2025-2026</a> — <em>farmdoc daily</em> <button class="thumb-up" onclick="voteItem('feed-highlights','Sample Cost and Returns for a Migratory Commercial Beekeeping Operation 2025-2026','up')">👍</button><button class="thumb-down" onclick="voteItem('feed-highlights','Sample Cost and Returns for a Migratory Commercial Beekeeping Operation 2025-2026','down')">👎</button><button class="bookmark-btn" data-bookmark-url="https://farmdocdaily.illinois.edu/2026/10/sample-cost-and-returns-for-a-migratory-commercial-beekeeping-operation-2025-2026.html" data-bookmark-title="Sample Cost and Returns for a Migratory Commercial Beekeeping Operation 2025-2026" data-bookmark-section="feed-highlights" type="button" aria-label="Bookmark this item">🔖 Bookmark</button></span></li>
+</ul>
+<h2 id="hacker-news">🔥 Hacker News</h2>
+<p>1. <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fapi-docs.deepseek.com%2Fguides%2Fsearch%2F&section=hacker-news&date=2026-10-18" target="_self" rel="noopener">DeepSeek search and fetch – $0.75 per 1000 successful requests</a> — <strong>199</strong> pts by fagnerbrack (<a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fnews.ycombinator.com%2Fitem%3Fid%3D50138531&section=hacker-news&date=2026-10-18" target="_self" rel="noopener">97 comments</a>)</p>
+<p>2. <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fsphinx-six-theta.vercel.app%2F&section=hacker-news&date=2026-10-18" target="_self" rel="noopener">Show HN: Sphinx – A hook that quizzes you on your AI&amp;#39;s code before shipping</a> — <strong>135</strong> pts by critiquebrowser (<a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fnews.ycombinator.com%2Fitem%3Fid%3D50137950&section=hacker-news&date=2026-10-18" target="_self" rel="noopener">35 comments</a>)</p>
+<p>3. <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fwww.readtheprofile.com%2Fp%2Felizabeth-holmes-documentary-you-can-see-everything&section=hacker-news&date=2026-10-18" target="_self" rel="noopener">How the Elizabeth Holmes documentary “You Can See Everything” is deceiving</a> — <strong>147</strong> pts by MaysonL (<a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fnews.ycombinator.com%2Fitem%3Fid%3D50137620&section=hacker-news&date=2026-10-18" target="_self" rel="noopener">156 comments</a>)</p>
+<p>4. <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Ft3.at%2Fblog%2F2026-10-17-parser-combinators%2F&section=hacker-news&date=2026-10-18" target="_self" rel="noopener">Parser Combinators</a> — <strong>16</strong> pts by schindlabua (<a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fnews.ycombinator.com%2Fitem%3Fid%3D50139067&section=hacker-news&date=2026-10-18" target="_self" rel="noopener">1 comments</a>)</p>
+<p>5. <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fwww.nature.com%2Farticles%2Fd41586-026-03266-x&section=hacker-news&date=2026-10-18" target="_self" rel="noopener">Bleached corals thrive within days when touching healthy neighbour</a> — <strong>463</strong> pts by alkyon (<a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fnews.ycombinator.com%2Fitem%3Fid%3D50126253&section=hacker-news&date=2026-10-18" target="_self" rel="noopener">99 comments</a>)</p>
+<h2 id="r-hermesagent">🤖 r/hermesagent</h2>
+<p><em>No new r/hermesagent threads.</em></p>
+<h2 id="hermes-agent-highlights">🤖 Hermes &amp; Agent Highlights</h2>
+<p><em>No verified highlights today.</em></p>
+<h2 id="targeted-search-highlights">𝕏 Targeted Search Highlights</h2>
+<p><em>X source status: current verified artifact.</em></p>
+<h3>Hermes / Nous</h3>
+<p>1. <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fx.com%2FKaganKongar%2Fstatus%2F2111755045494513930&section=targeted-search-highlights&date=2026-10-18" target="_self" rel="noopener">Kağan Kongar @KaganKongar · 31m Replying to @ollies0x and @vmkbuilds This 👇 Also, may I suggest a 3-tier architecture? Deepseek V4.1 as advisor, V4.0 as coding supervisor, Muse Spark 1.3 as coder, first two running in different sessions of Hermes Agent and coding agent, Muse Code is controlled by its supervisor. As cheap, much less errors, Show more Quote Ka</a> — <em>Hermes</em> · 0 engagement</p>
+<p>2. <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fx.com%2FJulianGoldieSEO%2Fstatus%2F2111754115403665505&section=targeted-search-highlights&date=2026-10-18" target="_self" rel="noopener">Julian Goldie SEO @JulianGoldieSEO · 35m Hermes Agent OS puts all your AI agents in one place so you stop jumping between tools. There’s a free system that runs every AI agent from one screen. And most people have no idea it exists. Not 10 tabs. One dashboard. → Open Montage makes videos for free → Remotion builds Show more 2 773</a> — <em>Hermes</em> · 0 engagement</p>
+<p>3. <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fx.com%2Fdanielbitpro%2Fstatus%2F2111583877185622162&section=targeted-search-highlights&date=2026-10-18" target="_self" rel="noopener">Daniel B. - AI &amp;amp; Tech @danielbitpro · 6m @NousResearch and Hermes Agent have come a long way in such a short time, and it&amp;#39;s just the beginning! 👏 Quote Nous Research @NousResearch · Oct 16 Hermes Agent is a launch partner for @nvidia&amp;#39;s RTX Spark across the new generation of laptops. Pick it in the built-in @Windows agent setup flow, run the new generative on</a> — <em>Hermes</em> · 0 engagement</p>
+<p>4. <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fx.com%2FNousResearch%2Fstatus%2F2111583598104940952&section=targeted-search-highlights&date=2026-10-18" target="_self" rel="noopener">Nous Research @NousResearch · 7m Replying to @midasunhinged and @deepfates There is a Simple Mode 63</a> — <em>Hermes</em> · 0 engagement</p>
+<p>5. <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fx.com%2Ftborges77%2Fstatus%2F2111582443706925385&section=targeted-search-highlights&date=2026-10-18" target="_self" rel="noopener">Thiago Oliveira @tborges77 · 12m Replying to @NixFred Same thing i noticed with my Hermes agent Jarvis being left aside and more of a helper to my grokbots as my use of them increases! Did not see that coming... 6</a> — <em>Hermes</em> · 0 engagement</p>
+<p>6. <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fx.com%2FJulianGoldieSEO%2Fstatus%2F2111492649115074620&section=targeted-search-highlights&date=2026-10-18" target="_self" rel="noopener">Julian Goldie SEO @JulianGoldieSEO · 9m I gave my AI agent a link to my calendar app. It came back with a better one. Here&amp;#39;s what happened. I installed Reverse Engineer Anything \\(REA\\), a free MCP plugin, inside Hermes agent. Then I typed one prompt: &amp;#39;Use REA to reverse engineer this calendar app. Rebuild a Show more 698</a> — <em>Hermes</em> · 0 engagement</p>
+<p>7. <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fx.com%2Felshayib%3C%2Fem%3E%2Fstatus%2F2111492679733264846&section=targeted-search-highlights&date=2026-10-18" target="_self" rel="noopener">Elshayib @elshayib\&amp;lt;em&amp;gt; · 9m Replying to @ThungDick Hermes Agent 70</a> — <em>Hermes</em> · 0 engagement</p>
+<p>8. <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fx.com%2FJASONMCNAB%2Fstatus%2F2111492144896618545&section=targeted-search-highlights&date=2026-10-18" target="_self" rel="noopener">JASON MCNAB @JASONMCNAB · 11m Two DGX Sparks, one model: @Zai\&amp;lt;em&amp;gt;org GLM-5.3 Flash in @NVIDIAAI @nvidia &amp;#39;s FP4 local build, split across both boxes with tensor parallel, set up flag for flag from NVIDIA&amp;#39;s card. Short prompts, same 10-prompt set on every model: 37.5 tok/s, 0.29 s first token. Hermes Agent v0.22.0 Show more 1 39</a> — _Hermes</em> · 0 engagement</p>
+<h3>Bayer / Crop Science</h3>
+<p>9. <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fx.com%2FChurchillWw%2Fstatus%2F2111513329718145156&section=targeted-search-highlights&date=2026-10-18" target="_self" rel="noopener">Winston • Frontier @ChurchillWw · 16h Idaho&amp;#39;s largest electricity user is a plant with three electric furnaces that turn phosphate rock into elemental phosphorus. Bayer, the German pharmaceutical and agriculture group, has run it in Soda Springs since 1951. The furnaces are charged with rock, coke and silica, and the Show more 1 36 1.7K</a> — <em>Bayer</em> · 0 engagement</p>
+<p>10. <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fx.com%2FFieldView%2Fstatus%2F2111457203362152613&section=targeted-search-highlights&date=2026-10-18" target="_self" rel="noopener">FieldView @FieldView · 2h What’s next from Bayer Crop Science? Brian Naber joins #AroundTheFarm to talk Preceon Short Stature Corn, FieldView Advisor, farmer profitability and what’s ahead for the 2027 season. Watch the full episode ⬇️ 2 1 383</a> — <em>Bayer</em> · 0 engagement</p>
+<h3>US Agriculture</h3>
+<p>11. <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fx.com%2FBruce_LeVell%2Fstatus%2F2111744747526140149&section=targeted-search-highlights&date=2026-10-18" target="_self" rel="noopener">Bruce LeVell @Bruce\&amp;lt;em&amp;gt;LeVell · 1h When crop prices and costs get brutal, farmers need flexibility not red tape. @SecRollins just rolled out payment flexibility, modernized data tools, and enhanced crop insurance options at Minnesota Farmfest. President Trump said Farmers First. @USDA is delivering. Does your Show more 3 186</a> — _Agriculture</em> · 0 engagement</p>
+<p>12. <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fx.com%2FAgincRand%2Fstatus%2F2111578332114420127&section=targeted-search-highlights&date=2026-10-18" target="_self" rel="noopener">R&amp;amp;D Ag Inc @AgincRand · 29m Replying to @cfarms76 Usda might lie, but basis &amp;amp; futures spreads dont. Right now there are plenty of corn &amp;amp; beans around. If there are shortages, they are localized. 4</a> — <em>Agriculture</em> · 0 engagement</p>
+<p>13. <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fx.com%2Fmarkeduard1037%2Fstatus%2F2111484191003357522&section=targeted-search-highlights&date=2026-10-18" target="_self" rel="noopener">Mark Eduard Buena @markeduard1037 · 43m New help for American cotton farmers: Agriculture Secretary Brooke Rollins announced more crop-insurance flexibility for the 2027 crop year under the Working Families Tax Cuts. USDA is also offering lower tariffs on imported apparel made with U.S. cotton, to get key markets Show more Quote Dept. of Agriculture @USDA ·</a> — <em>Agriculture</em> · 0 engagement</p>
+<h2 id="agtalk-crop-talk">🌾 AgTalk Crop Talk</h2>
+<p><em>AgTalk source status: latest attempt unavailable; showing earlier verified briefing interval results.</em></p>
+<h3>Bayer / Product</h3>
+<p>1. <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Ftalk.newagtalk.com%2Fforums%2Fthread-view.asp%3Ftid%3D1249952&section=agtalk-crop-talk&date=2026-10-18" target="_self" rel="noopener">Asgrow 3. Beans</a> — 3 replies · jd43 · 10/17/2026 07:04 · <strong>Bayer/Product mention</strong></p>
+<h3>Other Crop Talk</h3>
+<p>2. <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Ftalk.newagtalk.com%2Fforums%2Fthread-view.asp%3Ftid%3D1249906&section=agtalk-crop-talk&date=2026-10-18" target="_self" rel="noopener">Head loss in 15%</a> — 15 replies · Morningdew · 10/16/2026 12:31</p>
+<p>3. <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Ftalk.newagtalk.com%2Fforums%2Fthread-view.asp%3Ftid%3D1249904&section=agtalk-crop-talk&date=2026-10-18" target="_self" rel="noopener">Heavy rain</a> — 12 replies · versatile875 · 10/16/2026 11:02</p>
+<p>4. <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Ftalk.newagtalk.com%2Fforums%2Fthread-view.asp%3Ftid%3D1249915&section=agtalk-crop-talk&date=2026-10-18" target="_self" rel="noopener">Lime and fertilizer laying on top of ground together</a> — 8 replies · CornFarmer86 · 10/16/2026 16:17</p>
+<p>5. <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Ftalk.newagtalk.com%2Fforums%2Fthread-view.asp%3Ftid%3D1249884&section=agtalk-crop-talk&date=2026-10-18" target="_self" rel="noopener">Covercrop application</a> — 7 replies · still trying · 10/16/2026 07:28</p>
+<p>6. <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Ftalk.newagtalk.com%2Fforums%2Fthread-view.asp%3Ftid%3D1249892&section=agtalk-crop-talk&date=2026-10-18" target="_self" rel="noopener">Litter Analysis</a> — 7 replies · gbryce · 10/16/2026 08:33</p>
+<h2 id="videos">📺 Videos</h2>
+<p>📺 <strong>New Hermes &amp; Copilot Videos</strong> — Top picks from the last 14 days</p>
+<ul>
+<li><span class="item-feedback" data-id="&lt;strong&gt;[Hermes Agent For Beginners 🧠 Ru" data-section="videos"><strong><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fyoutu.be%2FaUVC9BwoLPg&section=videos&date=2026-10-18" target="_self" rel="noopener">Hermes Agent For Beginners 🧠 Run Your First Local AI Agent (Easily)</a></strong> ⭐ 🎙️ <button class="thumb-up" onclick="voteItem('videos','&lt;strong&gt;[Hermes Agent For Beginners 🧠 Ru','up')">👍</button><button class="thumb-down" onclick="voteItem('videos','&lt;strong&gt;[Hermes Agent For Beginners 🧠 Ru','down')">👎</button><button class="bookmark-btn" data-bookmark-url="https://youtu.be/aUVC9BwoLPg" data-bookmark-title="Hermes Agent For Beginners 🧠 Run Your First Local AI Agent (Easily)" data-bookmark-section="videos" type="button" aria-label="Bookmark this item">🔖 Bookmark</button></span></li>
+</ul>
+<p>Wanderloots · 20m · 18,462 views · ❤️ 345</p>
+<p>🔬 Deep Dive</p>
+<p>📝 [ASR captions available — can summarize with LLM]</p>
+<ul>
+<li><span class="item-feedback" data-id="&lt;strong&gt;[AI Assisted CAP Development](ht" data-section="videos"><strong><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fyoutu.be%2F2OejfBst0zU&section=videos&date=2026-10-18" target="_self" rel="noopener">AI Assisted CAP Development</a></strong> 🎙️ <button class="thumb-up" onclick="voteItem('videos','&lt;strong&gt;[AI Assisted CAP Development](ht','up')">👍</button><button class="thumb-down" onclick="voteItem('videos','&lt;strong&gt;[AI Assisted CAP Development](ht','down')">👎</button><button class="bookmark-btn" data-bookmark-url="https://youtu.be/2OejfBst0zU" data-bookmark-title="AI Assisted CAP Development" data-bookmark-section="videos" type="button" aria-label="Bookmark this item">🔖 Bookmark</button></span></li>
+</ul>
+<p>SAP Developers · 1h1m · 1,270 views · ❤️ 22</p>
+<p>🔬 Deep Dive</p>
+<p>📝 [ASR captions available — can summarize with LLM]</p>
+<ul>
+<li><span class="item-feedback" data-id="&lt;strong&gt;[5 Hermes Agent Updates You Need" data-section="videos"><strong><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fyoutu.be%2FbSw2jZVeCuk&section=videos&date=2026-10-18" target="_self" rel="noopener">5 Hermes Agent Updates You Need to Know (One Deletes Your Sessions)</a></strong> 🎙️ <button class="thumb-up" onclick="voteItem('videos','&lt;strong&gt;[5 Hermes Agent Updates You Need','up')">👍</button><button class="thumb-down" onclick="voteItem('videos','&lt;strong&gt;[5 Hermes Agent Updates You Need','down')">👎</button><button class="bookmark-btn" data-bookmark-url="https://youtu.be/bSw2jZVeCuk" data-bookmark-title="5 Hermes Agent Updates You Need to Know (One Deletes Your Sessions)" data-bookmark-section="videos" type="button" aria-label="Bookmark this item">🔖 Bookmark</button></span></li>
+</ul>
+<p>Teku AI · 6m · 1,635 views · ❤️ 16</p>
+<p>📝 [ASR captions available — can summarize with LLM]</p>
+<h2 id="podcasts">🎙️ Podcasts</h2>
+<p><em>No noteworthy new podcast episodes today.</em></p>
+<h2 id="apple-health">🩺 Apple Health</h2>
+<h3>Current week progress</h3>
+<p><strong>Elapsed:</strong> 2026-10-12–2026-10-17 · <strong>Coverage:</strong> 6/6 days</p>
+<p><strong>Current-week total:</strong> 30,420 steps · 1,804 kcal · 71 min exercise</p>
+<p>**Yesterday (2026-10-17): 5,562 steps · 413 kcal · 14 min exercise · RHR 72 · HRV 28</p>
+<p>🎯 Current-week workouts: <strong>1/3</strong></p>
+<p>Verified modalities: cardio 0 · strength 0 · unknown 1</p>
+<h3>Foundation decision</h3>
+<p><strong>Goal:</strong> 3 sessions/week (optional 4th in weeks 5–8).</p>
+<p><strong>Consistency:</strong> 1/4 evaluated weeks at target; progression: hold foundation.</p>
+<p><strong>Lapse/re-entry:</strong> active.</p>
+<p>💡 Goal behind: schedule 2 more workouts this week — a 20–30 minute walk or workout counts.</p>
+<p>⚠️ No valid historical baseline for exercise minutes.</p>
+<p>⚠️ No valid historical baseline for heart rate variability.</p>
+<h3>🧠 Evidence-informed training/recovery synthesis</h3>
+<p>Yesterday showed reduced recovery: 6.74 hours of sleep was below baseline and resting heart rate was elevated, while HRV declined across the last three days from 40.6 to 27.6 ms. This week recorded 1 of 3 target sessions, with an active five-day lapse, so remain at foundation level without catch-up intensity.</p>
+<p>🎯 Today&#39;s action: Take one easy 20-minute walk today at a comfortable conversational pace.</p>
+<p><em>Why: This safely re-establishes an intentional session while respecting the current recovery warnings and avoiding advanced intensity. · Limits: Apple Health exercise minutes do not identify workout type or intensity; HRV and exercise-minutes baselines are unavailable, wrist-temperature data are insufficient and non-diagnostic, and some recent sleep and heart-rate observations are missing.</em></p>
+<p><em>Public framework note (researched 2026-07-26): <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fwww.hubermanlab.com%2Ftopics%2Fsleep-hygiene&section=apple-health&date=2026-10-18" target="_self" rel="noopener">Huberman Lab</a> · <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fpeterattiamd.com%2Fexercising-for-longevity%2F&section=apple-health&date=2026-10-18" target="_self" rel="noopener">Peter Attia MD</a> · <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fwww.andygalpin.com%2F55-minute-physiology&section=apple-health&date=2026-10-18" target="_self" rel="noopener">Andy Galpin</a></em></p>
+<p><strong>Completed week:</strong> 2026-10-05–2026-10-11 · <strong>Coverage:</strong> 7/7 days</p>
+<table><thead><tr>
+<th>Date</th>
+<th>Steps</th>
+<th>Sleep</th>
+<th>Exercise</th>
+<th>RHR</th>
+<th>HRV</th>
+</tr></thead><tbody>
+<tr>
+<td>2026-10-05</td>
+<td>4,573</td>
+<td>8.0h</td>
+<td>7 min</td>
+<td>65</td>
+<td>45</td>
+</tr>
+<tr>
+<td>2026-10-06</td>
+<td>4,251</td>
+<td>6.4h</td>
+<td>—</td>
+<td>—</td>
+<td>51</td>
+</tr>
+<tr>
+<td>2026-10-07</td>
+<td>6,599</td>
+<td>—</td>
+<td>26 min</td>
+<td>79</td>
+<td>33</td>
+</tr>
+<tr>
+<td>2026-10-08</td>
+<td>6,278</td>
+<td>7.9h</td>
+<td>22 min</td>
+<td>72</td>
+<td>33</td>
+</tr>
+<tr>
+<td>2026-10-09</td>
+<td>4,188</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td>2026-10-10</td>
+<td>5,980</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td>2026-10-11</td>
+<td>10,347</td>
+<td>—</td>
+<td>23 min</td>
+<td>73</td>
+<td>22</td>
+</tr>
+</tbody></table>
+<table><thead><tr>
+<th>Metric</th>
+<th>Week</th>
+<th>Historical median</th>
+<th>Δ</th>
+<th>n</th>
+</tr></thead><tbody>
+<tr>
+<td>Steps</td>
+<td>42,216 steps</td>
+<td>46,316 steps</td>
+<td>-8.9%</td>
+<td>106</td>
+</tr>
+<tr>
+<td>Active Energy</td>
+<td>1,960.7 kcal</td>
+<td>3,086 kcal</td>
+<td>-36.5%</td>
+<td>98</td>
+</tr>
+<tr>
+<td>Walking Distance</td>
+<td>19.0 mi</td>
+<td>27.3 mi</td>
+<td>-30.5%</td>
+<td>106</td>
+</tr>
+<tr>
+<td>Flights Climbed</td>
+<td>49 flights</td>
+<td>83.4 flights</td>
+<td>-41.2%</td>
+<td>106</td>
+</tr>
+<tr>
+<td>Exercise Minutes</td>
+<td>78 min</td>
+<td>—</td>
+<td>—</td>
+<td>0</td>
+</tr>
+<tr>
+<td>Sleep</td>
+<td>7.5 h</td>
+<td>7.7 h</td>
+<td>-3.7%</td>
+<td>76</td>
+</tr>
+<tr>
+<td>Resting HR</td>
+<td>72.2 bpm</td>
+<td>63 bpm</td>
+<td>+14.7%</td>
+<td>77</td>
+</tr>
+<tr>
+<td>HRV</td>
+<td>36.8 ms</td>
+<td>—</td>
+<td>—</td>
+<td>0</td>
+</tr>
+</tbody></table>
+</main>
+<footer>
+  <p>🤖 Generated by Hermes Agent &middot; Built with ❤️</p>
+  <p>Click 👍/👎 on any story to help me learn what you like!</p>
+</footer>
+</div>
+<div id="toast" class="toast"></div>
+<script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function() {
+    navigator.serviceWorker.register('/sw.js', { scope: '/' })
+      .catch(function(error) { console.warn('SW registration failed:', error); });
+  });
+}
+</script>
+</body>
+</html>
