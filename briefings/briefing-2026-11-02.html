@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#2563eb">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Briefing">
+<link rel="apple-touch-icon" sizes="192x192" href="/icon-192.png">
+<link rel="manifest" href="/manifest.json?key=a8x3kM9pQw2z">
+<title>Daily Briefing — Monday, November 2, 2026</title>
+<style>
+:root {
+  --bg: #fafafa;
+  --card: #ffffff;
+  --text: #1a1a2e;
+  --muted: #666;
+  --accent: #2563eb;
+  --border: #e5e7eb;
+  --success: #059669;
+  --warning: #d97706;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0f172a;
+    --card: #1e293b;
+    --text: #e2e8f0;
+    --muted: #94a3b8;
+    --accent: #60a5fa;
+    --border: #334155;
+    --success: #34d399;
+    --warning: #fbbf24;
+  }
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', Roboto, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  padding: 0;
+}
+.container {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+header {
+  text-align: center;
+  padding: 2rem 0 1rem;
+  border-bottom: 2px solid var(--accent);
+  margin-bottom: 2rem;
+}
+header h1 { font-size: 1.5rem; color: var(--accent); }
+header .date { color: var(--muted); font-size: 0.9rem; }
+h2 {
+  font-size: 1.2rem;
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
+  padding-bottom: 0.3rem;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+h3 {
+  font-size: 1.05rem;
+  margin-top: 1.25rem;
+  margin-bottom: 0.5rem;
+  color: var(--muted);
+}
+strong { font-weight: 600; }
+em { font-style: italic; }
+code {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  padding: 1px 4px;
+  font-size: 0.85em;
+  font-family: 'SF Mono', 'Fira Code', monospace;
+}
+.feedback { margin-left: auto; font-size: 0.85rem; opacity: 0.5; transition: opacity 0.2s; }
+h2:hover .feedback { opacity: 1; }
+.thumb-up, .thumb-down {
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 2px 6px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  transition: all 0.15s;
+}
+.thumb-up:hover { background: var(--success); color: white; }
+.thumb-down:hover { background: #dc2626; color: white; }
+.thumb-up.voted, .thumb-down.voted { opacity: 0.5; pointer-events: none; }
+.bookmark-btn {
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 2px 6px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  margin-left: 0.25rem;
+}
+.bookmark-btn:hover, .bookmark-btn.saved { background: var(--accent); color: white; }
+.bookmark-btn:disabled { opacity: 0.6; cursor: wait; }
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0.75rem 0;
+  font-size: 0.9rem;
+}
+th, td {
+  text-align: left;
+  padding: 6px 10px;
+  border-bottom: 1px solid var(--border);
+}
+th { font-weight: 600; color: var(--accent); }
+ul { margin: 0.5rem 0 0.5rem 1.5rem; }
+li { margin: 0.25rem 0; }
+p { margin: 0.5rem 0; }
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+.weather-summary {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1rem;
+  margin: 1rem 0;
+}
+.weather-main { font-size: 2rem; font-weight: 700; }
+.weather-detail { color: var(--muted); font-size: 0.9rem; }
+footer {
+  margin-top: 3rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border);
+  text-align: center;
+  color: var(--muted);
+  font-size: 0.8rem;
+}
+.toast {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  background: var(--accent);
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  opacity: 0;
+  transition: opacity 0.3s;
+  pointer-events: none;
+}
+.toast.show { opacity: 1; }
+</style>
+</head>
+<body>
+<div class="container">
+<header>
+  <h1>📋 Daily Briefing</h1>
+  <div class="date">Monday, November 2, 2026</div>
+  <p style="margin-top:0.5rem;font-size:0.85rem"><a href="/?key=a8x3kM9pQw2z" target="_self">📋 Previous briefings</a> · <a href="/bookmarks.html?key=a8x3kM9pQw2z" target="_self">🔖 Bookmarks</a></p>
+</header>
+<main>
+<p># Daily Briefing — Monday, November 2, 2026</p>
+<h2 id="calendar">📅 Calendar</h2>
+<ul>
+<li><span class="item-feedback" data-id="No School - Conference Compensation Day" data-section="calendar"><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fwww.google.com%2Fcalendar%2Fevent%3Feid%3DXzYwcDcycnBsY2xrN2FwM2dja3A2dW9waGN0am1zZTM0NzVwNzhkcmU2ayAxNThqbjRhY3ZjanUybDgzbG91NDg0MjBwbXNoNGM1cEBp&section=calendar&date=2026-11-02" target="_self" rel="noopener">No School - Conference Compensation Day</a> [Lafayette High School Calendar] <button class="thumb-up" onclick="voteItem('calendar','No School - Conference Compensation Day','up')">👍</button><button class="thumb-down" onclick="voteItem('calendar','No School - Conference Compensation Day','down')">👎</button><button class="bookmark-btn" data-bookmark-url="https://www.google.com/calendar/event?eid=XzYwcDcycnBsY2xrN2FwM2dja3A2dW9waGN0am1zZTM0NzVwNzhkcmU2ayAxNThqbjRhY3ZjanUybDgzbG91NDg0MjBwbXNoNGM1cEBp" data-bookmark-title="No School - Conference Compensation Day" data-bookmark-section="calendar" type="button" aria-label="Bookmark this item">🔖 Bookmark</button></span></li>
+<li><span class="item-feedback" data-id="All-Suburban Band Auditions" data-section="calendar"><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fwww.google.com%2Fcalendar%2Fevent%3Feid%3DXzZ0aDM2cjNrZGhxbXNxMzlkZ3EzZ3QzNzc0cW1pdGIxNmRpM2djajM2OCAxNThqbjRhY3ZjanUybDgzbG91NDg0MjBwbXNoNGM1cEBp&section=calendar&date=2026-11-02" target="_self" rel="noopener">All-Suburban Band Auditions</a> [Lafayette High School Calendar] <button class="thumb-up" onclick="voteItem('calendar','All-Suburban Band Auditions','up')">👍</button><button class="thumb-down" onclick="voteItem('calendar','All-Suburban Band Auditions','down')">👎</button><button class="bookmark-btn" data-bookmark-url="https://www.google.com/calendar/event?eid=XzZ0aDM2cjNrZGhxbXNxMzlkZ3EzZ3QzNzc0cW1pdGIxNmRpM2djajM2OCAxNThqbjRhY3ZjanUybDgzbG91NDg0MjBwbXNoNGM1cEBp" data-bookmark-title="All-Suburban Band Auditions" data-bookmark-section="calendar" type="button" aria-label="Bookmark this item">🔖 Bookmark</button></span></li>
+<li><span class="item-feedback" data-id="Matt Appointment with Clarkson Eyecare—arrive 10:10" data-section="calendar"><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fwww.google.com%2Fcalendar%2Fevent%3Feid%3DXzZvbzMyYzlwNmdyMzZiOXA4ZDFqNmI5azg1MzQ0YmExNmQxM2diYTU2NG80NGU5azg1MjRjZDFrOGMgbmNiY3JyZ3ZiY242YnFuYXR1MWgxOWw1MWtAZw&section=calendar&date=2026-11-02" target="_self" rel="noopener">Matt Appointment with Clarkson Eyecare—arrive 10:10</a> [McCown Family] <button class="thumb-up" onclick="voteItem('calendar','Matt Appointment with Clarkson Eyecare—arrive 10:10','up')">👍</button><button class="thumb-down" onclick="voteItem('calendar','Matt Appointment with Clarkson Eyecare—arrive 10:10','down')">👎</button><button class="bookmark-btn" data-bookmark-url="https://www.google.com/calendar/event?eid=XzZvbzMyYzlwNmdyMzZiOXA4ZDFqNmI5azg1MzQ0YmExNmQxM2diYTU2NG80NGU5azg1MjRjZDFrOGMgbmNiY3JyZ3ZiY242YnFuYXR1MWgxOWw1MWtAZw" data-bookmark-title="Matt Appointment with Clarkson Eyecare—arrive 10:10" data-bookmark-section="calendar" type="button" aria-label="Bookmark this item">🔖 Bookmark</button></span></li>
+<li><span class="item-feedback" data-id="Cleaning" data-section="calendar"><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fwww.google.com%2Fcalendar%2Fevent%3Feid%3DXzhwMTQ2ZDFuNzExamdiYTQ2OHJqOGI5azhsMWpnYmEyOGgyMzZiOW02Y3AzMGQyMjhoMGs0aGk2NnNfMjAyNjExMDJUMTYzMDAwWiBuY2JjcnJndmJjbjZicW5hdHUxaDE5bDUxa0Bn&section=calendar&date=2026-11-02" target="_self" rel="noopener">Cleaning </a> [McCown Family] <button class="thumb-up" onclick="voteItem('calendar','Cleaning','up')">👍</button><button class="thumb-down" onclick="voteItem('calendar','Cleaning','down')">👎</button><button class="bookmark-btn" data-bookmark-url="https://www.google.com/calendar/event?eid=XzhwMTQ2ZDFuNzExamdiYTQ2OHJqOGI5azhsMWpnYmEyOGgyMzZiOW02Y3AzMGQyMjhoMGs0aGk2NnNfMjAyNjExMDJUMTYzMDAwWiBuY2JjcnJndmJjbjZicW5hdHUxaDE5bDUxa0Bn" data-bookmark-title="Cleaning" data-bookmark-section="calendar" type="button" aria-label="Bookmark this item">🔖 Bookmark</button></span></li>
+<li><span class="item-feedback" data-id="🍛 Indian jar curry + chicken + rice" data-section="calendar"><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fwww.google.com%2Fcalendar%2Fevent%3Feid%3DZ3EwY2RlcjVzdHV2MGhpNnBsMjUzZWxtNG8gbmNiY3JyZ3ZiY242YnFuYXR1MWgxOWw1MWtAZw&section=calendar&date=2026-11-02" target="_self" rel="noopener">🍛 Indian jar curry + chicken + rice</a> [McCown Family] <button class="thumb-up" onclick="voteItem('calendar','🍛 Indian jar curry + chicken + rice','up')">👍</button><button class="thumb-down" onclick="voteItem('calendar','🍛 Indian jar curry + chicken + rice','down')">👎</button><button class="bookmark-btn" data-bookmark-url="https://www.google.com/calendar/event?eid=Z3EwY2RlcjVzdHV2MGhpNnBsMjUzZWxtNG8gbmNiY3JyZ3ZiY242YnFuYXR1MWgxOWw1MWtAZw" data-bookmark-title="🍛 Indian jar curry + chicken + rice" data-bookmark-section="calendar" type="button" aria-label="Bookmark this item">🔖 Bookmark</button></span></li>
+<li><span class="item-feedback" data-id="Soccer RSHS" data-section="calendar"><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fwww.google.com%2Fcalendar%2Fevent%3Feid%3DMDJsYzEzZzgxcG5mM2I4bW9xbGdmN25vZ24gbmNiY3JyZ3ZiY242YnFuYXR1MWgxOWw1MWtAZw&section=calendar&date=2026-11-02" target="_self" rel="noopener">Soccer RSHS</a> [McCown Family] <button class="thumb-up" onclick="voteItem('calendar','Soccer RSHS','up')">👍</button><button class="thumb-down" onclick="voteItem('calendar','Soccer RSHS','down')">👎</button><button class="bookmark-btn" data-bookmark-url="https://www.google.com/calendar/event?eid=MDJsYzEzZzgxcG5mM2I4bW9xbGdmN25vZ24gbmNiY3JyZ3ZiY242YnFuYXR1MWgxOWw1MWtAZw" data-bookmark-title="Soccer RSHS" data-bookmark-section="calendar" type="button" aria-label="Bookmark this item">🔖 Bookmark</button></span></li>
+<li><span class="item-feedback" data-id="No School - Professional Development Day (Teachers on Duty)" data-section="calendar"><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fwww.google.com%2Fcalendar%2Fevent%3Feid%3DXzZjcjY0cTFnZGxpMzZxMWpjOHM2NGRiYmNscDZvZGpnZTVqbjZvYjQ2NCAxNThqbjRhY3ZjanUybDgzbG91NDg0MjBwbXNoNGM1cEBp&section=calendar&date=2026-11-02" target="_self" rel="noopener">No School - Professional Development Day (Teachers on Duty)</a> [Lafayette High School Calendar] <button class="thumb-up" onclick="voteItem('calendar','No School - Professional Development Day (Teachers on Duty)','up')">👍</button><button class="thumb-down" onclick="voteItem('calendar','No School - Professional Development Day (Teachers on Duty)','down')">👎</button><button class="bookmark-btn" data-bookmark-url="https://www.google.com/calendar/event?eid=XzZjcjY0cTFnZGxpMzZxMWpjOHM2NGRiYmNscDZvZGpnZTVqbjZvYjQ2NCAxNThqbjRhY3ZjanUybDgzbG91NDg0MjBwbXNoNGM1cEBp" data-bookmark-title="No School - Professional Development Day (Teachers on Duty)" data-bookmark-section="calendar" type="button" aria-label="Bookmark this item">🔖 Bookmark</button></span></li>
+</ul>
+<h2 id="weather-wildwood-mo">🌤️ Weather — Wildwood, MO</h2>
+<table><thead><tr>
+<th>Day</th>
+<th>Condition</th>
+<th>High/Low</th>
+<th>Precip</th>
+<th>Wind</th>
+</tr></thead><tbody>
+<tr>
+<td><strong>Today</strong></td>
+<td>Cloudy</td>
+<td>68°F / 57°F</td>
+<td>15%</td>
+<td>6 to 10 mph SE</td>
+</tr>
+<tr>
+<td><strong>Tonight</strong></td>
+<td>Cloudy</td>
+<td>— / 57°F</td>
+<td>12%</td>
+<td>6 mph SE</td>
+</tr>
+<tr>
+<td>Tuesday</td>
+<td>Showers And Thunderstorms</td>
+<td>73°F / 51°F</td>
+<td>91%</td>
+<td>9 to 15 mph S</td>
+</tr>
+<tr>
+<td>Wednesday</td>
+<td>Mostly Sunny</td>
+<td>66°F / 44°F</td>
+<td>4%</td>
+<td>5 to 8 mph W</td>
+</tr>
+<tr>
+<td>Thursday</td>
+<td>Sunny</td>
+<td>66°F / 43°F</td>
+<td>4%</td>
+<td>6 mph W</td>
+</tr>
+<tr>
+<td>Friday</td>
+<td>Mostly Sunny</td>
+<td>61°F / 40°F</td>
+<td>2%</td>
+<td>6 mph NW</td>
+</tr>
+<tr>
+<td>Saturday</td>
+<td>Mostly Sunny</td>
+<td>62°F / 39°F</td>
+<td>2%</td>
+<td>3 mph W</td>
+</tr>
+<tr>
+<td>Sunday</td>
+<td>Slight Chance Light Rain</td>
+<td>62°F / —</td>
+<td>20%</td>
+<td>3 to 8 mph NW</td>
+</tr>
+</tbody></table>
+<h2 id="openrouter-budget">💰 OpenRouter Budget</h2>
+<h3>OpenRouter</h3>
+<p><strong>$1.27</strong> / $20.00 (6.3%) used</p>
+<p><code>█░░░░░░░░░░░░░░░░░░░</code></p>
+<p>📊 Daily: $0.00 · Remaining: <strong>$18.73</strong></p>
+<p>📈 ✅ On track</p>
+<h3>OpenAI Codex (separate from OpenRouter)</h3>
+<table><thead><tr>
+<th>Metric</th>
+<th>Value</th>
+</tr></thead><tbody>
+<tr>
+<td>Weekly limit used</td>
+<td><strong>16.0%</strong></td>
+</tr>
+<tr>
+<td>Weekly reset</td>
+<td>Wed 1:00 AM CT</td>
+</tr>
+<tr>
+<td>Latest session usage</td>
+<td>—</td>
+</tr>
+<tr>
+<td>Spend</td>
+<td>— (no monetary cost in local Codex data)</td>
+</tr>
+<tr>
+<td>Source/status</td>
+<td>Official Codex usage endpoint · available · 2026-11-02T11:31:01.761517+00:00</td>
+</tr>
+</tbody></table>
+<h2 id="feed-highlights">📰 Feed Highlights</h2>
+<h3>AI &amp; ML</h3>
+<ul>
+<li><span class="item-feedback" data-id="If in doubt, delete the uv.lock file" data-section="feed-highlights"><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fsimonwillison.net%2F2026%2FNov%2F1%2Fdelete-uv-lock-first%2F&section=feed-highlights&date=2026-11-02" target="_self" rel="noopener">If in doubt, delete the uv.lock file</a> — <em>Simon Willison</em> <button class="thumb-up" onclick="voteItem('feed-highlights','If in doubt, delete the uv.lock file','up')">👍</button><button class="thumb-down" onclick="voteItem('feed-highlights','If in doubt, delete the uv.lock file','down')">👎</button><button class="bookmark-btn" data-bookmark-url="https://simonwillison.net/2026/Nov/1/delete-uv-lock-first/" data-bookmark-title="If in doubt, delete the uv.lock file" data-bookmark-section="feed-highlights" type="button" aria-label="Bookmark this item">🔖 Bookmark</button></span></li>
+<li><span class="item-feedback" data-id="Speeding up planning decisions with AI" data-section="feed-highlights"><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fdeepmind.google%2Fblog%2Fspeeding-up-planning-decisions-with-ai%2F&section=feed-highlights&date=2026-11-02" target="_self" rel="noopener">Speeding up planning decisions with AI</a> — <em>Google DeepMind</em> <button class="thumb-up" onclick="voteItem('feed-highlights','Speeding up planning decisions with AI','up')">👍</button><button class="thumb-down" onclick="voteItem('feed-highlights','Speeding up planning decisions with AI','down')">👎</button><button class="bookmark-btn" data-bookmark-url="https://deepmind.google/blog/speeding-up-planning-decisions-with-ai/" data-bookmark-title="Speeding up planning decisions with AI" data-bookmark-section="feed-highlights" type="button" aria-label="Bookmark this item">🔖 Bookmark</button></span></li>
+<li><span class="item-feedback" data-id="Introducing AnySpeechRecognizer and AnyDecisionModel: Open Models for Speech and Decisions on Apple Platforms" data-section="feed-highlights"><a href="https://huggingface.co/blog/anydecisionmodel" target="_self" rel="noopener noreferrer">Introducing AnySpeechRecognizer and AnyDecisionModel: Open Models for Speech and Decisions on Apple Platforms</a> — <em>Hugging Face Blog</em> <button class="thumb-up" onclick="voteItem('feed-highlights','Introducing AnySpeechRecognizer and AnyDecisionModel: Open Models for Speech and Decisions on Apple Platforms','up')">👍</button><button class="thumb-down" onclick="voteItem('feed-highlights','Introducing AnySpeechRecognizer and AnyDecisionModel: Open Models for Speech and Decisions on Apple Platforms','down')">👎</button><button class="bookmark-btn" data-bookmark-url="https://huggingface.co/blog/anydecisionmodel" data-bookmark-title="Introducing AnySpeechRecognizer and AnyDecisionModel: Open Models for Speech and Decisions on Apple Platforms" data-bookmark-section="feed-highlights" type="button" aria-label="Bookmark this item">🔖 Bookmark</button></span></li>
+</ul>
+<h3>Technology</h3>
+<ul>
+<li><span class="item-feedback" data-id="Supersonic airliner in doubt as company shifts to powering AI data centers" data-section="feed-highlights"><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Farstechnica.com%2Fgadgets%2F2026%2F10%2Funited-airlines-ceo-doubts-supersonic-airliner-from-boom-will-be-ready-by-2029%2F&section=feed-highlights&date=2026-11-02" target="_self" rel="noopener">Supersonic airliner in doubt as company shifts to powering AI data centers</a> — <em>Ars Technica</em> <button class="thumb-up" onclick="voteItem('feed-highlights','Supersonic airliner in doubt as company shifts to powering AI data centers','up')">👍</button><button class="thumb-down" onclick="voteItem('feed-highlights','Supersonic airliner in doubt as company shifts to powering AI data centers','down')">👎</button><button class="bookmark-btn" data-bookmark-url="https://arstechnica.com/gadgets/2026/10/united-airlines-ceo-doubts-supersonic-airliner-from-boom-will-be-ready-by-2029/" data-bookmark-title="Supersonic airliner in doubt as company shifts to powering AI data centers" data-bookmark-section="feed-highlights" type="button" aria-label="Bookmark this item">🔖 Bookmark</button></span></li>
+</ul>
+<h3>Agriculture &amp; Food Systems</h3>
+<ul>
+<li><span class="item-feedback" data-id="The Great Barrier Reef&#39;s most notorious coral killer may actually be helping it" data-section="feed-highlights"><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fwww.sciencedaily.com%2Freleases%2F2026%2F10%2F261030002957.htm&section=feed-highlights&date=2026-11-02" target="_self" rel="noopener">The Great Barrier Reef&amp;#39;s most notorious coral killer may actually be helping it</a> — <em>ScienceDaily - Agriculture</em> <button class="thumb-up" onclick="voteItem('feed-highlights','The Great Barrier Reef&#39;s most notorious coral killer may actually be helping it','up')">👍</button><button class="thumb-down" onclick="voteItem('feed-highlights','The Great Barrier Reef&#39;s most notorious coral killer may actually be helping it','down')">👎</button><button class="bookmark-btn" data-bookmark-url="https://www.sciencedaily.com/releases/2026/10/261030002957.htm" data-bookmark-title="The Great Barrier Reef&#39;s most notorious coral killer may actually be helping it" data-bookmark-section="feed-highlights" type="button" aria-label="Bookmark this item">🔖 Bookmark</button></span></li>
+<li><span class="item-feedback" data-id="Ag on Instagram: The week’s best photos on Oct. 30, 2026" data-section="feed-highlights"><a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fwww.agdaily.com%2Flifestyle%2Fag-on-instagram-the-weeks-best-photos-on-oct-30-2026%2F&section=feed-highlights&date=2026-11-02" target="_self" rel="noopener">Ag on Instagram: The week’s best photos on Oct. 30, 2026</a> — <em>AGDaily</em> <button class="thumb-up" onclick="voteItem('feed-highlights','Ag on Instagram: The week’s best photos on Oct. 30, 2026','up')">👍</button><button class="thumb-down" onclick="voteItem('feed-highlights','Ag on Instagram: The week’s best photos on Oct. 30, 2026','down')">👎</button><button class="bookmark-btn" data-bookmark-url="https://www.agdaily.com/lifestyle/ag-on-instagram-the-weeks-best-photos-on-oct-30-2026/" data-bookmark-title="Ag on Instagram: The week’s best photos on Oct. 30, 2026" data-bookmark-section="feed-highlights" type="button" aria-label="Bookmark this item">🔖 Bookmark</button></span></li>
+</ul>
+<h2 id="hacker-news">🔥 Hacker News</h2>
+<p>1. <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fhackerbooks.org&section=hacker-news&date=2026-11-02" target="_self" rel="noopener">Show HN: HackerBooks – HackerTube, but for books mentioned on HN</a> — <strong>1441</strong> pts by roansh (<a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fnews.ycombinator.com%2Fitem%3Fid%3D50326821&section=hacker-news&date=2026-11-02" target="_self" rel="noopener">241 comments</a>)</p>
+<p>2. <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=http%3A%2F%2Frhaas.blogspot.com%2F2026%2F10%2Fpostgres-19-is-late-and-its-ais-fault.html&section=hacker-news&date=2026-11-02" target="_self" rel="noopener">Postgres 19 is late because so many more bugs are being found now</a> — <strong>514</strong> pts by soheilpro (<a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fnews.ycombinator.com%2Fitem%3Fid%3D50312408&section=hacker-news&date=2026-11-02" target="_self" rel="noopener">321 comments</a>)</p>
+<p>3. <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fwikihack.netlify.app&section=hacker-news&date=2026-11-02" target="_self" rel="noopener">Show HN: Wikihack – HackerTube, but for Wikipedia articles mentioned on HN</a> — <strong>222</strong> pts by aizk (<a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fnews.ycombinator.com%2Fitem%3Fid%3D50333339&section=hacker-news&date=2026-11-02" target="_self" rel="noopener">71 comments</a>)</p>
+<p>4. <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fkarpathy.bearblog.dev%2Fhacker-tube%2F&section=hacker-news&date=2026-11-02" target="_self" rel="noopener">HackerTube: YouTube built from videos recommended by HN</a> — <strong>2612</strong> pts by karpathy (<a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fnews.ycombinator.com%2Fitem%3Fid%3D50319510&section=hacker-news&date=2026-11-02" target="_self" rel="noopener">575 comments</a>)</p>
+<p>5. <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Ffosscomics.com%2Fposts%2F13.%2520BSD%2520Unix%2520Part%25203%2520-%2520The%2520Beginning%2520of%2520BSD%2520Unix%2F&section=hacker-news&date=2026-11-02" target="_self" rel="noopener">F/OSS Comics #13: BSD Unix, Part 3 – The Beginning of BSD Unix</a> — <strong>134</strong> pts by joonehur (<a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fnews.ycombinator.com%2Fitem%3Fid%3D50332163&section=hacker-news&date=2026-11-02" target="_self" rel="noopener">15 comments</a>)</p>
+<h2 id="r-hermesagent">🤖 r/hermesagent</h2>
+<p>1. <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fwww.reddit.com%2Fr%2Fhermesagent%2Fcomments%2F1xl6ih2%2Fhow_does_your_spouse_react%2F&section=r-hermesagent&date=2026-11-02" target="_self" rel="noopener">How does your spouse react?</a> — <strong>54</strong> pts · 45 comments</p>
+<p>2. <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fwww.reddit.com%2Fr%2Fhermesagent%2Fcomments%2F1xlmuhx%2Fhermes_official_app_device_access%2F&section=r-hermesagent&date=2026-11-02" target="_self" rel="noopener">Hermes official app - Device Access</a> — <strong>45</strong> pts · 24 comments</p>
+<p>3. <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fwww.reddit.com%2Fr%2Fhermesagent%2Fcomments%2F1xlj4ee%2Fwhy_do_people_use_obsidian_as_memory_is_it%2F&section=r-hermesagent&date=2026-11-02" target="_self" rel="noopener">Why do people use obsidian as memory? Is it justified?</a> — <strong>36</strong> pts · 22 comments</p>
+<p>4. <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fwww.reddit.com%2Fr%2Fhermesagent%2Fcomments%2F1xlniyf%2Fi_benchmarked_10_opensource_ai_memory_systems_on%2F&section=r-hermesagent&date=2026-11-02" target="_self" rel="noopener">I benchmarked 10 open-source AI memory systems on BEAM \(100K\) with Claude. Two matched full context while reading 24–35x less text</a> — <strong>30</strong> pts · 7 comments</p>
+<h2 id="hermes-agent-highlights">🤖 Hermes &amp; Agent Highlights</h2>
+<p><em>No verified highlights today.</em></p>
+<h2 id="targeted-search-highlights">𝕏 Targeted Search Highlights</h2>
+<p><em>X source status: current verified artifact.</em></p>
+<h3>Hermes / Nous</h3>
+<p>1. <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fx.com%2FMDBcertified%2Fstatus%2F2117213583109222539&section=targeted-search-highlights&date=2026-11-02" target="_self" rel="noopener">𝐊³ @MDBcertified · 1m Replying to @vibeman\&amp;lt;em&amp;gt;0 hermes agent fried my ssd on a similar task too many read and write operations, my pc stood no chance</a> — _Hermes</em> · 0 engagement</p>
+<p>2. <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fx.com%2Fyb2698%2Fstatus%2F2117213213272273336&section=targeted-search-highlights&date=2026-11-02" target="_self" rel="noopener">younes @yb2698 · 3m LFM2.5-24B harness adapter for @NousResearch hermes agent! We just finished the LoRA training of the hermes adapter for @liquidai LFM2.5-24B - no accuracy drop on held out test tasks with 20% efficiency gain! https:// huggingface.co/collections/ha rness-hub/lfm25-24b-harness-adapters … 1 16</a> — <em>Hermes</em> · 0 engagement</p>
+<p>3. <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fx.com%2FTeknium%2Fstatus%2F2117209597249499226&section=targeted-search-highlights&date=2026-11-02" target="_self" rel="noopener">Teknium 🪽 @Teknium · 17m Replying to @Ge3Be3 Yes run the desktop app as a web app from your Hermes agent server, launching today. Then you just use your web browser to use the app 1 1 35</a> — <em>Hermes</em> · 0 engagement</p>
+<p>4. <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fx.com%2Fbrucexu_eth%2Fstatus%2F2117035660939038829&section=targeted-search-highlights&date=2026-11-02" target="_self" rel="noopener">brucexu.eth @brucexu\&amp;lt;em&amp;gt;eth · 3m 我很好奇一个问题，为什么大家折腾来折腾去 Hermes Agent 不香吗？让它直接调度 Hardness，还能结合你的这个想法或者记忆，还能自由的使用各种 Agent 或者模型，就是说句话的问题。 Quote 陈大黄 @realchendahuang · 8h Translated from Chinese I&amp;#39;m really curious about one question. Lately, I&amp;#39;ve been coming across herdr a lot, mainly used to solve collaboration and communication issues between multiple Harnesses. S</a> — _Hermes</em> · 0 engagement</p>
+<p>5. <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fx.com%2FKit_Shicker%2Fstatus%2F2117035501689659625&section=targeted-search-highlights&date=2026-11-02" target="_self" rel="noopener">Kit Shicker @Kit\&amp;lt;em&amp;gt;Shicker · 4m Replying to @elonmusk and @DogecoinNorway I get it. But, for some reason, Grok Bot burns a lot more usage than, say, Hermes Agent running Grok doing similar tasks, and Grok&amp;#39;s usage limits have always been tight for the price, compared to competitors. If the usage is going to be rationed this tightly \\(understandable\\), Show mor</a> — _Hermes</em> · 0 engagement</p>
+<p>6. <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fx.com%2Fqueenvenatrix%2Fstatus%2F2117035258356862982&section=targeted-search-highlights&date=2026-11-02" target="_self" rel="noopener">Queen Venatrix Vale @queenvenatrix · 5m Replying to @elonmusk @AmX\&amp;lt;em&amp;gt;ZaxTr and @DogecoinNorway You need to get Hermes agent with deepseek api and give it to Grokbot as a cheap work horse - Grokbot can go all week long managing deepseek and Hermes is very powerful @NousResearch @bot @grok 1 10</a> — _Hermes</em> · 0 engagement</p>
+<p>7. <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fx.com%2FFinWoodsDev%2Fstatus%2F2116945832238784664&section=targeted-search-highlights&date=2026-11-02" target="_self" rel="noopener">Fin Woods @FinWoodsDev · 57s After using the new Hermes Agent iOS app, I no longer feel the need for Claude Duet or Dots. 1 1</a> — <em>Hermes</em> · 0 engagement</p>
+<p>8. <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fx.com%2Fiveyzen%2Fstatus%2F2116942664671076474&section=targeted-search-highlights&date=2026-11-02" target="_self" rel="noopener">information inu @iveyzen · 13m An AI agent can ask permission to run a command while showing a misleading version of it. An invisible character inside a filename, or a final line hidden below a truncated preview, can change what the person thinks they are approving. A Hermes Agent change merged on November 1 Show more Approval prompts show hidden Unicode, co</a> — <em>Hermes</em> · 0 engagement</p>
+<p>9. <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fx.com%2FHermesAgentTips%2Fstatus%2F2116938884047151199&section=targeted-search-highlights&date=2026-11-02" target="_self" rel="noopener">Hermes Agent Tips @HermesAgentTips · 28m Replying to @attacomsian yo working on a banger macos app. will submit once its ready 1 1 17</a> — <em>Hermes</em> · 0 engagement</p>
+<h3>Bayer / Crop Science</h3>
+<p>10. <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fx.com%2FBayerCropNL%2Fstatus%2F2117178637225218194&section=targeted-search-highlights&date=2026-11-02" target="_self" rel="noopener">Bayer Crop Science NL @BayerCropNL · 2h Biologicals blijft telers bezighouden – hoe ziet toekomstbestendige gewasbescherming eruit? Ontdek de nieuwe Tuinbouw Koerier en lees alles over de omslag naar systeemdenken en ICM, de groeiende rol van biologicals én slimme technieken. https:// agro.bayer.nl/nieuws-en-alge meen/koeriers/tuinbouw-koeriers/tuinbouw-koer</a> — <em>Bayer</em> · 0 engagement</p>
+<h3>US Agriculture</h3>
+<p>11. <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fx.com%2FNatlFarmers%2Fstatus%2F2117170094165885137&section=targeted-search-highlights&date=2026-11-02" target="_self" rel="noopener">National Farmers @NatlFarmers · 2h USDA buying ag products USDA to buy U.S. ag products as farmer price pressures From brownfieldagnews.com 32</a> — <em>Agriculture</em> · 0 engagement</p>
+<p>12. <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fx.com%2FFarmerCrafted%2Fstatus%2F2117034354094293085&section=targeted-search-highlights&date=2026-11-02" target="_self" rel="noopener">Farmer Crafted @FarmerCrafted · 9m Replying to @RoxyWarrior11 No, I would have to do all that USDA mess and I&amp;#39;m too tired 🤣♥️ 10</a> — <em>Agriculture</em> · 0 engagement</p>
+<p>13. <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fx.com%2FGertFrobe72%2Fstatus%2F2116935995178332269&section=targeted-search-highlights&date=2026-11-02" target="_self" rel="noopener">Gert Frobe @GertFrobe72 · 40m USDA processing error September Crop Production report. National Corn Growers Association stated that these inaccurate federal reports have cost farmers billions of dollars due to artificial market volatility, and demanded immediate procedural changes. youtube.com USDA Under Fire Over Crop Report Error, Major Moves in Ethanol, B</a> — <em>Agriculture</em> · 0 engagement</p>
+<h2 id="agtalk-crop-talk">🌾 AgTalk Crop Talk</h2>
+<p><em>AgTalk source status: current verified artifact.</em></p>
+<h3>Other Crop Talk</h3>
+<p>1. <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Ftalk.newagtalk.com%2Fforums%2Fthread-view.asp%3Ftid%3D1250865&section=agtalk-crop-talk&date=2026-11-02" target="_self" rel="noopener">Inline ripping</a> — 24 replies · DLB · 10/30/2026 20:31</p>
+<p>2. <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Ftalk.newagtalk.com%2Fforums%2Fthread-view.asp%3Ftid%3D1250905&section=agtalk-crop-talk&date=2026-11-02" target="_self" rel="noopener">Loading Semi&amp;#39;s in wet fields</a> — 18 replies · jicasedeere · 10/31/2026 10:27</p>
+<p>3. <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Ftalk.newagtalk.com%2Fforums%2Fthread-view.asp%3Ftid%3D1250943&section=agtalk-crop-talk&date=2026-11-02" target="_self" rel="noopener">Question for South Dakota corn growers</a> — 10 replies · packerfan · 10/31/2026 21:19</p>
+<p>4. <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Ftalk.newagtalk.com%2Fforums%2Fthread-view.asp%3Ftid%3D1250982&section=agtalk-crop-talk&date=2026-11-02" target="_self" rel="noopener">Marking tile outlets</a> — 10 replies · SoupSammich · 11/1/2026 15:47</p>
+<p>5. <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Ftalk.newagtalk.com%2Fforums%2Fthread-view.asp%3Ftid%3D1250898&section=agtalk-crop-talk&date=2026-11-02" target="_self" rel="noopener">Planting oats after alfalfa</a> — 5 replies · elkahogs · 10/31/2026 09:27</p>
+<p>6. <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Ftalk.newagtalk.com%2Fforums%2Fthread-view.asp%3Ftid%3D1250893&section=agtalk-crop-talk&date=2026-11-02" target="_self" rel="noopener">Impressive turnip growth</a> — 4 replies · kwvnhfr1 · 10/31/2026 09:01</p>
+<p>7. <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Ftalk.newagtalk.com%2Fforums%2Fthread-view.asp%3Ftid%3D1250811&section=agtalk-crop-talk&date=2026-11-02" target="_self" rel="noopener">Will soybeans be OK after rained on</a> — 15 replies · arem · 10/29/2026 22:34</p>
+<h2 id="videos">📺 Videos</h2>
+<p><em>No noteworthy new videos today.</em></p>
+<h2 id="podcasts">🎙️ Podcasts</h2>
+<p><em>No noteworthy new podcast episodes today.</em></p>
+<h2 id="apple-health">🩺 Apple Health</h2>
+<h3>Current week progress</h3>
+<p><strong>Elapsed:</strong> 2026-10-26–2026-11-01 · <strong>Coverage:</strong> 7/7 days</p>
+<p><strong>Current-week total:</strong> 38,670 steps · 2,442 kcal · 75 min exercise</p>
+<p>**Yesterday (2026-11-01): 6,004 steps · 3 kcal · — exercise · RHR — · HRV —</p>
+<p>🎯 Current-week workouts: <strong>0/3</strong></p>
+<p>Verified modalities: cardio 0 · strength 0 · unknown 0</p>
+<h3>Foundation decision</h3>
+<p><strong>Goal:</strong> 3 sessions/week (optional 4th in weeks 5–8).</p>
+<p><strong>Consistency:</strong> 1/4 evaluated weeks at target; progression: repeat reduced.</p>
+<p><strong>Lapse/re-entry:</strong> short lapse repeat reduced.</p>
+<p>💡 Short lapse: repeat an easy reduced foundation session; do not catch up or add advanced intensity.</p>
+<p>⚠️ No valid historical baseline for exercise minutes.</p>
+<p>⚠️ No valid historical baseline for heart rate variability.</p>
+<h3>🧠 Evidence-informed training/recovery synthesis</h3>
+<p>Yesterday’s recovery metrics were unavailable, and active-energy data appear incomplete; over the last three days, steps rose from 5,144 to 6,004 without evidence of a qualifying workout. The completed week had 75 exercise minutes but zero ≥20-minute intentional sessions, while average sleep (5.84 hours) and resting heart rate (69.5 bpm) were less favorable than historical baselines (7.74 hours and 63 bpm); wrist-temperature data are insufficient and show no corroborated elevation.</p>
+<p>🎯 Today&#39;s action: Complete one easy 20-minute walk today.</p>
+<p><em>Why: This restarts the foundation habit at minimum effective effort after a 13-day lapse without catch-up volume or advanced intensity. · Limits: Yesterday lacked sleep, resting-heart-rate, HRV, and exercise-minute data; Apple Health exercise minutes do not identify workout modality or intensity, and historical HRV and exercise-minute baselines are unavailable.</em></p>
+<p><em>Public framework note (researched 2026-07-26): <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fwww.hubermanlab.com%2Ftopics%2Fsleep-hygiene&section=apple-health&date=2026-11-02" target="_self" rel="noopener">Huberman Lab</a> · <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fpeterattiamd.com%2Fexercising-for-longevity%2F&section=apple-health&date=2026-11-02" target="_self" rel="noopener">Peter Attia MD</a> · <a href="https://daily-briefing-worker.mfmccown.workers.dev/api/click?url=https%3A%2F%2Fwww.andygalpin.com%2F55-minute-physiology&section=apple-health&date=2026-11-02" target="_self" rel="noopener">Andy Galpin</a></em></p>
+<p><strong>Completed week:</strong> 2026-10-26–2026-11-01 · <strong>Coverage:</strong> 7/7 days</p>
+<table><thead><tr>
+<th>Date</th>
+<th>Steps</th>
+<th>Sleep</th>
+<th>Exercise</th>
+<th>RHR</th>
+<th>HRV</th>
+</tr></thead><tbody>
+<tr>
+<td>2026-10-26</td>
+<td>4,870</td>
+<td>5.3h</td>
+<td>4 min</td>
+<td>70</td>
+<td>28</td>
+</tr>
+<tr>
+<td>2026-10-27</td>
+<td>3,197</td>
+<td>—</td>
+<td>8 min</td>
+<td>73</td>
+<td>33</td>
+</tr>
+<tr>
+<td>2026-10-28</td>
+<td>6,786</td>
+<td>5.3h</td>
+<td>15 min</td>
+<td>71</td>
+<td>31</td>
+</tr>
+<tr>
+<td>2026-10-29</td>
+<td>7,058</td>
+<td>—</td>
+<td>18 min</td>
+<td>68</td>
+<td>36</td>
+</tr>
+<tr>
+<td>2026-10-30</td>
+<td>5,144</td>
+<td>7.0h</td>
+<td>15 min</td>
+<td>67</td>
+<td>28</td>
+</tr>
+<tr>
+<td>2026-10-31</td>
+<td>5,611</td>
+<td>—</td>
+<td>15 min</td>
+<td>68</td>
+<td>38</td>
+</tr>
+<tr>
+<td>2026-11-01</td>
+<td>6,004</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+</tr>
+</tbody></table>
+<table><thead><tr>
+<th>Metric</th>
+<th>Week</th>
+<th>Historical median</th>
+<th>Δ</th>
+<th>n</th>
+</tr></thead><tbody>
+<tr>
+<td>Steps</td>
+<td>38,670 steps</td>
+<td>46,316 steps</td>
+<td>-16.5%</td>
+<td>106</td>
+</tr>
+<tr>
+<td>Active Energy</td>
+<td>2,441.6 kcal</td>
+<td>3,086 kcal</td>
+<td>-20.9%</td>
+<td>98</td>
+</tr>
+<tr>
+<td>Walking Distance</td>
+<td>17.5 mi</td>
+<td>27.3 mi</td>
+<td>-35.8%</td>
+<td>106</td>
+</tr>
+<tr>
+<td>Flights Climbed</td>
+<td>40 flights</td>
+<td>83.4 flights</td>
+<td>-52.0%</td>
+<td>106</td>
+</tr>
+<tr>
+<td>Exercise Minutes</td>
+<td>75 min</td>
+<td>—</td>
+<td>—</td>
+<td>0</td>
+</tr>
+<tr>
+<td>Sleep</td>
+<td>5.8 h</td>
+<td>7.7 h</td>
+<td>-24.5%</td>
+<td>76</td>
+</tr>
+<tr>
+<td>Resting HR</td>
+<td>69.5 bpm</td>
+<td>63 bpm</td>
+<td>+10.3%</td>
+<td>77</td>
+</tr>
+<tr>
+<td>HRV</td>
+<td>32.2 ms</td>
+<td>—</td>
+<td>—</td>
+<td>0</td>
+</tr>
+</tbody></table>
+</main>
+<footer>
+  <p>🤖 Generated by Hermes Agent &middot; Built with ❤️</p>
+  <p>Click 👍/👎 on any story to help me learn what you like!</p>
+</footer>
+</div>
+<div id="toast" class="toast"></div>
+<script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function() {
+    navigator.serviceWorker.register('/sw.js', { scope: '/' })
+      .catch(function(error) { console.warn('SW registration failed:', error); });
+  });
+}
+</script>
+</body>
+</html>
